@@ -5,6 +5,5 @@ echo     Base DakotaRP
 echo     Discord:discord.gg/dakotarp 
 echo ===-------------------------------===
 
-pause
-start ..\build\FXServer.exe +exec configs/server.cfg +set onesync on  +set onesync_enableinfinity 1 +set sv_enforceGameBuild 1355 +set gamename rdr3 +set svgui_disable true
+start ..\FXServer.exe +exec configs/server.cfg +set onesync on  +set sv_enforceGameBuild 1355 +set gamename rdr3 +set svgui_disable true
 exit
