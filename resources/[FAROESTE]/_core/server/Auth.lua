@@ -22,6 +22,8 @@ function connectUser(source, user_id)
 
     print(#GetPlayers() .. "/60 | " .. GetPlayerName(source) .. " (" .. User:getIpAddress() .. ") entrou (user_id = " .. user_id .. ", source = " .. source .. ")")
 
+    TriggerEvent('FRP:OnUserCreated', user_id, source)
+
     TriggerEvent("FRP:IDENTITY:DisplayCharSelection", User)
 
     TriggerClientEvent("FRP:_CORE:SetServerIdAsUserId", -1, source, user_id)
@@ -29,6 +31,33 @@ function connectUser(source, user_id)
 
     return User
 end
+
+-- { 
+--     {
+--         hook = hook,
+--         owner = resource,
+--     }
+-- }
+local gOnUserConnectingHooks = { }
+
+-- hook: function(source, user_id) => string
+function API.RegisterUserConnectingHook(hook)
+    table.insert(gOnUserConnectingHooks,
+    {
+        hook = hook,
+        owner = GetInvokingResource(),
+    })
+end
+
+AddEventHandler('onResourceStop', function(resource)
+    for i = 1, #gOnUserConnectingHooks do
+        local data = gOnUserConnectingHooks[i]
+
+        if data.owner == resource then
+            table.remove(gOnUserConnectingHooks, i)
+        end
+    end
+end)
 
 --[[
     INICIAR _CORE DEPOIS DO CONNECTQUEUE
@@ -45,23 +74,35 @@ Queue.OnReady(
 
                 local user_id = API.getUserIdByIdentifiers(ids, playerName)
 
-                if user_id then
-                    if API.isWhitelisted(steamId) then
-                        if not API.isBanned(user_id) then
-                            
-                            API.onFirstSpawn[user_id] = true
-
-                            TriggerEvent("API:playerJoin", user_id, source, playerName)
-                            allow()
-                        else
-                            allow("ERROR: Você está banido!")
-                        end
-                    else
-                        allow("ERROR: Você não tem permissão. \n Passe seu ID a adminstração: " .. user_id .. " \n discord.gg/dakotarp")
-                        end
-                else
+                if not user_id then
                     allow("ERROR: Falha ao encontrar ou criar o seu usúario, contate a STAFF!")
-                end                
+                    return
+                end
+
+                if not API.isWhitelisted(steamId) then
+                    allow("ERROR: Você não tem permissão. \n Passe seu ID a adminstração: " .. user_id .. " \n discord.gg/dakotarp")
+                    return
+                end
+
+                if API.isBanned(user_id) then
+                    allow("ERROR: Você está banido!")
+                    return
+                end
+                
+                for _, data in ipairs(gOnUserConnectingHooks) do
+                    local hookDenyCon = data.hook(user_id, source)
+
+                    if hookDenyCon then
+                        allow( ('ERROR %s'):format(hookDenyCon) )
+                        return
+                    end
+                end
+
+                API.onFirstSpawn[user_id] = true
+
+                TriggerEvent("API:playerJoin", user_id, source, playerName)
+
+                allow()
             end
         )
     end
