@@ -1,16 +1,14 @@
 window.addEventListener('message', (event) => {
     if (event.data.type == 1){
-        LoadCharacters(event.data.list);
+        LoadCharacters(event.data.list, event.data.maxCharacters);
     } else if(event.data.type == 2) {
         window.location.reload();
     }
 });
 
 var Identity = {};
-var LimitCharacters = 4
 
-
-function LoadCharacters(list) {
+function LoadCharacters(list, maxCharacters) {
 
     $(".loading").html('');
     
@@ -51,7 +49,7 @@ function LoadCharacters(list) {
         `);     
     }
 
-    let empty_slot = LimitCharacters - listLength;   
+    let empty_slot = maxCharacters - listLength;   
 
     if (empty_slot > 0) {
         for (let i = 0; i < empty_slot; i++){

@@ -60,12 +60,25 @@ AddEventHandler(
         SendNUIMessage({type = 2}) -- clear UI
 
         Wait(2500)
+        
+        local maxCharacters = 1
+
+        local PrivilegeSystemExports = exports['privilege_system']
+
+        if PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__LOW') then
+            maxCharacters = 2
+        elseif PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__MEDIUM') then
+            maxCharacters = 3
+        elseif PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__HIGH') then
+            maxCharacters = 4
+        end
 
         SetNuiFocus(true, true)
         SendNUIMessage(
             {
                 type = 1,
-                list = characterArray
+                list = characterArray,
+                maxCharacters = maxCharacters,
             }
         )
 
