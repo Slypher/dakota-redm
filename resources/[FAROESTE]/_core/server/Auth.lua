@@ -93,7 +93,7 @@ Queue.OnReady(
                     local hookDenyCon = data.hook(user_id, source)
 
                     if hookDenyCon then
-                        allow( ('ERROR %s'):format(hookDenyCon) )
+                        allow( ('ERROR: %s'):format(hookDenyCon) )
                         return
                     end
                 end
