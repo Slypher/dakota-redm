@@ -219,21 +219,26 @@ function cAPI.SetPedClothing(ped, clothingArray)
     end
 end
 
+local interactions = {
+    -- interactionId      interactionAnimation    propId
+    ["injection"] = {"INTERACTION_INJECTION_QUICK", "P_CS_SYRINGE01X"},
+    ['food']      = {'INTERACTION_FOOD', nil},
+}
+
 function cAPI.TaskAnimalInteraction(interaction)
     local ped = PlayerPedId()
-
-    local interactions = {
-        -- interactionId      interactionAnimation    propId
-        ["injection"] = {"INTERACT_INJECTION", "p_cs_syringe01x"}
-    }
 
     if interactions[interaction] then
         if cAPI.IsPlayerHorseActive() then
             local playerHorse = cAPI.GetPlayerHorse()
             local v = interactions[interaction]
 
-            SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true, 0, 0, 0)
-            TaskAnimalInteraction(ped, playerHorse, GetHashKey(v[1]), v[2] ~= nil and GetHashKey(v[2]) or 0, 0)
+            SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), false, 0, false, false)
+
+            local usedInteraction =  GetHashKey(v[1])
+            local usedProp = v[2] ~= nil and GetHashKey(v[2]) or 0
+
+            TaskAnimalInteraction(ped, playerHorse, usedInteraction, usedProp, 0)
         end
     end
 end

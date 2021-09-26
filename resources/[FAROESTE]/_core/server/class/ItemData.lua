@@ -197,6 +197,16 @@ function triggerUse(User, itemData)
         return false
     end
 
+    if itemId == 'milho' or itemId == 'trigo' or itemId == 'cenoura' or itemId == 'alface' then
+        if cAPI.IsPlayerMountedOnOwnHorse(source) then
+            cAPI.TaskAnimalInteraction(source, 'food')
+            cAPI.VaryHorseStamina(source, 5.0)
+            cAPI.VaryHorseCore(source, 1, 5.0) -- Health?
+
+            return true
+        end
+    end
+
     if itemId == "waterbottle" then
         cAPI.TaskInteraction(source, "drink_tonic")
         API.varyThirst2(source, -20)
