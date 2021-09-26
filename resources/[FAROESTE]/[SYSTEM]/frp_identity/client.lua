@@ -4,6 +4,8 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local PrivilegeSystem = Proxy.getInterface('PrivilegeSystem')
+
 local fakePeds = {}
 local playerSelected = false
 
@@ -63,13 +65,11 @@ AddEventHandler(
         
         local maxCharacters = 1
 
-        local PrivilegeSystemExports = exports['privilege_system']
-
-        if PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__LOW') then
+        if PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__LOW') then
             maxCharacters = 2
-        elseif PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__MEDIUM') then
+        elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__MEDIUM') then
             maxCharacters = 3
-        elseif PrivilegeSystemExports:getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__HIGH') then
+        elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__HIGH') then
             maxCharacters = 4
         end
 

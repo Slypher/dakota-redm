@@ -6,6 +6,6 @@ RegisterNetEvent('frp.removeReplicatedUserPrivilege', function(privilege)
     removeUserPrivilegeFromCache(-1, privilege)
 end)
 
-exports('getUserHasCachedPrivilege', function(privilege)
+PrivilegeSystemProxy.getUserHasCachedPrivilege = function(privilege)
     return getUserHasCachedPrivilege(-1, privilege)
 end)

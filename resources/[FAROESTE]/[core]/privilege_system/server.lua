@@ -16,7 +16,7 @@
 --     - Schema: { id name created_at set_by }
 
 local Tunnel = module('_core', 'lib/Tunnel')
-local Proxy = module('_core', 'lib/Proxy')
+-- Proxy tá definido no ./shared.
 
 ServerAPI = Proxy.getInterface('API')
 ClientRPC = Tunnel.getInterface('API')
@@ -210,3 +210,5 @@ RegisterCommand('priv_remove', privilegeCommandWrapper(removeUserPrivilege))
 RegisterCommand('priv_list', privilegeCommandWrapper(function(targetUserId, userId)
     print(json.encode(gUserPrivilegesCache[targetUserId], { indent = true }))
 end, true))
+
+PrivilegeSystemProxy.getUserHasCachedPrivilege = getUserHasCachedPrivilege

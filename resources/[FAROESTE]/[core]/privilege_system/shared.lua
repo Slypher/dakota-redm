@@ -1,3 +1,11 @@
+Proxy = module('_core', 'lib/Proxy')
+
+PrivilegeSystemProxy = { }
+Proxy.addInterface('PrivilegeSystem', PrivilegeSystemProxy)
+
+-- #TODO: ?
+-- PrivilegeSystem = Proxy.addInterface('PrivilegeSystem')
+
 PRIVILEGE_DATABASE = {
     PRIV_QUEUE_PRIORITY = {
         replicate = false,
@@ -16,11 +24,11 @@ PRIVILEGE_DATABASE = {
         },
     },
     PRIV_SLOT_COUNT_HORSE = {
-        replicate = true,
+        replicate = false,
         tiers = {
-            'LOW',
-            'MEDIUM',
-            'HIGH',
+            '1',
+            '2',
+            '4',
         },
     }
 }
@@ -121,6 +129,26 @@ function getUserHasCachedPrivilege(userId, privilege)
     return false
 end
 
+function getUserCachedPrivileges(userId)
+    return gUserPrivilegesCache[userId] or { }
+end
+
+function getUserCachedPrivilegesByType(userId, privilegeType)
+    local ret = { }
+
+    local userCachedPrivileges = getUserCachedPrivileges(userId)
+
+    for i = 1, #userCachedPrivileges do
+        local cachedPrivilege = userCachedPrivileges[i]
+
+        if getPrivilegeType(cachedPrivilege) == privilegeType then
+            table.insert(ret, cachedPrivilege)
+        end
+    end
+
+    return ret
+end
+
 function string:split(pat)
     pat = pat or '%s+'
     local st, g = 1, self:gmatch("()("..pat..")")
@@ -130,3 +158,7 @@ function string:split(pat)
     end
     return function() if st then return getter(st, g()) end end
 end
+
+PrivilegeSystemProxy.getPrivilegeTier = getPrivilegeTier
+PrivilegeSystemProxy.getUserCachedPrivileges = getUserCachedPrivileges
+PrivilegeSystemProxy.getUserCachedPrivilegesByType = getUserCachedPrivilegesByType

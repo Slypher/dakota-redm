@@ -4,6 +4,8 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
+local PrivilegeSystem = Proxy.getInterface('PrivilegeSystem')
+
 RegisterNetEvent("FRP:STABLE:UpdateHorseComponents")
 AddEventHandler(
     "FRP:STABLE:UpdateHorseComponents",
@@ -66,10 +68,9 @@ AddEventHandler(
         local _source = source
         local User = API.getUserFromSource(_source)
         local Character = User:getCharacter()
-        local Horses = Character:getHorses()
         local Inventory = Character:getInventory()
 
-        if #Horses >= 2 then
+        if #Character:getHorses() >= getUserMaxOwnedHorsesCount(User:getId()) then
             TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Limite de estabulo alcançado!', 5000)
             return
         end
@@ -162,3 +163,19 @@ RegisterCommand("delcavalo",function(source)
     TriggerClientEvent("FRP:STABLE:deletHorse")
 end
 )
+
+local DEFAULT_MAX_OWNED_HORSES_COUNT = 2
+
+function getUserMaxOwnedHorsesCount(userId)
+    local slotCountPrivileges = PrivilegeSystem.getUserCachedPrivilegesByType(userId, 'PRIV_SLOT_COUNT_HORSE')
+
+    local n = DEFAULT_MAX_OWNED_HORSES_COUNT
+
+    for i = 1, #slotCountPrivileges do
+        local privilege = slotCountPrivileges[i]
+
+        n = n + tonumber(PrivilegeSystem.getPrivilegeTier(privilege))
+    end
+
+    return n
+end
