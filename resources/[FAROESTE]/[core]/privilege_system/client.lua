@@ -8,4 +8,4 @@ end)
 
 PrivilegeSystemProxy.getUserHasCachedPrivilege = function(privilege)
     return getUserHasCachedPrivilege(-1, privilege)
-end)
+end
