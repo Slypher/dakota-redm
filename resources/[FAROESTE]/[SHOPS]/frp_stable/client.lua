@@ -473,17 +473,6 @@ RegisterNUICallback(
     end
 )
 
---[[
-local idhorse = json.decode(data.HorseComp)
-RegisterNetEvent(
-    "FRP:STABLE:deletHorse",
-    function(data)
-        local idhorse = json.decode(data.horseID)
-        print(idhorse)
-        TriggerServerEvent("FRP:STABLE:deadhorse", tonumber(idhorse))
-    end
-)]]
-
 RegisterNUICallback(
     "sellHorse",
     function(data)

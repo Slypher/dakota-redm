@@ -213,7 +213,6 @@ Citizen.CreateThread(function()
             if getHorseMood >= 0.02 then
                 Citizen.InvokeNative(0x06D26A96CA1BCA75, cAPI.GetPlayerHorse(), 3, PlayerPedId())
                 Citizen.InvokeNative(0xA1EB5D029E0191D3, cAPI.GetPlayerHorse(), 3, 0.99)
-                print("ENTITY MOOD: " .. cAPI.GetPlayerHorse(), getHorseMood)
             end
         end
         Citizen.Wait(1000)                
@@ -337,7 +336,7 @@ function WhistleHorse(whistleTypeHash)
             -- InitiateHorse(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 1.0, 1.0, 0.0))
             InitiateHorse()
         else
-            cAPI.notify("error", "Seu cavalo Morreu, Voce nao conseguio Reanimalo.")
+            cAPI.notify("error", "Seu cavalo morreu e você nao conseguiu reanimá-lo.")
         end
     end
 end

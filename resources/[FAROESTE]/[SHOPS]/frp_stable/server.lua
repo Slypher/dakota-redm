@@ -136,26 +136,6 @@ AddEventHandler(
     end
 )
 
-RegisterNetEvent("FRP:STABLE:deadhorse")
-AddEventHandler(
-    "FRP:STABLE:deadhorse",
-    function(id)
-        local _source = source
-        local User = API.getUserFromSource(_source)
-        local Character = User:getCharacter()
-        local Inventory = Character:getInventory()     
-        local Horse = Character:getHorse()
-        selectedHorseId = Horse:getId()
-
-        TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Seu Cavalo Morreu e nao conseguio ser reanimado...', 5000)  
-        
-        Character:removeHorse(tonumber(id))
-        Character:deleteHorse(tonumber(id))
-
-                
-    end
-)
-
 RegisterCommand("delcavalo",function(source)
     local _source = source
         local User = API.getUserFromSource(_source)
