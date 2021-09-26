@@ -432,7 +432,7 @@ Citizen.CreateThread(
 
             if PromptIsJustPressed(prompt_brush) then
                 local playerHorse = cAPI.GetPlayerHorse()
-                TaskAnimalInteraction(PlayerPedId(), playerHorse, GetHashKey("INTERACTION_BRUSH"), GetHashKey("p_brushhorse01x"), 1)
+                TaskAnimalInteraction(PlayerPedId(), playerHorse, GetHashKey("INTERACTION_BRUSH"), 0, 0)
                 Citizen.CreateThread(
                     function()
                         Citizen.Wait(10000)
