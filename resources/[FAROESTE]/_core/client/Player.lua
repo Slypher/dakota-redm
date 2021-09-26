@@ -259,8 +259,11 @@ Citizen.CreateThread(
                 if not isHorseActivationBlocked then
                     if IsPedInjured(playerHorse) then
                         cAPI.notify("error", "Seu cavalo foi ferido, você não poderá chama-lo nos proximos 2 minutos")
+
                         isHorseActivationBlocked = true
                         horseActivationSeconds = 120
+
+                        TriggerServerEvent('FRP:PlayerOwnedHorseWasInjured')
                     end
 
                     if PromptHasHoldModeCompleted(prompt_inventory) then

@@ -23,3 +23,37 @@ AddEventHandler('FRP:HORSE:OpenInventory', function()
         User:viewInventoryAsSecondary(HorseInventory)
     end
 end)
+
+RegisterNetEvent('FRP:PlayerOwnedHorseWasInjured', function()
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    if not user then
+        return
+    end
+    
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local activeHorse = character:getHorse()
+
+    if not activeHorse then
+        return
+    end
+
+    -- A gente deixa o modelo e o nome do cavalo como vazio
+    -- porque o script do frp_horse interpreta `nil` como podendo
+    -- liberar o uso do cavalo padrão.
+    TriggerClientEvent('FRP:HORSE:SetHorseInfo', playerId, '', '', '')
+    cAPI.SetPlayerHorse(playerId, 0)
+
+    -- Remover o caval otual da instancia do character.;
+    character:removeHorse(activeHorse:getId())
+
+    -- Remover a entrada do cavalo no banco de dados.
+    character:deleteHorse(activeHorse:getId())
+end)
