@@ -157,16 +157,20 @@ Citizen.CreateThread(
                 -- group, name, numpages, startpage(index 0),
                 PromptSetActiveGroupThisFrame(fakeplayer_promptgroup, CreateVarString(10, "LITERAL_STRING", name), 6, 0, 0, 0)
 
-                -- PUXAR A ARMA
+
+                -- Ao tentar puxar uma arma quanto mira para algum ped/entidade
+                -- o player não consegue, então a equipa a melhor arma do player
+                -- manualmente
                 if IsControlJustPressed(0, 0x07CE1E61) then
-                    local bestWeapon = GetBestPedWeapon(ped, 0, 0)
-                    if bestWeapon ~= GetHashKey("WEAPON_UNARMED") then
-                        ClearPedTasksImmediately(ped)
-                        ClearPedSecondaryTask(ped)
+                    local hasCurrent, currentWeaponHash = GetCurrentPedWeapon(PlayerPedId(), true, 0, false)
 
-                        SetCurrentPedWeapon(ped, bestWeapon, true)
-
-                        DisableControlAction(0, 0x07CE1E61, true)
+                    if hasCurrent and currentWeaponHash == `WEAPON_UNARMED` then
+                        local bestWeapon = GetBestPedWeapon(ped, false, false)
+                        if bestWeapon ~= `WEAPON_UNARMED` then
+                            SetCurrentPedWeapon(ped, bestWeapon, false, 0, false, false)
+    
+                            DisableControlAction(0, 0x07CE1E61, true)
+                        end
                     end
                 end
 
