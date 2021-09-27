@@ -32,8 +32,8 @@ function API.ItemData(id, name, description, type, stackSize, weight)
         return self.weight or 1
     end
 
-    self.triggerUse = function(this, User)
-        return triggerUse(User, self)
+    self.triggerUse = function(this, User, Slot)
+        return triggerUse(User, self, Slot)
     end
 
     self.isMelee = function()
@@ -73,7 +73,7 @@ end
 --     -- }
 --     return "Food"
 
-function triggerUse(User, itemData)
+function triggerUse(User, itemData, Slot)
     local source = User:getSource()
 
     --[[
@@ -570,6 +570,14 @@ end
     if itemId == "lockpick" then
         User:closeInventory()
         TriggerClientEvent("FRP:LOCKPICK:StartLockpicking", source)
+    end
+
+    if itemId == 'roupas' then
+        local metadata = Slot:getItemMetaData()
+
+        if metadata ~= '[]' then
+            TriggerClientEvent('FRP:SetPlayerClothingFromClothingItem', source, metadata)
+        end
     end
 
     return false

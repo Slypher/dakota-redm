@@ -8,12 +8,14 @@ client_scripts{
     "@_core/lib/utils.lua",
     'config/mp_male.lua',
 	'config/mp_female.lua',
-    'client/client.lua'
+    'client/client.lua',
+    'client/GetPedComponentAtIndex.js'
 }
 
 server_scripts{
     "@_core/lib/utils.lua",
-    'server.lua'}
+    'server.lua'
+}
 
 
 ui_page('client/html/index.html')

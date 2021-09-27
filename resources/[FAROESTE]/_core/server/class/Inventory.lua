@@ -578,6 +578,18 @@ function API.Inventory(id, capacity, slots)
         syncToViewers({[_source] = true}, sync, self:getWeight())
     end
 
+    self.getSlotsWithItemId = function(this, itemId)
+        local ret = { }
+
+        for slotId, slot in pairs(self.slots) do
+            if slot:getItemId() == itemId then
+                ret[slotId] = slot
+            end
+        end
+
+        return ret
+    end
+
     self.addRecent = function(this, itemId, itemAmount)
         -- local sync = {}
         -- for slotId = 16, 1, -1 do

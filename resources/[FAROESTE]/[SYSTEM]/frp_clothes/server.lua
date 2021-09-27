@@ -90,3 +90,81 @@ RegisterCommand('calca',function(source,args,rawCommand)
 		end
 	end
 end)
+
+local CLOTHING_STORAGE_ITEM = 'roupas'
+
+RegisterNetEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled', function()
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    if not user then
+        return
+    end
+
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local inventory = character:getInventory()
+
+    local hasAnyEmptyMetadata = false
+
+    for slotId, slot in pairs(inventory:getSlotsWithItemId(CLOTHING_STORAGE_ITEM)) do
+        local metadata = slot:getItemMetaData()
+
+        local isMetadataEmpty = metadata == '[]'
+
+        if isMetadataEmpty then
+            hasAnyEmptyMetadata = true
+            break
+        end
+    end
+
+    TriggerClientEvent('FRP:ResponseShouldStoreIntoClothingItemButtonBeEnabled', playerId, hasAnyEmptyMetadata)
+end)
+
+RegisterNetEvent('FRP:RequestStoreComponentsIntoClothingItem', function(clothingComponentsAsHex)
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    if not user then
+        return
+    end
+
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local inventory = character:getInventory()
+
+    if not inventory:hasItem(CLOTHING_STORAGE_ITEM) then
+        local itemData = API.getItemDataFromId(CLOTHING_STORAGE_ITEM)
+        user:notify('error', ('Você precisar ter o item \'%s\'.'):format(itemData:getName()) )
+        return
+    end
+
+    for slotId, slot in pairs(inventory:getSlotsWithItemId(CLOTHING_STORAGE_ITEM)) do
+        local metadata = slot:getItemMetaData()
+
+        local isMetadataEmpty = metadata == '[]'
+
+        if isMetadataEmpty then
+            -- Gambiarra, remover o item atual
+            -- só para reaplicar o metadata.
+            if inventory:removeItem(slotId, CLOTHING_STORAGE_ITEM, 1) then
+                if inventory:addItem(CLOTHING_STORAGE_ITEM, 1, clothingComponentsAsHex) then
+                    user:notify('success', 'Suas roupas atuais foram salvas em um item.')
+                    return
+                end
+            end
+        end
+    end
+
+    user:notify('error', 'Você não tem nenhum item de roupa vazia.')
+end)

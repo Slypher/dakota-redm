@@ -151,7 +151,7 @@ AddEventHandler(
 
         local itemData = Slot:getItemData()
 
-        if itemData:triggerUse(User) then
+        if itemData:triggerUse(User, Slot) then
             Inventory:removeItem(slotId, Slot:getItemId(), 1)
         end
     end

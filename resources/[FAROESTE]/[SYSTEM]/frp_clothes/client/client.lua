@@ -305,6 +305,8 @@ AddEventHandler(
             Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
 
             SetEveryoneAsInvisible()
+
+            TriggerServerEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled')
         else
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
         end
@@ -1398,3 +1400,110 @@ function DrawTxt(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre)
     Citizen.InvokeNative(0xADA9255D, 10)
     DisplayText(str, x, y)
 end
+
+RegisterNetEvent('FRP:ResponseShouldStoreIntoClothingItemButtonBeEnabled', function(shouldBeEnabled)
+    SendNUIMessage({
+        action = 'setStoreIntoClothingItemButtonAsEnabled',
+        value = shouldBeEnabled,
+    })
+end)
+
+local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
+    [`BOOT_ACCESSORIES`] = true,
+    [`PANTS`] = true,
+    [`CLOAKS`] = true,
+    [`HATS`] = true,
+    [`VESTS`] = true,
+    [`CHAPS`] = true,
+    [`SHIRTS_FULL`] = true,
+    [`BADGES`] = true,
+    [`MASKS`] = true,
+    [`SPATS`] = true,
+    [`NECKWEAR`] = true,
+    [`BOOTS`] = true,
+    [`ACCESSORIES`] = true,
+    [`JEWELRY_RINGS_RIGHT`] = true,
+    [`JEWELRY_RINGS_LEFT`] = true,
+    [`JEWELRY_BRACELETS`] = true,
+    [`GAUNTLETS`] = true,
+    [`NECKTIES`] = true,
+    [`HOLSTERS_KNIFE`] = true,
+    [`TALISMAN_HOLSTER`] = true,
+    [`LOADOUTS`] = true,
+    [`SUSPENDERS`] = true,
+    [`TALISMAN_SATCHEL`] = true,
+    [`SATCHELS`] = true,
+    [`GUNBELTS`] = true,
+    [`BELTS`] = true,
+    [`BELT_BUCKLES`] = true,
+    [`HOLSTERS_LEFT`] = true,
+    [`HOLSTERS_RIGHT`] = true,
+    [`AMMO_RIFLES`] = true,
+    [`TALISMAN_WRIST`] = true,
+    [`COATS`] = true,
+    [`COATS_CLOSED`] = true,
+    [`PONCHOS`] = true,
+    [`ARMOR`] = true,
+    [`GLOVES`] = true,
+    [`TALISMAN_BELT`] = true,
+    [`AMMO_PISTOLS`] = true,
+    [`HOLSTERS_CROSSDRAW`] = true,
+    [`APRONS`] = true,
+    [`SKIRTS`] = true,
+    [`MASKS_LARGE`] = true,
+    [`BEARDS_CHIN`] = true,
+    [`BEARDS_CHOPS`] = true,
+    [`BEARDS_MUSTACHE`] = true,
+}
+
+RegisterNUICallback('storeCurrentComponentsIntoClothingItem', function(data, cb)
+    local clothingPieceShopitemsAsHex = { }
+
+    local playerPed = PlayerPedId()
+
+    -- GetMetaPedType
+    local metapedType = N_0xec9a1261bf0ce510(playerPed)
+
+    -- GetNumComponentsInPed
+    for i = 1, N_0x90403e8107b60e81(playerPed) do
+
+        local shopitemHash = exports[GetCurrentResourceName()]:GetPedComponentAtIndex(playerPed, i - 1);
+
+        if shopitemHash ~= 0 then
+            -- GetPedComponentCategory
+            local shopitemCategoryHash = N_0x5ff9a878c3d115b8(shopitemHash, metapedType, true)
+
+            if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
+                table.insert(clothingPieceShopitemsAsHex, ('0x%x'):format(shopitemHash) )
+            end
+        end
+    end
+
+    TriggerServerEvent('FRP:RequestStoreComponentsIntoClothingItem', clothingPieceShopitemsAsHex)
+
+    -- Close connection.
+    cb({ })
+end)
+
+RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPieceShopitemsAsHex)
+    local playerPed = PlayerPedId()
+
+    -- Remover todas os componentes atuais.
+    for shopitemCategoryHash, _ in pairs(ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES) do
+        -- RemoveShopItemFromPedByCategory
+        -- Citizen.InvokeNative(0xDF631E4BCE1B1FC4, playerPed, shopitemCategoryHash, 0, 1)
+
+        -- RemoveTagFromMetaPed
+        Citizen.InvokeNative(0xD710A5007C2AC539, playerPed, shopitemCategoryHash, true)
+
+        NativeUpdatePedVariation(playerPed)
+    end 
+
+    -- Aplicar os componentes do item.
+    for _, clothingShopitemAsHex in ipairs(clothingPieceShopitemsAsHex) do
+        local clothingShopitemHash = tonumber(clothingShopitemAsHex)
+
+        NativeSetPedComponentEnabled(playerPed, clothingShopitemHash, false, true, true)
+        NativeUpdatePedVariation(playerPed)
+    end
+end)

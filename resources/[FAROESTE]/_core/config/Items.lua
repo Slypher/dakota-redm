@@ -2488,5 +2488,11 @@ ItemList = {
         description = "Utilizado para colocar conteúdo líquido.",
         stackSize = 30
     },
-   
+    ["roupas"] = {
+        type = "generic",
+        name = "roupas",
+        weight = 0.1,
+        description = "roupas.",
+        stackSize = 1
+    },
 }
