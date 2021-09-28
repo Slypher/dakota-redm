@@ -23,6 +23,8 @@ tempCam2 = nil
 tempCam = nil
 groundCam = nil
 
+local gZoomInterpolationCam
+
 local adding2 = true
 local adding = true
 
@@ -321,11 +323,12 @@ end
 RegisterNUICallback(
     "rotate",
     function(data, cb)
-        if (data["key"] == "left") then
-            rotation(20)
-        else
-            rotation(-20)
-        end
+        local VAR = 45
+
+        local playerPed = PlayerPedId()
+
+        TaskAchieveHeading(playerPed, GetEntityHeading(playerPed) + (data["key"] ~= "left" and VAR or -(VAR)), 0)
+
         cb("ok")
     end
 )
@@ -408,31 +411,34 @@ function SetEveryoneAsInvisible(invisible)
 end
 
 function createCamera()
-    SetEntityCoords(PlayerPedId(), -329.755,775.333,121.634)
-    local coords = GetEntityCoords(PlayerPedId())
-    groundCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", -329.755,775.333,121.634)
-    SetEntityHeading(PlayerPedId(), 286.07)
 
-    --	SetEntityVisible(PlayerPedId(), false)
+    local playerPed = PlayerPedId()
+
+    SetEntityCoords(playerPed, -329.755, 775.333, 121.634)
+    SetEntityHeading(playerPed, 286.07)
+
+    groundCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", -329.755, 775.333, 121.634)
     SetCamCoord(groundCam, -327.643,774.342,121.646)
-    --  SetCamFov(groundCam, 100)
     SetCamRot(groundCam, -10.0, 0.0, 152.09)
     SetCamActive(groundCam, true)
     RenderScriptCams(true, false, 1, true, true)
+
     --Wait(3000)
+
     -- last camera, create interpolate
     fixedCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
     SetCamCoord(fixedCam, -327.643,774.342,121.646)
     SetCamRot(fixedCam, 1.0, 0, 55.09)
-    -- Wait(3000)
-    cAPI.OutFade(500)
-    TriggerEvent("FRP:NOTIFY:Simple", "Utilize as teclas A e D para rotacionar o personagem, e as setas do teclado para selecionar as opções.", 10000)
-    --SetCamFov(fixedCam, 100)
+    cAPI.OutFade(500) -- It is blocking?
     SetCamActive(fixedCam, true)
     SetCamActiveWithInterp(fixedCam, groundCam, 1000, true, true)
+
+    TriggerEvent("FRP:NOTIFY:Simple", "Utilize as teclas A e D para rotacionar o personagem, e as setas do teclado para selecionar as opções.", 10000)
+
     Wait(1000)
+
     DestroyCam(groundCam)
-    -- InterP = true
+    groundCam = nil
 
     createZoomInterpCamera()
 end
@@ -1255,7 +1261,7 @@ RegisterNetEvent("FRP:CLOTHES:DrawOldClothing")
 AddEventHandler(
     "FRP:CLOTHES:DrawOldClothing",
     function()
-DestroyClothingMenu()
+        DestroyClothingMenu()
         cAPI.InFade(500)
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
@@ -1327,7 +1333,13 @@ function DestroyClothingMenu()
     inCustomization = false
     hided = false
 
+    DestroyCam(fixedCam)
+    DestroyCam(gZoomInterpolationCam)
+
+    fixedCam = nil
     gZoomInterpolationCam = nil
+
+    CamActive = false
 
     SendNUIMessage(
         {
@@ -1514,13 +1526,12 @@ RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPiece
     end
 end)
 
-local gZoomInterpolationCam
-
 function createZoomInterpCamera()
     if not gZoomInterpolationCam then
         gZoomInterpolationCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
         SetCamCoord(gZoomInterpolationCam, -327.643,774.342,121.646)
         SetCamRot(gZoomInterpolationCam, 1.0, 0, 55.09)
+        SetCamActive(gZoomInterpolationCam, true)
     end
 end
 
