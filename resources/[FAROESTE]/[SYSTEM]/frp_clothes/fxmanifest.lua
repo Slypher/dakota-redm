@@ -28,3 +28,5 @@ files({
     'client/html/css/*',
     'server.lua'
 })
+
+lua54 'yes'

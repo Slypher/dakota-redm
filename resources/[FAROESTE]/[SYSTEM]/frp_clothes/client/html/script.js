@@ -244,3 +244,52 @@ function storeCurrentComponentsIntoClothingItem()
 {
     $.post('http://frp_clothes/storeCurrentComponentsIntoClothingItem', JSON.stringify({ }));
 }
+
+let mouseX = 0.5;
+let mouseY = 0.5;
+
+function postMouseWheelMovement(isUp)
+{
+    $.post('http://frp_clothes/mouseWheelMovement', JSON.stringify({
+        isUp: isUp,
+    }))
+}
+
+$(window).on('wheel', function(event)
+{
+    if(event.originalEvent.deltaY !== 0)
+    {
+        if (event.originalEvent.deltaY <= 0)
+        {
+            // wheeled up
+            postMouseWheelMovement(true);
+        }
+        else
+        {
+            // wheeled down
+            postMouseWheelMovement(false);
+        }
+    }
+});
+
+$(document).mousemove(function(e)
+{
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+}); 
+
+$(document).mousedown(function(event)
+{
+    switch (event.which)
+    {
+        case 1:
+            $.post('http://frp_clothes/mouseLeftClick', JSON.stringify({
+                screenW: window.screen.availWidth,
+                screenH: window.screen.availHeight,
+        
+                mouseX: mouseX,
+                mouseY: mouseY,
+            }));
+            break;
+    }
+});
