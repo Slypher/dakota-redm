@@ -9,5 +9,4 @@ cache
 *.bat
 *.txt
 savedata
-resources/GHMattiMySQL/settings.xml
 resources/redemrp_inventory
