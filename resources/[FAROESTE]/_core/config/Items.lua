@@ -2490,9 +2490,9 @@ ItemList = {
     },
     ["roupas"] = {
         type = "generic",
-        name = "roupas",
-        weight = 0.1,
-        description = "roupas.",
+        name = "Roupas",
+        weight = 0.5,
+        description = "Uma muda de roupas para cada ocasião, troque de roupas onde quiser.",
         stackSize = 1
     },
 }
