@@ -65,12 +65,16 @@ AddEventHandler(
         
         local maxCharacters = 1
 
-        if PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__LOW') then
-            maxCharacters = 2
-        elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__MEDIUM') then
-            maxCharacters = 3
-        elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__HIGH') then
+        if cAPI.hasGroupOrInheritance('admin') then
             maxCharacters = 4
+        else
+            if PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__LOW') then
+                maxCharacters = 2
+            elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__MEDIUM') then
+                maxCharacters = 3
+            elseif PrivilegeSystem.getUserHasCachedPrivilege('PRIV_SLOT_COUNT_CHAR__HIGH') then
+                maxCharacters = 4
+            end
         end
 
         SetNuiFocus(true, true)
