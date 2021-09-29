@@ -1,16 +1,37 @@
-window.addEventListener('message', (event) => {
-    if (event.data.type == 1){
-        LoadCharacters(event.data.list, event.data.maxCharacters);
-    } else if(event.data.type == 2) {
-        window.location.reload();
+window.addEventListener('message', (event) =>
+{
+    if (event.data.type == 1)
+    {
+        const characterList = event.data.list;
+        const maxCharacters = event.data.maxCharacters
+
+        if(document.readyState === 'complete')
+        {
+            LoadCharacters(characterList, maxCharacters);
+        }
+        else
+        {
+            window.addEventListener('load', () =>
+            {
+                LoadCharacters(characterList, maxCharacters);
+            });
+        }
+    }
+    else if(event.data.type == 2)
+    {
+        // window.location.reload();
     }
 });
 
 var Identity = {};
 
-function LoadCharacters(list, maxCharacters) {
+function LoadCharacters(list, maxCharacters)
+{
+    // Parece que as arrays se tornam objetos no
+    // momento que serializadas caso sejam muito grandes
+    list = Array.from(list ?? [ ]);
 
-    $(".loading").html('');
+    $("#loading").html('');
     
     $(".container").html(`    
         <div class="header-text">${LOCALES[LOCALE].CHARACTERS}</div>			
@@ -32,10 +53,10 @@ function LoadCharacters(list, maxCharacters) {
         </div>
     `);
 
-
     let listLength = 0;
 
-    if (list) {
+    if (list)
+    {
         listLength = list.length;
     }
 
