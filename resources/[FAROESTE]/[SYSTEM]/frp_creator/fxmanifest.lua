@@ -47,3 +47,5 @@ exports {
 	'setOverlaySelected',
 	'getDataCreator'
 }
+
+lua54 'yes'

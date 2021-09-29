@@ -6,6 +6,10 @@ local playerProfileCreation = {}
 
 local pedHandle = nil
 
+local cCamera = nil
+
+local gZoomInterpolationCam = nil
+
 RegisterNetEvent("FRP:CHARCREATION:startCustomizationScene")
 AddEventHandler(
     "FRP:CHARCREATION:startCustomizationScene", function(characterData)
@@ -44,7 +48,7 @@ function startCustomizationScene(characterData)
 
     DestroyAllCams(true);
     
-    local cCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true);
+    cCamera = CreateCam("DEFAULT_SCRIPTED_CAMERA", true);
     SetCamCoord(cCamera, x, y, z);
     SetCamRot(cCamera, pitch, roll, yaw, 2);
     SetCamActive(cCamera, true);
@@ -55,6 +59,8 @@ function startCustomizationScene(characterData)
     
     SetPedDesiredHeading(pedHandle, 91.0);
     
+    createZoomInterpCamera(x, y, z, pitch, roll, yaw)
+
     Wait(2000)
 
     local isMale = IsPedMale(pedHandle) == 1
@@ -376,3 +382,120 @@ RegisterNUICallback("state:Customization:rotateCurrentPed", function(data, cb)
 
     cb({ })
 end)
+
+-- #WARNING: Código duplicado do frp_clothes.
+-- #WARNING: Código duplicado do frp_clothes.
+-- #WARNING: Código duplicado do frp_clothes.
+function createZoomInterpCamera(x, y, z, pitch, roll, yaw)
+    if not gZoomInterpolationCam then
+        gZoomInterpolationCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
+        SetCamCoord(gZoomInterpolationCam, x, y, z)
+        SetCamRot(gZoomInterpolationCam, pitch, roll, yaw)
+        -- SetCamActive(gZoomInterpolationCam, true)
+    end
+end
+
+RegisterNUICallback('mouseWheelMovement', function(data, cb)
+    data = json.decode(data) -- :/
+
+    -- Do not zoom in/out if one of the cams is interpolating.
+    if not cCamera or IsCamInterpolating(cCamera) or IsCamInterpolating(gZoomInterpolationCam) then
+        return
+    end
+    
+    local isZoomIn = data.isUp
+
+    local function interpolateToCamWithFovKeepPointing(from, to)
+        -- clear cam pointing because it will override setting rotation.
+        StopCamPointing(to)
+
+        SetCamRot(to, GetCamRot(from, 2), 2)
+
+        local FOV_VAR = 25.0
+
+        local fromCamFov = GetCamFov(from)
+
+        local newFov = isZoomIn and (fromCamFov - FOV_VAR) or (fromCamFov + FOV_VAR)
+        newFov = math.min(newFov, 40.0)
+
+        SetCamFov(to, newFov)
+        SetCamActiveWithInterp(to, from, 100, true, true)
+    end
+
+    if IsCamRendering(cCamera) then
+        interpolateToCamWithFovKeepPointing(cCamera, gZoomInterpolationCam)
+    else
+        interpolateToCamWithFovKeepPointing(gZoomInterpolationCam, cCamera)
+    end
+
+    cb({ })
+end)
+
+RegisterNUICallback('mouseLeftClick', function(data, cb)
+    data = json.decode(data) -- :/
+
+    if not cCamera or IsCamInterpolating(cCamera) or IsCamInterpolating(gZoomInterpolationCam) then
+        return
+    end
+
+    local _, hit, raycastHitPos, surfaceNormal, hitEntity = GetRaycastHitPositionFromNUIMouse(data.screenW, data.screenH, data.mouseX, data.mouseY)
+
+    if hit == 0 then
+        return
+    end
+
+    local function interpolateToCamKeepFov(from, to)
+        local pointAtXY = GetEntityCoords(hitEntity).xy
+        local pointAtZ = math.min(raycastHitPos.z, 240.0)
+
+        PointCamAtCoord(to, pointAtXY, pointAtZ)
+
+        -- Keep the old camera's FOV.
+        SetCamFov(to, GetCamFov(from))
+    
+        SetCamActiveWithInterp(to, from, 500, true, true)
+    end
+
+    if IsCamRendering(cCamera) then
+        interpolateToCamKeepFov(cCamera, gZoomInterpolationCam)
+    else
+        interpolateToCamKeepFov(gZoomInterpolationCam, cCamera)
+    end
+
+    cb({ })
+end)
+
+local glm = require("glm")
+
+function ScreenPositionToCameraRay(screenX, screenY, screenW, screenH)
+    local pos = GetFinalRenderedCamCoord()
+    local rot = glm.rad(GetFinalRenderedCamRot(2))
+
+    local q = glm.quatEulerAngleZYX(rot.z, rot.y, rot.x)
+    return pos,glm.rayPicking(
+        q * glm.forward(),
+        q * glm.up(),
+        glm.rad(GetFinalRenderedCamFov()),
+        (screenW / screenH),
+        0.10000, -- GetFinalRenderedCamNearClip(),
+        10000.0, -- GetFinalRenderedCamFarClip(),
+        screenX * 2 - 1, -- scale mouse coordinates from [0, 1] to [-1, 1]
+        screenY * 2 - 1
+    )
+end
+
+function GetRaycastHitPositionFromNUIMouse(w, h, mouseX, mouseY)
+    local mx = mouseX / w
+    local my = mouseY / h
+
+    -- Create a ray from the camera origin that extends through the mouse cursor
+    local r_pos, r_dir = ScreenPositionToCameraRay(mx, my, w, h)
+    local b = r_pos + 10000 * r_dir
+
+    -- StartExpensiveSynchronousShapeTestLosProbe
+    local handle = Citizen.InvokeNative(0x377906D8A31E5586, r_pos.x, r_pos.y, r_pos.z, b.x, b.y, b.z, 4 | 8, PlayerPedId(), 7)
+
+    local _, hit, pos, surface, entity = GetShapeTestResult(handle)
+    
+    return _, hit, pos, surface, entity
+end
