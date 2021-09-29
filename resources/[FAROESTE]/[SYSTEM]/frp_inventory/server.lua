@@ -4,20 +4,20 @@ API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
 local dropPopulation = 
-    {
-        x,
-        y,
-        z,
-        itemId,
-        itemAmount
-    }
-local dropPopulation_serveronly = 
+-- {
+--     x,
+--     y,
+--     z,
+--     itemId,
+--     itemAmount
+-- }
 
-    {
-        itemWeaponAmmoInClip,
-        itemWeaponAmmoInWeapon,
-        deletionTimestamp
-    }
+local dropPopulation_serveronly = 
+-- {
+--     itemWeaponAmmoInClip,
+--     itemWeaponAmmoInWeapon,
+--     deletionTimestamp
+-- }
 
 
 RegisterCommand("getSlots", function(source, args)
