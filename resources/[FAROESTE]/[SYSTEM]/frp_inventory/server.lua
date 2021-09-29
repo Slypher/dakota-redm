@@ -3,7 +3,7 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
-local dropPopulation = 
+local dropPopulation = { }
 -- {
 --     x,
 --     y,
@@ -12,7 +12,7 @@ local dropPopulation =
 --     itemAmount
 -- }
 
-local dropPopulation_serveronly = 
+local dropPopulation_serveronly = { }
 -- {
 --     itemWeaponAmmoInClip,
 --     itemWeaponAmmoInWeapon,
