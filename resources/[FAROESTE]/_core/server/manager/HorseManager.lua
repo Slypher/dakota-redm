@@ -51,9 +51,11 @@ RegisterNetEvent('FRP:PlayerOwnedHorseWasInjured', function()
     TriggerClientEvent('FRP:HORSE:SetHorseInfo', playerId, '', '', '')
     cAPI.SetPlayerHorse(playerId, 0)
 
+    local horseId = activeHorse:getId()
+
     -- Remover o caval otual da instancia do character.;
-    character:removeHorse(activeHorse:getId())
+    character:removeHorse(horseId)
 
     -- Remover a entrada do cavalo no banco de dados.
-    character:deleteHorse(activeHorse:getId())
+    character:deleteHorse(horseId)
 end)
