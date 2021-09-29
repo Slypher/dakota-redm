@@ -343,8 +343,12 @@ RegisterNetEvent("FRP:RESPAWN:revive")
 AddEventHandler(
 	"FRP:RESPAWN:revive",
 	function()
-		NetworkResurrectLocalPlayer(GetEntityCoords(PlayerPedId()), true, true, false)
+		local playerPed = PlayerPedId()
+
+		NetworkResurrectLocalPlayer(GetEntityCoords(playerPed), GetEntityHeading(playerPed), 0, false, 0, true)
+
 		DestroyAllCams(true)
+
 		DestroyDeathRelatedInformation()
 	end
 )
