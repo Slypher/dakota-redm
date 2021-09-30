@@ -47,16 +47,19 @@ function InitiateHorse(atCoords)
 
     initializing = true
 
-    if horseModel == nil and horseName == nil then
+    local hasNoHorseData = horseModel == nil or horseModel == ''
+    local canUseDefaultHorse = horseModel == nil
+
+    if hasNoHorseData then
         TriggerServerEvent("FRP:HORSE:RequestMyHorseInfo")
 
         local timeoutatgametimer = GetGameTimer() + (3 * 1000)
 
-        while horseModel == nil and timeoutatgametimer > GetGameTimer() do
+        while hasNoHorseData and timeoutatgametimer > GetGameTimer() do
             Citizen.Wait(0)
         end
 
-        if horseModel == nil and horseName == nil then
+        if horseModel == nil and canUseDefaultHorse then
             horseModel = "A_C_Horse_MP_Mangy_Backup"
             horseName = "Pangaré"
         end
