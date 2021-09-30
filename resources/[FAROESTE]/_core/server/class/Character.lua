@@ -282,7 +282,7 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
         local rows = API_Database.query("FCRP/CreateHorse", {charid = self:getId(), model = model, name = name})
         if #rows > 0 then
             local id = rows[1].id
-            self.Horse = API.Horse(id, model, name, API.Inventory("horse" .. id, nil, nil))
+            self.Horse = API.Horse(id, model, name, API.Inventory("horse:" .. id, nil, nil))
             local Inventory = self.Horse:getInventory()
 
             API_Database.execute("FCRP/Inventory", {id = "horse:" .. id, charid = self:getId(), capacity = Inventory:getCapacity(), slot = 0, itemId = 0, itemAmount = 0, procType = "insert"})
