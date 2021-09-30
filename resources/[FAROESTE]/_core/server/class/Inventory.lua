@@ -152,7 +152,7 @@ function API.Inventory(id, capacity, slots)
                     self.slots[slotId] = nil
                     Citizen.CreateThread(
                         function()
-                            API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                            API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                         end
                     )
                 end
@@ -161,10 +161,10 @@ function API.Inventory(id, capacity, slots)
                     function()
                         if gotRemoved == false then
                             local slot_data = json.encode(Slot:getSyncData())
-                            API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                            API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                         end
                         local slot_dataTo = json.encode(newSlot:getSyncData())
-                        API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotIdTo, slot_value = slot_dataTo})
+                        API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotIdTo, ['slot_value'] = slot_dataTo})
                     end
                 )
             end
@@ -187,7 +187,7 @@ function API.Inventory(id, capacity, slots)
                         self.slots[slotId] = nil
                         Citizen.CreateThread(
                             function()
-                                API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                                API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                             end
                         )
                     end
@@ -196,10 +196,10 @@ function API.Inventory(id, capacity, slots)
                         function()
                             if gotRemoved == false then
                                 local slot_data = json.encode(Slot:getSyncData())
-                                API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                                API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                             end
                             local slot_dataTo = json.encode(SlotTo:getSyncData())
-                            API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotIdTo, slot_value = slot_dataTo})
+                            API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotIdTo, ['slot_value'] = slot_dataTo})
                         end
                     )
                 end
@@ -217,7 +217,7 @@ function API.Inventory(id, capacity, slots)
                             self.slots[slotId] = nil
                             Citizen.CreateThread(
                                 function()
-                                    API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                                    API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                                 end
                             )
                         end
@@ -226,10 +226,10 @@ function API.Inventory(id, capacity, slots)
                             function()
                                 if gotRemoved == false then
                                     local slot_data = json.encode(Slot:getSyncData())
-                                    API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                                    API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                                 end
                                 local slot_dataTo = json.encode(SlotTo:getSyncData())
-                                API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotIdTo, slot_value = slot_dataTo})
+                                API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotIdTo, ['slot_value'] = slot_dataTo})
                             end
                         )
 
@@ -245,9 +245,9 @@ function API.Inventory(id, capacity, slots)
                     Citizen.CreateThread(
                         function()
                             local slot_data = json.encode(Slot:getSyncData())
-                            API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotIdTo, slot_value = slot_data})
+                            API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotIdTo, ['slot_value'] = slot_data})
                             local slot_dataTo = json.encode(copySlot:getSyncData())
-                            API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_dataTo})
+                            API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_dataTo})
                         end
                     )
 
@@ -373,7 +373,7 @@ function API.Inventory(id, capacity, slots)
                 Citizen.CreateThread(
                     function()
                         local slot_data = json.encode(Slot:getSyncData())
-                        API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                        API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                     end
                 )
             end
@@ -422,14 +422,14 @@ function API.Inventory(id, capacity, slots)
                         self.slots[slotId] = nil
                         Citizen.CreateThread(
                             function()
-                                API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                                API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                             end
                         )
                     else
                         Citizen.CreateThread(
                             function()
                                 local slot_data = json.encode(Slot:getSyncData())                               
-                                API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                                API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                             end
                         )
                     end
@@ -466,14 +466,14 @@ function API.Inventory(id, capacity, slots)
                 self.slots[slotId] = nil
                 Citizen.CreateThread(
                     function()
-                        API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                        API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                     end
                 )
             else
                 Citizen.CreateThread(
                     function()
                         local slot_data = json.encode(Slot:getSyncData())
-                        API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                        API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                     end
                 )
             end
@@ -563,14 +563,14 @@ function API.Inventory(id, capacity, slots)
             self.slots[slotId] = nil
             Citizen.CreateThread(
                 function()
-                    API_Database.execute("UPDATE:inv_remove_slot", {inv_id = self:getId(), slot_id = slotId})
+                    API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
                 end
             )
         else
             Citizen.CreateThread(
                 function()
                     local slot_data = json.encode(Slot:getSyncData())
-                    API_Database.execute("UPDATE:inv_update_slot", {inv_id = self:getId(), slot_id = slotId, slot_value = slot_data})
+                    API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
                 end
             )
         end
