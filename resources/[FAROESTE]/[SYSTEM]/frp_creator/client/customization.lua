@@ -363,7 +363,10 @@ RegisterNUICallback(
         
         playerProfileCreation.components = json.encode(playerAppearanceComponents);
         playerProfileCreation.overlays = json.encode(playerAppearanceOverlay);
+        
         SetNuiFocus(false, false);
+        SetNuiFocusKeepInput(false)
+
         TriggerServerEvent("PersonaCreatorHandler.requestCreatePersona", playerProfileCreation)
 
 
