@@ -19,7 +19,7 @@ window.addEventListener('message', (event) =>
     }
     else if(event.data.type == 2)
     {
-        // window.location.reload();
+        window.location.reload();
     }
 });
 
