@@ -130,6 +130,14 @@ function setComponentPlayer(data)
         local hash = data.faceFeatureIndex;
         local value = componentIndex;    
 
+        -- Remover da tabela caso ja exista :)
+        for i, pair in ipairs(playerProfileCreation.faceFeatures) do
+            if pair.hash == hash then
+                table.remove(playerProfileCreation.faceFeatures, i)
+                break
+            end
+        end
+
         table.insert(playerProfileCreation.faceFeatures, {['hash'] = hash, ['index'] = value})     
 
         Citizen.InvokeNative(0x5653AB26C82938CF, pedHandle, tonumber(hash), tonumber(value))

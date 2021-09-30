@@ -78,9 +78,10 @@ end
 function cAPI.SetPedFaceFeature(ped, faceFeatures)
     faceFeatures = json.decode(faceFeatures)
 
-    for index, floatValue in pairs(faceFeatures) do
+    -- { hash: number, index: number }[];
+    for i, pair in ipairs(faceFeatures) do
         -- Doesn't need to be requested !!!!!!        
-        NativeSetPedFaceFeature(ped, tonumber(index), tonumber(floatValue))
+        NativeSetPedFaceFeature(ped, tonumber(pair.hash), tonumber(pair.index))
     end
 end
 
