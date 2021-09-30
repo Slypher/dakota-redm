@@ -6,10 +6,10 @@ API = Tunnel.getInterface("API")
 
 local FirstSpawn = false
 
-local car = nil
-local ped = nil
+local gStageCoachVehicle
+local gCoachDriverPed
 
-local coordsSpawn = vector3(-284.436,796.012,118.737)
+local COORDS_SPAWN = vector3(-284.436, 796.012, 118.737)
 
 RegisterNetEvent("FRP:CREATOR:FirstSpawn")
 AddEventHandler(
@@ -17,87 +17,140 @@ AddEventHandler(
     function()
         if not FirstSpawn and Config.EnableCutscene then
             TriggerMusicEvent("REHR_START")
-            NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)           
-            Wait(100)
-            SetEntityCoords(PlayerPedId(), 2520.09,-358.05,41.61)
-            Wait(2500)
-            TriggerEvent('FRP:CREATOR:CreateVehicle', 'STAGECOACH001X')
-            Wait(1000)
-            TriggerEvent('FRP:CREATOR:CreatePedOnVehicle', 'CS_BivCoachDriver')
-            Wait(3000)
-            SetPedIntoVehicle(PlayerPedId(), car, 1)
-            Wait(2000)               
-            TriggerEvent('FRP:CREATOR:StartNotify')
-            Wait(2000) 
-            SetEntityHealth(PlayerPedId(), 20)
-            FirstSpawn = true
+
+            TriggerEvent('hideBasicNeedsUI')
+
+            local playerPed = PlayerPedId()
+
+            SetEntityInvincible(playerPed, true)
+
+            DoScreenFadeOut(500)
+
+            while IsScreenFadedOut() do
+                Wait(0)
+            end
+
+            NetworkSetEntityInvisibleToNetwork(playerPed, true)
+
+            StartPlayerTeleport(PlayerId(), 2520.09, -358.05, 41.61, 0.0, false, true, true, false --[[ bDisableSeamlessTeleport ]])
+
+            local hasFinishedTeleporting = false
+            local hasFinishedRenderingEntities = false
+
+            local function afterLoad()
+                if FirstSpawn then
+                    return
+                end
+
+                DoScreenFadeIn(1000)
+
+                SetPedIntoVehicle(playerPed, gStageCoachVehicle, 1)
+                SetEntityHealth(playerPed, 20)
+    
+                TriggerEvent('FRP:CREATOR:StartNotify')
+                
+                FirstSpawn = true
+
+                createThreadShowHelperAudioAndText()
+            end
+            
+            -- Não bloquear o teleporte.
+            CreateThread(function()
+                createStageCoachVehicle()
+                createCoachDriverPed()
+
+                hasFinishedRenderingEntities = true
+
+                if hasFinishedTeleporting then
+                    afterLoad()
+                end
+            end)
+
+            while IsPlayerTeleportActive() do
+                Wait(0)
+            end
+
+            hasFinishedTeleporting = true
+
+            if hasFinishedRenderingEntities then
+                afterLoad()
+            end
         else            
-            TriggerEvent('FRP:CREATOR:StartNotify')            
-            SetEntityCoords(PlayerPedId(), Config.FirstSpawnCoords)
+            TriggerEvent('FRP:CREATOR:StartNotify')
+
+            SetEntityCoords(playerPed, Config.FirstSpawnCoords)
+
             FirstSpawn = false
         end
     end
 )
 
-Citizen.CreateThread(
-    function()
-        while true do
-            Wait(10)
-            if FirstSpawn then	
-                local pcoords = GetEntityCoords(PlayerPedId())                
-                local dst = #(coordsSpawn - pcoords)	   
-                if dst < 5 then
-                    RemovePedFromGroup(ped, GetPedGroupIndex(PlayerPedId()))
-                    Wait(100)
-                    DisableAllControlActions(0)                  
-                    NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
-                    SetEntityInvincible(PlayerPedId(), false)  
-                    SetCinematicModeActive(0)                    
-                    FirstSpawn = false
-                    N_0x69d65e89ffd72313(false)    
-                    Wait(1000)
-                    TaskLeaveVehicle(PlayerPedId(), car, 0, 0) 
-                    Wait(2000)                         
-                    TaskVehicleDriveToCoord(ped, GetVehiclePedIsIn(ped, false), 2600.436,-1205.932,53.323, 10.0, 1.0, GetEntityModel(GetVehiclePedIsIn(PlayerPedId())), 67633207, 5.0, false)
-                    TriggerEvent('FRP:NOTIFY:Simple', 'Sua viagem foi longa, voce nao esta muito bem, dirija-se ao banco para sacar o dinheiro para pagar seu tratamento...', 10000)
-                    TriggerEvent("vrp_sound:source",'Intro6',0.55)
-                    TriggerMusicEvent("MC_MUSIC_STOP")                    
-                    Wait(10000)
-                  --  TriggerEvent('FRP:NOTIFY:Simple', 'Digite /guiainiciante ver o Jornal Guia de Iniciante.', 10000)
-                    DeleteVehicle(car)
-					Citizen.InvokeNative(0x971D38760FBC02EF, ped, false)
-                    DeleteEntity(ped)
-                else               
-                    N_0x69d65e89ffd72313(true)
-                    SetCinematicModeActive(1)
-                    DisableAllControlActions(1)
-                end 
-            end	
+function createThreadShowHelperAudioAndText()
+    while true do
+        Wait(10)
+        
+        local playerPed = PlayerPedId()
+        local playerPos = GetEntityCoords(playerPed)
+
+        if #(COORDS_SPAWN - playerPos) <= 5.0 then
+            RemovePedFromGroup(gCoachDriverPed, GetPedGroupIndex(playerPed))
+
+            Wait(100)
+
+            DisableAllControlActions(0)                  
+            SetCinematicModeActive(0)
+
+            N_0x69d65e89ffd72313(false)   
+
+            Wait(1000)
+
+            TaskLeaveVehicle(playerPed, gStageCoachVehicle, 0, 0)
+
+            SetEntityInvincible(playerPed, false)
+            NetworkSetEntityInvisibleToNetwork(playerPed, false)
+
+            TriggerEvent('showBasicNeedsUI')
+
+            Wait(2000)              
+
+            -- Old driving style: 67633207
+            TaskVehicleDriveToCoord(gCoachDriverPed, GetVehiclePedIsIn(gCoachDriverPed, false), 2600.436, -1205.932, 53.323, 10.0, 1.0, GetEntityModel(GetVehiclePedIsIn(playerPed)), 262708, 5.0, false)
+            
+            TriggerEvent('FRP:NOTIFY:Simple', 'Sua viagem foi longa, voce nao esta muito bem, dirija-se ao banco para sacar o dinheiro para pagar seu tratamento...', 10000)
+            TriggerEvent("vrp_sound:source", 'Intro6', 0.55)
+            TriggerMusicEvent("MC_MUSIC_STOP") 
+
+            Wait(10000)
+            
+            --  TriggerEvent('FRP:NOTIFY:Simple', 'Digite /guiainiciante ver o Jornal Guia de Iniciante.', 10000)
+            DeleteVehicle(gStageCoachVehicle)
+            DeleteEntity(gCoachDriverPed)
+
+            break
+        else               
+            N_0x69d65e89ffd72313(true)
+            SetCinematicModeActive(1)
+            DisableAllControlActions(1)
+        end 
+    end
+end
+
+function createStageCoachVehicle()
+    local modelHash = `STAGECOACH001X`
+    if not HasModelLoaded(modelHash) then
+        RequestModel(modelHash)
+
+        while not HasModelLoaded(modelHash) do
+            Wait(0)
         end
     end
-)
 
-RegisterNetEvent("FRP:CREATOR:CreateVehicle")
-AddEventHandler(
-	"FRP:CREATOR:CreateVehicle",
-	function(vModel)
-		local veh = GetHashKey(vModel)
-		local ply = GetPlayerPed()
-		local coords = GetEntityCoords(ply)
-		Citizen.CreateThread(
-			function()
-				RequestModel(veh)
-				while not HasModelLoaded(veh) do
-                    Wait(1000)                    
-				end
-				if HasModelLoaded(veh) then
-                    car = CreateVehicle(veh, 74.183,93.763,103.161, true, false)
-					SetVehicleOnGroundProperly(car)
-				end
-			end
-		)
-	end
-)
+    gStageCoachVehicle = CreateVehicle(modelHash, 74.183,93.763,103.161, true, false)
+    SetModelAsNoLongerNeeded(modelHash)
+
+    SetVehicleOnGroundProperly(gStageCoachVehicle)
+end
+
 local soundDistanceMax = 8.0
 
 RegisterNetEvent("FRP:CREATOR:StartNotify")
@@ -122,63 +175,77 @@ AddEventHandler(
     end)
 
 
-function StopSoundJS (sound)
+function StopSoundJS(sound)
     SendNUIMessage({ event = 'stopSound', sound = sound})
-  end
+end
 
-
-  
-  
 RegisterCommand(
 	"testarsom",
 	function()
         StopSoundJS('Intro1.ogg')
 	end
 )
-RegisterNetEvent("FRP:CREATOR:CreatePedOnVehicle")
-AddEventHandler(
-    "FRP:CREATOR:CreatePedOnVehicle",    
-    function(pedModel)
-        
-        local pedModelHash = GetHashKey(pedModel)
-		if not IsModelValid(pedModelHash) then
-			return
-		end
 
-		if not HasModelLoaded(pedModelHash) then
-			RequestModel(pedModelHash)
-			while not HasModelLoaded(pedModelHash) do
-				Citizen.Wait(10)
-			end
+function createCoachDriverPed()
+    local modelHash = `CS_BivCoachDriver`
+
+    if not HasModelLoaded(modelHash) then
+        RequestModel(modelHash)
+
+        while not HasModelLoaded(modelHash) do
+            Citizen.Wait(0)
         end
-        
-		ped = CreatePed(pedModelHash, coordsSpawn, GetEntityHeading(PlayerPedId()), false, 0)        
-        Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-        Citizen.InvokeNative(0x58A850EAEE20FAA3, ped)
-		
-		SetEntityNoCollisionEntity(PlayerPedId(), ped, false)
-        SetEntityCanBeDamaged(ped, false)
-        SetEntityInvincible(ped, true)
-        Wait(1000)
-        SetBlockingOfNonTemporaryEvents(ped, true)
+    end
+    
+    local playerPed = PlayerPedId()
 
-        SetEntityAsMissionEntity(ped)
+    gCoachDriverPed = CreatePed(modelHash, COORDS_SPAWN, GetEntityHeading(playerPed), false, 0)     
+    SetModelAsNoLongerNeeded(modelHash)
+    
+    -- SetRandomOutfitVariation
+    Citizen.InvokeNative(0x283978A15512B2FE, gCoachDriverPed, true)
 
-        -- SetModelAsNoLongerNeeded(pedModelHash)
-        Citizen.Wait(150)
-        SetPedAsGroupMember(ped, GetPedGroupIndex(PlayerPedId()))
-		
-		SetEntityAsMissionEntity(car, false, false)
-        SetEntityAsMissionEntity(ped, false, false)
-            
-        npc_group = GetPedRelationshipGroupHash(ped)
-        SetRelationshipBetweenGroups(1 , GetHashKey("PLAYER") , npc_group)
+    -- PlaceEntityOnGroundProperly
+    Citizen.InvokeNative(0x9587913B9E772D29, gCoachDriverPed, true)
+    
+    SetEntityNoCollisionEntity(playerPed, gCoachDriverPed, false)
+    SetEntityCanBeDamaged(gCoachDriverPed, false)
+    SetEntityInvincible(gCoachDriverPed, true)
 
-        SetPedIntoVehicle(ped, car, -1)
-        TaskVehicleDriveToCoord(ped, GetVehiclePedIsIn(ped, false), -284.436,796.012,118.737, 10.0, 1.0, GetEntityModel(GetVehiclePedIsIn(PlayerPedId())), 67633207, 5.0, false)
-        Citizen.InvokeNative(0x971D38760FBC02EF, ped, true)
-        
-        Citizen.Wait(250)
-	end
-)
+    -- Wait(1000)
 
+    SetBlockingOfNonTemporaryEvents(gCoachDriverPed, true)
+    SetEntityAsMissionEntity(gCoachDriverPed)
+
+    -- Wait(150)
+
+    SetPedAsGroupMember(gCoachDriverPed, GetPedGroupIndex(playerPed))
+    
+    SetEntityAsMissionEntity(gStageCoachVehicle, false, false)
+    SetEntityAsMissionEntity(gCoachDriverPed, false, false)
+    
+    SetRelationshipBetweenGroups(1 , `PLAYER`, GetPedRelationshipGroupHash(gCoachDriverPed))
+
+    SetPedIntoVehicle(gCoachDriverPed, gStageCoachVehicle, -1)
+    
+    TaskVehicleDriveToCoord(gCoachDriverPed, GetVehiclePedIsIn(gCoachDriverPed, false), -284.436,796.012,118.737, 10.0, 1.0, modelHash, 67633207, 5.0, false)
+    
+    -- SetPedKeepTask
+    Citizen.InvokeNative(0x971D38760FBC02EF, gCoachDriverPed, true)
+    
+    -- IsPedReadyToRender
+    while not Citizen.InvokeNative(0xA0BC8FAED8CFEB3C, gCoachDriverPed) do
+        Wait(0)
+    end
+
+    -- Wait(250)
+end
+
+AddEventHandler('onResourceStop', function(resource)
+    if resource == GetCurrentResourceName() then
+        DeleteEntity(gStageCoachVehicle)
+        DeleteEntity(gCoachDriverPed)
+
+        SetEntityInvincible(PlayerPedId(), false)
+    end
+end)

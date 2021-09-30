@@ -126,6 +126,21 @@ AddEventHandler(
     end
 )
 
+AddEventHandler('hideBasicNeedsUI', function()
+    SendNUIMessage(
+        {
+            action = "hideHud"
+        }
+    )
+end)
+
+AddEventHandler('showBasicNeedsUI', function()
+    SendNUIMessage(
+        {
+            action = "showHud"
+        }
+    )
+end)
 
 function DirectionHeading(heading)
     if ((heading >= 0 and heading < 45) or (heading >= 315 and heading < 360)) then

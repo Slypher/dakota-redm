@@ -147,10 +147,9 @@ function request()
 
     Wait(1500)
 
+    TriggerServerEvent("PersonaCreatorHandler.setPlayerRoutingBucket")
+
     for i = 1, 2 do
-
-        TriggerServerEvent("PersonaCreatorHandler.setPlayerRoutingBucket")
-
         pedModel = staticPedModels[i]
 
         hashedPedModel = GetHashKey(pedModel)
