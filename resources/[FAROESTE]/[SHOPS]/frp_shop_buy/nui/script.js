@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-let shops = {};
+let shops = [ ];
 
 window.addEventListener("message", function(event) {
     var data = event.data;
@@ -17,17 +17,20 @@ window.addEventListener("message", function(event) {
 
         if (data.firstTimeData) {
 
-            data.firstTimeData.forEach(function(shopData, index) {
-                for (const [shopSubType, shopItemList] of Object.entries(shopData)) {
-                    if (shopSubType == "name") {
-                        shops[shopItemList] = shopData;
-                        break
-                    }
-                }
-            });
+            shops = data.firstTimeData;
+
+            // data.firstTimeData.forEach(function(shopData, index) {
+            //     for (const [shopSubType, shopItemList] of Object.entries(shopData)) {
+            //         if (shopSubType == "name") {
+            //             shops[shopItemList] = shopData;
+            //             break
+            //         }
+            //     }
+            // });
         }
 
         $(".container").show();
+
         draw(data.shopId);
     }
 
@@ -36,50 +39,49 @@ window.addEventListener("message", function(event) {
     }
 });
 
-function draw(shopId) {
-
+function draw(shopId)
+{
     $('.slot-container').html('');
 
-    $('.title').text(shopId);
+    let renderedItems = 0;
 
-    var renderedItems = 0;
+    const shopInfo = shops[String(shopId)];
 
-    for (const [shopSubType, shopItemList] of Object.entries(shops[shopId])) {
+    const shopItemsInfo= shopInfo.items;
 
-        if (shopSubType != "name") {
+    $('.title').text(shopInfo.name);
 
-            for (const [i, itemData] of Object.entries(shopItemList)) {
+    for (const [shopItemId, shopItemInfo] of Object.entries(shopItemsInfo))
+    {
+        var itemId = shopItemInfo[0];
+        var itemLevel = shopItemInfo[1];
+        var itemPrice_dollar = shopItemInfo[2];
+        var itemPrice_gold = shopItemInfo[3];
+        var itemName = shopItemInfo[4];
+        var itemWeight = shopItemInfo[5];
+        var itemDescription = shopItemInfo[6];
 
-                var itemId = itemData[0];
-                var itemLevel = itemData[1];
-                var itemPrice_dollar = itemData[2];
-                var itemPrice_gold = itemData[3];
-                var itemName = itemData[4];
-                var itemWeight = itemData[5];
-                var itemDescription = itemData[6];
+        itemWeight = itemWeight.toFixed(1);
+        itemPrice_dollar = (itemPrice_dollar / 100).toFixed(2);
+        itemPrice_gold = (itemPrice_gold / 100).toFixed(2);
 
-                itemWeight = itemWeight.toFixed(1);
-                itemPrice_dollar = (itemPrice_dollar / 100).toFixed(2);
-                itemPrice_gold = (itemPrice_gold / 100).toFixed(2);
+        $('.slot-container').append(`
+            <div class="slot" id="${itemId}" onclick="select(this)">
+                <img src="nui://frp_inventory/nui/images/items/${itemId}.png">
+            </div>
+        `);
 
-                $('.slot-container').append(`
-                    <div class="slot" id="${itemId}" onclick="select(this)">
-                        <img src="nui://frp_inventory/nui/images/items/${itemId}.png">
-                    </div>
-                `);
+        var element = $(`.slot-container #${itemId}`);
+        $(element).attr('shopId', shopId);
+        $(element).attr('name', itemName);
+        $(element).attr('description', itemDescription);
+        $(element).attr('weight', itemWeight);
+        $(element).attr('p_dollar', itemPrice_dollar);
+        $(element).attr('p_gold', itemPrice_gold);
 
-                var element = $(`.slot-container #${itemId}`);
-                $(element).attr('shopId', shopId);
-                $(element).attr('name', itemName);
-                $(element).attr('description', itemDescription);
-                $(element).attr('weight', itemWeight);
-                $(element).attr('p_dollar', itemPrice_dollar);
-                $(element).attr('p_gold', itemPrice_gold);
+        $(element).attr('shopItemId', shopItemId);
 
-                renderedItems++;
-            }
-            break;
-        }
+        renderedItems++;
     }
 
     if ((renderedItems % 4) != 0 || renderedItems < 16) {
@@ -179,6 +181,19 @@ function select(element) {
         $('.description-title').text(item_name);
         $('.description-description').text(item_description);
         $('#confirmation-container #confirm_title').text(item_name);
+
+        const jqryElement = $(element);
+
+        const itemId = jqryElement.attr('id');
+        const shopItemId = jqryElement.attr('shopItemId');
+
+        
+        $.post('http://frp_shop_buy/shopItemWasSelected', JSON.stringify(
+            {
+                itemId: itemId,
+                shopItemId: shopItemId,
+            }
+        ));
     }
 }
 
@@ -192,6 +207,8 @@ function unSelect(element) {
         $('#confirmation-container').hide();
         $('#p_gold_img').removeClass('fhover_gold');
         $('#p_dollar_img').removeClass('fhover_dollar');
+
+        $.post('http://frp_shop_buy/shopItemWasUnselected');
     }
 }
 

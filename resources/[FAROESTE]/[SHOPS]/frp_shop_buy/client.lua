@@ -13,161 +13,84 @@ local prompt_group_name
 
 local sentFirstData = false
 
+local gSelectedShopId
+local gSelectedShopName
 
------------------------------------------------------------------------------------------------------------------------------------------
--- PED PART
------------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
-        local modelName = 'U_M_M_TumBartender_01' -- SALOON VALENTINE
-        local modelHash = GetHashKey(modelName)
-        while not HasModelLoaded(modelHash) do
-            Wait(100)
-            RequestModel(modelHash)
-        end
-        local ped = CreatePed(modelHash, -313.366,805.996,117.955,267.0, false, true)
-        Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-        FreezeEntityPosition(ped,true)
-        SetEntityInvincible(ped,true)
-        SetBlockingOfNonTemporaryEvents(ped,true)
-end)
-Citizen.CreateThread(function()
-    local modelName = 'U_F_M_TumGeneralStoreOwner_01' -- ARMAZEM VALENTINE
-    local modelHash = GetHashKey(modelName)
-    while not HasModelLoaded(modelHash) do
-        Wait(100)
-        RequestModel(modelHash)
-    end
-    local ped = CreatePed(modelHash, -324.078,804.157,116.882,289.0, false, true)
-    Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-    FreezeEntityPosition(ped,true)
-    SetEntityInvincible(ped,true)
-    SetBlockingOfNonTemporaryEvents(ped,true)
-end)
+local gSelectedShopChildPos
 
-Citizen.CreateThread(function()
-    local modelName = 'U_M_Y_CzPHomesteadSon_01' -- HOTEL VALENTINE
-    local modelHash = GetHashKey(modelName)
-    while not HasModelLoaded(modelHash) do
-        Wait(100)
-        RequestModel(modelHash)
-    end
-    local ped = CreatePed(modelHash, -325.825,773.059,116.436,20.0, false, true)
-    Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-    FreezeEntityPosition(ped,true)
-    SetEntityInvincible(ped,true)
-    SetBlockingOfNonTemporaryEvents(ped,true)
-end)
+local gSelectedShopItemId
+local gSelectedShopItemQuantityMultiplier = 1
 
-Citizen.CreateThread(function()
-    local modelName = 'U_M_O_BHT_DOCWORMWOOD' -- BANCO VALENTINE
-    local modelHash = GetHashKey(modelName)
-    while not HasModelLoaded(modelHash) do
-        Wait(100)
-        RequestModel(modelHash)
-    end
-    local ped = CreatePed(modelHash, -308.108,773.999,117.703,20.0, false, true)
-    Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-    FreezeEntityPosition(ped,true)
-    SetEntityInvincible(ped,true)
-    SetBlockingOfNonTemporaryEvents(ped,true)
-end)
-
-Citizen.CreateThread(function()
-    local modelName = 'U_M_M_ValDoctor_01' -- DOCTOR VALENTINE
-    local modelHash = GetHashKey(modelName)
-    while not HasModelLoaded(modelHash) do
-        Wait(100)
-        RequestModel(modelHash)
-    end
-    local ped = CreatePed(modelHash,  -287.991,804.201,118.386,290.0, false, true)
-    Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-    FreezeEntityPosition(ped,true)
-    SetEntityInvincible(ped,true)
-    SetBlockingOfNonTemporaryEvents(ped,true)
-end)
-
-Citizen.CreateThread(function()
-    local modelName = 'S_M_M_ValCowpoke_01' -- PRISIONEIRO VALENTINE
-    local modelHash = GetHashKey(modelName)
-    while not HasModelLoaded(modelHash) do
-        Wait(100)
-        RequestModel(modelHash)
-    end
-    local ped = CreatePed(modelHash,  -271.402,806.932,118.371,45.0, false, true)
-    Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
-    FreezeEntityPosition(ped,true)
-    SetEntityInvincible(ped,true)
-    SetBlockingOfNonTemporaryEvents(ped,true)
-end)
+local gShopItemPrompts = { }
+local gShopItemPromptCooldown = { }
 
 Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(1000)
-                        
-            local ped = PlayerPedId()
-            local pCoords = GetEntityCoords(ped)
+            
+            local playerPed = PlayerPedId()
+            local playerPos = GetEntityCoords(playerPed)
 
-            local foundShopId
-            local foundShopVector
-            local lastDist
+            for shopId, shopInfo in ipairs(SHOPINFO_DATABASE) do
+                
+                if shopInfo.positions then
+                    for _, childShopPos in ipairs(shopInfo.positions) do
 
-            for shopId, shopLocations in pairs(Config.ShopLocations) do
-                for _, locationData in pairs(shopLocations) do
-                    local x, y, z, _ = table.unpack(locationData)
-                    local vec = vec3(x, y, z)
-                    local dist = #(pCoords - vec)
-                    if (foundShopVector == nil and dist <= 10.0) or (lastDist ~= nil and dist < lastDist)  then
-                        foundShopId = shopId
-                        foundShopVector = vec
-                        lastDist = dist
+                        if #(playerPos - childShopPos) <= 10.0 then
+
+                            gSelectedShopId = shopId
+                            gSelectedShopName = shopInfo.name
+
+                            gSelectedShopChildPos = childShopPos
+
+                            break
+                        end
                     end
                 end
             end
 
-            if foundShopId ~= nil then
-                prompt_group_name = CreateVarString(10, "LITERAL_STRING", foundShopId)
+            -- local ped = PlayerPedId()
+            -- local pCoords = GetEntityCoords(ped)
 
-            end
+            -- local foundShopId
+            -- local foundShopVector
+            -- local lastDist
 
-            closestShopId = foundShopId
-            closestShopVector = foundShopVector
+            -- for shopId, shopLocations in pairs(Config.ShopLocations) do
+            --     for _, locationData in pairs(shopLocations) do
+            --         local x, y, z, _ = table.unpack(locationData)
+            --         local vec = vec3(x, y, z)
+            --         local dist = #(pCoords - vec)
+            --         if (foundShopVector == nil and dist <= 10.0) or (lastDist ~= nil and dist < lastDist)  then
+            --             foundShopId = shopId
+            --             foundShopVector = vec
+            --             lastDist = dist
+            --         end
+            --     end
+            -- end
+
+            -- if foundShopId ~= nil then
+            --     prompt_group_name = CreateVarString(10, "LITERAL_STRING", foundShopId)
+            -- end
+
+            -- closestShopId = foundShopId
+            -- closestShopVector = foundShopVector
+
+            -- gSelectedShopId = nil
+            -- gSelectedShopName = closestShopId
+
+            -- if closestShopId then
+            --     for shopId, shopInfo in ipairs(Config.ShopDatas) do
+            --         if shopInfo.name == closestShopId then
+            --             gSelectedShopId = shopId
+            --             break
+            --         end
+            --     end
+            -- end
         end
     end
 )
-
-function audio()                    
-            local ped = PlayerPedId()
-            local pCoords = GetEntityCoords(ped)
-
-            local foundShopId
-            local foundShopVector
-            local lastDist
-
-            for shopId, shopLocations in pairs(Config.Charles) do
-                for _, locationData in pairs(shopLocations) do
-                    local x, y, z, _ = table.unpack(locationData)
-                    local vec = vec3(x, y, z)
-                    local dist = #(pCoords - vec)
-                    if (foundShopVector == nil and dist <= 3.0) then
-                        foundShopId = shopId
-                    end
-                end
-            end
-
-            if foundShopId == "Charles" then
-                TriggerEvent("vrp_sound:source",'charles',0.95)
-                print(foundShopId)
-            end
-            if foundShopId == "Armeiro" then
-                TriggerEvent("vrp_sound:source",'alarm',0.95)
-                print(foundShopId)
-            end
-
-            closestShopId = foundShopId
-            closestShopVector = foundShopVector
-end
-
 
 Citizen.CreateThread(
     function()
@@ -175,54 +98,79 @@ Citizen.CreateThread(
         while true do
             Citizen.Wait(0)
 
-            if closestShopId ~= nil then
-                local ped = PlayerPedId()
-                local pCoords = GetEntityCoords(ped)
+            if gSelectedShopId then
+                if IsNuiFocused() then
+                    DisableAllControlActions(0)
+                else
+                    local playerPed = PlayerPedId()
+                    local playerPos = GetEntityCoords(playerPed)
 
-                if #(pCoords - closestShopVector) <= 1.5 then
-                    -- if IsControlJustPressed(0, 0xDFF812F9) then
-                    PromptSetActiveGroupThisFrame(prompt_group, prompt_group_name)
+                    if #(playerPos - gSelectedShopChildPos) <= 1.5 then
+                        local displayText = CreateVarString(10, 'LITERAL_STRING', gSelectedShopName)
 
-                    if PromptHasHoldModeCompleted(prompt) then
-                        if IsControlPressed(0, 0xDFF812F9) then
-                            
+                        PromptSetActiveGroupThisFrame(prompt_group, displayText)
 
-                            if sentFirstData == true then
+                        if PromptHasHoldModeCompleted(prompt) and IsControlPressed(0, 0xDFF812F9) then
+
+                            if sentFirstData then
                                 SendNUIMessage(
                                     {
                                         display = true,
-                                        shopId = closestShopId
+                                        shopId = gSelectedShopId - 1,
                                     }
                                 )
                             else
-                                local temp_ConfigShopData = Config.ShopDatas
+                                local shopInfoDatabaseClone = { }
 
-                                for _, shopData in pairs(temp_ConfigShopData) do
-                                    for key, value in pairs(shopData) do
-                                        if key ~= "name" then
-                                            for _, shopItemData in pairs(value) do
-                                                local itemData = ItemList[shopItemData[1]]
-                                                if itemData then
-                                                    shopItemData[5] = itemData.name
-                                                    shopItemData[6] = itemData.weight
-                                                    shopItemData[7] = itemData.description
-                                                end
-                                            end
-                                        end
+                                for shopId, shopInfo in ipairs(SHOPINFO_DATABASE) do
+                                    
+                                    local items = { }
+
+                                    for shopItemId, shopItemInfo in ipairs(shopInfo.items) do
+                                        local itemId = shopItemInfo.itemId
+    
+                                        local itemData = ItemList[itemId] or { }
+    
+                                        table.insert(items,
+                                        {
+                                            itemId,
+                                            0,
+                                            shopItemInfo.transactionPriceBuyDollar,
+                                            shopItemInfo.transactionPriceBuyGold,
+                                            itemData.name or ('ERROR %s'):format(itemId),
+                                            itemData.weight or 0.0,
+                                            itemData.description or '',
+                                        })
                                     end
+
+                                    table.insert(shopInfoDatabaseClone,
+                                    {
+                                        name = shopInfo.name,
+                                        items = items,
+                                    })
                                 end
+
                                 SendNUIMessage(
                                     {
                                         display = true,
-                                        shopId = closestShopId,
-                                        firstTimeData = temp_ConfigShopData
+                                        shopId = gSelectedShopId - 1,
+                                        firstTimeData = shopInfoDatabaseClone,
                                     }
                                 )
+
                                 sentFirstData = true
                             end
-                            audio()
+
+                            local shopAudios = SHOPINFO_DATABASE[gSelectedShopId].audios
+
+                            if shopAudios then
+                                local rnd = math.random(#shopAudios)
+
+                                TriggerEvent('vrp_sound:source', shopAudios[rnd], 0.95)
+                            end
+
                             SetNuiFocus(true, true)
-                            Citizen.Wait(1000)
+                            SetNuiFocusKeepInput(true)
                         end
                     end
                 end
@@ -245,34 +193,261 @@ function initPrompt()
     PromptRegisterEnd(prompt)
 end
 
-RegisterNUICallback(
-    "buyItem",
-    function(data, cb)
-        TriggerServerEvent("FRP:SHOP:TryToBuy", data.shopId, data.itemId, data.withGold)
-    end
-)
+-- RegisterNUICallback(
+--     "buyItem",
+--     function(data, cb)
+--         TriggerServerEvent("FRP:SHOP:TryToBuy", data.shopId, data.itemId, data.withGold)
+--     end
+-- )
 
 RegisterNUICallback(
     "focusOff",
     function(data, cb)
         SetNuiFocus(false, false)
+        SetNuiFocusKeepInput(false)
+
+        ReleaseShopItemPrompts(gShopItemPrompts)
     end
 )
 
-AddEventHandler(
-    "onResourceStop",
-    function(resourceName)
-        if resourceName == GetCurrentResourceName() then
-            SendNUIMessage(
-                {
-                    display = false
-                }
-            )
-            SetNuiFocus(false, false)
+RegisterNUICallback('shopItemWasSelected', function(data, cb)
+    gSelectedShopItemQuantityMultiplier = 1
 
-            if prompt ~= nil then
-                PromptDelete(prompt)
+    gSelectedShopItemId = tonumber(data.shopItemId) + 1
+
+    DrawSelectedShopItemPromptsWhileSelected()
+
+    cb({ })
+end)
+
+RegisterNUICallback('shopItemWasUnselected', function(data, cb)
+    gSelectedShopItemId = nil
+
+    cb({ })
+end)
+
+function CreatePrompt(text, control, isHoldMode, promptGroup)
+    local prompt = PromptRegisterBegin()
+    PromptSetText(prompt, CreateVarString(10, 'LITERAL_STRING', text))
+    PromptSetEnabled(prompt, true)
+    PromptSetVisible(prompt, true)
+    PromptSetControlAction(prompt, control)
+
+    if isHoldMode then
+        PromptSetHoldMode(prompt, true)
+    else
+        -- UipromptSetStandardMode
+        Citizen.InvokeNative(0xCC6656799977741B, prompt, true)
+    end
+
+    PromptSetGroup(prompt, promptGroup, 0)
+
+    PromptRegisterEnd(prompt)
+
+    return prompt
+end
+
+function CreateShopItemPromptGroup(shopItemInfo)
+    local promptGroup = GetRandomIntInRange(0, 0xffffff)
+
+    local promptGroupPrompts = { }
+
+    local promptsInfo = {
+        {
+            name = 'QUANTITY_INCREASE',
+            text = 'Mais',
+            control = `INPUT_FRONTEND_UP`,
+        },
+        {
+            name = 'QUANTITY_DECREASE',
+            text = 'Menos',
+            control = `INPUT_FRONTEND_DOWN`,
+        },
+    }
+
+    if shopItemInfo.transactionPriceBuyDollar and shopItemInfo.transactionPriceBuyDollar > 0 then
+        table.insert(promptsInfo,
+        {
+            name = 'BUY_DOLLAR',
+            control = `INPUT_DIVE`,
+            isHold = true,
+        })
+    end
+
+    if shopItemInfo.transactionPriceBuyGold and shopItemInfo.transactionPriceBuyGold > 0 then
+        table.insert(promptsInfo,
+        {
+            name = 'BUY_GOLD',
+            control = `INPUT_FRONTEND_RDOWN`,
+            isHold = true,
+        })
+    end
+
+    -- A parte de enviar as informações de items para NUI
+    -- tá injetando valores nos indices 5, 6, 7
+    -- então isso quebra toda a tabela de config...
+    -- que deveria ficar inalterada né, na que é a porra de uma config.
+    if shopItemInfo.transactionPriceSellDollar and shopItemInfo.transactionPriceSellDollar > 0 then
+        table.insert(promptsInfo,
+        {
+            name = 'SELL_DOLLAR',
+            control = `INPUT_NEXT_CAMERA`,
+            isHold = true,
+        })
+    end
+
+    local shopItemPrompts = { }
+
+    for _, promptInfo in ipairs(promptsInfo) do
+        local prompt = CreatePrompt(promptInfo.text, promptInfo.control, promptInfo.isHold, promptGroup)
+
+        Citizen.InvokeNative(0xCA24F528D0D16289, prompt)
+
+        table.insert(shopItemPrompts,
+        {
+            handle = prompt,
+            info = promptInfo,
+        })
+    end
+
+    return promptGroup, shopItemPrompts
+end
+
+function ReleaseShopItemPrompts(shopItemPrompts)
+    for _, shopItemPrompt in ipairs(shopItemPrompts) do
+        PromptDelete(shopItemPrompt.handle)
+    end
+
+    gSelectedShopItemId = nil
+
+    gShopItemPrompts = { }
+    gShopItemPromptCooldown = { }
+end
+
+function DrawSelectedShopItemPromptsWhileSelected()
+    local shopItemId = gSelectedShopItemId
+
+    local shopInfo = SHOPINFO_DATABASE[gSelectedShopId]
+    
+    local shopInfoItems = shopInfo.items
+
+    local shopItemInfo = shopInfoItems[shopItemId]
+
+    local shopItemPriceInDollar = shopItemInfo.transactionPriceBuyDollar
+    local shopItemPriceInGold = shopItemInfo.transactionPriceBuyGold
+
+    local itemId = shopItemInfo.itemId
+    local itemInfo = ItemList[itemId]
+
+    if not itemInfo then
+        error( ('Item \'%s\' não existe no banco de dados.'):format(itemId) )
+    end
+
+    local shopItemName = itemInfo.name
+
+    local promptGroup, shopItemPrompts = CreateShopItemPromptGroup(shopItemInfo)
+
+    gShopItemPrompts = shopItemPrompts
+
+    local numShopItemPrompts = #shopItemPrompts
+
+    while gSelectedShopItemId == shopItemId do
+        Wait(0)
+
+        local selectedItemQuantity = gSelectedShopItemQuantityMultiplier * 1
+
+        PromptSetActiveGroupThisFrame(promptGroup, CreateVarString(10, 'LITERAL_STRING', ('%d %s'):format(selectedItemQuantity, shopItemName) ))
+
+        local gameTimer = GetGameTimer()
+
+        for i = 1, numShopItemPrompts do
+            local shopItemPrompt = shopItemPrompts[i]
+
+            local handle = shopItemPrompt.handle
+            local info = shopItemPrompt.info
+            local name = info.name
+
+            local onPromptPressedCooldown = 500
+            local onPromptPressed
+
+            if name == 'QUANTITY_INCREASE' or name == 'QUANTITY_DECREASE' then
+                -- UipromptIsJustPressed
+                if Citizen.InvokeNative(0x2787CC611D3FACC5, handle) then
+                    onPromptPressed = function()
+                        local toAdd = name == 'QUANTITY_INCREASE' and 1 or -1
+
+                        gSelectedShopItemQuantityMultiplier = gSelectedShopItemQuantityMultiplier + toAdd
+
+                        gSelectedShopItemQuantityMultiplier = math.max(gSelectedShopItemQuantityMultiplier, 1)
+
+                        -- Cooldown das teclas de aumentar e diminuir a quantidade
+                        -- são menores, para ficar mais dinamico.
+                        onPromptPressedCooldown = 100
+                    end
+                end
+            elseif name == 'BUY_DOLLAR' or name == 'BUY_GOLD' then
+                local isBuyWithDollarPrompt = name == 'BUY_DOLLAR'
+
+                if PromptHasHoldModeCompleted(handle) then
+                    onPromptPressed = function()
+                        local useCurrencyGold = isBuyWithDollarPrompt == false
+
+                        TriggerServerEvent("FRP:SHOP:RequestBuyShopItem", gSelectedShopId, gSelectedShopItemId, useCurrencyGold, gSelectedShopItemQuantityMultiplier)
+                    end
+                end
+
+                local currencySymbol = isBuyWithDollarPrompt and '$' or '~t4~G'
+                local currencyPrice = isBuyWithDollarPrompt and shopItemPriceInDollar or shopItemPriceInGold
+
+                PromptSetText(handle, CreateVarString(10, 'LITERAL_STRING', ('Comprar %s%0.2f'):format(currencySymbol, (currencyPrice / 100) * selectedItemQuantity) ))
+
+            elseif name == 'SELL_DOLLAR' then
+                if PromptHasHoldModeCompleted(handle) then
+                    onPromptPressed = function()
+                        TriggerServerEvent('FRP:SHOP:RequestSellShopItem', gSelectedShopName, gSelectedShopItemId, gSelectedShopItemQuantityMultiplier)
+                    end
+                end
+
+                local currencySymbol = '$'
+                local currencyPrice = shopItemInfo.transactionPriceSellDollar
+
+                PromptSetText(handle, CreateVarString(10, 'LITERAL_STRING', ('Vender %s%0.2f'):format(currencySymbol, (currencyPrice / 100) * selectedItemQuantity) ))
+            end
+
+            -- A thread principal está bloqueando todos os controles
+            -- então a gente só reativa as que estão sendo usadas
+            -- por prompts.
+            EnableControlAction(0, info.control, true)
+
+            if gShopItemPromptCooldown[handle] and (gameTimer - gShopItemPromptCooldown[handle]) <= 0 then
+                PromptSetEnabled(handle, false)
+            else
+                PromptSetEnabled(handle, true)
+
+                if onPromptPressed then
+                    onPromptPressed()
+                    
+                    gShopItemPromptCooldown[handle] = GetGameTimer() + onPromptPressedCooldown
+                end
             end
         end
     end
-)
+end
+
+AddEventHandler('onResourceStop', function(resource)
+    if resource == GetCurrentResourceName() then
+        ReleaseShopItemPrompts(gShopItemPrompts)
+    end
+
+    SendNUIMessage(
+        {
+            display = false
+        }
+    )
+    SetNuiFocus(false, false)
+    SetNuiFocusKeepInput(false)
+
+    if prompt ~= nil then
+        PromptDelete(prompt)
+    end
+end)

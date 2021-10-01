@@ -120,70 +120,119 @@ local verificationData = {
 	},
 }
 
-RegisterNetEvent("FRP:SHOP:TryToBuy")
+RegisterNetEvent("FRP:SHOP:RequestBuyShopItem")
 AddEventHandler(
-    "FRP:SHOP:TryToBuy",
-    function(shopId, itemId, withGold)
-        local _source = source
+    "FRP:SHOP:RequestBuyShopItem",
+    function(shopId, shopItemId, useCurrencyGold, shopItemQuantityMultiplier)
+        local playerId = source
 
-        if not verificationData[shopId] or not verificationData[shopId][itemId] then
+        local user = API.getUserFromSource(playerId)
+
+        if not user then
             return
         end
 
-        local data = verificationData[shopId]
+        local shopInfo = SHOPINFO_DATABASE[shopId]
 
-        local User = API.getUserFromSource(_source)
-        local Character = User.getCharacter()
+        if not shopInfo then
+            user:notify('error', 'Shop inválido, contate a Staff!')
+            return
+        end
 
-        if data.group then
-            if not Character:hasGroupOrInheritance(data.group) then
-                User:notify("error", "Você não tem permissao")
-                return
+        local character = user:getCharacter()
+
+        local shopExclusivityGroup = shopInfo.exclusivityGroup
+
+        if shopExclusivityGroup and not character:hasGroupOrInheritance(shopExclusivityGroup) then
+            user:notify('error', 'Você não tem permissao')
+            return
+        end
+    
+        local shopItemInfo = shopInfo.items[shopItemId]
+    
+        if not shopItemInfo then
+            user:notify('error', 'Este item não está presente neste Shop, contate a Staff!')
+            return
+        end
+
+        local inventory = character:getInventory()
+
+        local currencyItemId = useCurrencyGold and 'gold' or 'money'
+        local transactionPriceBuy = (useCurrencyGold and shopItemInfo.transactionPriceBuyGold or shopItemInfo.transactionPriceBuyDollar) * shopItemQuantityMultiplier
+
+        if transactionPriceBuy > 0 and inventory:getItemAmount(currencyItemId) < transactionPriceBuy then
+            user:notify('error', useCurrencyGold and 'Ouros insuficientes' or 'Doláres insuficientes')
+            return
+        end
+
+        if transactionPriceBuy == 0 or inventory:removeItem(-1, currencyItemId, transactionPriceBuy) then
+
+            if transactionPriceBuy > 0 then
+                user:notify('item', currencyItemId, -(transactionPriceBuy))
             end
-        end
 
-        local itemData = data[itemId]
+            local addItemId = shopItemInfo.itemId
+            local addItemQuantity = (shopItemInfo.bundleBuyQuantity or 1) * shopItemQuantityMultiplier
 
-        -- local itemLevel = itemData[1]
-
-        -- if Character:getLevel() < itemLevel then
-        --     User:notify("error", "Você não tem level suficiente")
-        --     return
-        -- end
-
-        local Inventory = Character:getInventory()
-
-        local currencyItem = "money"
-        local itemPrice = itemData[2]
-
-        if withGold then
-            currencyItem = "gold"
-            itemPrice = itemData[3]
-        end
-
-        if Inventory:getItemAmount(currencyItem) < itemPrice then
-            if currencyItem == "money" then
-                User:notify("error", "Doláres insuficientes")
+            if inventory:addItem(addItemId, addItemQuantity) then
+                user:notify('item', addItemId, addItemQuantity)
             else
-                User:notify("error", "Ouros insuficientes")
-            end
-            return
-        end
+                user:notify('error', 'Falha ao concluir a transição :/')
 
-        local itemAmount = itemData[4]
-
-        if Inventory:addItem(itemId, itemAmount or 1) then
-            Inventory:removeItem(-1, currencyItem, itemPrice)
-            if itemPrice > 0 then
-                if not withGold then
-                    User:notify("item", "money", -(itemPrice))
-                else
-                    User:notify("item", "gold", -(itemPrice))
-                end
+                inventory:addItem(currencyItemId, transactionPriceBuy)
             end
-            User:notify("item", itemId, itemAmount or 1)
-        else
-            User:notify("error", "Espaço insuficiente na bolsa!")
         end
     end
 )
+
+RegisterNetEvent('FRP:SHOP:RequestSellShopItem', function(shopId, shopItemId, shopItemQuantityMultiplier, itemQuantity)
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    if not user then
+        return
+    end
+
+    local shopInfo = SHOPINFO_DATABASE[shopId]
+
+    if not shopInfo then
+        user:notify('error', 'Shop inválido, contate a Staff!')
+        return
+    end
+
+    local shopItemInfo = shopInfo.items[shopItemId]
+
+    if not shopItemInfo then
+        user:notify('error', 'Este item não está presente neste Shop, contate a Staff!')
+        return
+    end
+
+    local transactionPriceSellDollar = shopItemInfo.transactionPriceSellDollar * shopItemQuantityMultiplier
+
+    if not transactionPriceSellDollar then
+        return
+    end
+
+    local character = user:getCharacter()
+    local inventory = character:getInventory()
+
+    local itemId = shopItemInfo.itemId
+
+    local removeItemQuantity = (shopItemInfo.bundleSellQuantity or 1) * shopItemQuantityMultiplier
+
+    if inventory:getItemAmount(itemId) < removeItemQuantity then
+        user:notify('error', 'Você não tem items suficientes para vender.')
+        return
+    end
+
+    local transactionAmountInDollars = removeItemQuantity * transactionPriceSellDollar
+
+    if inventory:removeItem(itemId, removeItemQuantity) then
+        inventory:addItem('money', transactionAmountInDollars)
+
+        user:notify('item', 'money', transactionAmountInDollars)
+    else
+        user:notify('error', 'Falha ao concluir a transação.')
+    end
+end)

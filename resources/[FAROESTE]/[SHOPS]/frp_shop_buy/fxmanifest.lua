@@ -4,6 +4,8 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 ui_page 'nui/index.html'
 
+shared_script 'SHOPINFO_DATABASE.lua'
+
 server_scripts {
 	'@_core/lib/utils.lua',
 	'_cfg.lua',
@@ -15,7 +17,8 @@ client_scripts {
 	'@_core/lib/utils.lua',
 	'@_core/config/Items.lua',
 	'_cfg.lua',
-	'client.lua'
+	'client.lua',
+	'audio_peds.lua'
 }
 
 files {
