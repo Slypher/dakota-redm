@@ -44,19 +44,24 @@ RegisterNetEvent("BasicNeeds.update")
 AddEventHandler(
     "BasicNeeds.update",
     function(hunger, thirst, health)
-        if gHunger ~= hunger or gThirst ~= thirst then
+        if hunger or thirst then
+            
+            if hunger and gHunger ~= hunger then
+                gHunger = hunger
+            end
+
+            if thirst and gThirst ~= thirst then
+                gThirst = thirst
+            end
+
             SendNUIMessage(
                 {
-                    action = "updateNeeds",
-                    hunger = hunger,
-                    thirst = thirst
+                    action = 'updateNeeds',
+                    hunger = gHunger,
+                    thirst = gThirst,
                 }
             )
-            
-            gHunger = hunger
-            gThirst = thirst
         end
-
 
         if health == 0 then
             myHealth = health   

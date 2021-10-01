@@ -44,7 +44,6 @@ Citizen.CreateThread(
                 if vhunger ~= 0 then
                     API.varyHunger(vhunger / 12.0) 
                 end
-
             end
         end
     end

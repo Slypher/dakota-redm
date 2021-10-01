@@ -1,13 +1,3 @@
-local gHunger = 0.0
-local gThirst = 0.0
-
-RegisterCommand("testesede", function(source, args)
-
-        API.varyHunger2(source, -20)
-        API.varyThirst2(source, -20)
-        
-    end)
-
 function API.varyHunger(variation)
     local _source = source
     local User = API.getUserFromSource(_source)
@@ -37,10 +27,12 @@ function API.varyHunger(variation)
         elseif hunger > 100 then
             hunger = 100
         end
-        gHunger = tonumber(math.floor(hunger * 100) / 100)
+        
+        local finalHunger = tonumber(math.floor(hunger * 100) / 100)
 
-        Character:setData(Character:getId(), 'metaData', 'hunger', gHunger)        
-        updateSocialNeeds(_source, _source)
+        Character:setData(Character:getId(), 'metaData', 'hunger', finalHunger) 
+        
+        updateSocialNeeds(_source, finalHunger, nil)
     end
 end
 
@@ -73,10 +65,12 @@ function API.varyHunger2(source, variation)
         elseif hunger > 100 then
             hunger = 100
         end
-        gHunger = tonumber(math.floor(hunger * 100) / 100)
 
-        Character:setData(Character:getId(), 'metaData', 'hunger', gHunger)        
-        updateSocialNeeds(_source, _source)
+        local finalHunger = tonumber(math.floor(hunger * 100) / 100)
+
+        Character:setData(Character:getId(), 'metaData', 'hunger', finalHunger)
+
+        updateSocialNeeds(_source, finalHunger, nil)
     end
 end
 
@@ -114,10 +108,11 @@ function API.varyThirst(variation)
             thirst = 100
         end
 
-        gThirst = tonumber(math.floor(thirst * 100) / 100)
+        local finalThirst = tonumber(math.floor(thirst * 100) / 100)
 
-        Character:setData(Character:getId(), 'metaData', 'thirst', gThirst)
-        updateSocialNeeds(_source, _source)
+        Character:setData(Character:getId(), 'metaData', 'thirst', finalThirst)
+
+        updateSocialNeeds(_source, nil, finalThirst)
     end
 end
 
@@ -155,14 +150,14 @@ function API.varyThirst2(source, variation)
             thirst = 100
         end
 
-        gThirst = tonumber(math.floor(thirst * 100) / 100)
+        local finalThirst = tonumber(math.floor(thirst * 100) / 100)
 
-        Character:setData(Character:getId(), 'metaData', 'thirst', gThirst)
-        updateSocialNeeds(_source, _source)
+        Character:setData(Character:getId(), 'metaData', 'thirst', finalThirst)
+
+        updateSocialNeeds(_source, nil, finalThirst)
     end
 end
 
-function updateSocialNeeds(src)
-    local _source = src
-    TriggerClientEvent('BasicNeeds.update', _source, gHunger, gThirst)
+function updateSocialNeeds(src, hunger, thirst)
+    TriggerClientEvent('BasicNeeds.update', src, hunger, thirst)
 end
