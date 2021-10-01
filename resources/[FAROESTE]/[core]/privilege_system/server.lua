@@ -98,7 +98,7 @@ local function addUserPrivilege(userId, privilege, setByUserId)
 
     local playerId = user:getSource()
 
-    DatabaseAPI.execute('privilege_system_add_privilege_for_user', { user_id = userId, name = privilege })
+    DatabaseAPI.execute('privilege_system_add_privilege_for_user', { user_id = userId, name = privilege, set_by = setByUserId })
 
     addUserPrivilegeToCache(userId, privilege)
 
