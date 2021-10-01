@@ -51,7 +51,6 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
     cAPI.SetPlayerPed(pedModel)
 
     cAPI.setPlayerAppearence(PlayerPedId())
- --   cAPI.SetPedCloAthing(PlayerPedId(), pClothing)
 
     pHealth = pStats[1] or 250
     pStamina = pStats[2] or 34.0
@@ -71,6 +70,17 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
     if not cAPI.isStartedNeeds() then
         cAPI.startNeeds()
     end
+
+    -- #WARNING: Gambiarra, atualizar a escala do player a cada 5 segundos,
+    -- parece que o jogo reseta a escalada toda vez em que algum componente
+    -- do ped do player é atualizado :/
+    CreateThread(function()
+        while true do
+            Wait(5000)
+
+            cAPI.SetPedScale(PlayerPedId(), gCharAppearence.pedHeight)
+        end
+    end)
 end
 
 function cAPI.setPlayerAppearence(playerId)
@@ -92,7 +102,6 @@ function cAPI.setPlayerAppearence(playerId)
     if gCharAppearence.clothes ~= nil then
         cAPI.SetSkin(playerId, gCharAppearence.clothes)   
     end
-    
 end
 
 
