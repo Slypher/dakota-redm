@@ -170,6 +170,8 @@ function cAPI.SetSkin(ped, componentArray)
                 end
                 
             end
+        elseif index == 'Outfit' then
+            SetPedOutfitPreset(ped, tonumber(componentHash))
         end
     end
 
