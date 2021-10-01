@@ -24,12 +24,12 @@ end
 
 function cAPI.SetPedScale(ped, num)
     if num == 0 or num == nil then
-        SetPedScale(ped, tonumber(1.0))
+        SetPedScale(ped, 1.0)
     else
-        SetPedScale(ped, tonumber(num))
+        SetPedScale(ped, tonumber(num) + 0.0001)
     end
     
-   -- Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0) -- update
+    Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0) -- update
 end
 
 function cAPI.SetPedOverlay(ped, data)
