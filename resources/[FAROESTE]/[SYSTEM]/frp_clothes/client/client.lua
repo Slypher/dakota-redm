@@ -1428,46 +1428,46 @@ end)
 
 local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`BOOT_ACCESSORIES`] = true,
-    [`PANTS`] = true,
-    [`CLOAKS`] = true,
-    [`HATS`] = true,
-    [`VESTS`] = true,
-    [`CHAPS`] = true,
+    [`PANTS`] = 'pants',
+    [`CLOAKS`] = 'cloaks',
+    [`HATS`] = 'hat',
+    [`VESTS`] = 'vests',
+    [`CHAPS`] = 'chaps',
     [`SHIRTS_FULL`] = true,
     [`BADGES`] = true,
-    [`MASKS`] = true,
-    [`SPATS`] = true,
-    [`NECKWEAR`] = true,
-    [`BOOTS`] = true,
-    [`ACCESSORIES`] = true,
+    [`MASKS`] = 'masks',
+    [`SPATS`] = 'spats',
+    [`NECKWEAR`] = 'neckwear',
+    [`BOOTS`] = 'boots',
+    [`ACCESSORIES`] = 'access',
     [`JEWELRY_RINGS_RIGHT`] = true,
     [`JEWELRY_RINGS_LEFT`] = true,
     [`JEWELRY_BRACELETS`] = true,
-    [`GAUNTLETS`] = true,
-    [`NECKTIES`] = true,
+    [`GAUNTLETS`] = 'gauntlets',
+    [`NECKTIES`] = 'neckties',
     [`HOLSTERS_KNIFE`] = true,
     [`TALISMAN_HOLSTER`] = true,
     [`LOADOUTS`] = true,
-    [`SUSPENDERS`] = true,
+    [`SUSPENDERS`] = 'suspenders',
     [`TALISMAN_SATCHEL`] = true,
     [`SATCHELS`] = true,
     [`GUNBELTS`] = true,
-    [`BELTS`] = true,
-    [`BELT_BUCKLES`] = true,
+    [`BELTS`] = 'belts',
+    [`BELT_BUCKLES`] = 'beltbuckle',
     [`HOLSTERS_LEFT`] = true,
     [`HOLSTERS_RIGHT`] = true,
     [`AMMO_RIFLES`] = true,
     [`TALISMAN_WRIST`] = true,
-    [`COATS`] = true,
-    [`COATS_CLOSED`] = true,
-    [`PONCHOS`] = true,
+    [`COATS`] = 'coats',
+    [`COATS_CLOSED`] = 'coats2',
+    [`PONCHOS`] = 'ponchos',
     [`ARMOR`] = true,
-    [`GLOVES`] = true,
+    [`GLOVES`] = 'gloves',
     [`TALISMAN_BELT`] = true,
     [`AMMO_PISTOLS`] = true,
     [`HOLSTERS_CROSSDRAW`] = true,
     [`APRONS`] = true,
-    [`SKIRTS`] = true,
+    [`SKIRTS`] = 'skirts',
     [`MASKS_LARGE`] = true,
     [`BEARDS_CHIN`] = true,
     [`BEARDS_CHOPS`] = true,
@@ -1492,7 +1492,7 @@ RegisterNUICallback('storeCurrentComponentsIntoClothingItem', function(data, cb)
             local shopitemCategoryHash = N_0x5ff9a878c3d115b8(shopitemHash, metapedType, true)
 
             if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
-                table.insert(clothingPieceShopitemsAsHex, ('0x%x'):format(shopitemHash) )
+                table.insert(clothingPieceShopitemsAsHex, ('0x%x'):format(shopitemHash & 0xFFFFFFFF) )
             end
         end
     end
@@ -1524,6 +1524,32 @@ RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPiece
         NativeSetPedComponentEnabled(playerPed, clothingShopitemHash, false, true, true)
         NativeUpdatePedVariation(playerPed)
     end
+
+    local toStoreClothingData = { }
+
+    -- GetMetaPedType
+    local metapedType = N_0xec9a1261bf0ce510(playerPed)
+
+    -- GetNumComponentsInPed
+    for i = 1, N_0x90403e8107b60e81(playerPed) do
+
+        local shopitemHash = exports[GetCurrentResourceName()]:GetPedComponentAtIndex(playerPed, i - 1);
+
+        if shopitemHash ~= 0 then
+            -- GetPedComponentCategory
+            local shopitemCategoryHash = N_0x5ff9a878c3d115b8(shopitemHash, metapedType, true)
+
+            if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
+                local thisScriptCategoryEquivalent = ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash]
+    
+                if thisScriptCategoryEquivalent and thisScriptCategoryEquivalent ~= true then
+                    toStoreClothingData[thisScriptCategoryEquivalent] = ('0x%x'):format(shopitemHash & 0xFFFFFFFF)
+                end
+            end
+        end
+    end
+
+    TriggerServerEvent('FRP:CLOTHES:SavePlayerClothing', toStoreClothingData, true)
 end)
 
 function createZoomInterpCamera()
