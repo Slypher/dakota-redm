@@ -9,7 +9,7 @@ local FirstSpawn = false
 local gStageCoachVehicle
 local gCoachDriverPed
 
-local COORDS_SPAWN = vector3(-284.436, 796.012, 118.737)
+local END_POSITION = vector3(-352.705, 787.453, 116.041)
 
 RegisterNetEvent("FRP:CREATOR:FirstSpawn")
 AddEventHandler(
@@ -45,7 +45,12 @@ AddEventHandler(
                 DoScreenFadeIn(1000)
 
                 SetPedIntoVehicle(playerPed, gStageCoachVehicle, 1)
+
+                -- Parece que nem funciona essa native em peds :?
                 SetEntityHealth(playerPed, 20)
+
+                -- SetAttributeCoreValue
+                Citizen.InvokeNative(0xC6258F41D86676E0, playerPed, 0, 1)
     
                 TriggerEvent('FRP:CREATOR:StartNotify')
                 
@@ -92,7 +97,7 @@ function createThreadShowHelperAudioAndText()
         local playerPed = PlayerPedId()
         local playerPos = GetEntityCoords(playerPed)
 
-        if #(COORDS_SPAWN - playerPos) <= 5.0 then
+        if #(END_POSITION - playerPos) <= 5.0 then
             RemovePedFromGroup(gCoachDriverPed, GetPedGroupIndex(playerPed))
 
             Wait(100)
@@ -179,13 +184,6 @@ function StopSoundJS(sound)
     SendNUIMessage({ event = 'stopSound', sound = sound})
 end
 
-RegisterCommand(
-	"testarsom",
-	function()
-        StopSoundJS('Intro1.ogg')
-	end
-)
-
 function createCoachDriverPed()
     local modelHash = `CS_BivCoachDriver`
 
@@ -199,7 +197,7 @@ function createCoachDriverPed()
     
     local playerPed = PlayerPedId()
 
-    gCoachDriverPed = CreatePed(modelHash, COORDS_SPAWN, GetEntityHeading(playerPed), false, 0)     
+    gCoachDriverPed = CreatePed(modelHash, END_POSITION, GetEntityHeading(playerPed), false, 0)     
     SetModelAsNoLongerNeeded(modelHash)
     
     -- SetRandomOutfitVariation
@@ -228,7 +226,7 @@ function createCoachDriverPed()
 
     SetPedIntoVehicle(gCoachDriverPed, gStageCoachVehicle, -1)
     
-    TaskVehicleDriveToCoord(gCoachDriverPed, GetVehiclePedIsIn(gCoachDriverPed, false), -284.436,796.012,118.737, 10.0, 1.0, modelHash, 67633207, 5.0, false)
+    TaskVehicleDriveToCoord(gCoachDriverPed, GetVehiclePedIsIn(gCoachDriverPed, false), END_POSITION, 10.0, 1.0, modelHash, 67633207, 5.0, false)
     
     -- SetPedKeepTask
     Citizen.InvokeNative(0x971D38760FBC02EF, gCoachDriverPed, true)
@@ -247,5 +245,7 @@ AddEventHandler('onResourceStop', function(resource)
         DeleteEntity(gCoachDriverPed)
 
         SetEntityInvincible(PlayerPedId(), false)
+
+        TriggerEvent('showBasicNeedsUI')
     end
 end)
