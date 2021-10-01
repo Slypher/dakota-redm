@@ -407,7 +407,7 @@ function DrawSelectedShopItemPromptsWhileSelected()
             elseif name == 'SELL_DOLLAR' then
                 if PromptHasHoldModeCompleted(handle) then
                     onPromptPressed = function()
-                        TriggerServerEvent('FRP:SHOP:RequestSellShopItem', gSelectedShopName, gSelectedShopItemId, gSelectedShopItemQuantityMultiplier)
+                        TriggerServerEvent('FRP:SHOP:RequestSellShopItem', gSelectedShopId, gSelectedShopItemId, gSelectedShopItemQuantityMultiplier)
                     end
                 end
 
