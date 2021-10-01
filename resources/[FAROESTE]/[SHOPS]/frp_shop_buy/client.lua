@@ -44,6 +44,10 @@ Citizen.CreateThread(
 
                             gSelectedShopChildPos = childShopPos
 
+                            if not prompt_group then
+                                initPrompt()
+                            end
+
                             break
                         end
                     end
@@ -94,7 +98,6 @@ Citizen.CreateThread(
 
 Citizen.CreateThread(
     function()
-        initPrompt()
         while true do
             Citizen.Wait(0)
 
