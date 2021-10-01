@@ -9,9 +9,7 @@ AddEventHandler('vorp_hunting:giveReward', function(givenItem, money)
     local user = ServerAPI.getUserFromSource(playerId)
     local character = user:getCharacter()
     local inventory = character:getInventory()
-
-    print('vorp_hunting:giveReward', givenItem, money, playerId, user, character, inventory)
-
+    
     -- local rnd = math.random(Config.ItemQuantity.Min, Config.ItemQuantity.Max)
     -- VorpInv.addItem(_source, givenItem, rnd)
 
