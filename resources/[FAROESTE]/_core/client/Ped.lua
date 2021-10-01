@@ -170,12 +170,14 @@ function cAPI.SetSkin(ped, componentArray)
                 end
                 
             end
-        elseif index == 'Outfit' then
-            SetPedOutfitPreset(ped, tonumber(componentHash))
         end
     end
 
+    local outfitValue = componentArray['Outfit']
 
+    if outfitValue then
+        SetPedOutfitPreset(ped, tonumber(outfitValue))
+    end
 end
 
 function cAPI.SetPedClothing(ped, clothingArray)
