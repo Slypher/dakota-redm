@@ -36,13 +36,13 @@ local BLIP_COLORS = {
 
 local blips = {
 	--SHERIFF
-	{name = "Sheriff (DP)", sprite = 1047294027, x = -3622.86, y = -2605.45, z = 13.34}, --ARMADILLO
-	{name = "Sheriff (DP)", sprite = 1047294027, x = -5527.6, y = -2953.36, z = -0.7}, --TUMBLEWEED
-	{name = "Sheriff (DP)", sprite = 1047294027, x = -759.17, y = -1266.61, z = 44.06}, --BLAKCWATER
-	{name = "Sheriff (DP)", sprite = 1047294027, x = -1808.51, y = -348.13, z = 164.65}, --STRAWBERRY
-	{name = "Sheriff (DP)", sprite = 1047294027, x = -275.95, y = 804.97, z = 119.38}, --VALENTINE
-	{name = "Sheriff (DP)", sprite = 1047294027, x = 1359.64, y = -1304.43, z = 77.77},-- color = BLIP_COLORS.BLUE2}, --RHODES
-	{name = "Sheriff (DP)", sprite = 1047294027, x = 2908.20, y = 1311.53, z = 44.94},-- color = BLIP_COLORS.BLUE2}, -- ANNESBURGS
+	{name = "Sheriff", sprite = 1047294027, x = -3622.86, y = -2605.45, z = 13.34}, --ARMADILLO
+	{name = "Sheriff", sprite = 1047294027, x = -5527.6, y = -2953.36, z = -0.7}, --TUMBLEWEED
+	{name = "Sheriff", sprite = 1047294027, x = -759.17, y = -1266.61, z = 44.06}, --BLAKCWATER
+	{name = "Sheriff", sprite = 1047294027, x = -1808.51, y = -348.13, z = 164.65}, --STRAWBERRY
+	{name = "Sheriff", sprite = 1047294027, x = -275.95, y = 804.97, z = 119.38}, --VALENTINE
+	{name = "Sheriff", sprite = 1047294027, x = 1359.64, y = -1304.43, z = 77.77},-- color = BLIP_COLORS.BLUE2}, --RHODES
+	{name = "Sheriff", sprite = 1047294027, x = 2908.20, y = 1311.53, z = 44.94},-- color = BLIP_COLORS.BLUE2}, -- ANNESBURGS
 	{name = "Departamento de Polícia", sprite = 1047294027, x = 2512.04, y = -1308.5, z = 48.95},-- color = BLIP_COLORS.BLUE2}, --SAINT DENIS
 
 	-- LOJA DE ARMAS
@@ -93,16 +93,16 @@ local blips = {
 	--{name = "Saloon", sprite = 1879260108, x = 1347.172, y = -1374.833, z = 80.494, color = BLIP_COLORS.TEAL},   -- rhodes
 
 	--BANCOS
-	{name = "Banco", sprite = -2128054417, x = -308.52, y = 775.99, z = 118.7}, -- valentine
-	{name = "Banco", sprite = -2128054417, x = -813.09, y = -1277.52, z = 43.64}, -- blackwater
-	{name = "Banco", sprite = -2128054417, x = 2642.879, y = -1296.995, z = 52.252},-- color = BLIP_COLORS.LIGHT_YELLOW2}, -- saint DENIS
-	{name = "Banco", sprite = -2128054417, x = 1299.520, y = -1300.899, z = 77.625}, --color = BLIP_COLORS.LIGHT_YELLOW2}, -- rhodes
+	{name = "Banco de Valentine", sprite = -60720396, x = -308.52, y = 775.99, z = 118.7}, -- valentine
+	{name = "Banco de Blackwater", sprite = -60720396, x = -813.09, y = -1277.52, z = 43.64}, -- blackwater
+	{name = "Banco de Saint Denis", sprite = -60720396, x = 2642.879, y = -1296.995, z = 52.252},-- color = BLIP_COLORS.LIGHT_YELLOW2}, -- saint DENIS
+	{name = "Banco de Rhodes", sprite = -60720396, x = 1299.520, y = -1300.899, z = 77.625}, --color = BLIP_COLORS.LIGHT_YELLOW2}, -- rhodes
 
 	--{name = "Teatro", sprite = -417940443, x = 2547.876, y = -1308.547, z = 49.287}, -- Saint Dennis
 
 	-- CORREIOS
 	--{name = "Correio", sprite = 1861010125, x = -872.21, y = -1334.13, z = 43.97},
-    --{name = "Correio", sprite = 1861010125, x = -178.02, y = 635.27, z = 114.09}, -- valentine
+    {name = "Carteiro", sprite = 1861010125, x = -174.02, y = 633.27, z = 114.09}, -- valentine
 	--{name = "Correio", sprite = 1861010125, x = 1233.23, y = -1294.56, z = 76.65}, -- rhodes
 
 	--FORTES
@@ -118,7 +118,22 @@ local blips = {
 
 	--Loja de itens
 	--{name = "Armazem", sprite = -60720396, x = 1327.907, y = -1292.865, z = 77.023}, -- rhodes
-	--{name = "Armazem", sprite = -60720396, x = -785.338, y = -1323.850, z = 43.884}, -- blackwater
+	{name = "Terry", sprite = -1954662204, x = -785.338, y = -1323.850, z = 43.884}, -- Blackwater
+	{name = "Merida", sprite = -1954662204, x = -322.327, y = 804.016, z = 117.886}, -- Valentine
+	{name = "Thomas", sprite = -1954662204, x = -1789.752, y = -385.738, z = 160.333}, -- Starwberry
+
+
+	-- Moinho
+	{name = "Mery", sprite = 669307703, x = 1054.110, y = -1122.900, z = 67.889}, -- Rhodes
+	-- ADUBO
+	{name = "Decomposição", sprite = 552659337, x = -873.370, y = 318.540, z = 96.288}, -- Valentine
+
+
+	-- MONTANHAS
+	{name = "Monte Shann", sprite = -902701436, x = -2018.557, y = 56.249, z = 332.376}, --  
+	{name = "Monte Hagen", sprite = -902701436, x = -1625.058, y = 1286.668, z = 371.754}, -- 	
+	{name = "Monte Grizzlies", sprite = -902701436, x = 1084.537, y = 1718.977, z = 382.057}, -- 
+
 
 	--{name = "Posto de Troca", sprite = -242384756, x = 3027.058, y = 561.334, z = 44.794}, -- van horn
 	--{name = "Posto de Troca", sprite = -242384756, x = 3050.231, y = 553.261, z = 46.125}, 
@@ -139,7 +154,8 @@ local blips = {
 	-- { name = 'Processamento de Cobre', sprite = -2024635066, x = 2942.67, y = 1381.81, z = 56.25 },
 	-- { name = 'Processamento de Metal', sprite = -2024635066, x = -6048.58, y = -3260.85, z = -17.98 },
 	-- { name = 'Processamento de madeira', sprite = -2024635066, x = 2922.84, y = 1389.69, z = 56.25 },
-	-- {name = "Madeira", sprite = 1904459580, x = 2630.26, y = 1800.17, z = 99.63},
+	{name = "Castor", sprite = 1904459580, x = -859.689, y = -1277.975, z = 43.563},
+	{name = "Francis", sprite = -758970771, x = -368.663, y = 801.739, z = 116.139},
 	-- {name = "Madeira", sprite = 1904459580, x = 737.7, y = -1078.09, z = 56.39},
 	-- {name = "Madeira", sprite = 1904459580, x = -2052.62, y = -1846.97, z = 121.04},
 	-- {name = "Mineração", sprite = 2107754879, x = 2294.75, y = 1069.27, z = 81.49},
