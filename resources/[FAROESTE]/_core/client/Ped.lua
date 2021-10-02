@@ -81,7 +81,7 @@ function cAPI.SetPedFaceFeature(ped, faceFeatures)
     -- { hash: number, index: number }[];
     for i, pair in ipairs(faceFeatures) do
         -- Doesn't need to be requested !!!!!!        
-        NativeSetPedFaceFeature(ped, tonumber(pair.hash), tonumber(pair.index))
+        NativeSetPedFaceFeature(ped, tonumber(pair.hash), tonumber(pair.index) + 0.0001)
     end
 end
 
