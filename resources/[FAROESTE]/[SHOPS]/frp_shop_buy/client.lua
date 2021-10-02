@@ -32,26 +32,39 @@ Citizen.CreateThread(
             local playerPed = PlayerPedId()
             local playerPos = GetEntityCoords(playerPed)
 
+            local closestShopId
+            local closestShopName
+            local closestShopChildPos
+
+            local closestShopDistance
+
             for shopId, shopInfo in ipairs(SHOPINFO_DATABASE) do
                 
                 if shopInfo.positions then
                     for _, childShopPos in ipairs(shopInfo.positions) do
 
-                        if #(playerPos - childShopPos) <= 10.0 then
+                        local distanceToShop = #(playerPos - childShopPos)
 
-                            gSelectedShopId = shopId
-                            gSelectedShopName = shopInfo.name
+                        if distanceToShop <= 10.0 and (closestShopDistance == nil or distanceToShop <= closestShopDistance) then
 
-                            gSelectedShopChildPos = childShopPos
+                            closestShopId = shopId
+                            closestShopName = shopInfo.name
 
-                            if not prompt_group then
-                                initPrompt()
-                            end
+                            closestShopChildPos = childShopPos
 
-                            break
+                            closestShopDistance = distanceToShop
                         end
                     end
                 end
+            end
+
+            gSelectedShopId = closestShopId
+            gSelectedShopName = closestShopName
+
+            gSelectedShopChildPos = closestShopChildPos
+
+            if closestShopId and not prompt_group then
+                initPrompt()
             end
 
             -- local ped = PlayerPedId()

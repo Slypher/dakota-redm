@@ -185,7 +185,7 @@ AddEventHandler(
     end
 )
 
-RegisterNetEvent('FRP:SHOP:RequestSellShopItem', function(shopId, shopItemId, shopItemQuantityMultiplier, itemQuantity)
+RegisterNetEvent('FRP:SHOP:RequestSellShopItem', function(shopId, shopItemId, shopItemQuantityMultiplier)
     local playerId = source
 
     local user = API.getUserFromSource(playerId)
@@ -208,11 +208,12 @@ RegisterNetEvent('FRP:SHOP:RequestSellShopItem', function(shopId, shopItemId, sh
         return
     end
 
-    local transactionPriceSellDollar = shopItemInfo.transactionPriceSellDollar * shopItemQuantityMultiplier
-
-    if not transactionPriceSellDollar then
+    if not shopItemInfo.transactionPriceSellDollar then
+        user:notify('error', 'Esse item não está a venda!')
         return
     end
+
+    local transactionPriceSellDollar = shopItemInfo.transactionPriceSellDollar * shopItemQuantityMultiplier
 
     local character = user:getCharacter()
     local inventory = character:getInventory()
@@ -226,12 +227,10 @@ RegisterNetEvent('FRP:SHOP:RequestSellShopItem', function(shopId, shopItemId, sh
         return
     end
 
-    local transactionAmountInDollars = removeItemQuantity * transactionPriceSellDollar
+    if inventory:removeItem(-1, itemId, removeItemQuantity) then
+        inventory:addItem('money', transactionPriceSellDollar)
 
-    if inventory:removeItem(itemId, removeItemQuantity) then
-        inventory:addItem('money', transactionAmountInDollars)
-
-        user:notify('item', 'money', transactionAmountInDollars)
+        user:notify('item', 'money', transactionPriceSellDollar)
     else
         user:notify('error', 'Falha ao concluir a transação.')
     end
