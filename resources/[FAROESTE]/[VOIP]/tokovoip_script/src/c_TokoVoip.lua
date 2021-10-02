@@ -94,7 +94,7 @@ function TokoVoip.initialize(self)
 		while (true) do
 			Citizen.Wait(5);
 
-	if (IsControlJustPressed(0, self.keyProximity)) then -- Switch proximity modes (normal / whisper / shout)
+			if (IsControlJustPressed(0, self.keyProximity)) then -- Switch proximity modes (normal / whisper / shout)
 				if (not self.mode) then
 					self.mode = 1;
 				end

@@ -14,7 +14,7 @@ TokoVoipConfig = {
 	radioKey = Keys["CAPS"], -- Keybind used to talk on the radio
 	keySwitchChannels = Keys["Z"], -- Keybind used to switch the radio channels
 	keySwitchChannelsSecondary = Keys["LEFTSHIFT"], -- If set, both the keySwitchChannels and keySwitchChannelsSecondary keybinds must be pressed to switch the radio channels
-	keyProximity = 0x4BC9DABB, -- Keybind used to switch the proximity mode
+	keyProximity = `INPUT_CREATOR_RT` --[[ HOME ]], -- Keybind used to switch the proximity mode
 	radioClickMaxChannel = 1040, -- Set the max amount of radio channels that will have local radio clicks enabled
 	radioAnim = false, -- Enable or disable the radio animation
 	radioEnabled = false, -- Enable or disable using the radio
@@ -24,7 +24,7 @@ TokoVoipConfig = {
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
 		TSChannel = "JOGANDO",
-		TSPassword = "", -- TeamSpeak channel password (can be empty)
+		TSPassword = "dakota159753", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
 		-- If the TSChannel is public and people can join directly, you can leave this empty and not use the auto-move
