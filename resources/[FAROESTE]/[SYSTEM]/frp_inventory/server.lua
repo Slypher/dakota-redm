@@ -568,7 +568,7 @@ AddEventHandler('poke_planting:giveitem', function(tipo)
     local _source = source
     local User = API.getUserFromSource(_source)
     local Inventory = User:getCharacter():getInventory()
-	local count = math.random(4, 8)
+	local count = math.random(1, 2)
 		if tipo == `CRP_TOBACCOPLANT_AC_sim` then
 			Inventory:addItem('tabaco', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
