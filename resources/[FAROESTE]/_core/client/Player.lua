@@ -266,7 +266,7 @@ Citizen.CreateThread(
 
             if cAPI.IsPlayerHorseActive() then
                 if not isHorseActivationBlocked then
-                    if IsPedInjured(playerHorse) then
+                    if DoesEntityExist(playerHorse) and IsPedInjured(playerHorse) then
                         cAPI.notify("error", "Seu cavalo foi ferido, você não poderá chama-lo nos proximos 2 minutos")
 
                         isHorseActivationBlocked = true
