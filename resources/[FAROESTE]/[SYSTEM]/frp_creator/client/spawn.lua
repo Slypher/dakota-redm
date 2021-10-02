@@ -30,7 +30,7 @@ AddEventHandler(
                 Wait(0)
             end
 
-            NetworkSetEntityInvisibleToNetwork(playerPed, true)
+            TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
 
             StartPlayerTeleport(PlayerId(), 2520.09, -358.05, 41.61, 0.0, false, true, true, false --[[ bDisableSeamlessTeleport ]])
 
@@ -97,7 +97,7 @@ function createThreadShowHelperAudioAndText()
         local playerPed = PlayerPedId()
         local playerPos = GetEntityCoords(playerPed)
 
-        if #(END_POSITION - playerPos) <= 5.0 then
+        if #(END_POSITION - playerPos) <= 10.0 then
             RemovePedFromGroup(gCoachDriverPed, GetPedGroupIndex(playerPed))
 
             Wait(100)
@@ -112,7 +112,8 @@ function createThreadShowHelperAudioAndText()
             TaskLeaveVehicle(playerPed, gStageCoachVehicle, 0, 0)
 
             SetEntityInvincible(playerPed, false)
-            NetworkSetEntityInvisibleToNetwork(playerPed, false)
+
+            TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
 
             TriggerEvent('showBasicNeedsUI')
 

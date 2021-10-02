@@ -11,6 +11,11 @@ AddEventHandler('PersonaCreatorHandler.setPlayerRoutingBucket', function()
     SetPlayerRoutingBucket(_source, _source)
 end)
 
+RegisterNetEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
+AddEventHandler('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket', function()
+    SetPlayerRoutingBucket(source, 0)
+end)
+
 RegisterNetEvent('PersonaCreatorHandler.setRoutingBucket')
 AddEventHandler('PersonaCreatorHandler.setRoutingBucket', function(entityId)
     local _source = source
