@@ -157,6 +157,8 @@ function setComponentPlayer(data)
         if componentIndex == 0 and components.category_hashname == categoryIndex then           
             Citizen.InvokeNative(0xD710A5007C2AC539, pedHandle, components.category_hash, 0)
             Citizen.InvokeNative(0xCC8CA3E88256E58F, pedHandle, 0, 1, 1, 1, 0)
+
+            playerAppearanceComponents[categoryIndex] = {componentIndex, variationIndex}
             return
         end
 
