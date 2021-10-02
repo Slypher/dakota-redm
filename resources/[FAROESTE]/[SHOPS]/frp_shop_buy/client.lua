@@ -166,7 +166,7 @@ Citizen.CreateThread(
 
                             local shopAudios = SHOPINFO_DATABASE[gSelectedShopId].audios
 
-                            if shopAudios then
+                            if shopAudios and #shopAudios > 0 then
                                 local rnd = math.random(#shopAudios)
 
                                 TriggerEvent('vrp_sound:source', shopAudios[rnd], 0.95)
