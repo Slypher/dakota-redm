@@ -247,7 +247,7 @@ SHOPINFO_DATABASE = {
         },
 
         audios = {
-            'alarm',
+            -- 'alarm',
         }
     },
     {
