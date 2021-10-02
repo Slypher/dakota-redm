@@ -1246,12 +1246,17 @@ Config = {
                         {item = "feijaolata", amount = 1, name = "Feijão Enlatado"}
                     }
                 },
-
----------------------------------------------ADUBO---------------------------------
-
+            }
+        },
+        ---------------------------------------------ADUBO---------------------------------
+        {
+            position = vec3(-873.196,318.333,96.283), -- No position, its global
+            craftings = 
+            {
                 {
                     time = 15,
                     input = {
+                        {item = "pa", amount = 1, remove = false},
                         {item = "osso", amount = 10},
                     },
                     output = {
@@ -1261,6 +1266,7 @@ Config = {
                 {
                     time = 15,
                     input = {
+                        {item = "pa", amount = 1, remove = false},
                         {item = "podeosso", amount = 10},
                         {item = "saco", amount = 1},
                     },
@@ -1268,6 +1274,34 @@ Config = {
                         {item = "sacodeadubo", amount = 1, name = "Saco de Adubo"}
                     }
                 }
+            }
+        },
+-------------------------------------------------MOINHO--------------------------------------------
+        {
+            position = vec3(1053.885,-1123.756,67.891), -- No position, its global
+            craftings = 
+            {
+                {
+                    time = 15,
+                    input = {
+                        {item = "money", amount = 1},
+                        {item = "trigo", amount = 4},
+                        --{item = "melee_knife", amount = 1, remove = false}
+                    },
+                    output = {
+                        {item = "farinha", amount = 1, name = "Pacote de Farinha"}
+                    }
+                },
+                {
+                    time = 15,
+                    input = {
+                        {item = "money", amount = 1},
+                        {item = "canaacucar", amount = 4},
+                    },
+                    output = {
+                        {item = "acucar", amount = 1, name = "Açúcar"}
+                    }
+                },
             }
         },
 
@@ -1311,7 +1345,7 @@ Config = {
                         {item = "agulha", amount = 1, remove = false}
                     },
                     output = {
-                        {item = "pecaroupabranca", amount = 1, name = "Peça de Roupa Branca"}
+                        {item = "roupas", amount = 1, name = "Peça de Roupa Branca"}
                     }
                 },
                 {
