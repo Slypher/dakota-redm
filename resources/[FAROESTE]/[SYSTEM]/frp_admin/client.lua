@@ -11,7 +11,7 @@ AddEventHandler(
 
 		if not cAPI.IsWanted() then				
 			cAPI.SetPlayerPed(pedModel)			
-			cAPI.setPlayerAppearence(PlayerPedId())
+			cAPI.setDataAppearence(pedModel, clothes)
 		else
 			TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
 		end
