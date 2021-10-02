@@ -3,7 +3,7 @@ local Proxy = module("_core", "lib/Proxy")
 
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
-API_Database = Proxy.getInterface("DB_API")
+API_Database = Proxy.getInterface("API_DB")
 
 ------------------------------------
 ------------ADMIN COMMANDS----------
