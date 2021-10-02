@@ -1361,7 +1361,7 @@ ItemList = {
     },
     ["canaacucar"] = {
         type = "generic",
-        name = "Açúcar",
+        name = "Cana-de-Açúcar",
         weight = 0.5,
         description = "Uma Cana que é de Açúcar.",
         stackSize = 45
