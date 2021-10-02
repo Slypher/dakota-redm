@@ -570,7 +570,7 @@ SHOPINFO_DATABASE = {
         }
     },
     {
-        name = 'Mark',
+        name = 'Merida',
 
         items = {
             {
@@ -590,28 +590,12 @@ SHOPINFO_DATABASE = {
                 transactionPriceSellDollar = 0,
             },
             {
-                itemId = 'sopa',
-            
-                transactionPriceBuyDollar = 700,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 0,
-            },
-            {
-                itemId = 'sopadecarne',
-            
-                transactionPriceBuyDollar = 790,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 0,
-            },
-            {
                 itemId = 'molhotomate',
             
                 transactionPriceBuyDollar = 70,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 0,
+                transactionPriceSellDollar = 35,
             },
             {
                 itemId = 'wateringcan',
@@ -669,6 +653,8 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'pao',
 
+                transactionPriceBuyDollar = 40,
+
                 transactionPriceSellDollar = 29,
             },
             {
@@ -692,19 +678,14 @@ SHOPINFO_DATABASE = {
                 transactionPriceSellDollar = 45,
             },
             {
-                itemId = 'sopa',
+                itemId = 'melee_hatchet',
 
-                transactionPriceSellDollar = 310,
+                transactionPriceBuyDollar = 1000,
             },
             {
-                itemId = 'sopacarne',
+                itemId = 'picareta',
 
-                transactionPriceSellDollar = 390,
-            },
-            {
-                itemId = 'molhotomate',
-
-                transactionPriceSellDollar = 35,
+                transactionPriceBuyDollar = 1000,
             },
         },
 

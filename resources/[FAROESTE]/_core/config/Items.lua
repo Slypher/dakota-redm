@@ -1901,7 +1901,7 @@ ItemList = {
     },
     ["picareta"] = {
         type = "generic",
-        name = "weapon",
+        name = "Picareta",
         weight = 4.08,
         description = "Uma simples picareta, extremamente útil na mineração.",
         stackSize = 1
