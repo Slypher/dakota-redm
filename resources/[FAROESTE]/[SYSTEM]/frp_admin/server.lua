@@ -3,6 +3,7 @@ local Proxy = module("_core", "lib/Proxy")
 
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
+API_Database = Proxy.getInterface("DB_API")
 
 ------------------------------------
 ------------ADMIN COMMANDS----------
@@ -56,14 +57,13 @@ end)
 RegisterCommand(
     "loadsk",
     function(source)
+        local appearence = {}
         local User = API.getUserFromSource(source)
         local Character = User:getCharacter()
         local model = Character:getModel()
-        local clothes = Character:getClothes()
-        if Character:getDeath() == 1 then
-            return
-        end
-        TriggerClientEvent("FRP:ADMIN:Model", source, model, clothes)
+        appearence.clothes = Character:getClothes()
+
+        TriggerClientEvent("FRP:ADMIN:Model", source, model, appearence)
     end
 )
 
@@ -822,3 +822,65 @@ RegisterCommand(
 --     end
 -- )
 
+CreateThread(
+    function()
+        API_Database.prepare("FCRP/UpdatePedByChar", 'UPDATE characters_appearence SET model = @ped , clothes = \'{"Outfit":"0"}\' WHERE charid = @charid')
+        API_Database.prepare("FCRP/GetCharacter", "SELECT * from characters WHERE charid = @charid")
+        API_Database.prepare("FCRP/GetCharacterLikeCharName", "SELECT * FROM characters where characterName like @charname")
+        API_Database.prepare("FCRP/DeleteCharacter", "DELETE FROM characters WHERE charid = @charid")
+        API_Database.prepare("FCRP/DeleteCharacterAppearence", "DELETE FROM characters_appearence WHERE charid = @charid")
+        API_Database.prepare("FCRP/DeleteHorseByChar", "DELETE FROM horses WHERE charid = @charid")
+        API_Database.prepare("FCRP/DeleteInventoreByChar", "DELETE FROM inventories WHERE charid = @charid")
+    end
+)
+
+RegisterCommand(
+    "findchar",
+    function(source, args, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+        if Character:hasGroupOrInheritance("admin") then
+            local chars = API_Database.query("FCRP/GetCharacterLikeCharName", {charname = '%'..args[1]..'%'})
+            if #chars > 0 then
+                for i, char  in pairs(chars) do                    
+                    TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "[ "..char.charid.." ] - "..char.characterName, 2000)
+                end
+            else
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Não encontramos personagens com esse nome", 2000)
+            end
+        end
+    end
+)
+
+RegisterCommand(
+    "setped",
+    function(source, args, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+        if Character:hasGroupOrInheritance("admin") then
+            API_Database.query("FCRP/UpdatePedByChar", {ped = args[2], charid = args[1]})
+            
+            TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "PED: "..args[2].." está setado para o Char: "..args[1], 2000)
+        end
+    end
+)
+
+RegisterCommand(
+    "delchar",
+    function(source, args, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+        if Character:hasGroupOrInheritance("admin") then
+            local rows = API_Database.query("FCRP/GetCharacter", {charid = args[1]})    
+            if #rows == 1 then
+                API_Database.query("FCRP/DeleteHorseByChar", {charid = rows[1].charid})
+                API_Database.query("FCRP/DeleteInventoreByChar", {charid = rows[1].charid})
+                API_Database.query("FCRP/DeleteCharacterAppearence", {charid = rows[1].charid})
+                API_Database.query("FCRP/DeleteCharacter", {charid = rows[1].charid})
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char: "..rows[1].characterName.." Foi deletado com sucesso.", 2000)
+            else
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char não encontrado", 2000)    
+            end
+        end
+    end
+)
