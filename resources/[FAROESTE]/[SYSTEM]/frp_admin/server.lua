@@ -57,13 +57,19 @@ end)
 RegisterCommand(
     "loadsk",
     function(source)
-        local appearence = {}
         local User = API.getUserFromSource(source)
         local Character = User:getCharacter()
         local model = Character:getModel()
-        appearence.clothes = Character:getClothes()
+        local appearenceRow = Character:getCharacterAppearence()
+        local appearence = {}
+        appearence.enabledComponents = appearenceRow[1].enabledComponents
+        appearence.faceFeatures = appearenceRow[1].faceFeatures
+        appearence.overlays = appearenceRow[1].overlays
+        appearence.clothes = appearenceRow[1].clothes
+        appearence.pedHeight = appearenceRow[1].pedHeight
+        appearence.pedWeight = appearenceRow[1].pedWeight
 
-        TriggerClientEvent("FRP:ADMIN:Model", source, model, appearence)
+        TriggerClientEvent("FRP:ADMIN:Model", source, model,  appearence)
     end
 )
 

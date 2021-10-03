@@ -7,11 +7,12 @@ API = Tunnel.getInterface("API")
 RegisterNetEvent("FRP:ADMIN:Model")
 AddEventHandler(
 	"FRP:ADMIN:Model",
-	function(pedModel, clothes)
+	function(pedModel, appearence)
 
 		if not cAPI.IsWanted() then				
 			cAPI.SetPlayerPed(pedModel)			
-			cAPI.setDataAppearence(pedModel, clothes)
+			cAPI.setDataAppearence(pedModel, appearence)
+			cAPI.setPlayerAppearence(PlayerPedId())
 		else
 			TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
 		end
