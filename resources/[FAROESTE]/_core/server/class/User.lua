@@ -153,7 +153,7 @@ function API.User(source, id, ipAddress)
             TriggerEvent("API:OnUserSelectCharacter", self, id)
 
             ---------------- AUTO ADMING GROUP TO USER WITH ID 1
-            self.drawCharacter()
+            self:drawCharacter()
         end
     end
 

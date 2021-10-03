@@ -50,7 +50,14 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
     
     cAPI.SetPlayerPed(pedModel)
 
-    cAPI.setPlayerAppearence(PlayerPedId())
+    local playerPed = PlayerPedId()
+
+    -- IsPedReadyToRender
+    while not Citizen.InvokeNative(0xA0BC8FAED8CFEB3C, playerPed) do
+        Wait(0)
+    end
+
+    cAPI.setPlayerAppearence(playerPed)
 
     pHealth = pStats[1] or 250
     pStamina = pStats[2] or 34.0
@@ -58,11 +65,6 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
     pStaminaCore = pStats[3] or 100
 
     Wait(3000)
-
-    cAPI.VaryPlayerHealth(pHealth)
-    cAPI.VaryPlayerStamina(pStamina)
-    cAPI.VaryPlayerCore(0, pHealthCore)
-    cAPI.VaryPlayerCore(1, pStaminaCore)
 
     TriggerServerEvent("FRP:RESPAWN:CheckDeath")
     TriggerServerEvent("API:pre_OnUserCharacterInitialization")
@@ -84,10 +86,9 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
 end
 
 function cAPI.setPlayerAppearence(playerId)
-
     --cAPI.SetPedBodyType(PlayerPedId(), pBodySize)    
 
-    cAPI.SetSkin(playerId, gCharAppearence.enabledComponents)   
+    cAPI.SetSkin(playerId, gCharAppearence.enabledComponents)
 
     cAPI.SetPedFaceFeature(playerId, gCharAppearence.faceFeatures)    
 
@@ -99,9 +100,9 @@ function cAPI.setPlayerAppearence(playerId)
 
     cAPI.SetPedPortAndWeight(playerId, bodySize['porte'], gCharAppearence.pedWeight)
 
-    if gCharAppearence.clothes ~= nil then
-        cAPI.SetSkin(playerId, gCharAppearence.clothes)   
-    end
+    -- if gCharAppearence.clothes ~= nil then
+        -- cAPI.SetSkin(playerId, gCharAppearence.clothes)   
+    -- end
 end
 
 
@@ -373,7 +374,6 @@ function cAPI.getMyOrg()
 end
 
 function cAPI.setMyOrg(orgs)
-    print(orgs)
     myOrgs = json.decode(orgs)
 end
 

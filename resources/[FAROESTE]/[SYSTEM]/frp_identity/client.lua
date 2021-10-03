@@ -115,9 +115,9 @@ AddEventHandler(
 
                 cAPI.SetPedPortAndWeight(ped, tonumber(bodySize['porte']), charAppearence[i][1].pedWeight)
 
-                if charAppearence[i][1].clothes ~= nil then
-                    cAPI.SetSkin(ped, charAppearence[i][1].clothes)   
-                end
+                -- if charAppearence[i][1].clothes ~= nil then
+                --     cAPI.SetSkin(ped, charAppearence[i][1].clothes)   
+                -- end
 
                 table.insert(fakePeds, ped)
                             

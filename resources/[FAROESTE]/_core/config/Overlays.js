@@ -1414,7 +1414,7 @@ function setOverlaySelected(data) {
     const offsetVariation = data.offsetVariation;
     const overlayOpacity = data.opacity;
 
-    console.log(overlayNameType, offset, offsetVariation, overlayOpacity);
+    // console.log(overlayNameType, offset, offsetVariation, overlayOpacity);
 	
     let visibility = 0;
     let tx_id = 1;

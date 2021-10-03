@@ -5,13 +5,18 @@ function cAPI.SetPlayerPed(model)
         if not HasModelLoaded(modelHash) then
             RequestModel(modelHash)
             while not HasModelLoaded(modelHash) do
-                Citizen.Wait(10)
+                Citizen.Wait(0)
             end
         end
     end
 
+    local oldHealth = GetEntityHealth(PlayerPedId())
+
     SetPlayerModel(PlayerId(), modelHash, true)
-    NativeSetRandomOutfitVariation(PlayerPedId(SetPlayerPed))
+
+    NativeSetRandomOutfitVariation(PlayerPedId())
+
+    SetEntityHealth(PlayerPedId(), oldHealth)
 
     -- while not NativeHasPedComponentLoaded(ped) do
     --     Wait(10)
@@ -26,7 +31,7 @@ function cAPI.SetPedScale(ped, num)
     if num == 0 or num == nil then
         SetPedScale(ped, 1.0)
     else
-        SetPedScale(ped, tonumber(num) + 0.0001)
+        SetPedScale(ped, tonumber(num))
     end
     
     Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0) -- update
@@ -66,13 +71,15 @@ local WAIST_TYPES = {
 }
 
 function cAPI.SetPedPortAndWeight(ped, bodySize, pedWeight)
-    print('sizeee', bodySize, pedWeight)
-    Citizen.InvokeNative(0xA5BAE410B03E7371, ped, bodySize, false, true)     
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0) 
+    if bodySize then
+        Citizen.InvokeNative(0xA5BAE410B03E7371, ped, bodySize, false, true)     
+        Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0) 
+    end
 
-    Citizen.InvokeNative(0x1902C4CFCC5BE57C,ped, WAIST_TYPES[pedWeight])
-    Citizen.InvokeNative(0xCC8CA3E88256E58F,ped, 0, 1, 1, 1, false)
-    
+    if pedWeight then
+        Citizen.InvokeNative(0x1902C4CFCC5BE57C,ped, WAIST_TYPES[pedWeight])
+        Citizen.InvokeNative(0xCC8CA3E88256E58F,ped, 0, 1, 1, 1, false)
+    end   
 end
 
 function cAPI.SetPedFaceFeature(ped, faceFeatures)
@@ -110,7 +117,7 @@ function cAPI.SetSkin(ped, componentArray)
     if IsPedMale(ped) then
         isMale = "male"
     end
-
+    
     local outfitValue = componentArray['Outfit']
 
     if outfitValue then
@@ -128,11 +135,11 @@ function cAPI.SetSkin(ped, componentArray)
                         NativeSetPedComponentEnabled(ped, componentHash, true, true)
                     end
 
-                    while not NativeHasPedComponentLoaded(ped) do
-                        Wait(10)
-                    end
+                    -- while not NativeHasPedComponentLoaded(ped) do
+                    --     Wait(10)
+                    -- end
 
-                    SetModelAsNoLongerNeeded(componentHash)
+                    -- SetModelAsNoLongerNeeded(componentHash)
                 else         
 
                     local categoryIndex = index
@@ -150,17 +157,17 @@ function cAPI.SetSkin(ped, componentArray)
                                     local componentHash = components.models[componentIndex][variationIndex].hash
 
                                     componentHash = tonumber(componentHash)
-                                    
+
                                     if componentHash ~= 0 then
                                         -- Doesn't need to be requested !!!!!!
                                         NativeSetPedComponentEnabled(ped, componentHash, true, true)
                                     end
                             
-                                    while not NativeHasPedComponentLoaded(ped) do
-                                        Wait(10)
-                                    end
+                                    -- while not NativeHasPedComponentLoaded(ped) do
+                                    --     Wait(10)
+                                    -- end
                             
-                                    SetModelAsNoLongerNeeded(componentHash)           
+                                    -- SetModelAsNoLongerNeeded(componentHash)           
                                 end
 
                                 if categoryIndex == "BODIES_UPPER" then
@@ -168,10 +175,8 @@ function cAPI.SetSkin(ped, componentArray)
 
                                         local componentHash = componentsHashNames[i-2].models[componentIndex][variationIndex].hash
                                         Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, true, true, true)
-
                                     end
                                 end
-
                             end
                         end
                     end
@@ -191,10 +196,10 @@ function cAPI.SetPedClothing(ped, clothingArray)
                     componentHash = tonumber(componentHash)
                     -- Doesn't need to be requested !!!!!!
                     NativeSetPedComponentEnabled(ped, componentHash, true, true)
-                    while not NativeHasPedComponentLoaded(ped) do
-                        Wait(10)
-                    end
-                    SetModelAsNoLongerNeeded(modelHash)
+                    -- while not NativeHasPedComponentLoaded(ped) do
+                    --     Wait(10)
+                    -- end
+                    -- SetModelAsNoLongerNeeded(modelHash)
                     numComponents = numComponents + 1
                 end
             else
@@ -310,15 +315,14 @@ function NativeSetPedFaceFeature(ped, index, value)
 end
 
 function NativeSetPedComponentEnabled(ped, componentHash, immediately, isMp)
-    local categoryHash = NativeGetPedComponentCategory(not IsPedMale(ped), componentHash)
-    -- print(componentHash, categoryHash, NativeGetMetapedType(ped))
+    -- local categoryHash = NativeGetPedComponentCategory(not IsPedMale(ped), componentHash)
     
     Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, immediately, isMp, true)
-    --NativeUpdatePedVariation(ped)
+    NativeUpdatePedVariation(ped)
 end
 
 function NativeUpdatePedVariation(ped)
-    Citizen.InvokeNative(0x704C908E9C405136, ped)
+    -- Citizen.InvokeNative(0x704C908E9C405136, ped)
     Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, false, true, true, true, false)
 end
 
