@@ -100,9 +100,9 @@ function cAPI.setPlayerAppearence(playerId)
 
     cAPI.SetPedPortAndWeight(playerId, bodySize['porte'], gCharAppearence.pedWeight)
 
-    -- if gCharAppearence.clothes ~= nil then
-        -- cAPI.SetSkin(playerId, gCharAppearence.clothes)   
-    -- end
+    if gCharAppearence.clothes ~= nil then
+        cAPI.SetSkin(playerId, gCharAppearence.clothes)   
+    end
 end
 
 
