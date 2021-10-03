@@ -139,38 +139,40 @@ function cAPI.SetSkin(ped, componentArray)
                     local componentIndex = componentHash[1]
                     local variationIndex = componentHash[2]
 
-                    for i = 1, #componentsHashNames do
+                    if componentIndex ~= 0 then
+                        for i = 1, #componentsHashNames do
 
-                        local components = componentsHashNames[i]                
+                            local components = componentsHashNames[i]                
 
-                        if components.ped_type == isMale then
-                            if components.category_hashname == categoryIndex then                    
+                            if components.ped_type == isMale then
+                                if components.category_hashname == categoryIndex then                    
 
-                                local componentHash = components.models[componentIndex][variationIndex].hash
+                                    local componentHash = components.models[componentIndex][variationIndex].hash
 
-                                componentHash = tonumber(componentHash)
-                                
-                                if componentHash ~= 0 then
-                                    -- Doesn't need to be requested !!!!!!
-                                    NativeSetPedComponentEnabled(ped, componentHash, true, true)
+                                    componentHash = tonumber(componentHash)
+                                    
+                                    if componentHash ~= 0 then
+                                        -- Doesn't need to be requested !!!!!!
+                                        NativeSetPedComponentEnabled(ped, componentHash, true, true)
+                                    end
+                            
+                                    while not NativeHasPedComponentLoaded(ped) do
+                                        Wait(10)
+                                    end
+                            
+                                    SetModelAsNoLongerNeeded(componentHash)           
                                 end
-                        
-                                while not NativeHasPedComponentLoaded(ped) do
-                                    Wait(10)
+
+                                if categoryIndex == "BODIES_UPPER" then
+                                    if components.category_hashname == "BODIES_UPPER" then
+
+                                        local componentHash = componentsHashNames[i-2].models[componentIndex][variationIndex].hash
+                                        Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, true, true, true)
+
+                                    end
                                 end
-                        
-                                SetModelAsNoLongerNeeded(componentHash)           
+
                             end
-
-                            if categoryIndex == "BODIES_UPPER" then
-                                if components.category_hashname == "BODIES_UPPER" then
-
-                                    local componentHash = componentsHashNames[i-2].models[componentIndex][variationIndex].hash
-                                    Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, true, true, true)
-
-                                end
-                            end
-
                         end
                     end
                 end
