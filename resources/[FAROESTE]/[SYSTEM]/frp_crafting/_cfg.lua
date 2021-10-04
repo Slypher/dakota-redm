@@ -83,6 +83,25 @@ Config = {
                         {item = "peixegrandeassado", amount = 1, name = "Peixe Grande Assado"}
                     }
                 },
+                --------------------------------------------- Plantas --------------------------------------
+                {
+                    time = 15,
+                    input = {
+                        {item = "milho", amount = 1}, 
+                    },
+                    output = {
+                        {item = "milhoassado", amount = 1, name = "Milho Assado"}
+                    }
+                },
+                {
+                    time = 15,
+                    input = {
+                        {item = "batata", amount = 1}, 
+                    },
+                    output = {
+                        {item = "batataassada", amount = 1, name = "Batata Assada"}
+                    }
+                },
                 --------------------------------------------- CARNES --------------------------------------
                 {
                     time = 40,
@@ -193,6 +212,15 @@ Config = {
                     },
                     output = {
                         {item = "sopadecarne", amount = 1, name = "Ensopado de Carne"}
+                    }
+                },
+                {
+                    time = 30,
+                    input = {
+                        {item = "batata", amount = 10},
+                    },
+                    output = {
+                        {item = "puredebatata", amount = 1, name = "Pure de Batata"}
                     }
                 },
             }

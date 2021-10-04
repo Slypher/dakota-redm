@@ -198,10 +198,24 @@ function triggerUse(User, itemData, Slot)
     end
 
     if itemId == 'milho' or itemId == 'trigo' or itemId == 'cenoura' or itemId == 'alface' then
+
         if cAPI.IsPlayerMountedOnOwnHorse(source) then
             cAPI.TaskAnimalInteraction(source, 'food')
+
             cAPI.VaryHorseStamina(source, 5.0)
             cAPI.VaryHorseCore(source, 1, 5.0) -- Health?
+
+            User:closeInventory()
+
+            return true
+        end
+
+        if itemId == 'cenoura' or itemId == 'alface' then
+            cAPI.TaskScriptedAnim(source, "eat")
+
+            API.varyHunger2(source, -15)
+
+            User:closeInventory()
 
             return true
         end
@@ -386,7 +400,7 @@ function triggerUse(User, itemData, Slot)
         -- cAPI.VaryPlayerStamina(source, 15)
         --cAPI.VaryPlayerCore(source, 1, 20)
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -75)
+        API.varyHunger2(source, -60)
         --cAPI.VarySickness(source, 10)
 
         User:closeInventory()
@@ -407,13 +421,31 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "bolacha" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -50) 
+        API.varyHunger2(source, -35) 
+        User:closeInventory()
+        return true
+    end
+    if itemId == "biscoito" then
+        cAPI.TaskScriptedAnim(source, "eat")
+        API.varyHunger2(source, -35) 
+        User:closeInventory()
+        return true
+    end
+    if itemId == "milhoassado" then
+        cAPI.TaskScriptedAnim(source, "eat")
+        API.varyHunger2(source, -18) 
+        User:closeInventory()
+        return true
+    end
+    if itemId == "batataassada" then
+        cAPI.TaskScriptedAnim(source, "eat")
+        API.varyHunger2(source, -18) 
         User:closeInventory()
         return true
     end
     if itemId == "carneruimassada" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -20) 
+        API.varyHunger2(source, -18) 
         User:closeInventory()
         return true
     end
@@ -443,7 +475,7 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "peixegrandeassado" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -50) 
+        API.varyHunger2(source, -40) 
         User:closeInventory()
         return true
     end
@@ -455,19 +487,25 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "peixepequenoassado" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -20) 
+        API.varyHunger2(source, -18) 
+        User:closeInventory()
+        return true
+    end
+    if itemId == "puredebatata" then
+        cAPI.TaskScriptedAnim(source, "eat")
+        API.varyHunger2(source, -30) 
         User:closeInventory()
         return true
     end
     if itemId == "sopa" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -75) 
+        API.varyHunger2(source, -70) 
         User:closeInventory()
         return true
     end
     if itemId == "sopadecarne" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -100) 
+        API.varyHunger2(source, -80) 
         User:closeInventory()
         return true
     end
@@ -488,7 +526,7 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "vitamina" then
         cAPI.TaskInteraction(source, "drink_tonic")
-        API.varyThirst2(source, -75)
+        API.varyThirst2(source, -55)
         User:closeInventory()
         return true
     end
