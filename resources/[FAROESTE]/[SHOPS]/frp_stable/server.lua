@@ -111,7 +111,6 @@ AddEventHandler(
     end
 )
 
-
 RegisterNetEvent("FRP:STABLE:SellHorseWithId")
 AddEventHandler(
     "FRP:STABLE:SellHorseWithId",
@@ -119,20 +118,55 @@ AddEventHandler(
         local _source = source
         local User = API.getUserFromSource(_source)
         local Character = User:getCharacter()
-        local Inventory = Character:getInventory()     
-        local Horse = Character:getHorse()
+        local Inventory = Character:getInventory()
 
-        if Horse == nil then            
-            TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Você já vendeu este cavalo.', 5000)
+        local offlineHorses = Character:getHorses()
+
+        if #offlineHorses <= 0 then
+            TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Você não possui nenhum cavalo.', 5000)
+            return
+        end
+
+        local toSellOfflineHorse
+
+        for _, offlineHorse in ipairs(offlineHorses) do
+            if offlineHorse.id == id then
+                toSellOfflineHorse = offlineHorse
+                break
+            end
+        end
+
+        if not toSellOfflineHorse then
+            TriggerClientEvent('FRP:NOTIFY:Simple', _source, ('Você não tem nenhum cavalo com o id \'%d\''):format(id), 5000)
+            return
+        end
+
+        local toSellHorseModel = string.lower(toSellOfflineHorse.model)
+
+        local sellingPriceInDollars
+
+        for _, shopCategoryInfo in ipairs(HORSESHOP_INFO) do
+            for horseModel, horseSellableInfo in pairs(shopCategoryInfo) do
+                if string.lower(horseModel) == toSellHorseModel then
+
+                    sellingPriceInDollars = horseSellableInfo[3]
+
+                    break
+                end
+            end
+        end
+
+        if not sellingPriceInDollars then
+            TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Esta raça de cavalo não pode ser vendida.', 5000)
             return
         end
 
         TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Cavalo vendido com sucesso.', 5000)  
 
-        Character:removeHorse(tonumber(id))
-        Character:deleteHorse(tonumber(id))
+        Character:removeHorse(id)
+        Character:deleteHorse(id)
                 
-        Inventory:addItem("money", 1000)
+        Inventory:addItem('money', sellingPriceInDollars * 0.25)
     end
 )
 
@@ -145,6 +179,7 @@ end
 )
 
 local DEFAULT_MAX_OWNED_HORSES_COUNT = 2
+local OWNED_HORSES_LIMIT = 10
 
 function getUserMaxOwnedHorsesCount(userId)
     local slotCountPrivileges = PrivilegeSystem.getUserCachedPrivilegesByType(userId, 'PRIV_SLOT_COUNT_HORSE')
@@ -156,6 +191,8 @@ function getUserMaxOwnedHorsesCount(userId)
 
         n = n + tonumber(PrivilegeSystem.getPrivilegeTier(privilege))
     end
+
+    n = math.min(n, OWNED_HORSES_LIMIT)
 
     return n
 end
