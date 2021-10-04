@@ -165,8 +165,9 @@ AddEventHandler(
 
         Character:removeHorse(id)
         Character:deleteHorse(id)
-                
-        Inventory:addItem('money', sellingPriceInDollars * 0.25)
+        
+        -- 25%(100 * 0.25) do valor de compra.
+        Inventory:addItem('money', sellingPriceInDollars * 25.0)
     end
 )
 
