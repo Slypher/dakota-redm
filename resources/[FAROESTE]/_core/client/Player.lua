@@ -76,13 +76,13 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
     -- #WARNING: Gambiarra, atualizar a escala do player a cada 5 segundos,
     -- parece que o jogo reseta a escalada toda vez em que algum componente
     -- do ped do player é atualizado :/
-    -- CreateThread(function()
-    --     while true do
-    --         Wait(5000)
+    CreateThread(function()
+        while true do
+            Wait(5000)
 
-    --         cAPI.SetPedScale(PlayerPedId(), gCharAppearence.pedHeight)
-    --     end
-    -- end)
+            cAPI.SetPedScale(PlayerPedId(), gCharAppearence.pedHeight)
+        end
+    end)
 end
 
 function cAPI.setPlayerAppearence(playerId)
