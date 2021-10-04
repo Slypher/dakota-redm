@@ -24,9 +24,13 @@ AddEventHandler(
 
             SetEntityInvincible(playerPed, true)
 
+            while IsScreenFadingIn() do
+                Wait(0)
+            end
+
             DoScreenFadeOut(500)
 
-            while IsScreenFadedOut() do
+            while IsScreenFadingOut() do
                 Wait(0)
             end
 

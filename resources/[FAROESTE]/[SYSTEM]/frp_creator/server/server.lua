@@ -43,10 +43,5 @@ AddEventHandler('PersonaCreatorHandler.requestCreatePersona', function(playerPro
         User:setCharacter(Character:getId()) -- Will draw itself      
     end
 
-    Wait(1000)
-
-    SetPlayerRoutingBucket(_source, 0)
-
     TriggerClientEvent('FRP:CREATOR:FirstSpawn', _source)
-
 end)

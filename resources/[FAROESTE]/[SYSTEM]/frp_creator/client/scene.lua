@@ -300,14 +300,15 @@ AddEventHandler(
             end
 
             if IsDisabledControlJustReleased(0, INPUT_FRONTEND_ACCEPT) then
-                
-                TriggerEvent("FRP:CHARCREATION:startCustomizationScene", defaultPedComponents[gPedSelectedSex])
+                if gPedSelectedSex ~= 'none' then
+                    TriggerEvent("FRP:CHARCREATION:startCustomizationScene", defaultPedComponents[gPedSelectedSex])
 
-                gIsCamInterpolating = false
+                    gIsCamInterpolating = false
 
-                interpolateToCamIndex(staticOrderedCameras, 2)
+                    interpolateToCamIndex(staticOrderedCameras, 2)
 
-                gState = State.TRANSITION_TO_SELECTING
+                    gState = State.TRANSITION_TO_SELECTING
+                end
             end
 
             local text = "Escolha seu personagem, use as setas do seu teclado. ~INPUT_FRONTEND_ACCEPT~ Para escolher."
