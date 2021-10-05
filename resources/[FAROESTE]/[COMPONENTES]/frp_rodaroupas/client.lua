@@ -182,113 +182,130 @@ RegisterCommand('closeradial', function(data, cb)
 
 end)
 
-RegisterCommand ('chapeu', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x9925C067, 0) -- Target Category Hat
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('camisa', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x2026C46D, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('suspensorios', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x877A2CF7, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('colete', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x485EE834, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('gravatas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7A96FACA, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('lencos', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x5FC29285, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('calca', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x1D4C528A, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('chaps', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3107499B, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('polainas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x514ADCEA, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('esporas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x18729F39, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('botas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x777EC6EF, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('luvas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xEABE0032, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('casaco', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xE06D30CE, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('casacof', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('poncho', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xAF14310B, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('capas', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3C1A74CD, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('coldre', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x9B2C8B89, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('coldre2', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xB6B6122D, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('cinto', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA6D134C6, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('fivela', function (data, cb)
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xFAE9107F, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('cartucheira', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3F1F01E5, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('acessorio', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x79D7DF96, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('bracelete', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7BC10759, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('manoplas', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x91CE9B20, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('olhos', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x5E47CA6, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
-RegisterCommand ('aneis', function (data, cb) -- Munições que ficam penduradas no personagem
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7A6BBD0B, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-    Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF16A1D23, 0) -- Target Category shirt
-    Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-end)
+local MENU_COMMAND_TO_COMPONENTCATEGORY_HASH = {
+    ['chapeu']       = 0x9925C067,
+    ['camisa']       = 0x2026C46D,
+    ['suspensorios'] = 0x877A2CF7,
+    ['colete']       = 0x485EE834,
+    ['gravatas']     = 0x7A96FACA,
+    ['lencos']       = 0x5FC29285,
+    ['calca']        = 0x1D4C528A,
+    ['chaps']        = 0x3107499B,
+    ['polainas']     = 0x514ADCEA,
+    ['esporas']      = 0x18729F39,
+    ['botas']        = 0x777EC6EF,
+    ['luvas']        = 0xEABE0032,
+    ['casaco']       = 0xE06D30CE,
+    ['casacof']      = 0x662AC34,
+    ['poncho']       = 0xAF14310B,
+    ['capas']        = 0x3C1A74CD,
+    ['coldre']       = 0x9B2C8B89,
+    ['coldre2']      = 0xB6B6122D,
+    ['cinto']        = 0xA6D134C6,
+    ['fivela']       = 0xFAE9107F,
+    ['cartucheira']  = 0x3F1F01E5,
+    ['acessorio']    = 0x79D7DF96,
+    ['bracelete']    = 0x7BC10759,
+    ['manoplas']     = 0x91CE9B20,
+    ['olhos']        = 0x5E47CA6,
+    ['aneis']        = { 0x7A6BBD0B, 0xF16A1D23 },
+}
 
+do
+    for commandName, componentCategoriesOrHash in pairs(MENU_COMMAND_TO_COMPONENTCATEGORY_HASH) do
+        RegisterCommand(commandName, function()
+
+            if type(componentCategoriesOrHash) == 'table' then
+                for _, categoryHash in ipairs(componentCategoriesOrHash) do
+                    cacheOrApplyComponentByCategory(categoryHash)
+                end
+            else
+                cacheOrApplyComponentByCategory(componentCategoriesOrHash)
+            end
+        end)
+    end
+end
+
+local gHiddenClothingComponentsCache = { }
+
+function cacheOrApplyComponentByCategory(componentHash)
+    local playerPed = PlayerPedId()
+
+    if not applyComponentOfCategoryFromCache(playerPed, componentHash) then
+        -- Player não tem nenhum componente dessa categoria em cache,
+        -- então a gente joga o componte atual para o cache e remove ele.
+        cacheAndRemoveComponentByCategory(playerPed, componentHash)
+    end
+end
+
+function getComponentByCategory(ped, categoryHash)
+    -- GetNumComponentsInPed
+    local numMetaAssets = Citizen.InvokeNative(0x90403E8107B60E81, ped)
+
+    if numMetaAssets <= 0 then
+        return
+    end
+
+    -- GetMetaPedType
+    local metaPedType = Citizen.InvokeNative(0xEC9A1261BF0CE510, ped)
+
+    for i = 0, numMetaAssets - 1 do
+
+        -- GetPedComponentAtIndex
+        local shopItemHash = exports['frp_clothes']:GetPedComponentAtIndex(ped, i) -- Citizen.InvokeNative(0x77BA37622E22023B, ped, i, true, Citizen.PointerValueInt(), Citizen.PointerValueInt())
+
+        -- GetPedComponentCategory
+        local shopItemCategoryHash = Citizen.InvokeNative(0x5FF9A878C3D115B8, shopItemHash, metaPedType, true)
+
+        -- UNSIGNED
+        if shopItemCategoryHash and (shopItemCategoryHash & 0xFFFFFFFF) == categoryHash then
+            return shopItemHash
+        end
+    end
+
+    return
+end
+
+function applyComponentOfCategoryFromCache(ped, categoryHash)
+    local shopItemHashOfCategory = getComponentByCategory(ped, categoryHash)
+
+    -- Não aplicar o cache caso o player esteja usando um componente
+    if shopItemHashOfCategory then
+        return false
+    end
+
+    local shopItemHash = gHiddenClothingComponentsCache[categoryHash]
+    if shopItemHash then
+        
+        -- ApplyShopItemToPed
+        Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, shopItemHash, true, true, true)
+
+        -- Remover do cache :)
+        gHiddenClothingComponentsCache[categoryHash] = nil
+
+        return true
+    end
+
+    return false
+end
+
+function cacheAndRemoveComponentByCategory(ped, categoryHash)
+    local shopItemHashOfCategory = getComponentByCategory(ped, categoryHash)
+
+    if not shopItemHashOfCategory then
+        return false
+    end
+
+    gHiddenClothingComponentsCache[categoryHash] = shopItemHashOfCategory
+
+    -- RemoveTagFromMetaPed
+    Citizen.InvokeNative(0xD710A5007C2AC539, ped, categoryHash, 0)
+
+    -- UpdatePedVariation
+    Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0)
+
+    return true
+end
 
 --[[
 
