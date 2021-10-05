@@ -13,8 +13,13 @@ AddEventHandler(
                     Citizen.Wait(wait)
                     timeout = timeout - wait
 
-                    if NativeIsEntityGathered(entity) then
-                        TriggerServerEvent("FRP:GATHERING:Gathered", GetEntityModel(entity), isHuman, GetAnimalCarcassQuality(entity))
+                    -- IsEntityFullyLooted
+                    if Citizen.InvokeNative(0x8DE41E9902E85756, entity) then
+
+                        -- GetPedQuality
+                        local quality = Citizen.InvokeNative(0x7BCC6087D130312A, entity, Citizen.ResultAsInteger())
+
+                        TriggerServerEvent("FRP:GATHERING:Gathered", GetEntityModel(entity), isHuman, quality)
                         break
                     end
                 end
@@ -22,12 +27,3 @@ AddEventHandler(
         end
     end
 )
-
-function GetAnimalCarcassQuality(entity)
-    local ret = Citizen.InvokeNative(0x88EFFED5FE8B0B4A, entity)
-    return ret ~= false and ret or 0
-end
-
-function NativeIsEntityGathered(entity)
-    return Citizen.InvokeNative(0x8DE41E9902E85756, entity)
-end

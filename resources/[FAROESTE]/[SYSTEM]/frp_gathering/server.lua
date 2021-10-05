@@ -247,93 +247,63 @@ local AnimalModelToItem2 = {
 [`A_C_SnakeFerDeLance_01`] = "peledecobra",
 [`A_C_SnakeRedBoa_01`] = "peledecobra",
 -- PEIXES
-[`A_C_FishBluegil_01_ms`] = "oleopeixe",
-[`A_C_FishBullHeadCat_01_ms`] = "oleopeixe",
-[`A_C_FishChainPickerel_01_ms`] = "oleopeixe",
-[`A_C_FishLargeMouthBass_01_ms`] = "oleopeixe",
-[`A_C_FishPerch_01_ms`] = "oleopeixe",
-[`A_C_FishRainbowTrout_01_ms`] = "oleopeixe",
-[`A_C_FishRedfinPickerel_01_ms`] = "oleopeixe",
-[`A_C_FishRockBass_01_ms`] = "oleopeixe",
-[`A_C_FishSalmonSockeye_01_ms`] = "oleopeixe",
-[`A_C_FishSmallMouthBass_01_ms`] = "oleopeixe",
-[`A_C_FishBluegil_01_sm`] = "oleopeixe",
-[`A_C_FishBullHeadCat_01_sm`] = "oleopeixe",
-[`A_C_FishChainPickerel_01_sm`] = "oleopeixe",
-[`A_C_FishPerch_01_sm`] = "oleopeixe",
-[`A_C_FishRedfinPickerel_01_sm`] = "oleopeixe",
-[`A_C_FishRockBass_01_sm`] = "oleopeixe",
+[`A_C_FishBluegil_01_ms`] = "oleodepeixe",
+[`A_C_FishBullHeadCat_01_ms`] = "oleodepeixe",
+[`A_C_FishChainPickerel_01_ms`] = "oleodepeixe",
+[`A_C_FishLargeMouthBass_01_ms`] = "oleodepeixe",
+[`A_C_FishPerch_01_ms`] = "oleodepeixe",
+[`A_C_FishRainbowTrout_01_ms`] = "oleodepeixe",
+[`A_C_FishRedfinPickerel_01_ms`] = "oleodepeixe",
+[`A_C_FishRockBass_01_ms`] = "oleodepeixe",
+[`A_C_FishSalmonSockeye_01_ms`] = "oleodepeixe",
+[`A_C_FishSmallMouthBass_01_ms`] = "oleodepeixe",
+[`A_C_FishBluegil_01_sm`] = "oleodepeixe",
+[`A_C_FishBullHeadCat_01_sm`] = "oleodepeixe",
+[`A_C_FishChainPickerel_01_sm`] = "oleodepeixe",
+[`A_C_FishPerch_01_sm`] = "oleodepeixe",
+[`A_C_FishRedfinPickerel_01_sm`] = "oleodepeixe",
+[`A_C_FishRockBass_01_sm`] = "oleodepeixe",
 }
 
-RegisterNetEvent("FRP:GATHERING:Gathered")
-AddEventHandler(
-    "FRP:GATHERING:Gathered",
-    function(entityModelHash, isHuman, entityQuality)
-        local _source = source
+RegisterNetEvent("FRP:GATHERING:Gathered", function(entityModelHash, isHuman, entityQuality)
+    local _source = source
 
-        local User = API.getUserFromSource(_source)
-        local Character = User:getCharacter()
+    local User = API.getUserFromSource(_source)
+    local Character = User:getCharacter()
 
-        if Character == nil then
-            return
-        end
+    if Character == nil then
+        return
+    end
 
-        local Inventory = Character:getInventory()
+    local toAddItemBundle = { }
+    local toAddAmount = 1
 
-        local item = 'carneruim'
-        local item2 = ''
-        local item3 = ''
-        local itemAmount = 1
+    if isHuman then
+        toAddItemBundle = { 'money' }
 
-        if not isHuman then
-            print("É um Animal")
-            print(entityQuality)
-            print(entityModelHash)
-            --if AnimalModelToItem[entityModelHash] then
-                --item2 = AnimalModelToItem[entityModelHash]
-
-                if entityQuality == 2 then
-                    item = 'carneperfeita'
-                    item2 = AnimalModelToItem[entityModelHash]
-                    item3 = AnimalModelToItem2[entityModelHash]
-
-                elseif  entityQuality ~= 2 and entityQuality ~= 0 then
-                    item = 'carneboa'
-                    item2 = AnimalModelToItem[entityModelHash]
-
-                elseif  entityQuality == 0 then
-                    item = 'carneruim'
-                end
-            --end
-        else
-            item = 'money'
-            itemAmount = 1
-        end
-
-        if item2 ~= '' and item3 ~= '' then
-            Inventory:addItem(item, 1)
-            User:notify("item", item, itemAmount)
-            Inventory:addItem(item2, 1)
-            User:notify("item2", item2, itemAmount)
-            Inventory:addItem(item3, 1)
-            User:notify("item3", item3, itemAmount)
-
-        elseif item2 ~= '' then
-            Inventory:addItem(item, 1)
-            User:notify("item", item, itemAmount)
-            Inventory:addItem(item2, 1)
-            User:notify("item2", item2, itemAmount)
-
-        elseif item2 == '' then
-            Inventory:addItem(item, 1)
-            User:notify("item", item, itemAmount)
-        
-        else
-            User:notify("Bolsa sem espaço!")
-        --     TriggerClientEvent("FRP:LOOTING:LooteableDenied", _source, GetHashKey('p_whitefleshymeat01xa'))
+        -- 2 a 4 centavos.
+        math.randomseed(GetGameTimer())
+        toAddAmount = math.random(2, 4)
+    else
+        if entityQuality >= 2 then
+            toAddItemBundle = { 'carneperfeita', AnimalModelToItem[entityModelHash], AnimalModelToItem2[entityModelHash] }
+        elseif entityQuality == 1 then
+            toAddItemBundle = { 'carneboa', AnimalModelToItem[entityModelHash] }
+        elseif entityQuality <= 0 then
+            toAddItemBundle = { 'carneruim' }
         end
     end
-)
+
+    local Inventory = Character:getInventory()
+
+    for _, toAddItem in ipairs(toAddItemBundle) do
+        Inventory:addItem(toAddItem, toAddAmount)
+
+        User:notify('item', toAddItem, toAddAmount)
+    end
+
+    -- TriggerClientEvent("FRP:LOOTING:LooteableDenied", _source, GetHashKey('p_whitefleshymeat01xa'))
+end)
 
 --[[
     

@@ -570,14 +570,14 @@ ItemList = {
     },  
     ["smallfish"] = {
         type = "generic",
-        name = "Small Fish",
+        name = "Peixinho",
         weight = 0.3,
         description = "Um peixinho, quase não vale a pena...",
         stackSize = 10
     },
     ["mediumfish"] = {
         type = "generic",
-        name = "Medium Fish",
+        name = "Peixe Médio",
         weight = 2.3,
         description = "Um peixe de tamanho médio, muito comum.",
         stackSize = 10
