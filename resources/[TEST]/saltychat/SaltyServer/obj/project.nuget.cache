@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "SOwEYDybsx3KVzNGdr1D5QtfPPpnRMDO8h6CLkWqv62nmBRObe85H4EwqpEy7Rw/diMR9V9tyTkatwq/F8aG+w==",
+  "dgSpecHash": "K1SjrmA68RzAmVK+x0vHDrycAoyaNvCB067h3JIVAmKL50V2T7/dLmZnc42LTePU3kfJrRmzmwVklprHZbXoRw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jordy\\Desktop\\OutlawsRP\\_Data\\resources\\[ Core ]\\[ RedEmRP ]\\saltychat\\SaltyServer\\SaltyServer.csproj",
+  "projectFilePath": "E:\\Scripting\\[RDR3]\\fxserver-dakota\\dakota-redm\\resources\\[TEST]\\saltychat\\SaltyServer\\SaltyServer.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\jordy\\.nuget\\packages\\citizenfx.core.server\\1.0.1552\\citizenfx.core.server.1.0.1552.nupkg.sha512",
-    "C:\\Users\\jordy\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
-    "C:\\Users\\jordy\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\jordy\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\kvalue\\.nuget\\packages\\citizenfx.core.server\\1.0.4355\\citizenfx.core.server.1.0.4355.nupkg.sha512",
+    "C:\\Users\\kvalue\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\kvalue\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\kvalue\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }
