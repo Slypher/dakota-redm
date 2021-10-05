@@ -1225,7 +1225,7 @@ RegisterNUICallback(
         }
 
         TriggerServerEvent("FRP:CLOTHES:payClothing", 500, dados, true)
-        TriggerServerEvent("FRP:CLOTHES:SavePlayerClothing", dados, true)
+        
         DestroyClothingMenu()
         cAPI.InFade(500)
         if positionBack ~= nil then
@@ -1310,7 +1310,8 @@ AddEventHandler(
             ["Outfit"] = OutfitUsing
         }
 
-        TriggerServerEvent("FRP:CLOTHES:SavePlayerClothing", dados, true)
+        -- Esse codepath se quer é usado?
+        -- TriggerServerEvent("FRP:CLOTHES:SavePlayerClothing", dados, true)
         DestroyClothingMenu()
         cAPI.InFade(500)
         if positionBack ~= nil then

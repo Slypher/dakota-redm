@@ -9,9 +9,13 @@ AddEventHandler(
 	"FRP:ADMIN:Model",
 	function(pedModel, appearence)
 
-		if not cAPI.IsWanted() then				
-			cAPI.SetPlayerPed(pedModel)			
-			cAPI.setDataAppearence(pedModel, appearence)
+		if not cAPI.IsWanted() then		
+			if pedModel then		
+				cAPI.SetPlayerPed(pedModel)
+			end
+			if appearence then
+				cAPI.setDataAppearence(pedModel, appearence)
+			end
 			cAPI.setPlayerAppearence(PlayerPedId())
 		else
 			TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)

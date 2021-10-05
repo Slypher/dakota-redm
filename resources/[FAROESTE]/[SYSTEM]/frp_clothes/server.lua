@@ -8,26 +8,52 @@ dbAPI = Proxy.getInterface("API_DB")
 RegisterServerEvent("FRP:CLOTHES:payClothing")
 AddEventHandler(
     "FRP:CLOTHES:payClothing",
-    function(price)
+    function(price, clothingData)
         local _source = source
         local User = API.getUserFromSource(_source)
-        local Inventory = User:getCharacter():getInventory()
+        local Character = User:getCharacter()
+
+        local Inventory = Character:getInventory()
 
         if Inventory:getItemAmount("money") < price then
-            local Character = User:getCharacter()
             local model = Character:getModel()
-            local clothes = Character:getClothes()
+
+            local appearenceRow = Character:getCharacterAppearence()
+            local appearence = {}
+            appearence.enabledComponents = appearenceRow[1].enabledComponents
+            appearence.faceFeatures = appearenceRow[1].faceFeatures
+            appearence.overlays = appearenceRow[1].overlays
+            appearence.clothes = appearenceRow[1].clothes
+            appearence.pedHeight = appearenceRow[1].pedHeight
+            appearence.pedWeight = appearenceRow[1].pedWeight
 
             User:notify("error", "Dinheiro insuficiente!")
-            TriggerClientEvent('FRP:CLOTHES:DrawOldClothing', _source)
-            TriggerClientEvent("FRP:ADMIN:Model", _source, model, clothes)
+            
+            -- Necessario?
+            -- TriggerClientEvent('FRP:CLOTHES:DrawOldClothing', _source)
+
+            TriggerClientEvent("FRP:ADMIN:Model", _source, nil, appearence)
             return
         end
-        User:notify("item", "money", -price) 
+
         Inventory:removeItem(-1, "money", price)
-        TriggerEvent('FRP:CLOTHES:SaveClothing')
+        User:notify("item", "money", -price)
+        
+        SavePlayerClothing(_source, clothingData)
     end
 )
+
+function SavePlayerClothing(playerId, dataClothes)
+    local User = API.getUserFromSource(playerId)
+    local Character = User:getCharacter()
+    if Character ~= nil then
+        for k, v in pairs(dataClothes) do 
+            if v ~= nil then
+                Character:setData(Character:getId(), 'clothes', k, v)
+            end
+        end     
+    end
+end
 
 RegisterServerEvent("FRP:CLOTHES:fechar")
 AddEventHandler(
@@ -43,23 +69,6 @@ AddEventHandler(
     end
 )
 
-
-RegisterNetEvent("FRP:CLOTHES:SavePlayerClothing")
-AddEventHandler(
-    "FRP:CLOTHES:SavePlayerClothing",
-    function(dataClothes, securePayment)
-        local _source = source
-        local User = API.getUserFromSource(_source)
-        local Character = User:getCharacter()
-        if Character ~= nil then
-            for k, v in pairs(dataClothes) do 
-                if v ~= nil then
-                    Character:setData(Character:getId(), 'clothes', k, v)
-                end
-            end     
-        end
-    end
-)
 RegisterCommand('calca',function(source,args,rawCommand)
 	local user_id = API.getUserId(source)
 	if cAPI.getHealth(source) > 101 then
