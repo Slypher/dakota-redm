@@ -103,6 +103,7 @@ $(".button-right").on('click', function() {
     nValue = parseFloat(parseFloat(nValue).toFixed(1));
 
     $(inputElement).attr('value', nValue);
+    $(inputElement).val(nValue);
 
     var id = nValue;
 
@@ -144,6 +145,7 @@ $(".button-left").on('click', function() {
     nValue = parseFloat(parseFloat(nValue).toFixed(1));
 
     $(inputElement).attr('value', nValue);
+    $(inputElement).val(nValue);
 
     var id = nValue;
 
@@ -186,11 +188,16 @@ $(".input-number").on("change paste keyup", function() {
         value = max;
         $(this).val(value);
     }
+    
+    var titleElement = $(this).parent().parent().find('.qtd');
+    titleElement.text(value + '/' + max);
 
-    var titleElement = $(this).parent().parent().find('.grey-text');
-    var text = titleElement.text();
-    var component = text.split(' ')[0];
-    titleElement.text(component + ' ' + value + '/' + max);
+    $(this).val(value);
+    $(this).attr('value', value);
+
+    const component =  $(this).attr('id');
+
+    $.post('http://frp_clothes/' + component, JSON.stringify({ id: value }));
 });
 
 function buy(element, isGold) {
