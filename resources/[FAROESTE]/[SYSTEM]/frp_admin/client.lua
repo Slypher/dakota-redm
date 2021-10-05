@@ -445,14 +445,14 @@ CreateThread(function()
 					-- ClearPedBloodDamageFacial
 					Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
 
-					PlayerWashingFaceAnimation()
+					PlayWashingFaceAnimation()
 				end
 			end
 		end
 	end
 end)
 
-function PlayerWashingFaceAnimation()
+function PlayWashingFaceAnimation()
 	local DICTIONARY  = 'amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d'
 	local ANIMATION = 'idle_l'
 
