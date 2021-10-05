@@ -575,10 +575,10 @@ AddEventHandler('poke_planting:giveitem', function(tipo)
 		elseif tipo == `CRP_CORNSTALKS_AB_sim` then
 			Inventory:addItem('milho', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-        elseif tipo == `crp_carrots_Aa_sim` then
+        elseif tipo == `crp_carrots_ba_sim` then
 			Inventory:addItem('cenoura', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-        elseif tipo == `crp_wheat_sap_long_aa_sim` then
+        elseif tipo == `crp_wheat_dry_long_aa_sim` then
 			Inventory:addItem('trigo', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `CRP_SUGARCANE_AC_sim` then
@@ -593,13 +593,13 @@ AddEventHandler('poke_planting:giveitem', function(tipo)
         elseif tipo == `CRP_TOMATOES_AA_SIM` then
 			Inventory:addItem('tomate', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-        elseif tipo == `crp_tobaccoplant_Bc_sim` then
+        elseif tipo == `crp_berry_har_aa_sim` then
 			Inventory:addItem('feijao', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `prariepoppy_p` then
 			Inventory:addItem('papola', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-        elseif tipo == `rdr_bush_agave_aa_sim` then
+        elseif tipo == `crp_broccoli_aa_sim` then
 			Inventory:addItem('repolho', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `CRP_POTATO_AA_sim` then
