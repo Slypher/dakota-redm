@@ -35,21 +35,19 @@ AddEventHandler(
 
         local horses = Character:getHorses() or {}
 
-        if #horses <= 0 then
-            return
-        end
-
-        local Horse = Character:getHorse()
-        local selectedHorseId
-        if Horse ~= nil then
-            selectedHorseId = Horse:getId()
-        end
-
-        for _, data in pairs(horses) do
-            if selectedHorseId ~= nil and data.id == selectedHorseId then
-                data.selected = true
+        if horses >= 1 then
+            local Horse = Character:getHorse()
+            local selectedHorseId
+            if Horse ~= nil then
+                selectedHorseId = Horse:getId()
             end
-            data.charid = nil
+
+            for _, data in pairs(horses) do
+                if selectedHorseId ~= nil and data.id == selectedHorseId then
+                    data.selected = true
+                end
+                data.charid = nil
+            end
         end
 
         -- for k,v in pairs(horses) do
