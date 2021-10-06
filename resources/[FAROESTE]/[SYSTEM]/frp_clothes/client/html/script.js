@@ -247,11 +247,6 @@ window.addEventListener("keydown", throttle(function (ev) {
     }
 }, 50))
 
-function storeCurrentComponentsIntoClothingItem()
-{
-    $.post('http://frp_clothes/storeCurrentComponentsIntoClothingItem', JSON.stringify({ }));
-}
-
 let mouseX = 0.5;
 let mouseY = 0.5;
 

@@ -1428,60 +1428,59 @@ RegisterNetEvent('FRP:ResponseShouldStoreIntoClothingItemButtonBeEnabled', funct
 end)
 
 local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
-    [`BOOT_ACCESSORIES`] = true,
+    [`BOOT_ACCESSORIES`] = 'boot_accessories',
     [`PANTS`] = 'pants',
     [`CLOAKS`] = 'cloaks',
-    [`HATS`] = 'hat',
+    [`HATS`] = 'hats',
     [`VESTS`] = 'vests',
     [`CHAPS`] = 'chaps',
-    [`SHIRTS_FULL`] = true,
-    [`BADGES`] = true,
+    [`SHIRTS_FULL`] = 'shirts_full',
+    [`BADGES`] = 'badges',
     [`MASKS`] = 'masks',
     [`SPATS`] = 'spats',
     [`NECKWEAR`] = 'neckwear',
     [`BOOTS`] = 'boots',
-    [`ACCESSORIES`] = 'access',
-    [`JEWELRY_RINGS_RIGHT`] = true,
-    [`JEWELRY_RINGS_LEFT`] = true,
-    [`JEWELRY_BRACELETS`] = true,
+    [`ACCESSORIES`] = 'accessories',
+    [`JEWELRY_RINGS_RIGHT`] = 'jewelry_rings_right',
+    [`JEWELRY_RINGS_LEFT`] = 'jewelry_rings_left',
+    [`JEWELRY_BRACELETS`] = 'jewelry_bracelets',
     [`GAUNTLETS`] = 'gauntlets',
     [`NECKTIES`] = 'neckties',
-    [`HOLSTERS_KNIFE`] = true,
-    [`TALISMAN_HOLSTER`] = true,
-    [`LOADOUTS`] = true,
+    [`HOLSTERS_KNIFE`] = 'holsters_knife',
+    [`TALISMAN_HOLSTER`] = 'talisman_holster',
+    [`LOADOUTS`] = 'loadouts',
     [`SUSPENDERS`] = 'suspenders',
-    [`TALISMAN_SATCHEL`] = true,
-    [`SATCHELS`] = true,
-    [`GUNBELTS`] = true,
+    [`TALISMAN_SATCHEL`] = 'talisman_satchel',
+    [`SATCHELS`] = 'satchels',
+    [`GUNBELTS`] = 'gunbelts',
     [`BELTS`] = 'belts',
-    [`BELT_BUCKLES`] = 'beltbuckle',
-    [`HOLSTERS_LEFT`] = true,
-    [`HOLSTERS_RIGHT`] = true,
-    [`AMMO_RIFLES`] = true,
-    [`TALISMAN_WRIST`] = true,
+    [`BELT_BUCKLES`] = 'belt_buckles',
+    [`HOLSTERS_LEFT`] = 'holsters_left',
+    [`HOLSTERS_RIGHT`] = 'holsters_right',
+    [`AMMO_RIFLES`] = 'ammo_rifles',
+    [`TALISMAN_WRIST`] = 'talisman_wrist',
     [`COATS`] = 'coats',
-    [`COATS_CLOSED`] = 'coats2',
+    [`COATS_CLOSED`] = 'coats_closed',
     [`PONCHOS`] = 'ponchos',
-    [`ARMOR`] = true,
+    [`ARMOR`] = 'armor',
     [`GLOVES`] = 'gloves',
-    [`TALISMAN_BELT`] = true,
-    [`AMMO_PISTOLS`] = true,
-    [`HOLSTERS_CROSSDRAW`] = true,
-    [`APRONS`] = true,
+    [`TALISMAN_BELT`] = 'talisman_belt',
+    [`AMMO_PISTOLS`] = 'ammo_pistols',
+    [`HOLSTERS_CROSSDRAW`] = 'holsters_crossdraw',
+    [`APRONS`] = 'aprons',
     [`SKIRTS`] = 'skirts',
-    [`MASKS_LARGE`] = true,
-    [`BEARDS_CHIN`] = true,
-    [`BEARDS_CHOPS`] = true,
-    [`BEARDS_MUSTACHE`] = true,
+    [`MASKS_LARGE`] = 'MASKS_LARGE',
 }
 
-RegisterNUICallback('storeCurrentComponentsIntoClothingItem', function(data, cb)
+RegisterNetEvent('storeCurrentComponentsIntoClothingItem', function(slotId)
     local clothingPieceShopitemsAsHex = { }
 
     local playerPed = PlayerPedId()
 
     -- GetMetaPedType
     local metapedType = N_0xec9a1261bf0ce510(playerPed)
+
+    local toRemoveClothingPieces = { }
 
     -- GetNumComponentsInPed
     for i = 1, N_0x90403e8107b60e81(playerPed) do
@@ -1494,14 +1493,25 @@ RegisterNUICallback('storeCurrentComponentsIntoClothingItem', function(data, cb)
 
             if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
                 table.insert(clothingPieceShopitemsAsHex, ('0x%x'):format(shopitemHash & 0xFFFFFFFF) )
+
+                -- Remover também o componente atual, já que a gente tá guardando a informação no item.
+                -- RemoveTagFromMetaPed
+                Citizen.InvokeNative(0xD710A5007C2AC539, playerPed, shopitemCategoryHash, true)
+
+                NativeUpdatePedVariation(playerPed)
+
+                local thisScriptCategoryEquivalent = ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash]
+    
+                if thisScriptCategoryEquivalent and thisScriptCategoryEquivalent ~= true then
+                    toRemoveClothingPieces[thisScriptCategoryEquivalent] = true
+                end
             end
         end
     end
 
-    TriggerServerEvent('FRP:RequestStoreComponentsIntoClothingItem', clothingPieceShopitemsAsHex)
+    TriggerServerEvent('FRP:RequestStoreComponentsIntoClothingItem', slotId, clothingPieceShopitemsAsHex)
 
-    -- Close connection.
-    cb({ })
+    TriggerServerEvent('RemovePlayerClothingPieces', toRemoveClothingPieces, true)
 end)
 
 RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPieceShopitemsAsHex)

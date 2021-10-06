@@ -4,8 +4,13 @@ local gLastPosition
 local gStats
 
 function cAPI.setDataAppearence(pedModel, charAppearence)
-    gPedModel = pedModel
-    gCharAppearence = charAppearence
+    if pedModel then
+        gPedModel = pedModel
+    end
+
+    if charAppearence then
+        gCharAppearence = charAppearence
+    end
 end
 
 function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
@@ -92,7 +97,7 @@ function cAPI.setPlayerAppearence(playerId)
 
     cAPI.SetPedFaceFeature(playerId, gCharAppearence.faceFeatures)    
 
-    cAPI.SetPedScale(playerId, gCharAppearence.pedHeight) 
+    cAPI.SetPedScale(playerId, gCharAppearence.pedHeight)
     
     cAPI.SetPedOverlay(playerId, gCharAppearence.overlays)
     
@@ -100,9 +105,9 @@ function cAPI.setPlayerAppearence(playerId)
 
     cAPI.SetPedPortAndWeight(playerId, bodySize['porte'], gCharAppearence.pedWeight)
 
-    if gCharAppearence.clothes ~= nil then
-        cAPI.SetSkin(playerId, gCharAppearence.clothes)   
-    end
+    -- if gCharAppearence.clothes ~= nil then
+    --     cAPI.SetSkin(playerId, gCharAppearence.clothes)   
+    -- end
 end
 
 

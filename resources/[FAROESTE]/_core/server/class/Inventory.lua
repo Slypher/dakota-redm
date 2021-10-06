@@ -69,6 +69,10 @@ function API.Inventory(id, capacity, slots)
         return self.slots
     end
 
+    self.getSlotById = function(self, slotId)
+        return self.slots[slotId]
+    end
+
     self.getItemsAndAmount = function()
         local r = {}
 

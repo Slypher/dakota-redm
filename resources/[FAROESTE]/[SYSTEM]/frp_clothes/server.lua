@@ -23,7 +23,6 @@ AddEventHandler(
             appearence.enabledComponents = appearenceRow[1].enabledComponents
             appearence.faceFeatures = appearenceRow[1].faceFeatures
             appearence.overlays = appearenceRow[1].overlays
-            appearence.clothes = appearenceRow[1].clothes
             appearence.pedHeight = appearenceRow[1].pedHeight
             appearence.pedWeight = appearenceRow[1].pedWeight
 
@@ -39,21 +38,33 @@ AddEventHandler(
         Inventory:removeItem(-1, "money", price)
         User:notify("item", "money", -price)
         
-        SavePlayerClothing(_source, clothingData)
+        AddPlayerClothingPiecesToEnabledComponents(_source, clothingData)
     end
 )
 
-function SavePlayerClothing(playerId, dataClothes)
+function AddPlayerClothingPiecesToEnabledComponents(playerId, toAddClothingPieces)
     local User = API.getUserFromSource(playerId)
     local Character = User:getCharacter()
     if Character ~= nil then
-        for k, v in pairs(dataClothes) do 
-            if v ~= nil then
-                Character:setData(Character:getId(), 'clothes', k, v)
-            end
-        end     
+        for k, v in pairs(toAddClothingPieces) do
+            Character:remData(Character:getId(), 'enabledComponents', k)
+        end
     end
 end
+
+function RemovePlayerClothingPiecesFromEnabledComponents(playerId, toRemoveClothingPieces)
+    local User = API.getUserFromSource(playerId)
+    local Character = User:getCharacter()
+    if Character ~= nil then
+        for k, v in pairs(toRemoveClothingPieces) do
+            Character:remData(Character:getId(), 'enabledComponents', k)
+        end
+    end
+end
+
+RegisterNetEvent('RemovePlayerClothingPieces', function(toRemoveClothingPieces)
+    RemovePlayerClothingPiecesFromEnabledComponents(source, toRemoveClothingPieces)
+end)
 
 RegisterServerEvent("FRP:CLOTHES:fechar")
 AddEventHandler(
@@ -63,9 +74,17 @@ AddEventHandler(
         local User = API.getUserFromSource(_source)
         local Character = User:getCharacter()
         local model = Character:getModel()
-        local clothes = Character:getClothes()
-            TriggerClientEvent("FRP:ADMIN:Model", _source, clothes)
-            return
+
+        local appearenceRow = Character:getCharacterAppearence()
+        local appearence = {}
+        appearence.enabledComponents = appearenceRow[1].enabledComponents
+        appearence.faceFeatures = appearenceRow[1].faceFeatures
+        appearence.overlays = appearenceRow[1].overlays
+        appearence.pedHeight = appearenceRow[1].pedHeight
+        appearence.pedWeight = appearenceRow[1].pedWeight
+
+        TriggerClientEvent("FRP:ADMIN:Model", _source, nil, appearence)
+        return
     end
 )
 
@@ -106,7 +125,7 @@ RegisterNetEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled', functi
     for slotId, slot in pairs(inventory:getSlotsWithItemId(CLOTHING_STORAGE_ITEM)) do
         local metadata = slot:getItemMetaData()
 
-        local isMetadataEmpty = metadata == '[]'
+        local isMetadataEmpty = metadata == '[]' or json.encode(metadata) == '[]'
 
         if isMetadataEmpty then
             hasAnyEmptyMetadata = true
@@ -117,7 +136,7 @@ RegisterNetEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled', functi
     TriggerClientEvent('FRP:ResponseShouldStoreIntoClothingItemButtonBeEnabled', playerId, hasAnyEmptyMetadata)
 end)
 
-RegisterNetEvent('FRP:RequestStoreComponentsIntoClothingItem', function(clothingComponentsAsHex)
+RegisterNetEvent('FRP:RequestStoreComponentsIntoClothingItem', function(slotId, clothingComponentsAsHex)
     local playerId = source
 
     local user = API.getUserFromSource(playerId)
@@ -140,21 +159,23 @@ RegisterNetEvent('FRP:RequestStoreComponentsIntoClothingItem', function(clothing
         return
     end
 
-    for slotId, slot in pairs(inventory:getSlotsWithItemId(CLOTHING_STORAGE_ITEM)) do
-        local metadata = slot:getItemMetaData()
+    local slot = inventory:getSlotById(slotId)
 
-        local isMetadataEmpty = metadata == '[]'
+    if not slot then
+        return
+    end
 
-        if isMetadataEmpty then
-            -- Gambiarra, remover o item atual
-            -- só para reaplicar o metadata.
-            if inventory:removeItem(slotId, CLOTHING_STORAGE_ITEM, 1) then
-                if inventory:addItem(CLOTHING_STORAGE_ITEM, 1, clothingComponentsAsHex) then
-                    user:notify('success', 'Suas roupas atuais foram salvas em um item.')
-                    return
-                end
-            end
-        end
+    if slot:getItemId() ~= CLOTHING_STORAGE_ITEM then
+        return
+    end
+
+    local metadata = slot:getItemMetaData()
+
+    local isMetadataEmpty = metadata == '[]' or json.encode(metadata) == '[]'
+
+    if isMetadataEmpty and inventory:setSlot(slotId, CLOTHING_STORAGE_ITEM, 1, true, clothingComponentsAsHex) then
+        user:notify('success', 'Suas roupas atuais foram salvas em um item.')
+        return
     end
 
     user:notify('error', 'Você não tem nenhum item de roupa vazia.')

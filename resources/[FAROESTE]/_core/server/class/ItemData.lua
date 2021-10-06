@@ -613,8 +613,14 @@ end
     if itemId == 'roupas' then
         local metadata = Slot:getItemMetaData()
 
-        if metadata ~= '[]' then
-            TriggerClientEvent('FRP:SetPlayerClothingFromClothingItem', source, metadata)
+        local slotId = Slot:getId()
+
+        if metadata == '[]' or json.encode(metadata) == '[]' then
+            TriggerClientEvent('storeCurrentComponentsIntoClothingItem', source,slotId)
+        else
+            if User:getCharacter():getInventory():setSlot(slotId, 'roupas', 1, true, { }) then
+                TriggerClientEvent('FRP:SetPlayerClothingFromClothingItem', source, metadata)
+            end
         end
     end
 

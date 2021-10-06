@@ -13,9 +13,11 @@ AddEventHandler(
 			if pedModel then		
 				cAPI.SetPlayerPed(pedModel)
 			end
+			
 			if appearence then
 				cAPI.setDataAppearence(pedModel, appearence)
 			end
+
 			cAPI.setPlayerAppearence(PlayerPedId())
 		else
 			TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
