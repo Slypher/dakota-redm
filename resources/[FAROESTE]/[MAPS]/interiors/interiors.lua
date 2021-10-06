@@ -1341,7 +1341,7 @@ RequestImap(-1229109520) -- Green Plants
 ------------------------------------- #### END OF GREY ESTATES ####
 
 ------------------------------------- Blackwater Town Hall
-RemoveImap(-2082201137)  --Blackwater Ground Town Hall
+RemoveImap(-2082201137)  --Blackwater Ground Town Hall ----------------- CHÃO LISO
 RemoveImap(1343343014)  --Blackwater Town Hall Addons Construction
 --RequestImap(739412171)  -- Two Boards in front of city hall (Goes with Town Hall Construction)
 RemoveImap(-5339556)  --Bank Under Construction
@@ -1358,8 +1358,8 @@ RequestImap(-636161219)
 -- RequestImap(-2122914678) -- grave
 -- RequestImap(917434281) -- grave
 RequestImap(-518004776) -- grave
- RequestImap(1173561253) -- Tents Beside City Hall Near Trech
--- RequestImap(1470738186) -- Adds Pre-Construcion Ground (Ground does not mesh well with contrustion IPLs)
+RequestImap(1173561253) -- Tents Beside City Hall Near Trech
+RequestImap(1470738186) -- Adds Pre-Construcion Ground (Ground does not mesh well with contrustion IPLs)
 RequestImap(-1632348233) -- Adds Trees and Grass (DO NOT USE WITH CONSTRUCTION IPL, WILL MERGE VISUALS)
 RequestImap(-562289114) -- something in cemetary
 ------------------------------------- #### END OF BLACKWATER TOWN HALL ####
