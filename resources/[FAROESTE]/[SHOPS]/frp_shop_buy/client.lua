@@ -67,6 +67,9 @@ Citizen.CreateThread(
                 initPrompt()
             end
 
+            print('SHOP gSelectedShopId', gSelectedShopId)
+            print('SHOP gSelectedShopName', gSelectedShopName)
+
             -- local ped = PlayerPedId()
             -- local pCoords = GetEntityCoords(ped)
 
@@ -166,6 +169,8 @@ Citizen.CreateThread(
                                     })
                                 end
 
+                                print('SHOP send firstTimeData')
+
                                 SendNUIMessage(
                                     {
                                         display = true,
@@ -196,6 +201,8 @@ Citizen.CreateThread(
 )
 
 function initPrompt()
+    print('SHOP initPrompt')
+
     prompt = PromptRegisterBegin()
     prompt_group = GetRandomIntInRange(0, 0xffffff)
     PromptSetControlAction(prompt, 0xDFF812F9)
@@ -451,9 +458,11 @@ function DrawSelectedShopItemPromptsWhileSelected()
 end
 
 AddEventHandler('onResourceStop', function(resource)
-    if resource == GetCurrentResourceName() then
-        ReleaseShopItemPrompts(gShopItemPrompts)
+    if resource ~= GetCurrentResourceName() then
+        return
     end
+
+    ReleaseShopItemPrompts(gShopItemPrompts)
 
     SendNUIMessage(
         {
