@@ -837,6 +837,8 @@ CreateThread(
         API_Database.prepare("FCRP/DeleteCharacterAppearence", "DELETE FROM characters_appearence WHERE charid = @charid")
         API_Database.prepare("FCRP/DeleteHorseByChar", "DELETE FROM horses WHERE charid = @charid")
         API_Database.prepare("FCRP/DeleteInventoreByChar", "DELETE FROM inventories WHERE charid = @charid")
+        API_Database.prepare("FCRP/GetCharacterByUserId", "SELECT * from characters WHERE user_id = @userid")
+        API_Database.prepare("FCRP/GetInventoryByCharid", "SELECT * FROM inventories WHERE id = @charid")
     end
 )
 
@@ -886,6 +888,65 @@ RegisterCommand(
                 TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char: "..rows[1].characterName.." Foi deletado com sucesso.", 2000)
             else
                 TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char não encontrado", 2000)    
+            end
+        end
+    end
+)
+
+RegisterCommand(
+    "charmoney",
+    function(source, args, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+        if Character:hasGroupOrInheritance("admin") then            
+            local slots = {}
+            local inventoryMoney = 0
+
+            local characterFound = API_Database.query("FCRP/GetCharacter", {charid = args[1]})    
+
+            if #characterFound > 0 then
+
+                local inventory = API_Database.query("FCRP/GetInventoryByCharid", {charid = 'char:'..args[1]})
+                if #inventory > 0 then
+                    slots, _ = json.decode(inventory[1].inv_slots)
+                    for k, v in pairs(slots) do
+                        local slot = json.decode(v)
+                        if slot.name == "money" then 
+                            for i, dol in pairs(slot.amount) do
+                                inventoryMoney = inventoryMoney + dol
+                            end
+                        end
+                    end
+                end                
+
+                
+                local bankMoney = json.decode(characterFound[1].metaData).banco/100
+                inventoryMoney = inventoryMoney/100
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), characterFound[1].characterName, 5000)
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "No Bolso -> "..inventoryMoney, 5000)
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "No Banco -> "..bankMoney, 5000)
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Total    -> "..bankMoney+inventoryMoney, 5000)
+
+            else
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Não encontramos esse personagem", 2000)
+            end
+        end
+    end
+)
+
+RegisterCommand(
+    "charusuario",
+    function(source, args, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+        if Character:hasGroupOrInheritance("admin") then
+            local chars = API_Database.query("FCRP/GetCharacterByUserId", {userid = args[1]})
+            if #chars > 0 then
+                for i, char  in pairs(chars) do                    
+                    TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "CharId -> [ "..char.charid.." ] Nome -> "..char.characterName, 5000)
+                end
+            else
+                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Não encontramos personagens para esse usuário", 2000)
             end
         end
     end
