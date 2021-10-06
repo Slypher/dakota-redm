@@ -280,6 +280,9 @@ function applyComponentOfCategoryFromCache(ped, categoryHash)
         -- ApplyShopItemToPed
         Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, shopItemHash, true, true, true)
 
+        -- UpdatePedVariation
+        Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, 0, 1, 1, 1, 0)
+
         -- Remover do cache :)
         gHiddenClothingComponentsCache[categoryHash] = nil
 
