@@ -58,7 +58,7 @@ local gActiveShopPos
 
 CreateThread(function()
     while true do
-        Wait(0)
+        Wait(500)
 
         gPlayerPed = PlayerPedId()
         local playerPos = GetEntityCoords(gPlayerPed)
