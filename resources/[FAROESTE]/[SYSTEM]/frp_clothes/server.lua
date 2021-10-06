@@ -47,7 +47,7 @@ function AddPlayerClothingPiecesToEnabledComponents(playerId, toAddClothingPiece
     local Character = User:getCharacter()
     if Character ~= nil then
         for k, v in pairs(toAddClothingPieces) do
-            Character:remData(Character:getId(), 'enabledComponents', k)
+            Character:setData(Character:getId(), 'enabledComponents', k, v)
         end
     end
 end
