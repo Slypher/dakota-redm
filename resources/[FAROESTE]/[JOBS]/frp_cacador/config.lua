@@ -3,7 +3,8 @@ Config = { }
 Config.Language = {
     ["NotHoldingAnimal"] = "Você precisa estar carregando o animal",
     ["NotInTheButcher"] = "Eu não vou comprar este animal",
-    ["AnimalSold"] = "Muito Obrigado!"
+    ["AnimalSold"] = "Muito Obrigado!",
+    ["AnimalBodyToFar"] = "Você deixou o animal longe demais!",
 }
 
 Config.ItemQuantity = {

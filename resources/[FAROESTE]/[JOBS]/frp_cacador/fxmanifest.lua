@@ -12,3 +12,5 @@ server_script {
     'config.lua',
     'server/main.lua'    
 }
+
+lua54 'yes'

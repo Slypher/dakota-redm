@@ -14,7 +14,7 @@ AddEventHandler('vorp_hunting:giveReward', function(givenItem, money)
     -- VorpInv.addItem(_source, givenItem, rnd)
 
     -- #WARNING: Anti-injection meio merda.
-    if money and money <= 100 then
+    if money and money <= 200 then
         inventory:addItem('money', money)
     end
 end)
