@@ -1341,11 +1341,11 @@ RequestImap(-1229109520) -- Green Plants
 ------------------------------------- #### END OF GREY ESTATES ####
 
 ------------------------------------- Blackwater Town Hall
-RequestImap(-2082201137)  --Blackwater Ground Town Hall
---RequestImap(1343343014)  --Blackwater Town Hall Addons Construction
+RemoveImap(-2082201137)  --Blackwater Ground Town Hall
+RemoveImap(1343343014)  --Blackwater Town Hall Addons Construction
 --RequestImap(739412171)  -- Two Boards in front of city hall (Goes with Town Hall Construction)
---RequestImap(-5339556)  --Bank Under Construction
-RequestImap(1641449717)
+RemoveImap(-5339556)  --Bank Under Construction
+RemoveImap(1641449717)
 --RequestImap(1258244391) -- se deixar isso sem as instruituras fica bugado
 RequestImap(-501793326) -- construction
 RequestImap(1490756544) -- crates on main st
@@ -1360,7 +1360,7 @@ RequestImap(-636161219)
 RequestImap(-518004776) -- grave
  RequestImap(1173561253) -- Tents Beside City Hall Near Trech
 -- RequestImap(1470738186) -- Adds Pre-Construcion Ground (Ground does not mesh well with contrustion IPLs)
--- RequestImap(-1632348233) -- Adds Trees and Grass (DO NOT USE WITH CONSTRUCTION IPL, WILL MERGE VISUALS)
+RequestImap(-1632348233) -- Adds Trees and Grass (DO NOT USE WITH CONSTRUCTION IPL, WILL MERGE VISUALS)
 RequestImap(-562289114) -- something in cemetary
 ------------------------------------- #### END OF BLACKWATER TOWN HALL ####
 
@@ -1594,10 +1594,10 @@ RequestImap(-284612948) -- beechers field tilled field
 RemoveImap(-1765152778) -- beechers field logs laying in 
 RemoveImap(-2072231077) -- beechers field plants over area
 RemoveImap(-1253110600) -- beechers field hole in ground fix
-RequestImap(1965249616)
+RemoveImap(1965249616)
 RemoveImap(276582710)
 RemoveImap(1977031606)
-RequestImap(-2021605623)
+RemoveImap(-2021605623)
 RemoveImap(1191890045)
 RequestImap(19217583)
 ------------------------------------- #### END OF BEECHERS FIELD ####
@@ -2644,7 +2644,7 @@ RequestImap(-242247633)
 RequestImap(-1439987356)
 RequestImap(-1126224181)
 RequestImap(-890895654)
-RequestImap(-372970556)
+RemoveImap(-372970556)
 RequestImap(271879652)
 RequestImap(-1393565861)
 RequestImap(-586415580)
@@ -2874,53 +2874,57 @@ RequestImap(2038589758) -- Strawberry / Pronghorn Sign -2646.41, 205.36, 153.42
 --RequestImap(77337110) -- burning cabin -2371.56, -1594.17, 153.93
 RequestImap(2029194243) -- taxidermy cabin -1680.5, -337.43, 174.0
 RequestImap(-1125782227)  -- taxidermy cabin -1680.5, -337.43, 174.0
-RequestImap(1749008611) -- cabin -1398.47, -215.33, 102.33
-RequestImap(898257133) -- cabin curtains
---RequestImap(1943484686) -- trashed cabin interior
---RequestImap(2056603274) -- trashed cabin interior
---RequestImap(758066107) -- something inside cabin above
-RequestImap(-1560816708)-- something inside cabin above
-RequestImap(1202346365)-- something inside cabin above
-RequestImap(-1995054197) -- lighting inside cabin above
-RequestImap(-1623126047) -- lighting inside cabin above
-RequestImap(2111695903) -- something near cabin above
-RequestImap(-1947695052) -- something near cabin above
-RequestImap(-1321905459) -- something near cabin above
-RequestImap(-826466486) -- something near cabin above
-RequestImap(-593183975) -- something near cabin above
+
+----------------- TESTE
+RemoveImap(1749008611) -- cabin -1398.47, -215.33, 102.33
+RemoveImap(898257133) -- cabin curtains
+RemoveImap(1943484686) -- trashed cabin interior 
+RemoveImap(2056603274) -- trashed cabin interior
+RemoveImap(758066107) -- something inside cabin above
+RemoveImap(-1560816708)-- something inside cabin above
+RemoveImap(1202346365)-- something inside cabin above
+RemoveImap(-1995054197) -- lighting inside cabin above
+RemoveImap(-1623126047) -- lighting inside cabin above
+----------------- TESTE
+
+RemoveImap(2111695903) -- something near cabin above
+RemoveImap(-1947695052) -- something near cabin above
+RemoveImap(-1321905459) -- something near cabin above
+RemoveImap(-826466486) -- something near cabin above
+RemoveImap(-593183975) -- something near cabin above
 RequestImap(1433203214) -- something near cabin above
 --RequestImap(-362883443) -- something near cabin above
-RequestImap(-1559513478) -- lighting near cabin above
-RequestImap(823583740) -- crates near cabin above 
-RequestImap(-630275010) -- campfire near cabin above 
-RequestImap(-164693058) -- campfire near cabin above 
-RequestImap(118201723) -- campfire near cabin above 
-RequestImap(458453080) -- campfire near cabin above 
-RequestImap(-1385360243) -- campfire near cabin above
-RequestImap(-1288790000) -- campfire near cabin above
---RequestImap(-380287375) -- logging camp -1358.32, -198.43, 101.79
-RequestImap(281153830) -- logging camp -1358.32, -198.43, 101.79
-RequestImap(1739101350) -- logging camp -1358.32, -198.43, 101.79
-RequestImap(-1047158045) -- logging camp -1358.32, -198.43, 101.79
---RequestImap(42081460) -- logging camp -1358.32, -198.43, 101.79
---RequestImap(-125588314) -- uncut trees
---RequestImap(-1340001373) -- uncut trees
---RequestImap(-2116397290) -- uncut trees
---RequestImap(-922917541) -- uncut trees
---RequestImap(1524580507) -- uncut trees
---RequestImap(204481342) -- uncut trees
-RequestImap(870580095) -- logging camp -1358.32, -198.43, 101.79
-RequestImap(767505137) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(-1559513478) -- lighting near cabin above
+RemoveImap(823583740) -- crates near cabin above 
+RemoveImap(-630275010) -- campfire near cabin above 
+RemoveImap(-164693058) -- campfire near cabin above 
+RemoveImap(118201723) -- campfire near cabin above 
+RemoveImap(458453080) -- campfire near cabin above 
+RemoveImap(-1385360243) -- campfire near cabin above
+RemoveImap(-1288790000) -- campfire near cabin above
+RemoveImap(-380287375) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(281153830) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(1739101350) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(-1047158045) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(42081460) -- logging camp -1358.32, -198.43, 101.79
+RequestImap(-125588314) -- uncut trees
+RequestImap(-1340001373) -- uncut trees
+RequestImap(-2116397290) -- uncut trees
+RequestImap(-922917541) -- uncut trees
+RequestImap(1524580507) -- uncut trees
+RequestImap(204481342) -- uncut trees
+RemoveImap(870580095) -- logging camp -1358.32, -198.43, 101.79
+RemoveImap(767505137) -- logging camp -1358.32, -198.43, 101.79
 RequestImap(1815262278)
-RequestImap(588062093)
+RemoveImap(588062093)
 RequestImap(471934509)
-RequestImap(995675696)
+RemoveImap(995675696)
 RequestImap(706423733)
 --RequestImap(82084523)
---RequestImap(-1466172032) -- grass at logging camp
---RequestImap(-981873755) -- grass at logging camp
---RequestImap(2013143748) -- grass at logging camp
---RequestImap(-2139410267)  -- grass at logging camp
+RequestImap(-1466172032) -- grass at logging camp
+RequestImap(-981873755) -- grass at logging camp
+RequestImap(2013143748) -- grass at logging camp
+RemoveImap(-2139410267)  -- grass at logging camp
 --RequestImap(1289178060) -- shrubs at logging camp
 --RequestImap(138913863)
 --RequestImap(-90108678)
