@@ -281,7 +281,7 @@ function CreateShopItemPromptGroup(shopItemInfo)
         },
     }
 
-    if shopItemInfo.transactionPriceBuyDollar and shopItemInfo.transactionPriceBuyDollar > 0 then
+    if shopItemInfo.transactionPriceBuyDollar then
         table.insert(promptsInfo,
         {
             name = 'BUY_DOLLAR',
@@ -290,7 +290,7 @@ function CreateShopItemPromptGroup(shopItemInfo)
         })
     end
 
-    if shopItemInfo.transactionPriceBuyGold and shopItemInfo.transactionPriceBuyGold > 0 then
+    if shopItemInfo.transactionPriceBuyGold then
         table.insert(promptsInfo,
         {
             name = 'BUY_GOLD',
@@ -303,7 +303,7 @@ function CreateShopItemPromptGroup(shopItemInfo)
     -- tá injetando valores nos indices 5, 6, 7
     -- então isso quebra toda a tabela de config...
     -- que deveria ficar inalterada né, na que é a porra de uma config.
-    if shopItemInfo.transactionPriceSellDollar and shopItemInfo.transactionPriceSellDollar > 0 then
+    if shopItemInfo.transactionPriceSellDollar then
         table.insert(promptsInfo,
         {
             name = 'SELL_DOLLAR',
