@@ -6,7 +6,7 @@
   "IngameChannelId": 5,
   "IngameChannelPassword": "dakota159753",
   "SwissChannelIds": [ 61, 62 ],
-  "VoiceRanges": [ 3.5, 8, 15, 32 ],
+  "VoiceRanges": [ 2, 6, 16, 32 ],
   "EnableVoiceRangeNotification": true,
   "VoiceRangeNotification": "New voice range is {voicerange} metres.",
   "RadioType": 4,
