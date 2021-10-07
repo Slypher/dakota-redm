@@ -50,6 +50,10 @@ AddEventHandler(
         if Character ~= nil then
             Character:setDeath(tonumber(bool))
         end
+
+        local isAlive = bool == 0 and true or false
+
+        exports.saltychat:SetPlayerAlive(_source, isAlive)
     end
 )
 
