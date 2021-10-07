@@ -226,7 +226,7 @@ API_Database.prepare("FCRP/Inventory", "CALL procInventory(@id, @charid, @capaci
 API_Database.prepare("UPDATE:inv_update_slot", "CALL inv_update_slot(@inv_id, @slot_id, @slot_value)")
 API_Database.prepare("UPDATE:inv_remove_slot", "CALL inv_remove_slot(@inv_id, @slot_id);")
 API_Database.prepare("SELECT:inv_select_slots_and_capacity", "SELECT inv_slots, inv_capacity FROM inventories WHERE id = @inv_id")
-API_Database.prepare("UPDATE:inv_clear", "UPDATE inventories SET inv_slot = `{}` WHERE inv_id = @inv_id")
+API_Database.prepare("UPDATE:inv_clear", "UPDATE `inventories` SET `inv_slots` = '{}' WHERE id = @id")
 
 ---------- HORSE QUERIES -------------
 API_Database.prepare("FCRP/CreateHorse", "INSERT INTO horses(charid, model, name) VALUES (@charid, @model, @name); SELECT LAST_INSERT_ID() AS id")

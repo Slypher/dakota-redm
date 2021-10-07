@@ -620,7 +620,7 @@ function API.Inventory(id, capacity, slots)
         for slotId, Slot in pairs(self.slots) do
             _slots[slotId] = Slot:getSyncData()
         end
-       
+
         TriggerClientEvent("FRP:INVENTORY:openAsPrimary", viewerSource, _slots, self:getWeight(), self:getCapacity())
     end
 
@@ -658,9 +658,9 @@ function API.Inventory(id, capacity, slots)
         end
     end
 
-    self.clear = function(self)
+    self.clear = function(this)
         API_Database.execute("UPDATE:inv_clear", {id = self:getId()})
-        self.slots = {}
+        self.slots = { }
     end
 
     return self
