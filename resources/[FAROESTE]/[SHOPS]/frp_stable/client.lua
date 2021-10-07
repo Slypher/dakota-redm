@@ -104,8 +104,9 @@ function OpenStable()
     else
         createCamera(PlayerPedId())
     end
+    
     --  SetEntityVisible(PlayerPedId(), false)
-    if not alreadySentShopData then
+    -- if not alreadySentShopData then
         SendNUIMessage(
             {
                 action = "show",
@@ -113,14 +114,14 @@ function OpenStable()
             }
         )
 
-        alreadySentShopData = true
-    else
-        SendNUIMessage(
-            {
-                action = "show"
-            }
-        )
-    end
+    --     alreadySentShopData = true
+    -- else
+    --     SendNUIMessage(
+    --         {
+    --             action = "show"
+    --         }
+    --     )
+    -- end
     TriggerServerEvent("FRP:STABLE:AskForMyHorses")
 end
 

@@ -35,7 +35,7 @@ AddEventHandler(
 
         local horses = Character:getHorses() or {}
 
-        if horses >= 1 then
+        if #horses >= 1 then
             local Horse = Character:getHorse()
             local selectedHorseId
             if Horse ~= nil then
