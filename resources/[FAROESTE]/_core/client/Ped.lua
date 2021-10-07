@@ -14,7 +14,11 @@ function cAPI.SetPlayerPed(model)
 
     SetPlayerModel(PlayerId(), modelHash, true)
 
-    NativeSetRandomOutfitVariation(PlayerPedId())
+    while not Citizen.InvokeNative(0xA0BC8FAED8CFEB3C, PlayerPedId()) do
+        Wait(0)
+    end
+
+    -- NativeSetRandomOutfitVariation(PlayerPedId())
 
     SetEntityHealth(PlayerPedId(), oldHealth)
 
@@ -100,9 +104,9 @@ function cAPI.SetPedBodyType(ped, bodyTypeHash)
     -- if IsPedMale(ped) then
     Citizen.InvokeNative(0xA5BAE410B03E7371, ped, bodyTypeHash, true, true, true)
 
-    while not NativeHasPedComponentLoaded(ped) do
-        Wait(10)
-    end
+    -- while not NativeHasPedComponentLoaded(ped) do
+    --     Wait(10)
+    -- end
     -- else
     --     Citizen.InvokeNative(0xA5BAE410B03E7371, ped, bodyTypeHash, true, true, true)
     -- end
