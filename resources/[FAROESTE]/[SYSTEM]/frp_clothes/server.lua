@@ -47,6 +47,7 @@ function AddPlayerClothingPiecesToEnabledComponents(playerId, toAddClothingPiece
     local Character = User:getCharacter()
     if Character ~= nil then
         for k, v in pairs(toAddClothingPieces) do
+            print( 'toAddClothingPieces', k, v)
             Character:setData(Character:getId(), 'enabledComponents', k, v)
         end
     end
@@ -57,6 +58,7 @@ function RemovePlayerClothingPiecesFromEnabledComponents(playerId, toRemoveCloth
     local Character = User:getCharacter()
     if Character ~= nil then
         for k, v in pairs(toRemoveClothingPieces) do
+            print( ('toRemoveClothingPieces :%s:'):format(k), v)
             Character:remData(Character:getId(), 'enabledComponents', k)
         end
     end
@@ -64,6 +66,10 @@ end
 
 RegisterNetEvent('RemovePlayerClothingPieces', function(toRemoveClothingPieces)
     RemovePlayerClothingPiecesFromEnabledComponents(source, toRemoveClothingPieces)
+end)
+
+RegisterNetEvent('AddPlayerClothingPieces', function(toAddClothingPieces)
+    AddPlayerClothingPiecesToEnabledComponents(source, toAddClothingPieces)
 end)
 
 RegisterServerEvent("FRP:CLOTHES:fechar")
@@ -84,7 +90,6 @@ AddEventHandler(
         appearence.pedWeight = appearenceRow[1].pedWeight
 
         TriggerClientEvent("FRP:ADMIN:Model", _source, nil, appearence)
-        return
     end
 )
 

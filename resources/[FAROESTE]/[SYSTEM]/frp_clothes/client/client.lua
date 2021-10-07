@@ -1193,7 +1193,7 @@ RegisterNUICallback(
     "Confirm",
     function()
         local dados = {
-            ["hat"] = HatUsing,
+            ["hats"] = HatUsing,
             ["shirts"] = ShirtsUsing,
             ["vests"] = VestsUsing,
             ["pants"] = PantsUsing,
@@ -1209,18 +1209,17 @@ RegisterNUICallback(
             ["chaps"] = chapsUsing,
             ["spats"] = spatsUsing,
             ["eyewear"] = eyewearUsing,
-            ["access"] = accessUsing,
+            ["accessories"] = accessUsing,
             ["neckties"] = necktiesUsing,
-            ["bracelets"] = braceletsUsing,
+            ["jewelry_bracelets"] = braceletsUsing,
             ["suspenders"] = suspendersUsing,
             ["gauntlets"] = gauntletsUsing,
             ["belts"] = beltsUsing,
             ["ponchos"] = ponchosUsing,
             ["offhand"] = offhandUsing,
-            ["beltbuckle"] = beltbuckleUsing,
+            ["belt_buckles"] = beltbuckleUsing,
             ["cloaks"] = cloaksUsing,
-            ["coats2"] = coats2Using,
-            ["beltbuckle"] = beltbuckleUsing,
+            ["coats_closed"] = coats2Using,
             ["Outfit"] = OutfitUsing
         }
 
@@ -1434,6 +1433,7 @@ local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`HATS`] = 'hats',
     [`VESTS`] = 'vests',
     [`CHAPS`] = 'chaps',
+    [`SHIRTS`] = 'shirts',
     [`SHIRTS_FULL`] = 'shirts_full',
     [`BADGES`] = 'badges',
     [`MASKS`] = 'masks',
@@ -1528,39 +1528,30 @@ RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPiece
         NativeUpdatePedVariation(playerPed)
     end 
 
-    -- Aplicar os componentes do item.
-    for _, clothingShopitemAsHex in ipairs(clothingPieceShopitemsAsHex) do
-        local clothingShopitemHash = tonumber(clothingShopitemAsHex)
-
-        NativeSetPedComponentEnabled(playerPed, clothingShopitemHash, false, true, true)
-        NativeUpdatePedVariation(playerPed)
-    end
-
-    local toStoreClothingData = { }
+    local toAddClothingPieces = { }
 
     -- GetMetaPedType
     local metapedType = N_0xec9a1261bf0ce510(playerPed)
 
-    -- GetNumComponentsInPed
-    for i = 1, N_0x90403e8107b60e81(playerPed) do
+    -- Aplicar os componentes do item.
+    for _, clothingShopitemAsHex in ipairs(clothingPieceShopitemsAsHex) do
+        local shopitemHash = tonumber(clothingShopitemAsHex)
 
-        local shopitemHash = exports[GetCurrentResourceName()]:GetPedComponentAtIndex(playerPed, i - 1);
+        NativeSetPedComponentEnabled(playerPed, shopitemHash, false, true, true)
+        NativeUpdatePedVariation(playerPed)
 
-        if shopitemHash ~= 0 then
-            -- GetPedComponentCategory
-            local shopitemCategoryHash = N_0x5ff9a878c3d115b8(shopitemHash, metapedType, true)
+        local shopitemCategoryHash = N_0x5ff9a878c3d115b8(shopitemHash, metapedType, true)
 
-            if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
-                local thisScriptCategoryEquivalent = ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash]
-    
-                if thisScriptCategoryEquivalent and thisScriptCategoryEquivalent ~= true then
-                    toStoreClothingData[thisScriptCategoryEquivalent] = ('0x%x'):format(shopitemHash & 0xFFFFFFFF)
-                end
+        if ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash] then
+            local thisScriptCategoryEquivalent = ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES[shopitemCategoryHash]
+
+            if thisScriptCategoryEquivalent and thisScriptCategoryEquivalent ~= true then
+                toAddClothingPieces[thisScriptCategoryEquivalent] = ('0x%x'):format(shopitemHash & 0xFFFFFFFF)
             end
         end
     end
 
-    TriggerServerEvent('FRP:CLOTHES:SavePlayerClothing', toStoreClothingData, true)
+    TriggerServerEvent('AddPlayerClothingPieces', toAddClothingPieces)
 end)
 
 function createZoomInterpCamera()
