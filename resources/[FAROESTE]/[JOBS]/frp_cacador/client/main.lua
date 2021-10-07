@@ -204,7 +204,7 @@ function RunButcherShopBrainThread()
 
                     TriggerServerEvent('vorp_hunting:giveReward', nil, toAddMoneyQnt * (toAddMoneyQntMultiplier or 1))
 
-                    DisplayCommonNotification(Config.Language.AnimalSold)
+                    -- DisplayCommonNotification(Config.Language.AnimalSold)
                 end)
             end
 
