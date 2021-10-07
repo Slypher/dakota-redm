@@ -1470,6 +1470,7 @@ local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`APRONS`] = 'aprons',
     [`SKIRTS`] = 'skirts',
     [`MASKS_LARGE`] = 'MASKS_LARGE',
+    [`EYEWEAR`] = 'eyewear',
 }
 
 RegisterNetEvent('storeCurrentComponentsIntoClothingItem', function(slotId)
