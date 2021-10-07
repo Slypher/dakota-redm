@@ -4,6 +4,14 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local HOTBARSLOT_FROM_CONTROLHASH = {
+    [`INPUT_SELECT_QUICKSELECT_SIDEARMS_LEFT`] = 1,
+    [`INPUT_SELECT_QUICKSELECT_DUALWIELD`] = 2,
+    [`INPUT_SELECT_QUICKSELECT_SIDEARMS_RIGHT`] = 3,
+    [`INPUT_SELECT_QUICKSELECT_UNARMED`] = 4,
+    [`INPUT_SELECT_QUICKSELECT_MELEE_NO_UNARMED`] = 5,
+}
+
 Citizen.CreateThread(
     function()
         while true do
@@ -23,16 +31,18 @@ Citizen.CreateThread(
                 Wait(500)
             end
 
-            --[[
-            if IsControlJustPressed(0, 0x3076E97C) then -- NUMPAD 6
-                SendNUIMessage(
-                    {
-                        type = "nextHotbarSlot"
-                    }
-                )
-                Wait(500)
-            end 
-            --]]
+            for controlHash, hotbarSlot in pairs(HOTBARSLOT_FROM_CONTROLHASH) do
+                DisableControlAction(controlHash, true)
+
+                if IsDisabledControlJustPressed(0, controlHash) then
+                    SendNUIMessage(
+                        {
+                            type = 'setActiveHotbarSlot',
+                            data = hotbarSlot,
+                        }
+                    )
+                end
+            end
         end
     end
 )
@@ -315,22 +325,21 @@ RegisterNUICallback(
     end
 )
 
--- RegisterNUICallback(
---     "interactWithHotbarSlot",
---     function(cb)
---         local itemId = cb.itemId or "unarmed"
---         local weaponId = "weapon_" .. itemId
---         local weaponHash = GetHashKey(weaponId)
+RegisterNUICallback(
+    "interactWithHotbarSlot",
+    function(cb)
+        local itemId = cb.itemId or "unarmed"
+        local weaponId = "weapon_" .. itemId
+        local weaponHash = GetHashKey(weaponId)
 
---         local ped = PlayerPedId()
+        local ped = PlayerPedId()
 
---         local _, currentWeapon = GetCurrentPedWeapon(ped, true, 0, true)
---         if currentWeapon ~= weaponHash then
---             Citizen.InvokeNative(0x5E3BDDBCB83F3D84, ped, weaponHash, 0, true, true)
---             TaskReloadWeapon(ped, 0)
---         end
---     end
--- )
+        local _, currentWeapon = GetCurrentPedWeapon(ped, true, 0, true)
+        if currentWeapon ~= weaponHash then
+            SetCurrentPedWeapon(ped, weaponHash, true, 0, false, false)
+        end
+    end
+)
 
 RegisterNUICallback(
     "NUIFocusOff",

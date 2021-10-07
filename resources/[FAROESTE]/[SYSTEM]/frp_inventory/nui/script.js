@@ -47,6 +47,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 
+function setActiveHotbarSlot(activeSlotIndex)
+{
+    $('.hotbar').fadeIn(500).delay(5000).fadeOut(500);
+
+    $('.hotbar-slot-selected').removeClass("hotbar-slot-selected");
+
+    let element = $(`.hotbar .slot:nth-child(${hotbarSlotSelected}`);
+    element.addClass("hotbar-slot-selected");
+
+    let itemId = $(element).attr('itemId');
+
+    $.post('http://frp_inventory/interactWithHotbarSlot', JSON.stringify({
+        itemId: itemId,
+    }));
+}
 
 window.addEventListener("message", function(event) {
     if (event.data.action == 'hide') {
@@ -82,18 +97,14 @@ window.addEventListener("message", function(event) {
                 hotbarSlotSelected = 1;
             }
 
-            $('.hotbar').fadeIn(500).delay(5000).fadeOut(500);
+            setActiveHotbarSlot(hotbarSlotSelected);
+        }
 
-            $('.hotbar-slot-selected').removeClass("hotbar-slot-selected");
+        if (event.data.type === 'setActiveHotbarSlot')
+        {
+            hotbarSlotSelected = event.data.data;
 
-            let element = $(`.hotbar .slot:nth-child(${hotbarSlotSelected}`);
-            element.addClass("hotbar-slot-selected");
-
-            let itemId = $(element).attr('itemId');
-
-            $.post('http://frp_inventory/interactWithHotbarSlot', JSON.stringify({
-                itemId: itemId,
-            }));
+            setActiveHotbarSlot(hotbarSlotSelected);
         }
 
         if (event.data.primarySlots) {
