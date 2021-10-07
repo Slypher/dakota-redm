@@ -82,14 +82,16 @@ Citizen.CreateThread(
         while true do
             Citizen.Wait(0)
             if not IsPedOnMount(PlayerPedId()) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
-                DisplayRadar(false)
+                SetMinimapType(0)
+
                 SendNUIMessage(
                     {
                         action = "isMounted"
                     }
                 )
             else
-                DisplayRadar(false)
+                SetMinimapType(0)
+
                 SendNUIMessage(
                     {
                         action = "isMounted"
