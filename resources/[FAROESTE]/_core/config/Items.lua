@@ -642,6 +642,22 @@ ItemList = {
         description = "Uma lata cheia de Milhos, da pra matar um pouquinho a fome...",
         stackSize = 5
     },
+    ["milhoassado"] = {
+        type = "edible",
+        name = "Milho Assado",
+        weight = 0.09,
+        varOnUse = 0.4,
+        description = "Quase virou pipoca.",
+        stackSize = 5
+    },
+    ["batataassada"] = {
+        type = "edible",
+        name = "Batata Assada",
+        weight = 0.09,
+        varOnUse = 0.4,
+        description = "Pega que ta quente.",
+        stackSize = 5
+    },
     ["bolacha"] = {
         type = "edible",
         name = "Bolacha",
@@ -1345,6 +1361,14 @@ ItemList = {
         description = "Boa para fazer pure.",
         stackSize = 30
     },
+    ["puredebatata"] = {
+        type = "edible",
+        type = "generic",
+        name = "Batata",
+        weight = 2.5,
+        description = "Algumas batatas amassadas.",
+        stackSize = 30
+    },
     ["algodao"] = {
         type = "generic",
         name = "Algodão",
@@ -1756,41 +1780,41 @@ ItemList = {
         description = "Munição produzida especialmente para arcos.",
         stackSize = 25
     },
-    -- ['ammo_arrow_dynamite'] = {
-    --     type = 'ammo',
-    --     name = 'Flecha Explosiva',
-    --     weight = 0.2,
-    --     description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
-    --     stackSize = 25,
-    -- },
-    -- ['ammo_arrow_fire'] = {
-    --     type = 'ammo',
-    --     name = 'Flecha Explosiva',
-    --     weight = 0.2,
-    --     description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
-    --     stackSize = 10,
-    -- },
-    -- ['ammo_arrow_improved'] = {
-    --     type = 'ammo',
-    --     name = 'Flecha Aprimorada',
-    --     weight = 0.3,
-    --     description = 'Flecha encoberta por uma linha de metal extremamente letal.',
-    --     stackSize = 25,
-    -- },
-    -- ['ammo_arrow_poison'] = {
-    --     type = 'ammo',
-    --     name = 'Flecha',
-    --     weight = 0.2,
-    --     description = 'Uma flecha venenosa.',
-    --     stackSize = 25,
-    -- },
-    -- ['ammo_arrow_small_game'] = {
-    --     type = 'ammo',
-    --     name = 'Flecha',
-    --     weight = 0.2,
-    --     description = 'Munição produzida especialmente para arcos.',
-    --     stackSize = 25,
-    -- },
+    ['ammo_arrow_dynamite'] = {
+        type = 'ammo',
+        name = 'Flecha Explosiva',
+        weight = 0.2,
+        description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
+        stackSize = 25,
+    },
+    ['ammo_arrow_fire'] = {
+        type = 'ammo',
+        name = 'Flecha Explosiva',
+        weight = 0.2,
+        description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
+        stackSize = 10,
+    },
+    ['ammo_arrow_improved'] = {
+        type = 'ammo',
+        name = 'Flecha Aprimorada',
+        weight = 0.3,
+        description = 'Flecha encoberta por uma linha de metal extremamente letal.',
+        stackSize = 25,
+    },
+    ['ammo_arrow_poison'] = {
+        type = 'ammo',
+        name = 'Flecha',
+        weight = 0.2,
+        description = 'Uma flecha venenosa.',
+        stackSize = 25,
+    },
+    ['ammo_arrow_small_game'] = {
+        type = 'ammo',
+        name = 'Flecha',
+        weight = 0.2,
+        description = 'Munição produzida especialmente para arcos.',
+        stackSize = 25,
+    },
     ["ammo_pistol"] = {
         type = "ammo",
         name = "Munição de Pistola",
