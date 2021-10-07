@@ -151,9 +151,9 @@ function RunButcherShopBrainThread()
 
             local animalSellInfo = Config.Animals[animalModel]
 
-            if animalSellInfo then
-                DrawCommonText('~e~Solte o animal próximo da açougueiro para vender.')
-            end
+            -- if animalSellInfo then
+                -- DrawCommonText('~e~Solte o animal próximo da açougueiro para vender.')
+            -- end
 
             -- CARRIABLE_STATE_BEING_PLACED_ON_GROUND
             if carriableState == 6 and not gTrackedCarriableEntities[carryingEntity] then
@@ -191,7 +191,7 @@ function RunButcherShopBrainThread()
 
                     -- local toAddItem = animalSellInfo.givenItem
                     local toAddMoneyQnt = animalSellInfo.money
-                    local toAddMoneyQntMultiplier = animalSellInfo.poorQualityMultiplier
+                    local toAddMoneyQntMultiplier -- = animalSellInfo.poorQualityMultiplier
 
                     -- GetPedQuality
                     local animalQuality = Citizen.InvokeNative(0x7BCC6087D130312A, carryingEntity)
@@ -202,7 +202,7 @@ function RunButcherShopBrainThread()
                         toAddMoneyQntMultiplier = animalSellInfo.goodQualityMultiplier
                     end
 
-                    TriggerServerEvent('vorp_hunting:giveReward', nil, toAddMoneyQnt * toAddMoneyQntMultiplier)
+                    TriggerServerEvent('vorp_hunting:giveReward', nil, toAddMoneyQnt * (toAddMoneyQntMultiplier or 1))
 
                     DisplayCommonNotification(Config.Language.AnimalSold)
                 end)
