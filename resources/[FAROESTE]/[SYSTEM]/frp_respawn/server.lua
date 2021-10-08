@@ -89,6 +89,8 @@ AddEventHandler(
 
             local Inventory = Character:getInventory()
             Inventory:clear()
+
+            exports.saltychat:SetPlayerAlive(_source, true)
         end
     end
 )
