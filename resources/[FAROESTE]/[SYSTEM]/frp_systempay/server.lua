@@ -5,9 +5,9 @@ API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
 local r = {
-	["trooper"] = {payment = 3000},
-	["sheriff"] = {payment = 4500},
-	["medic"] = {payment = 2500, xp = 0.0}
+	["trooper"] = {payment = 300},
+	["sheriff"] = {payment = 450},
+	["medic"] = {payment = 250, xp = 0.0}
 	-- ["vip1"] = {payment = 0, xp = 1.10},
 	-- ["vip2"] = {payment = 0, xp = 1.20},
 	-- ["vip3"] = {payment = 0, xp = 1.30},
