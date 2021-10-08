@@ -9,14 +9,14 @@ local verificationData = {
     ["Arsenal"] = {
         group = "trooper",
         -- Level, Price, Amount(optional)
-        ["revolver_doubleaction"] = {0, 0, 0},
-        ["rifle_springfield"] = {0, 0, 0},
-        ["ammo_revolver"] = {0, 0, 0, 50},
-        ["ammo_rifle"] = {0, 0, 0, 50},
-        ["ammo_repeater"] = {0, 0, 0, 50},
-        ["melee_torch"] = {0, 0, 0, 1},
-        ["lasso"] = {0, 0, 0, 1},
-        ["melee_knife"] = {0, 0, 0, 1},
+        ["revolver_doubleaction"] = {0, 1, 0},
+        ["rifle_springfield"] = {0, 1, 0},
+        ["ammo_revolver"] = {0, 1, 0, 50},
+        ["ammo_rifle"] = {0, 1, 0, 50},
+        ["ammo_repeater"] = {0, 1, 0, 50},
+        ["melee_torch"] = {0, 1, 0, 1},
+        ["lasso"] = {0, 1, 0, 1},
+        ["melee_knife"] = {0, 1, 0, 1},
     },
 
     ["Armeiro"] = {

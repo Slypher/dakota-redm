@@ -6,70 +6,70 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'revolver_doubleaction',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 100,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'rifle_springfield',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1000,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'ammo_revolver',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'ammo_rifle',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'ammo_repeater',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'melee_torch',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'lasso',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
             {
                 itemId = 'melee_knife',
             
-                transactionPriceBuyDollar = 0,
-                transactionPriceBuyGold = 0,
+                transactionPriceBuyDollar = 1,
+                transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
             },
         },
 
-        exclusivityGroup = 'police',
+        exclusivityGroup = 'trooper',
 
         positions = {
             vec3(-764.927 ,-1272.443, 44.041),   -- BlackWater
@@ -681,7 +681,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'pao',
 
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 120,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 29,
@@ -689,7 +689,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'biscoito',
 
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 20,
@@ -697,7 +697,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'bolacha',
 
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 20,
@@ -705,7 +705,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'milholata',
 
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 110,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 45,
@@ -713,7 +713,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'feijaolata',
 
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 110,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 45,
