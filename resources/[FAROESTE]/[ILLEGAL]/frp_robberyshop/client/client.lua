@@ -37,7 +37,7 @@ Citizen.CreateThread(
 					end
 				else
 					if distance <= 1.2 then
-						DrawText3D(v.x, v.y, v.z + 0.5, "Aperte [ENTER] para roubar")
+						DrawText3D(v.x, v.y, v.z + 0.2, "Aperte [ENTER] para roubar")
 
 						if IsControlJustPressed(0, 0xC7B5340A) and not IsPedInAnyVehicle(player) then
 							if NetworkIsSessionActive() == 1 then
@@ -219,14 +219,14 @@ end
 function DrawText3D(x, y, z, text)
 	local onScreen, _x, _y = GetScreenCoordFromWorldCoord(x, y, z)
 	local px, py, pz = table.unpack(GetGameplayCamCoord())
-	SetTextScale(0.35, 0.35)
+	SetTextScale(0.25, 0.25)
 	SetTextFontForCurrentCommand(1)
 	SetTextColor(255, 255, 255, 215)
 	local str = CreateVarString(10, "LITERAL_STRING", text, Citizen.ResultAsLong())
 	SetTextCentre(1)
 	DisplayText(str, _x, _y)
 	local factor = (string.len(text)) / 150
-	DrawSprite("generic_textures", "hud_menu_4a", _x, _y + 0.0125, 0.015 + factor, 0.03, 0.1, 100, 1, 1, 190, 0)
+	--DrawSprite("generic_textures", "hud_menu_4a", _x, _y + 0.0125, 0.015 + factor, 0.03, 0.1, 100, 1, 1, 190, 0)
 end
 
 RegisterNetEvent("FRP:ROBREG:PlayAlarm")
