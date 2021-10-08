@@ -58,8 +58,8 @@ RegisterNUICallback(
             return
         end
 
-        local cGroup = cb.cGroup
-        local cIndex = cb.cIndex
+        local cGroup = tonumber(cb.cGroup)
+        local cIndex = tonumber(cb.cIndex)
 
         local inputlist = deepcopy(_tempParsedConfig[cGroup].craftings[cIndex].input)
 

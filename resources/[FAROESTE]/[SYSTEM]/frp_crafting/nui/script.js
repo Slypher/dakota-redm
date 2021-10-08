@@ -6,9 +6,21 @@ window.addEventListener("message", function(event) {
 
         let selectedFirst = false;
 
+        const wasSerializedToHashMap = !Array.isArray(event.data.data);
+
         $.each(event.data.data, function(cGroup, x) {
 
-            cGroup += 1;
+            cGroup = Number(cGroup);
+
+            // Caso a configuração do crafting fique muito
+            // grande, ela vai começar a ser serializada em hashmap
+            // que vai fazer com que o indices continuem iguais ao do lua
+            // então a gente não vai mais precisar compensar;
+            
+            if (!wasSerializedToHashMap)
+            {
+                cGroup += 1;
+            }
 
             $.each(x, function(i, y) {
                 $.each(y, function(cIndex, z) {

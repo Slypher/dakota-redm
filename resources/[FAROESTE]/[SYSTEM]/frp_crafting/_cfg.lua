@@ -1333,6 +1333,34 @@ Config = {
             }
         },
 
+-------------------------------------------------LENHADOR--------------------------------------------
+        {
+            position = vec3(-1821.705,-423.195,160.052), -- No position, its global
+            craftings = 
+            {
+                {
+                    time = 15,
+                    input = {
+                        {item = "madeiraboa", amount = 1},
+                        {item = "melee_hatchet", amount = 1, remove = false},
+                    },
+                    output = {
+                        {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
+                    }
+                },
+                {
+                    time = 15,
+                    input = {
+                        {item = "madeirarefinada", amount = 1},
+                        {item = "melee_hatchet", amount = 1, remove = false},
+                    },
+                    output = {
+                        {item = "tabua", amount = 1, name = "Tábua"}
+                    }
+                },
+            }
+        },
+
 --------------------------------------ALFAIATE-------------------------------
         {
             position = vec3(1410.200,-1283.656,81.594), -- No position, its global
@@ -1342,7 +1370,6 @@ Config = {
                     time = 20,
                     input = {
                         {item = "algodao", amount = 10, alias = {"fibra"}},
-                        --{item = "melee_knife", amount = 1, remove = false}
                     },
                     output = {
                         {item = "linha", amount = 5, name = "Rolo de Linha"}
@@ -1350,7 +1377,9 @@ Config = {
                 },
             }
         },
+
         {
+            group = "alfaiate",
             position = vec3(-766.793,-1291.068,43.839), -- No position, its global
             craftings = 
             {
