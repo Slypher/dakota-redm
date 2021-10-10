@@ -309,6 +309,8 @@ AddEventHandler(
             SetEveryoneAsInvisible()
 
             TriggerServerEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled')
+
+            TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
         else
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
         end
@@ -1346,6 +1348,8 @@ function DestroyClothingMenu()
             action = "hide"
         }
     )
+
+    TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
 end
 
 Citizen.CreateThread(
