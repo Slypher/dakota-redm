@@ -27,7 +27,7 @@ Citizen.CreateThread(
 
 				if isRobberyActive then
 					DrawText("Faltam " .. robberyTime .. " segundos~w~ para finalizar o roubo", 0.85, 0.96, 0.4, 0.4, false, 255, 255, 255, 120, 1, 7)
-					if robberyTime < 30 then
+					if robberyTime < 225 then
 						DrawText("Aperte " .. Config.robberyCancelKey .. " para cancelar o andamento do roubo", 0.85, 0.93, 0.4, 0.4, false, 255, 255, 255, 120, 1, 7)
 						if IsControlJustPressed(0, 0xD8F73058) or GetEntityHealth(player) <= 100 then
 							isRobberyActive = "fail"
@@ -183,7 +183,7 @@ AddEventHandler(
 		AddPointToGpsMultiRoute(x, y, z)
 		SetGpsMultiRouteRender(true)
 		TriggerEvent("FRP:ROBREG:ClearGps")
-		local time = 60
+		local time = 300
 		Citizen.CreateThread(
 			function()
 				while time > 0 do

@@ -322,7 +322,7 @@ end
 --------------------------------------------FERREIRO-------------------------------------------------
 function GetNearestFerreiroPosition(radius)
     local models = {
-        "p_clamp01x ",        
+        "p_forge01x ",        
     }
 
     local playerPosition = GetEntityCoords(PlayerPedId())

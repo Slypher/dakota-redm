@@ -13,8 +13,8 @@ Config.MarkerColor = {
 }
 
 Config.moneyReward = {
-	min = 10,
-	max = 20,
+	min = 1,
+	max = 2,
 	type = 'dollar' -- normal for for normal money, black for black_money
 }
 

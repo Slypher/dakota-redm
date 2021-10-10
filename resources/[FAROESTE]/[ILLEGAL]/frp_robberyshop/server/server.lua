@@ -83,7 +83,7 @@ AddEventHandler(
 		-- end
 		--TriggerClientEvent('FRP:ROBREG:removeRobBlip', -1)
 		TriggerClientEvent("FRP:ROBREG:cancelfreeze", source)
-		TriggerClientEvent("FRP:NOTIFY:Simple", source, "Você roubou " .. money .. ".", 10000)
+		TriggerClientEvent("FRP:NOTIFY:Simple", source, "Você roubou " .. money/10 .. ".", 10000)
 
 		local User = API.getUserFromSource(source)
 
@@ -111,7 +111,7 @@ AddEventHandler(
 		-- end
 
 		TriggerClientEvent("FRP:ROBREG:cancelfreeze", source)
-		TriggerClientEvent("FRP:NOTIFY:Simple", source, "O roubo foi cancelado, você conseguiu apenas $ " .. money .. ".", 10000)
+		TriggerClientEvent("FRP:NOTIFY:Simple", source, "O roubo foi cancelado, você conseguiu apenas $ " .. money/10 .. ".", 10000)
 
 		--	TriggerClientEvent('Notify', source, 'negado',  Locales[Config.Locale]['robbery_stolen_cancel'] ..money )
 		--TriggerClientEvent('esx:showNotification', source, string.format( Locales[Config.Locale]['robbery_stolen_cancel'], money ))

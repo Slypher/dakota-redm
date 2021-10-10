@@ -15,12 +15,14 @@ config_file_GROUPS = {
     ["armeiro"] =   1 << 12,
     ["padeiro"] =   1 << 13,
     ["ferreiro"] =   1 << 14,
-    ["indio"] =   1 << 15,
-    ["alfaiate"] =   1 << 16,
+    ["alfaiate"] =   1 << 15,
+    ["indio"] =   1 << 16,
+    ["xama"] =   1 << 17,
 
 }
 
 config_file_INHERITANCE = {
     ["admin"] = "moderator",
-    ["sheriff"] = "trooper"
+    ["sheriff"] = "trooper",
+    ["xama"] = "indio"
 }
