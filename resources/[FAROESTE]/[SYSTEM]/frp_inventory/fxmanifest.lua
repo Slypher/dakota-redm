@@ -22,3 +22,5 @@ files {
     "nui/images/*",
     "nui/images/items/*"
 }
+
+lua54 'yes'

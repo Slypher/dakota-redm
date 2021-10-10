@@ -427,7 +427,9 @@ AddEventHandler(
         slotTo = tonumber(slotTo)
         itemAmount = tonumber(itemAmount)
 
-        local Slot = primaryInventory:getSlots()[slotFrom]
+        local primaryInventorySlots = primaryInventory:getSlots()
+
+        local Slot = primaryInventorySlots[slotFrom]
 
         if Slot == nil then
             return
@@ -436,9 +438,9 @@ AddEventHandler(
         local itemIdAtSlot = Slot:getItemId()
 
         if itemAmount == -2 then
-            itemAmount = primaryInventory:getSlots()[slotFrom]:getItemAmount()
+            itemAmount = primaryInventorySlots[slotFrom]:getItemAmount()
         elseif itemAmount == -1 then
-            itemAmount = primaryInventory:getSlots()[slotFrom]:getItemAmount() / 2
+            itemAmount = primaryInventorySlots[slotFrom]:getItemAmount() / 2
         elseif itemAmount <= 0 then
             itemAmount = 1
         else
