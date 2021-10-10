@@ -89,7 +89,7 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
     CreatePedWithAudio(`S_M_M_UNIBUTCHERS_01`, vec3(-1753.029,-392.859,155.265), 184.54)
 
     -- AÇOUGUE VALENTINE
-    CreatePedWithAudio(`U_M_M_VALBUTCHER_01`, vec3(-339.258,767.518,116.601), 101.22)
+    CreatePedWithAudio(`U_M_M_VALBUTCHER_01`, vec3(-339.258,767.518,115.601), 101.22)
 
     -- AÇOUGUE BLACKWATER
     CreatePedWithAudio(`U_M_M_TumButcher_01`, vec3(-753.067,-1284.851,42.496), 268.86)

@@ -54,10 +54,10 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'lasso',
             
-                transactionPriceBuyDollar = 1,
+                transactionPriceBuyDollar = 300,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 0,
+                transactionPriceSellDollar = 150,
             },
             {
                 itemId = 'melee_knife',
@@ -90,12 +90,20 @@ SHOPINFO_DATABASE = {
 
         items = {
             {
+                itemId = 'lasso',
+            
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 150,
+            },
+            {
                 itemId = 'melee_knife',
             
                 transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 250,
+                transactionPriceSellDollar = 25,
             },
             {
                 itemId = 'revolver_doubleaction',
@@ -556,7 +564,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 250,
+                transactionPriceSellDollar = 25,
             },
             --[[{
                 itemId = 'notepad',
@@ -583,22 +591,6 @@ SHOPINFO_DATABASE = {
 
         items = {
             {
-                itemId = 'feijaolata',
-            
-                transactionPriceBuyDollar = 90,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 45,
-            },
-            {
-                itemId = 'milholata',
-            
-                transactionPriceBuyDollar = 90,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 45,
-            },
-            {
                 itemId = 'molhotomate',
             
                 transactionPriceBuyDollar = 70,
@@ -612,7 +604,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 8,
             },
             {
                 itemId = 'cenoura',
@@ -620,7 +612,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'trigo',
@@ -628,47 +620,47 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 9,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'batata',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 90,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'repolho',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 80,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 9,
+                transactionPriceSellDollar = 6,
             },
             {
                 itemId = 'tomate',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 80,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'feijao',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 80,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 8,
             },
             {
                 itemId = 'alface',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 60,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 9,
+                transactionPriceSellDollar = 6,
             },
             {
                 itemId = 'canaacucar',
@@ -681,7 +673,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'pao',
 
-                transactionPriceBuyDollar = 120,
+                transactionPriceBuyDollar = 115,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 29,
@@ -743,7 +735,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 6,
+                transactionPriceBuyDollar = 60,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
@@ -754,7 +746,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 9,
             },
             {
                 itemId = 'cenoura',
@@ -762,7 +754,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 9,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'trigo',
@@ -770,7 +762,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 8,
             },
             {
                 itemId = 'batata',
@@ -778,7 +770,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 9,
+                transactionPriceSellDollar = 8,
             },
             {
                 itemId = 'repolho',
@@ -786,7 +778,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 6,
             },
             {
                 itemId = 'tomate',
@@ -794,7 +786,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'feijao',
@@ -810,7 +802,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 6,
             },
             {
                 itemId = 'canaacucar',
@@ -818,7 +810,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 6,
             },
         },
 
@@ -837,7 +829,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 0,
+                transactionPriceSellDollar = 250,
             },
             {
                 itemId = 'melee_knife',
@@ -850,7 +842,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 6,
+                transactionPriceBuyDollar = 16,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
@@ -885,7 +877,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 80,
+                transactionPriceBuyDollar = 20,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 0,
@@ -948,6 +940,14 @@ SHOPINFO_DATABASE = {
         name = 'Francis',
         items = {
             {
+                itemId = 'lata',
+
+                transactionPriceBuyDollar = 25,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 5,
+            },
+            {
                 itemId = 'ferramentas',
 
                 transactionPriceBuyDollar = 1000,
@@ -966,7 +966,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'picareta',
 
-                transactionPriceBuyDollar = 1000,
+                transactionPriceBuyDollar = 800,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 50,
@@ -974,7 +974,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'melee_hatchet',
 
-                transactionPriceBuyDollar = 1500,
+                transactionPriceBuyDollar = 1000,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 50,
