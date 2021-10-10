@@ -1225,7 +1225,7 @@ RegisterNUICallback(
             ["Outfit"] = OutfitUsing
         }
 
-        TriggerServerEvent("FRP:CLOTHES:payClothing", 500, dados, true)
+        TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
         
         DestroyClothingMenu()
         cAPI.InFade(500)

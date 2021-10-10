@@ -1041,7 +1041,7 @@ RegisterNUICallback(
             ["hair"] = HairUsing
         }
 
-        TriggerServerEvent("FRP:CLOTHES:payClothing", 500, dados, true)
+        TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
         TriggerServerEvent("FRP:CLOTHES:SavePlayerClothing", dados, true)
         DestroyClothingMenu()
         cAPI.InFade(500)
