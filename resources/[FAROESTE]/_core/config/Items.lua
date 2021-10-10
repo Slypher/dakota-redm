@@ -7,7 +7,7 @@ ItemList = {
         stackSize = 1,
         worldModel = "s_interact_lantern03x_pickup"
     },
-    ["MELEE_DAVY_LANTERN"] = { -- TESTE DAVY
+    ["melee_davy_lantern"] = { -- TESTE DAVY
         type = "weapon",
         name = "Lampião",
         weight = 1.0,
@@ -15,7 +15,7 @@ ItemList = {
         stackSize = 1,
         worldModel = "s_interact_lantern03x_pickup"
     },
-    ["KIT_BINOCULARS"] = { -- TESTE BINOCULOS
+    ["kit_binoculars"] = { -- TESTE BINOCULOS
         type = "weapon",
         name = "Binoculos",
         weight = 1.0,
@@ -411,15 +411,15 @@ ItemList = {
         type = "weapon",
         name = "Arco",
         weight = 2.5,
-        description = "Palett dobradiça fundida à corda, quando equipado com uma flecha, é capaz de dispara-la a distâncias incomparáveis.",
+        description = "Quando equipado com uma flecha, é capaz de dispara-la a distâncias incomparáveis.",
         stackSize = 1,
         worldModel = "w_sp_bowarrow"
     },
-    ["improved_bow"] = {
+    ["bow_improved"] = {
         type = "weapon",
         name = "Arco Curvado",
         weight = 2.5,
-        description = "Palett dobradiça fundida à corda, quando equipado com uma flecha, é capaz de dispara-la a distâncias incomparáveis.",
+        description = "Simplesmente melhor",
         stackSize = 1,
         worldModel = "w_sp_bowarrow"
     },
@@ -940,35 +940,35 @@ ItemList = {
         name = "Pena",
         weight = 0.01,
         description = "Utilizada principlamente para fazer flechas",
-        stackSize = 1
+        stackSize = 25
     },
     ["penarapina"] = {
         type = "generic",
         name = "Pluma de Garça-Vermelha",
         weight = 0.015,
         description = "A pena de uma ave de rápina, é excelente para fazer boas ferramentas",
-        stackSize = 1
+        stackSize = 25
     },
     ["penaarara"] = {
         type = "generic",
         name = "Pena de Árara",
         weight = 0.01,
         description = "Uma pena de Árara, isso é muito dificil de se encontrar.",
-        stackSize = 1
+        stackSize = 25
     },
     ["penacondor"] = {
         type = "generic",
         name = "Pena de Condor",
         weight = 0.02,
         description = "Uma pena da maior ave do mundo.",
-        stackSize = 1
+        stackSize = 25
     },
     ["penapicapau"] = {
         type = "generic",
         name = "Pena de Condor",
         weight = 0.02,
         description = "Uma pena da maior ave do mundo.",
-        stackSize = 1
+        stackSize = 25
     },
     ["tirascouro"] = {
         type = "generic",
@@ -1868,6 +1868,13 @@ ItemList = {
         name = "Peça de Roupa Branca",
         weight = 0.5,
         description = "Feita de algodão da mais alta qualidade.",
+        stackSize = 10
+    },
+    ["roupas"] = {
+        type = "generic",
+        name = "Roupas",
+        weight = 0.5,
+        description = "Uma muda de roupas para cada ocasião, troque de roupas onde quiser.",
         stackSize = 1
     },
 
@@ -1953,42 +1960,42 @@ ItemList = {
         stackSize = 1
     },
     ["lamina"] = {
-        type = "generic",
+        type = "kit",
         name = "Lâmina",
         weight = 0.2,
         description = "Uma lâmina muito afiada, serve para fazer facas e afins.",
         stackSize = 10
     },
     ["cabecapicareta"] = {
-        type = "generic",
+        type = "kit",
         name = "Cabeça de Picareta",
         weight = 3.0,
         description = "A parte de cima de uma picareta.",
         stackSize = 1
     },
     ["cabecapa"] = {
-        type = "generic",
+        type = "kit",
         name = "Cabeça de Pá",
         weight = 1.0,
         description = "A parte de cima de uma pá",
         stackSize = 1
     },
     ["cabecamachado"] = {
-        type = "generic",
+        type = "kit",
         name = "Cabeça de Machado",
         weight = 2.5,
         description = "A parte de cima de um machado.",
         stackSize = 1
     },
     ["cabecaenxada"] = {
-        type = "generic",
+        type = "kit",
         name = "Cabeça de Enxada",
         weight = 1.0,
         description = "Uma simples enxada, muito útil nas fazendas.",
         stackSize = 1
     },
     ["ferramentas"] = {
-        type = "generic",
+        type = "kit",
         name = "Ferramentas",
         weight = 1.6,
         description = "Um simples conjunto de ferramentas.",
@@ -2511,12 +2518,5 @@ ItemList = {
         weight = 0.1,
         description = "Utilizado para colocar conteúdo líquido.",
         stackSize = 30
-    },
-    ["roupas"] = {
-        type = "generic",
-        name = "Roupas",
-        weight = 0.5,
-        description = "Uma muda de roupas para cada ocasião, troque de roupas onde quiser.",
-        stackSize = 1
     },
 }
