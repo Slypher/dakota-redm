@@ -244,6 +244,11 @@ RegisterCommand('sentarcafe', function(source, arg)
     local playerPed, targetPed = PlayerPedId(), GetPlayerPed(target)
     TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_SIT_GROUND_COFFEE_DRINK'), -1, true, false, false, false)
 end)
+
+RegisterCommand("cafe", function(source, args, rawCommand)
+    TaskStartScenarioInPlace(PlayerPedId(), `WORLD_HUMAN_COFFEE_DRINK`, 360000, true, false, false, false)
+end)
+
 RegisterCommand('sentarlivro', function(source, arg)
     local playerPed, targetPed = PlayerPedId(), GetPlayerPed(target)
     TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_SIT_GROUND_READING_BOOK_STOW'), -1, true, false, false, false)
