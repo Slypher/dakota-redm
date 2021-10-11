@@ -52,27 +52,64 @@ local isReloadingOrShooting = false
 
 Citizen.CreateThread(
     function()
+
+        local lastUsedWeaponHash
+        local currUsedWeaponHash
+
         while true do
             Citizen.Wait(0)
 
             local ped = PlayerPedId()
 
-            -- 0x24B100C68C645951 IS_PED_RELOADING
             local _, currentWeapon = GetCurrentPedWeapon(ped, true, 0, true)
+
+            if currUsedWeaponHash ~= currentWeapon then
+                lastUsedWeaponHash = currUsedWeaponHash
+
+                currUsedWeaponHash = currentWeapon
+            end
+
             if currentWeapon ~= GetHashKey("weapon_lasso") then
+
+                -- IsPedReloading
                 if IsPedShooting(ped) or Citizen.InvokeNative(0x24B100C68C645951, ped) then
-                    -- local wasReloading = false
+
+                    -- IsPedReloading
                     while Citizen.InvokeNative(0x24B100C68C645951, ped) do
-                        -- wasReloading = true
                         Citizen.Wait(0)
                     end
-                    isReloadingOrShooting = true
-                    for weaponId, slotId in pairs(whereWeaponIsAtSlot) do
-                        local weaponHash = GetHashKey(weaponId)
-                        if currentWeapon == weaponHash then
-                            local _, inClip = GetAmmoInClip(ped, weaponHash)
 
-                            local inWeapon = GetAmmoInPedWeapon(ped, weaponHash)
+                    isReloadingOrShooting = true
+
+                    local weaponHashUsedToShoot = currUsedWeaponHash
+
+                    -- O player usou uma arma jogável e então aconteceu uma coisa ou outra:
+                    -- O player mudou ficou sem arma nenhuma na mão
+                    -- ou ele trocou para outra arma jogável.
+                    if currUsedWeaponHash == `WEAPON_UNARMED`
+                        -- IsWeaponThrowable
+                        or Citizen.InvokeNative(0x30E7C16B12DA8211, currUsedWeaponHash)
+                        -- IsWeaponMeleeWeapon
+                        or Citizen.InvokeNative(0x959383DCD42040DA, currUsedWeaponHash) then
+                        
+                        -- IsWeaponThrowable
+                        if lastUsedWeaponHash and Citizen.InvokeNative(0x30E7C16B12DA8211, lastUsedWeaponHash)then
+                            
+                            -- GetCoordsOfProjectileTypeWithinDistance
+                            local hasProjectile, projectilePos = Citizen.InvokeNative(0xD73C960A681052DF, ped, lastUsedWeaponHash, 2.0, Citizen.PointerValueVector(), false, true, Citizen.ReturnResultAnyway())
+
+                            if hasProjectile then
+                                weaponHashUsedToShoot = lastUsedWeaponHash
+                            end
+                        end
+                    end
+
+                    for weaponId, slotId in pairs(whereWeaponIsAtSlot) do
+
+                        if weaponHashUsedToShoot == GetHashKey(weaponId) then
+                            local _, inClip = GetAmmoInClip(ped, weaponHashUsedToShoot)
+
+                            local inWeapon = GetAmmoInPedWeapon(ped, weaponHashUsedToShoot)
                             local ammoRemaining = math.floor(inWeapon - inClip)
 
                             TriggerServerEvent("FRP:INVENTORY:SaveWeaponAmmoOnDB", slotId, inClip, ammoRemaining)
