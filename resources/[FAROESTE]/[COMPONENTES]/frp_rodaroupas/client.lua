@@ -67,7 +67,7 @@ RegisterCommand("submenu2", function(source, args, rawCommand)
     SetNuiFocus(true, true)
 end, false)
 
-RegisterCommand("submenu3", function(source, args, rawCommand)
+--[[RegisterCommand("submenu3", function(source, args, rawCommand)
     -- Wait for next frame just to be safe
     Citizen.Wait(0)
 
@@ -135,7 +135,7 @@ RegisterCommand("submenu7", function(source, args, rawCommand)
         resourceName = GetCurrentResourceName()
     })
     SetNuiFocus(true, true)
-end, false)
+end, false)]]
 
 -- Callback function for closing menu
 RegisterNUICallback('closemenu', function(data, cb)
