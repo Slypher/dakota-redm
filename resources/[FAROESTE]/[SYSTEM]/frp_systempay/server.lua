@@ -4,13 +4,15 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
-local r = {
-	["trooper"] = {payment = 300},
-	["sheriff"] = {payment = 450},
-	["medic"] = {payment = 250, xp = 0.0}
-	-- ["vip1"] = {payment = 0, xp = 1.10},
-	-- ["vip2"] = {payment = 0, xp = 1.20},
-	-- ["vip3"] = {payment = 0, xp = 1.30},
+local HOURLY_PAYMENT_PER_GROUP = {
+
+	["marshall"] = { payment = 800 },
+	["delegado"] = { payment = 500 },
+	["sheriff"]  = { payment = 400 },
+	["trooper"]  = { payment = 250 }, -- $2.50
+	["recruta"]  = { payment =  75 }, -- $0.75
+
+	["medic"] 	 = { payment = 250 },
 }
 
 -- local withHoldingPaymentToUsers = {}
@@ -22,7 +24,7 @@ Citizen.CreateThread(
 
 			local userIdWithExpMultiplier = {}
 
-			for group, d in pairs(r) do
+			for group, d in pairs(HOURLY_PAYMENT_PER_GROUP) do
 				local payment = d.payment
 				local exp = d.exp
 
