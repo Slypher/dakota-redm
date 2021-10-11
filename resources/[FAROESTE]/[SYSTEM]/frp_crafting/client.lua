@@ -617,8 +617,6 @@ AddEventHandler(
         SetGameplayCamRelativeHeading(0.0, 1.0)
         SetGameplayCamRelativePitch(0.0, 1.0)
 
-        local default_crafting_scenario = -1241981548
-
         local playerPed = PlayerPedId()
 
         local playerPosition = GetEntityCoords(playerPed)
@@ -641,7 +639,8 @@ AddEventHandler(
         ClearPedTasks(playerPed)
 
         if not nearestCraftingConfig.position then
-            local scenario = Citizen.InvokeNative(0x94B745CE41DB58A1, default_crafting_scenario, playerPosition, desiredHeading, 0, 0, 0)
+            -- CreateScenarioPointHash
+            local scenario = Citizen.InvokeNative(0x94B745CE41DB58A1, `WORLD_PLAYER_CAMP_FIRE_KNEEL3`, playerPosition, desiredHeading, 0, 0, 0)
             TaskUseScenarioPoint(playerPed, scenario, "", -1.0, true, false, 0, false, -1.0, true)
         else
             TaskAchieveHeading(playerPed, desiredHeading, -1)
