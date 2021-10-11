@@ -133,9 +133,9 @@ function API.Inventory(id, capacity, slots)
                 end
             else
                 if slotIdTo < first or slotIdTo > last then
-                    if self:autoSort() then
-                        slotIdTo = getFreeSlots(self:getSlots(), Slot:getItemId())[1]
-                    end
+                    -- if self:autoSort() then
+                    --     slotIdTo = getFreeSlots(self:getSlots(), Slot:getItemId())[1]
+                    -- end
                 end
             end
 
@@ -241,7 +241,8 @@ function API.Inventory(id, capacity, slots)
                         sync[slotIdTo] = SlotTo:getSyncData()
                     end
                 else
-                    local copySlot = deepcopy(SlotTo)
+                    -- Segurar a referencia para o slot por enquanto.
+                    local copySlot = SlotTo
 
                     self.slots[slotIdTo] = Slot
                     self.slots[slotId] = copySlot
@@ -270,7 +271,9 @@ function API.Inventory(id, capacity, slots)
         itemAmount = math.floor(math.abs(itemAmount))
 
         if self.slots[slotId] ~= nil then
-            self.slots[slotId]:setItemAmount(0) -- Will delete itself from the slot list
+            self.slots[slotId]:setItemAmount(0)
+
+            self.slots[slotId] = nil
         end
 
         local Slot = API.Slot(slotId, itemId, itemAmount, nil, nil, itemMetaData)
@@ -819,7 +822,9 @@ function getFirstLastSlots(itemId)
         end
     end
 
-    return table.unpack(a[itemTabType])
+    local firstAndLast = a[itemTabType]
+
+    return firstAndLast[1], firstAndLast[2]
 end
 
 function canFitHotbarSlot(slotId, itemId)
@@ -842,19 +847,4 @@ function canFitHotbarSlot(slotId, itemId)
     -- if slotId == 132 then
     --     return itemData:isThrowable(itemId)
     -- end
-end
-
-function deepcopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == "table" then
-        copy = {}
-        for orig_key, orig_value in next, orig, nil do
-            copy[deepcopy(orig_key)] = deepcopy(orig_value)
-        end
-        setmetatable(copy, deepcopy(getmetatable(orig)))
-    else -- number, string, boolean, etc
-        copy = orig
-    end
-    return copy
 end
