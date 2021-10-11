@@ -8,7 +8,10 @@ cAPI = Tunnel.getInterface('API')
 RegisterNetEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
 AddEventHandler('PersonaCreatorHandler.setPlayerRoutingBucket', function()
     local _source = source
-    SetPlayerRoutingBucket(_source, _source)
+
+    local bucketId = tonumber(_source)
+
+    SetPlayerRoutingBucket(_source, bucketId)
 end)
 
 RegisterNetEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')

@@ -9,6 +9,8 @@ local FirstSpawn = false
 local gStageCoachVehicle
 local gCoachDriverPed
 
+local gPopulationBudgedMultiplierCache
+
 local END_POSITION = vector3(-352.705, 787.453, 116.041)
 
 RegisterNetEvent("FRP:CREATOR:FirstSpawn")
@@ -35,6 +37,15 @@ AddEventHandler(
             end
 
             TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
+
+            -- Desabilitar a população por aqui por enquanto, parece que a native
+            -- especifica para routing bucket não funciona.
+
+            -- GetPopulationBudgetMultiplier
+            gPopulationBudgedMultiplierCache = Citizen.InvokeNative(0x8A3945405B31048F, Citizen.ResultAsFloat())
+
+            -- SetPopulationBudgetMultiplier
+            Citizen.InvokeNative(0x2F9AC754FE179D58, 0.0)
 
             StartPlayerTeleport(PlayerId(), 2520.09, -358.05, 41.61, 0.0, false, true, true, false --[[ bDisableSeamlessTeleport ]])
 
@@ -118,6 +129,10 @@ function createThreadShowHelperAudioAndText()
             SetEntityInvincible(playerPed, false)
 
             TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
+
+            -- SetPopulationBudgetMultiplier
+            Citizen.InvokeNative(0x2F9AC754FE179D58, gPopulationBudgedMultiplierCache)
+            gPopulationBudgedMultiplierCache = nil
 
             TriggerEvent('showBasicNeedsUI')
 
