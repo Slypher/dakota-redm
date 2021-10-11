@@ -45,39 +45,40 @@
 --     end
 -- )
 
-local DEBUGALWAYSCLEAR = false
+local DEBUG_ENABLE_ALWAYS_CLEAR = false
 
 local regionsWeather = {}
 
 Citizen.CreateThread(
     function()
-        local currentRegion
-        while true do
-            Citizen.Wait(1000)
-            local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(PlayerId())))
-            local region = GetCurrentRegionName()
 
-            if region ~= currentRegion then
-                currentRegion = region
+        local transitioningToWeatherHash
 
-                local weather_hash = regionsWeather[region]
+        while true do            
+            local currRegionName = GetCurrentRegionName()
 
-                if not DEBUGALWAYSCLEAR then
-                    if weather_hash then
-                        weather_hash = GetHashKey(weather_hash)
-                    else
-                        weather_hash = Citizen.InvokeNative(0x4BEB42AEBCA732E9)
-                    end
-                else
-                    weather_hash = GetHashKey("sunny")
-                end
+            -- GetPrevWeatherTypeHashName
+            local nextWeatherHash = Citizen.InvokeNative(0x4BEB42AEBCA732E9)
 
-                local old_weather = Citizen.InvokeNative(0x4BEB42AEBCA732E9)
+            local nextWeather = regionsWeather[currRegionName]
 
-                if weather_hash ~= old_weather then
-                    Citizen.InvokeNative(0x59174F1AFE095B5A, weather_hash, true, false, true, 15.0, false)
-                end
+            if nextWeather then
+                nextWeatherHash = GetHashKey(nextWeather)
             end
+
+            if DEBUG_ENABLE_ALWAYS_CLEAR then
+                nextWeatherHash = GetHashKey("sunny")
+                NetworkClockTimeOverride(12, 0, 0, false, true)
+            end
+
+            if transitioningToWeatherHash ~= nextWeatherHash then
+                -- SetWeatherType
+                Citizen.InvokeNative(0x59174F1AFE095B5A, nextWeatherHash, true, false, true, 15.0, false)
+
+                transitioningToWeatherHash = nextWeatherHash
+            end
+
+            Citizen.Wait(1000)
         end
     end
 )
