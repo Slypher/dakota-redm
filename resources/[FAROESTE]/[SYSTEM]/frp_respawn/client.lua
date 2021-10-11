@@ -577,6 +577,8 @@ function HandleAsInjured(fatal)
 					addedToReviveTime = false
 
 					timesLeftPlayerCanGetUp = timesLeftPlayerCanGetUp - 1
+
+					TriggerServerEvent("FRP:RESPAWN:SetPlayerAsDead", 0)
 				else
 					local timeTillfirstReviveDiff = timeTillFirstRevive - GetGameTimer()
 
