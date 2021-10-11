@@ -13,6 +13,9 @@ PRIVILEGE_DATABASE = {
             '10',
             '25',
             '50',
+            '100',
+            '250',
+            '500',
         },
     },
     PRIV_SLOT_COUNT_CHAR = {
