@@ -295,13 +295,19 @@ Citizen.CreateThread(
 
                     -- Flee
                     if IsControlJustPressed(0, 0x4216AF06) then -- F
-                        TaskAnimalFlee(playerHorse, PlayerPedId(), -1)
-                        Citizen.CreateThread(
-                            function()
-                                Citizen.Wait(10000)
-                                cAPI.DestroyPlayerHorse()
-                            end
-                        )
+
+                        local hasIloHorse, iloHorse = Citizen.InvokeNative(0x3EE1F7A8C32F24E1, PlayerId(), Citizen.PointerValueInt(), false, false, Citizen.ReturnResultAnyway())
+
+                        if hasIloHorse and iloHorse == playerHorse then
+                            TaskAnimalFlee(playerHorse, PlayerPedId(), -1)
+                            
+                            Citizen.CreateThread(
+                                function()
+                                    Citizen.Wait(10000)
+                                    cAPI.DestroyPlayerHorse()
+                                end
+                            )
+                        end
                     end
                 else
                     if not IsPedInjured(playerHorse) then
