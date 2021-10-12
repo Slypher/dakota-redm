@@ -514,7 +514,7 @@ Config = {
                     input = {
                         {item = "minerioferro", amount = 6},
                         {item = "carvao", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "barraferro", amount = 1, name = "Barra de Ferro"},
@@ -526,7 +526,7 @@ Config = {
                     input = {
                         {item = "mineriocobre", amount = 6},
                         {item = "carvao", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "barracobre", amount = 1, name = "Barra de Cobre"},
@@ -538,7 +538,7 @@ Config = {
                     input = {
                         {item = "pepitadeouro", amount = 50},
                         {item = "carvao", amount = 15},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "barraouro", amount = 1, name = "Barra de Ouro"}
@@ -561,7 +561,7 @@ Config = {
                     input = {
                         {item = "barraferro", amount = 1},
                         {item = "madeirarefinada", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "ferramentas", amount = 1, name = "Caixa de Ferramentas"},
@@ -572,7 +572,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "cabecapicareta", amount = 1, name = "Cabeça de Picareta"},
@@ -583,7 +583,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "cabecamachado", amount = 1, name = "Cabeça de Machado"},
@@ -594,7 +594,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "cabecapa", amount = 1, name = "Cabeça de Pá"}
@@ -605,7 +605,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "cabecaenxada", amount = 1, name = "Cabeça de Enxada"}
@@ -616,7 +616,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "lamina", amount = 1, name = "Lâmina"},
@@ -627,7 +627,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "canodearma", amount = 1, name = "Cano de Arma"},
@@ -638,7 +638,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "caodearma", amount = 4, name = "Cães de Arma"},
@@ -649,7 +649,7 @@ Config = {
                     time = 25,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "gatilhodearma", amount = 4, name = "Gatilhos de Arma"},
@@ -660,7 +660,7 @@ Config = {
                     time = 10,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "prego", amount = 20, name = "Pregos"},
@@ -671,7 +671,7 @@ Config = {
                     time = 10,
                     input = {
                         {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "parafuso", amount = 10, name = "Parafusos"},
@@ -697,7 +697,7 @@ Config = {
                         {item = "cabecapicareta", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 4},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "picareta", amount = 1, name = "Picareta"},
@@ -710,7 +710,7 @@ Config = {
                         {item = "cabecamachado", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "melee_hatchet", amount = 1, name = "Machado"},
@@ -723,7 +723,7 @@ Config = {
                         {item = "cabecapa", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 2},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "pa", amount = 1, name = "Pá"}
@@ -736,7 +736,7 @@ Config = {
                         {item = "cabecaenxada", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 2},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "enxada", amount = 1, name = "Enxada"}
@@ -749,7 +749,7 @@ Config = {
                         {item = "lamina", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "melee_machete", amount = 1, name = "Facão"},
@@ -762,7 +762,7 @@ Config = {
                         {item = "lamina", amount = 1},
                         {item = "madeirarefinada", amount = 1},
                         {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "melee_knife", amount = 1, name = "Faca de Caça"},
@@ -774,7 +774,7 @@ Config = {
                     input = {
                         {item = "parafuso", amount = 5},
                         {item = "barracobre", amount = 1},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "lockpick", amount = 1, name = "Gazua"},
@@ -802,7 +802,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderevolver", amount = 1},
                         {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "revolver_doubleaction", amount = 1, name = "Revólver de Ação-Dupla"},
@@ -817,7 +817,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderevolver", amount = 1},
                         {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "revolver_cattleman", amount = 1, name = "Revólver de Vaqueiro"},
@@ -832,7 +832,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderevolver", amount = 1},
                         {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "revolver_schofield", amount = 1, name = "Revólver Schotfield"},
@@ -847,7 +847,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderevolver", amount = 1},
                         {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "revolver_lemat", amount = 1, name = "Revólver Lemat"},
@@ -862,7 +862,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderevolver", amount = 1},
                         {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "revolver_navy", amount = 1, name = "Revólver da Marinha"},
@@ -877,7 +877,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodepistola", amount = 1},
                         {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "pistol_volcanic", amount = 1, name = "Pistola Volcanic"},
@@ -892,7 +892,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodepistola", amount = 1},
                         {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "pistol_mauser", amount = 1, name = "Pistola Mauser"},
@@ -907,7 +907,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodepistola", amount = 1},
                         {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "pistol_semiauto", amount = 1, name = "Pistola Semi-Auto"},
@@ -922,7 +922,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodecarabina", amount = 1},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "repeater_carbine", amount = 1, name = "Carabina de Repetição"}
@@ -937,7 +937,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodecarabina", amount = 1},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "repeater_winchester", amount = 1, name = "Lancaster de Repetição"}
@@ -952,7 +952,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodecarabina", amount = 1},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "repeater_henry", amount = 1, name = "Henry de Repetição"}
@@ -967,7 +967,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodecarabina", amount = 1},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "rifle_varmint", amount = 1, name = "Rifle Anti-Pragas"}
@@ -982,7 +982,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodecarabina", amount = 1},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "repeater_evans", amount = 1, name = "Evans de Repetição"}
@@ -997,7 +997,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderifle", amount = 1},
                         {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "rifle_springfield", amount = 1, name = "Rifle Springfield"}
@@ -1012,7 +1012,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpoderifle", amount = 1},
                         {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "rifle_boltaction", amount = 1, name = "Rifle de Ferrolho"}
@@ -1027,7 +1027,7 @@ Config = {
                         {item = "gatilhodearma", amount = 1},
                         {item = "corpodesniper", amount = 1},
                         {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "sniperrifle_rollingblock", amount = 1, name = "Rifle Rolling Block"}
@@ -1042,7 +1042,7 @@ Config = {
                         {item = "gatilhodearma", amount = 2},
                         {item = "corpodeescopeta", amount = 2},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "shotgun_sawedoff", amount = 1, name = "Escopeta de Cano-Serrado"},
@@ -1057,7 +1057,7 @@ Config = {
                         {item = "gatilhodearma", amount = 2},
                         {item = "corpodeescopeta", amount = 2},
                         {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 0, remove = false}
+                        {item = "ferramentas", amount = 1, remove = false}
                     },
                     output = {
                         {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
@@ -1072,7 +1072,7 @@ Config = {
                 --        {item = "gatilhodearma", amount = 2},
                 --        {item = "corpodeescopeta", amount = 2},
                 --        {item = "parafuso", amount = 8},
-                --        {item = "ferramentas", amount = 0, remove = false}
+                --        {item = "ferramentas", amount = 1, remove = false}
                 --    },
                 --    output = {
                 --        {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
