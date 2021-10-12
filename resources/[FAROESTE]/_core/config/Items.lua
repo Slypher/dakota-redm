@@ -2124,7 +2124,7 @@ ItemList = {
         name = "Ponta de Flecha",
         weight = 0.01,
         description = "A ponta de uma Flecha, feita a partir de pedras.",
-        stackSize = 2
+        stackSize = 50,
     },
     ------------------------- ESPECIAL DO INDIO
 

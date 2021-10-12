@@ -47,7 +47,6 @@ function AddPlayerClothingPiecesToEnabledComponents(playerId, toAddClothingPiece
     local Character = User:getCharacter()
     if Character ~= nil then
         for k, v in pairs(toAddClothingPieces) do
-            print( 'toAddClothingPieces', k, v)
             Character:setData(Character:getId(), 'enabledComponents', k, v)
         end
     end
@@ -58,7 +57,6 @@ function RemovePlayerClothingPiecesFromEnabledComponents(playerId, toRemoveCloth
     local Character = User:getCharacter()
     if Character ~= nil then
         for k, v in pairs(toRemoveClothingPieces) do
-            print( ('toRemoveClothingPieces :%s:'):format(k), v)
             Character:remData(Character:getId(), 'enabledComponents', k)
         end
     end

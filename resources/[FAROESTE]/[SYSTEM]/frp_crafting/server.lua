@@ -174,7 +174,7 @@ AddEventHandler(
                     local item = x.item
                     local amount = x.amount
                     local alias = x.alias
-                    local remove = x.remove or true
+                    local remove = x.remove == nil and true or x.remove
 
                     if remove then
                         if Inventory:getItemAmount(item) >= amount then
