@@ -511,6 +511,14 @@ SHOPINFO_DATABASE = {
             
                 transactionPriceSellDollar = 2,
             },
+            {
+                itemId = 'algodaoseed',
+            
+                transactionPriceBuyDollar = 5,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 2,
+            },
         },
 
         positions = {
@@ -526,7 +534,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'tobaccoseed',
             
-                transactionPriceBuyDollar = 5,
+                transactionPriceBuyDollar = 9,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 2,
@@ -542,10 +550,10 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'lupuloseed',
             
-                transactionPriceBuyDollar = 5,
+                transactionPriceBuyDollar = 6,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 3,
             },
             {
                 itemId = 'papolaseed',
@@ -554,14 +562,6 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 7,
-            },
-            {
-                itemId = 'quimicos',
-
-                transactionPriceBuyDollar = 30,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'mosto',
@@ -614,6 +614,14 @@ SHOPINFO_DATABASE = {
         name = 'Merida',
 
         items = {
+            {
+                itemId = 'agua',
+            
+                transactionPriceBuyDollar = 15,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 4,
+            },
             {
                 itemId = 'molhotomate',
             
@@ -748,6 +756,14 @@ SHOPINFO_DATABASE = {
         name = 'Terry',
 
         items = {
+            {
+                itemId = 'agua',
+            
+                transactionPriceBuyDollar = 14,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 4,
+            },
             {
                 itemId = 'molhotomate',
             
@@ -1013,23 +1029,31 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'cerveja',
             
-                transactionPriceBuyDollar = 170,
+                transactionPriceBuyDollar = 190,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 50,
+                transactionPriceSellDollar = 95,
             },
             {
                 itemId = 'whisky',
             
-                transactionPriceBuyDollar = 220,
+                transactionPriceBuyDollar = 400,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 60,
+                transactionPriceSellDollar = 200,
+            },
+            {
+                itemId = 'tequila',
+            
+                transactionPriceBuyDollar = 500,
+                transactionPriceBuyGold = 2,
+            
+                transactionPriceSellDollar = 250,
             },
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 30,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 4,
@@ -1404,7 +1428,10 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'frasco',
 
-                transactionPriceSellDollar = 10,
+                transactionPriceBuyDollar = 10,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 8,
                 --bundleSellQuantity = 2,
             },
         },
@@ -1415,7 +1442,8 @@ SHOPINFO_DATABASE = {
         },
     },
 
----------------------------------------------------------------
+  ---------------------------------------------------------------
+
 
     {
         name = 'Moonshiner',
@@ -1424,26 +1452,26 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'moonshinetradicional',
 
-                transactionPriceBuyDollar = 30,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 460,
+                transactionPriceBuyGold = 10,
 
-                transactionPriceSellDollar = 4,
+                transactionPriceSellDollar = 230,
             },
             {
                 itemId = 'moonshinedourado',
 
-                transactionPriceBuyDollar = 30,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 570,
+                transactionPriceBuyGold = 20,
 
-                transactionPriceSellDollar = 4,
+                transactionPriceSellDollar = 285,
             },
             {
                 itemId = 'moonshineinverno',
 
-                transactionPriceBuyDollar = 30,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 720,
+                transactionPriceBuyGold = 30,
 
-                transactionPriceSellDollar = 4,
+                transactionPriceSellDollar = 360,
             },
         },
 
@@ -1460,10 +1488,10 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'opio',
 
-                transactionPriceBuyDollar = 30,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 700,
+                transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 4,
+                transactionPriceSellDollar = 350,
             },
         },
 

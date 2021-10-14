@@ -1342,7 +1342,7 @@ Config = {
                 {
                     time = 15,
                     input = {
-                        {item = "money", amount = 1},
+                        {item = "money", amount = 10},
                         {item = "canaacucar", amount = 4},
                     },
                     output = {
@@ -1410,13 +1410,13 @@ Config = {
                         {item = "agulha", amount = 1, remove = false}
                     },
                     output = {
-                        {item = "tecidobranco", amount = 6, name = "Tecido Branco"}
+                        {item = "tecidobranco", amount = 5, name = "Tecido Branco"}
                     }
                 },
                 {
                     time = 50,
                     input = {
-                        {item = "tecidobranco", amount = 6},
+                        {item = "tecidobranco", amount = 5},
                         {item = "linha", amount = 2},
                         {item = "agulha", amount = 1, remove = false}
                     },
@@ -1450,10 +1450,9 @@ Config = {
                 {
                     time = 50,
                     input = {
-                        {item = "milholata", amount = 4},
+                        {item = "milholata", amount = 3},
                         {item = "alcool", amount = 1},
                         {item = "mosto", amount = 1},
-                        
                     },
                     output = {
                         {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
@@ -1464,9 +1463,8 @@ Config = {
                     input = {
                         {item = "cassisdourado", amount = 6},
                         {item = "mentasilvestre", amount = 6},
-                        {item = "alcool", amount = 2},
+                        {item = "alcool", amount = 3},
                         {item = "mosto", amount = 1},
-                        
                     },
                     output = {
                         {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
@@ -1475,11 +1473,10 @@ Config = {
                 {
                     time = 50,
                     input = {
-                        {item = "gualteria", amount = 5},
-                        {item = "violeta", amount = 5},
-                        {item = "alcool", amount = 2},
+                        {item = "gualteria", amount = 8},
+                        {item = "violeta", amount = 8},
+                        {item = "alcool", amount = 3},
                         {item = "mosto", amount = 1},
-                        
                     },
                     output = {
                         {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
@@ -1500,9 +1497,8 @@ Config = {
                 {
                     time = 22,
                     input = {
-                        {item = "trigo", amount = 6},
-                        {item = "lupulo", amount = 1},
-                        {item = "alcool", amount = 2},
+                        {item = "lupulo", amount = 4},
+                        {item = "alcool", amount = 1},
                         {item = "agua", amount = 2},
                     },
                     output = {
@@ -1514,8 +1510,8 @@ Config = {
                     input = {
                         {item = "milho", amount = 6},
                         {item = "trigo", amount = 6},
-                        {item = "alcool", amount = 2},
-                        {item = "agua", amount = 2},
+                        {item = "alcool", amount = 1},
+                        {item = "agua", amount = 1},
                     },
                     output = {
                         {item = "whisky", amount = 1, name = "Whisky"}
@@ -1524,8 +1520,8 @@ Config = {
                 {
                     time = 22,
                     input = {
-                        {item = "agave", amount = 6},
-                        {item = "alcool", amount = 2},
+                        {item = "agave", amount = 10},
+                        {item = "alcool", amount = 3},
                         {item = "agua", amount = 2},
                     },
                     output = {
@@ -1548,10 +1544,9 @@ Config = {
                 {
                     time = 50,
                     input = {
-                        {item = "papola", amount = 6},
-                        {item = "quimicos", amount = 2},
+                        {item = "papola", amount = 4},
+                        {item = "quimicos", amount = 1},
                         {item = "frasco", amount = 1},
-                        
                     },
                     output = {
                         {item = "extratodepapoula", amount = 1, name = "Extrato de Papoula"}
@@ -1560,10 +1555,9 @@ Config = {
                 {
                     time = 50,
                     input = {
-                        {item = "extratodepapoula", amount = 6},
-                        {item = "quimicos", amount = 2},
+                        {item = "extratodepapoula", amount = 1},
+                        {item = "quimicos", amount = 1},
                         {item = "tecidobranco", amount = 1},
-                        
                     },
                     output = {
                         {item = "opio", amount = 1, name = "Ópio"}

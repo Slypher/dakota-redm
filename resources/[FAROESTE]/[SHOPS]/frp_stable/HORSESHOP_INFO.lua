@@ -129,10 +129,10 @@ HORSESHOP_INFO = {
         ["A_C_Horse_Mustang_GrulloDun"] = {"Sol Dourado", 0.90, 180},
         ["A_C_Horse_Mustang_TigerStripedBay"] = {"Tigre Listrado", 0.90, 180},
         ["A_C_Horse_Mustang_WildBay"] = {"Selvagem", 0.90, 180},
-        ["a_c_horse_mustang_blackovero"] = {"Preto", 0.90, 180},    
-        ["a_c_horse_mustang_buckskin"] = {"Buck Skin", 0.120, 180},  
+        --["a_c_horse_mustang_blackovero"] = {"Preto", 0.90, 180},    
+        ["a_c_horse_mustang_buckskin"] = {"Buck Skin", 1.20, 180},  
         ["a_c_horse_mustang_chestnuttovero"] = {"Honesto", 0.90, 180}, 
-        ["a_c_horse_mustang_reddunovero"] = {"Vermelho", 0.90, 180},   
+        --["a_c_horse_mustang_reddunovero"] = {"Vermelho", 0.90, 180},   
     },
     {
         name = "Nokota", --------------------------------------------------------------------------------------
@@ -163,8 +163,8 @@ HORSESHOP_INFO = {
     },
     {
         name = "Puro-Sangue Inglês", ---------------------------------------------------------------
-        ["A_C_Horse_Thoroughbred_BlackChestnut"] = {"Roxo", 0.40, 80},  -- 12 Melhor
-        ["A_C_Horse_Thoroughbred_BloodBay"] = {"Vermelho", 0.40, 80},   -- 33 melhor
+        --["A_C_Horse_Thoroughbred_BlackChestnut"] = {"Roxo", 0.40, 80},  -- 12 Melhor
+        --["A_C_Horse_Thoroughbred_BloodBay"] = {"Vermelho", 0.40, 80},   -- 33 melhor
         ["A_C_Horse_Thoroughbred_DappleGrey"] = {"Cinza Invertido", 0.40, 80}, -- 31 melhor
         ["A_C_Horse_Thoroughbred_Brindle"] = {"Listrado", 0.40, 80},           -- 10 Melhor
         ["A_C_Horse_Thoroughbred_ReverseDappleBlack"] = {"Preto Invertido", 0.40, 80},
@@ -173,19 +173,19 @@ HORSESHOP_INFO = {
         name = "Crioulo", ------------------------------------------------------------------------------ 
         ["A_C_Horse_Criollo_Dun"] = {"Bege", 0.39, 78},				 -- 29 melhor
         ["A_C_Horse_Criollo_BlueRoanOvero"] = {"Azulado", 0.39, 78},   -- 29 melhor
-        ["A_C_Horse_Criollo_BayBrindle"] = {"Tigrado", 0.40, 78},      -- 16 melhor
+        --["A_C_Horse_Criollo_BayBrindle"] = {"Tigrado", 0.40, 78},      -- 16 melhor
         ["A_C_Horse_Criollo_SorrelOvero"] = {"Malhado", 0.40, 78},     -- 16 melhor
         ["A_C_Horse_Criollo_MarbleSabino"] = {"Pintado", 0.43, 78},    -- 6 melhor
         ["A_C_Horse_Criollo_BayFrameOvero"] = {"Baia", 0.43, 78},      -- 6 melhor
     },
     {
         name = "Bretão", -------------------------------------------------------------------------------------
-        ["A_C_Horse_Breton_MealyDappleBay"] = {"MealyDapple", 0.85, 170}, -- TESTE
+        --["A_C_Horse_Breton_MealyDappleBay"] = {"MealyDapple", 0.85, 170}, -- TESTE
         ["A_C_Horse_Breton_Sorrel"] = {"Sorrel", 0.75, 160},					  -- 30 melhor
         ["A_C_Horse_Breton_RedRoan"] = {"Rosado", 0.75, 160},				      -- 30 melhor
         ["A_C_Horse_Breton_GrulloDun"] = {"Bege", 0.75, 160},					  -- 17 melhor
         ["A_C_Horse_Breton_SealBrown"] = {"Vermelho", 0.75, 160},				  -- 17 melhor
-        ["A_C_Horse_Breton_SteelGrey"] = {"Aço cinza", 0.85, 170},               -- 7 melhor
+        --["A_C_Horse_Breton_SteelGrey"] = {"Aço cinza", 0.85, 170},               -- 7 melhor
     },
     { 
         name = "Norfolk Roadster", ----------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ HORSESHOP_INFO = {
         ["A_C_HORSE_NORFOLKROADSTER_BLACK"] = {"Preto", 0.50, 100},              -- 27 melhor
         ["A_C_HORSE_NORFOLKROADSTER_PIEBALDROAN"] = {"Piebaldroan", 0.50, 100},  -- 14 melhor
         ["A_C_HORSE_NORFOLKROADSTER_ROSEGREY"] = {"Cinza Malhado", 0.50, 100},   -- 14 melhor
-        ["A_C_HORSE_NORFOLKROADSTER_DAPPLEDBUCKSKIN"] = {"Onça", 0.65, 100},     -- 4 melhor
+        --["A_C_HORSE_NORFOLKROADSTER_DAPPLEDBUCKSKIN"] = {"Onça", 0.65, 100},     -- 4 melhor
         ["A_C_HORSE_NORFOLKROADSTER_SPOTTEDTRICOLOR"] = {"Tricolor", 0.65, 100}, -- 4 melhor
     },
     {
