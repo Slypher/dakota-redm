@@ -780,14 +780,14 @@ ItemList = {
         description = "Uma velha conhecida... Quem é você?",
         stackSize = 10
     },
-    ["moonshine"] = { --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
+    --[[["moonshine"] = { --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
         type = "beverage",
         name = "Moonshine",
         weight = 1.0,
         varOnUse = 1.0,
         description = "Bebida alcólica destilada de alto teor, produzido através de...",
         stackSize = 25
-    },
+    },]]
     ["agua"] = {
         type = "beverage",
         name = "Garrafa de Água",
@@ -868,20 +868,6 @@ ItemList = {
         description = "Quem sabe você não encontra ouro?",
         stackSize = 1
     },
-    ["pepitadeouro"] = {
-        type = "generic",
-        name = "Pepita de Ouro",
-        weight = 0.05,
-        description = "Uma Pepita de Ouro, isso vale uma boa quantidade de dinheiro",
-        stackSize = 50
-    },
-    ["barraouro"] = {
-        type = "generic",
-        name = "Barra de Ouro",
-        weight = 2.5,
-        description = "Uma Barra de Ouro, você pode comprar muitas coisas agora, ou investir!",
-        stackSize = 10
-    },
 
 
 --------------------------------------------------------------------------------------------------------
@@ -894,13 +880,6 @@ ItemList = {
         weight = 0.02,
         description = "As Fibras vegetais são coletadas de plantas, e são usadas para muitas coisas.",
         stackSize = 50
-    },
-    ["corda"] = {
-        type = "generic",
-        name = "Corda",
-        weight = 0.1,
-        description = "São feitas através de fibras vegetais ou linhas.",
-        stackSize = 10
     },
     ["madeiraruim"] = {
         type = "generic",
@@ -1291,6 +1270,13 @@ ItemList = {
         description = "Um pequeno grão de milho, pode ser plantado.",
         stackSize = 15
     },
+    ["agaveseed"] = {
+        type = "planting",
+        name = "Muda de Agave",
+        weight = 0.2,
+        description = "Uma pequena muda de espinho, pode ser plantado.",
+        stackSize = 15
+    },
     ["wateringcan"] = {
         type = "planting",
         name = "Balde",
@@ -1354,6 +1340,13 @@ ItemList = {
         description = "Não use em manifestações, e nem de pro cavalo.",
         stackSize = 30
     },
+    ["agave"] = {
+        type = "generic",
+        name = "Agave Azul",
+        weight = 0.2,
+        description = "Uma planta espinhosa que quanto mais velha melhor fica.",
+        stackSize = 30
+    },
     ["batata"] = {
         type = "generic",
         name = "Batata",
@@ -1363,7 +1356,6 @@ ItemList = {
     },
     ["puredebatata"] = {
         type = "edible",
-        type = "generic",
         name = "Batata",
         weight = 2.5,
         description = "Algumas batatas amassadas.",
@@ -1388,6 +1380,13 @@ ItemList = {
         name = "Cana-de-Açúcar",
         weight = 0.5,
         description = "Uma Cana que é de Açúcar.",
+        stackSize = 45
+    },
+    ["alcool"] = {
+        type = "generic",
+        name = "Garrafa de Álcool",
+        weight = 0.5,
+        description = "Pode te deixar bebado em instantes.",
         stackSize = 45
     },
     ["feijao"] = {
@@ -1445,35 +1444,35 @@ ItemList = {
     ["corpodevaqueiro"] = {
         type = "kit",
         name = "Base do Vaqueiro",
-        weight = 0.1,
+        weight = 0.457,
         description = "Utilizado para ser o corpo de um revólver de vaqueiro.",
         stackSize = 5
     },
     ["corpodeacaodupla"] = {
         type = "kit",
         name = "Base do Ação-Dupla",
-        weight = 0.1,
+        weight = 0.4,
         description = "Utilizado para ser o corpo de um revólver de ação-dupla.",
         stackSize = 5
     },
     ["corpodelemat"] = {
         type = "kit",
         name = "Base do Lemat",
-        weight = 0.1,
+        weight = 1.28,
         description = "Utilizado para ser o corpo de um revólver lemat.",
         stackSize = 5
     },
     ["corpodeschotfield"] = {
         type = "kit",
         name = "Base do Schotfield",
-        weight = 0.1,
+        weight = 0.78,
         description = "Utilizado para ser o corpo de um revólver schotfield.",
         stackSize = 5
     },
     ["corpodenavy"] = {
         type = "kit",
         name = "Base da Marinha",
-        weight = 0.1,
+        weight = 0.66,
         description = "Utilizado para ser o corpo de um revólver da marinha.",
         stackSize = 5
     },
@@ -1481,21 +1480,21 @@ ItemList = {
     ["corpodevolcanic"] = {
         type = "kit",
         name = "Base da Volcanic",
-        weight = 0.1,
+        weight = 1.5,
         description = "Utilizado para ser o corpo de uma pistola volcanic.",
         stackSize = 5
     },
     ["corpodemauser"] = {
         type = "kit",
         name = "Base da Mauser",
-        weight = 0.1,
+        weight = 1.66,
         description = "Utilizado para ser o corpo de uma pistola mauser.",
         stackSize = 5
     },
     ["corpodesemiauto"] = {
         type = "kit",
         name = "Base da Semi-Auto",
-        weight = 0.1,
+        weight = 0.62,
         description = "Utilizado para ser o corpo de uma pistola semi-automatica.",
         stackSize = 5
     },
@@ -1503,28 +1502,28 @@ ItemList = {
     ["corpodecarabina"] = {
         type = "kit",
         name = "Base da Carabina",
-        weight = 0.1,
+        weight = 3.96,
         description = "Utilizado para ser o corpo de uma carabina de repetição.",
         stackSize = 5
     },
     ["corpodeevans"] = {
         type = "kit",
         name = "Base da Evans",
-        weight = 0.1,
+        weight = 3.66,
         description = "Utilizado para ser o corpo de uma evans de repetição.",
         stackSize = 5
     },
     ["corpodehenry"] = {
         type = "kit",
         name = "Base da Henry",
-        weight = 0.1,
+        weight = 3.72,
         description = "Utilizado para ser o corpo de um henry de repetição.",
         stackSize = 5
     },
     ["corpodelancaster"] = {
         type = "kit",
         name = "Base da Lancaster",
-        weight = 0.1,
+        weight = 2.92,
         description = "Utilizado para ser o corpo de uma lancaster de repetição .",
         stackSize = 5
     },
@@ -1532,21 +1531,21 @@ ItemList = {
     ["corpodeferrolho"] = {
         type = "kit",
         name = "Base do Ferrolho",
-        weight = 0.1,
+        weight = 3.256,
         description = "Utilizado para ser o corpo de um rifle de ferrolho.",
         stackSize = 5
     },
     ["corpodespringfield"] = {
         type = "kit",
         name = "Base do Springfield",
-        weight = 0.1,
+        weight = 3.66,
         description = "Utilizado para ser o corpo de um rifle springfield.",
         stackSize = 5
     },
     ["corpoderolling"] = {
         type = "kit",
         name = "Base do Rolling Block",
-        weight = 0.1,
+        weight = 3.68,
         description = "Utilizado para ser o corpo de um rifle de precisão rolling block.",
         stackSize = 5
     },
@@ -1554,14 +1553,14 @@ ItemList = {
     ["corpodeescopeta"] = {
         type = "kit",
         name = "Base Cano-Duplo",
-        weight = 0.1,
+        weight = 2.32,
         description = "Utilizado para ser o corpo de uma escopeta de cano-duplo.",
         stackSize = 5
     },
     ["corpodeserrada"] = {
         type = "kit",
         name = "Base Escopeta Serrada",
-        weight = 0.1,
+        weight = 1.82,
         description = "Utilizado para ser o corpo de uma escopeta de cano-serrado.",
         stackSize = 5
     },
@@ -2274,20 +2273,26 @@ ItemList = {
         stackSize = 1,
         varOnUse = -838945132
     },
+
+
+
     ["money"] = {
         type = "valuable",
         name = "Dólar",
-        weight = 0.00001,
+        weight = 0.001,
         description = "Uma nota de valor, pode ser usada para comprar diversos itens. É a moeda da economia.",
         stackSize = -1
     },
     ["gold"] = {
         type = "valuable",
-        name = "Barra de Ouro",
+        name = "Ouro",
         weight = 0.001,
-        description = "Uma brilhante e cara barra de ouro.",
+        description = "Uma brilhante e cara grama de ouro.",
         stackSize = -1
     },
+
+
+
     ["map"] = {
         type = "document",
         name = "Mapa da Cidade",
@@ -2309,6 +2314,9 @@ ItemList = {
         description = "Com este papel você consegue escrever anotações ou uma carta.",
         stackSize = -1
     },
+
+----------------------------- PLANTAS E OVOS -------------------------------
+
     ["ovopato"] = {
         type = "generic",
         name = "Ovo de Pato",
@@ -2518,5 +2526,61 @@ ItemList = {
         weight = 0.1,
         description = "Utilizado para colocar conteúdo líquido.",
         stackSize = 30
+    },
+
+    ---------------------------- ILEGAL ----------------------------
+
+    ["quimicos"] = {
+        type = "generic",
+        name = "Quimicos",
+        weight = 0.3,
+        description = "Produtos quimicos utilizados em varias coisas...",
+        stackSize = 30
+    },
+    ["mosto"] = {
+        type = "generic",
+        name = "Mosto",
+        weight = 0.3,
+        description = "É uma mistura açucarada destinada à fermentação alcoólica.",
+        stackSize = 30
+    },
+    ["moonshinetradicional"] = {
+        type = "beverage",
+        name = "Moonshine Tradição Ilegal",
+        weight = 0.9,
+        varOnUse = 1.0,
+        description = "Bebida Ilegal de alto teor alcólico, esta variedade é uma tradição ilegal entre os fazendeiros.",
+        stackSize = 30
+    },
+    ["moonshinedourado"] = {
+        type = "beverage",
+        name = "Moonshine Refresco Dourado",
+        weight = 0.9,
+        varOnUse = 1.0,
+        description = "Bebida Ilegal de alto teor alcólico, esta variedade é refrescante como ver ouro na sombra.",
+        stackSize = 30
+    },
+    ["moonshineinverno"] = {
+        
+        type = "beverage",
+        name = "Moonshine Lágrimas de Inverno",
+        weight = 0.9,
+        varOnUse = 1.0,
+        description = "Bebida Ilegal de alto teor alcólico, esta variedade é tem cheiro de violetas no inverno.",
+        stackSize = 30
+    },
+    ["extratodepapoula"] = {
+        type = "generic",
+        name = "Extrato de Papoula",
+        weight = 0.5,
+        description = "O extrato da papoula pode servir para diversos fins, sejam medicinais ou não.",
+        stackSize = 45
+    },
+    ["opio"] = {
+        type = "generic",
+        name = "Ópio",
+        weight = 0.5,
+        description = "Use com moderação.",
+        stackSize = 45
     },
 }

@@ -503,6 +503,14 @@ SHOPINFO_DATABASE = {
             
                 transactionPriceSellDollar = 2,
             },
+            {
+                itemId = 'agaveseed',
+            
+                transactionPriceBuyDollar = 5,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 2,
+            },
         },
 
         positions = {
@@ -546,6 +554,22 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 7,
+            },
+            {
+                itemId = 'quimicos',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'mosto',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
             },
         },
 
@@ -1389,5 +1413,78 @@ SHOPINFO_DATABASE = {
             vec3(-286.269,804.616,119.390),
             vec3(-1804.629,-430.275,158.836),
         },
-    }
+    },
+
+---------------------------------------------------------------
+
+    {
+        name = 'Moonshiner',
+
+        items = {
+            {
+                itemId = 'moonshinetradicional',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'moonshinedourado',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'moonshineinverno',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+        },
+
+        positions = {
+            vec3(-945.832,2170.719,342.085),
+        },
+    },
+
+
+    {
+        name = 'Capitão',
+
+        items = {
+            {
+                itemId = 'opio',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+        },
+
+        positions = {
+            vec3(336.538,-672.327,42.817),
+        },
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

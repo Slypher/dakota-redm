@@ -610,6 +610,8 @@ AddEventHandler('poke_planting:giveitem', function(tipo)
         elseif tipo == `crp_cotton_be_sim` then
 			Inventory:addItem('algodao', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-
+        elseif tipo == `rdr_bush_agave_ab_sim` then
+			Inventory:addItem('agave', (count))
+			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
 		end
 end)

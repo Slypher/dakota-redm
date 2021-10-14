@@ -50,7 +50,7 @@ Config = {
             campfire = true,
             craftings = 
             {
-                -------------------------------------------- PEIXES ------------------------------------------
+                -------------------------------------- PEIXES 
                 
                 {
                     time = 30,
@@ -82,7 +82,8 @@ Config = {
                         {item = "peixegrandeassado", amount = 1, name = "Peixe Grande Assado"}
                     }
                 },
-                --------------------------------------------- Plantas --------------------------------------
+
+                -------------------------------------- PLANTAS 
                 {
                     time = 15,
                     input = {
@@ -101,7 +102,8 @@ Config = {
                         {item = "batataassada", amount = 1, name = "Batata Assada"}
                     }
                 },
-                --------------------------------------------- CARNES --------------------------------------
+
+                -------------------------------------- CARNES 
                 {
                     time = 40,
                     input = {
@@ -152,7 +154,8 @@ Config = {
                         {item = "carneavefrita", amount = 1, name = "Ave Frita"}
                     }
                 },
-                -------------------------------- BEBIDA --------------------------------
+
+                -------------------------------------- BEBIDA 
                 {
                     time = 15,
                     input = {
@@ -163,7 +166,8 @@ Config = {
                         {item = "cafe", amount = 1, name = "Café"}
                     }
                 },
-                -------------------------------- ITENS --------------------------------
+
+                -------------------------------------- ITENS 
                 {
                     time = 15,
                     input = {
@@ -176,15 +180,15 @@ Config = {
             }
         },
 
+
         ---------------------------------------------------------------------------------------------------
         --------------------------------------------- CARDERON --------------------------------------------
         ---------------------------------------------------------------------------------------------------
-
         {
             Calderon = true,
             craftings = 
             {
-                
+                -------------------------------------- SOPAS
                 {
                     time = 40,
                     input = {
@@ -211,6 +215,7 @@ Config = {
                         {item = "sopadecarne", amount = 1, name = "Ensopado de Carne"}
                     }
                 },
+                -------------------------------------- COMIDAS 
                 {
                     time = 30,
                     input = {
@@ -231,13 +236,15 @@ Config = {
             group = "xama",
             craftings = 
             {
-                {-------------------------------------------- ERVAS MEDICINAL ------------------------------------------
+                
+                -------------------------------------------- ERVAS MEDICINAL ------------------------------------------
+                {
                     time = 15,
                     input = {
                         {item = "milfolhas", amount = 5}, 
                         {item = "ginsengalaska", amount = 2}, 
                         {item = "gualteria", amount = 1}, 
-                        {item = "melee_knife_jawbone", amount = 0, remove = false}
+                        {item = "melee_knife_jawbone", amount = 1, remove = false}
                     },
                     output = {
                         {item = "ervamedicinal", amount = 1, name = "Erva Medicinal"},
@@ -250,7 +257,7 @@ Config = {
                         {item = "asclepia", amount = 5}, 
                         {item = "beijaflor", amount = 5}, 
                         {item = "oleandro", amount = 5}, 
-                        {item = "melee_knife_jawbone", amount = 0, remove = false}
+                        {item = "melee_knife_jawbone", amount = 1, remove = false}
                     },
                     output = {
                         {item = "ervadeveneno", amount = 1, name = "Erva de Veneno"},
@@ -263,7 +270,7 @@ Config = {
                         {item = "tabacoindiano", amount = 5}, 
                         {item = "tomilhorastejante", amount = 5}, 
                         {item = "violeta", amount = 5}, 
-                        {item = "melee_knife_jawbone", amount = 0, remove = false}
+                        {item = "melee_knife_jawbone", amount = 1, remove = false}
                     },
                     output = {
                         {item = "olhosdeaguia", amount = 1, name = "Visão de Águia"},
@@ -276,7 +283,7 @@ Config = {
                         {item = "cantarelo", amount = 5}, 
                         {item = "maitake", amount = 3}, 
                         {item = "boletobaio", amount = 4}, 
-                        {item = "melee_knife_jawbone", amount = 0, remove = false}
+                        {item = "melee_knife_jawbone", amount = 1, remove = false}
                     },
                     output = {
                         {item = "raizesdaterra", amount = 1, name = "Raízes da Terra"},
@@ -296,7 +303,7 @@ Config = {
                     input = {
                         {item = "madeiraboa", amount = 1}, 
                         --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 0, alias = {"melee_hatchet"}, remove = false},
+                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
                     },
                     output = {
                         {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"},
@@ -329,7 +336,7 @@ Config = {
                 {
                     time = 30,
                     input = {
-                        {item = "madeirarefinada", amount = 1}, 
+                        {item = "madeirarefinada", amount = 2}, 
                         {item = "fibra", amount = 5, alias = {"tirascouro"}}, 
                         {item = "melee_knife_jawbone", amount = 2}, 
                     },
@@ -342,7 +349,7 @@ Config = {
                 {
                     time = 30,
                     input = {
-                        {item = "corda", amount = 2}, 
+                        {item = "fibra", amount = 10}, 
                         {item = "estruturasimples", amount = 1}, 
                     },
                     output = {
@@ -353,8 +360,9 @@ Config = {
                 {
                     time = 30,
                     input = {
-                        {item = "corda", amount = 1}, 
-                        {item = "estruturacurvada", amount = 1}, 
+                        {item = "corda", amount = 1},
+                        {item = "tirascouro", amount = 2},
+                        {item = "estruturacurvada", amount = 1},
                     },
                     output = {
                         {item = "bow_improved", amount = 1, name = "Arco Curvado"},
@@ -366,7 +374,7 @@ Config = {
                     input = {
                         {item = "madeiraboa", amount = 3}, 
                         --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 0, alias = {"melee_hatchet"}, remove = false},
+                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
                     },
                     output = {
                         {item = "estruturasimples", amount = 1, name = "Estrutura de Arco"},
@@ -378,7 +386,7 @@ Config = {
                     input = {
                         {item = "madeirarefinada", amount = 4}, 
                         --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 0, alias = {"melee_hatchet"}, remove = false},
+                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
                     },
                     output = {
                         {item = "estruturacurvada", amount = 1, name = "Estrutura de Arco Curvada"},
@@ -429,7 +437,7 @@ Config = {
                 {
                     time = 15,
                     input = {
-                        {item = "pedra", amount = 1},                     
+                        {item = "pedra", amount = 2},                     
                     },
                     output = {
                         {item = "melee_knife_jawbone", amount = 1, name = "Pedra Afiada"},
@@ -1331,6 +1339,16 @@ Config = {
                         {item = "acucar", amount = 1, name = "Açúcar"}
                     }
                 },
+                {
+                    time = 15,
+                    input = {
+                        {item = "money", amount = 1},
+                        {item = "canaacucar", amount = 4},
+                    },
+                    output = {
+                        {item = "alcool", amount = 1, name = "Álcool"}
+                    }
+                },
             }
         },
 
@@ -1343,7 +1361,7 @@ Config = {
                     time = 15,
                     input = {
                         {item = "madeiraboa", amount = 1},
-                        {item = "melee_hatchet", amount = 0, remove = false},
+                        {item = "melee_hatchet", amount = 1, remove = false},
                     },
                     output = {
                         {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
@@ -1352,8 +1370,8 @@ Config = {
                 {
                     time = 15,
                     input = {
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "melee_hatchet", amount = 0, remove = false},
+                        {item = "madeirarefinada", amount = 2},
+                        {item = "melee_hatchet", amount = 1, remove = false},
                     },
                     output = {
                         {item = "tabua", amount = 1, name = "Tábua"}
@@ -1419,5 +1437,160 @@ Config = {
                 },
             }
         },
+
+
+        ----------------------------------------------------------------------------------------------------------------------------------------------------
+        --------------------------------------------------------------- MOONSHINE --------------------------------------------------------------------------
+        ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        {
+            position = vec3(1450.939,371.232,89.884), -- No position, its global
+            craftings = 
+            {
+                {
+                    time = 50,
+                    input = {
+                        {item = "milholata", amount = 4},
+                        {item = "alcool", amount = 1},
+                        {item = "mosto", amount = 1},
+                        
+                    },
+                    output = {
+                        {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
+                    }
+                },
+                {
+                    time = 50,
+                    input = {
+                        {item = "cassisdourado", amount = 6},
+                        {item = "mentasilvestre", amount = 6},
+                        {item = "alcool", amount = 2},
+                        {item = "mosto", amount = 1},
+                        
+                    },
+                    output = {
+                        {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
+                    }
+                },
+                {
+                    time = 50,
+                    input = {
+                        {item = "gualteria", amount = 5},
+                        {item = "violeta", amount = 5},
+                        {item = "alcool", amount = 2},
+                        {item = "mosto", amount = 1},
+                        
+                    },
+                    output = {
+                        {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
+                    }
+                },
+            }
+        },
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+        --------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------
+        ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+        {
+            position = vec3(-828.745,-1319.372,43.587), -- No position, its global
+            craftings = 
+            {
+                {
+                    time = 22,
+                    input = {
+                        {item = "trigo", amount = 6},
+                        {item = "lupulo", amount = 1},
+                        {item = "alcool", amount = 2},
+                        {item = "agua", amount = 2},
+                    },
+                    output = {
+                        {item = "cerveja", amount = 1, name = "Cerveja"}
+                    }
+                },
+                {
+                    time = 22,
+                    input = {
+                        {item = "milho", amount = 6},
+                        {item = "trigo", amount = 6},
+                        {item = "alcool", amount = 2},
+                        {item = "agua", amount = 2},
+                    },
+                    output = {
+                        {item = "whisky", amount = 1, name = "Whisky"}
+                    }
+                },
+                {
+                    time = 22,
+                    input = {
+                        {item = "agave", amount = 6},
+                        {item = "alcool", amount = 2},
+                        {item = "agua", amount = 2},
+                    },
+                    output = {
+                        {item = "tequila", amount = 1, name = "Tequila"}
+                    }
+                },
+            }
+        },
+
+
+        ----------------------------------------------------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------ OPIO ----------------------------------------------------------------------------
+        ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+        {
+            position = vec3(-329.753,-150.822,51.074), -- No position, its global
+            craftings = 
+            {
+                {
+                    time = 50,
+                    input = {
+                        {item = "papola", amount = 6},
+                        {item = "quimicos", amount = 2},
+                        {item = "frasco", amount = 1},
+                        
+                    },
+                    output = {
+                        {item = "extratodepapoula", amount = 1, name = "Extrato de Papoula"}
+                    }
+                },
+                {
+                    time = 50,
+                    input = {
+                        {item = "extratodepapoula", amount = 6},
+                        {item = "quimicos", amount = 2},
+                        {item = "tecidobranco", amount = 1},
+                        
+                    },
+                    output = {
+                        {item = "opio", amount = 1, name = "Ópio"}
+                    }
+                },
+            }
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     --}
 }

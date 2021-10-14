@@ -360,6 +360,12 @@ function triggerUse(User, itemData, Slot)
         User:closeInventory()
         return true
     end
+    if itemId == "agaveseed" then
+        local _source = source
+        TriggerClientEvent('poke_planting:planto1', _source, "agaveseed",`rdr_bush_agave_ab_sim`, `rdr_bush_agave_ab_sim`, `rdr_bush_agave_ab_sim`)
+        User:closeInventory()
+        return true
+    end
     if itemId == "wateringcan" then
         local _source = source
 	    TriggerClientEvent('poke_planting:regar1', _source)

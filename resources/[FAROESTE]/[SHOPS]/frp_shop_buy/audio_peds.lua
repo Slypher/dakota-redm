@@ -94,6 +94,14 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
     -- AÇOUGUE BLACKWATER
     CreatePedWithAudio(`U_M_M_TumButcher_01`, vec3(-753.067,-1284.851,42.496), 268.86)
 
+--------------------------------------MOONSHINER------------------------------------------------
+    -- MOONSHINER NEVE
+    CreatePedWithAudio(`CS_famousgunslinger_02`, vec3(-945.832,2170.719,342.085), 14.16)
+
+-----------------------------------------CAPITÃO------------------------------------------------
+    -- CAPITÃO PESCADOR
+    CreatePedWithAudio(`CS_BeatenUpCaptain`, vec3(336.538,-672.327,42.817), 75.00)
+
 end)
 
 AddEventHandler('onResourceStop', function(resource)
