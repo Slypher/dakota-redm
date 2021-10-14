@@ -311,33 +311,65 @@ RegisterCommand(
         local User = API.getUserFromSource(source)
         local Character = User:getCharacter()
 
-        if #args < 2 and not tonumber(args[2]) then
+        local numArgs = #args
+
+        if numArgs < 2 and not tonumber(args[2]) then
             User:notify("error", "sintaxe: /item id quantidade")
             return
         end
 
-        if Character:hasGroupOrInheritance("admin") then
-            if #args >= 3 then
-                local UserTarget = API.getUserFromUserId(tonumber(args[1]))
-                if UserTarget ~= nil then
-                    local CharacterTarget = UserTarget:getCharacter()
-                    if CharacterTarget ~= nil then
-                        CharacterTarget:getInventory():addItem(args[2], tonumber(args[3]))
- --                       API.logs("./savedata/giveitem.txt",  os.date() .. " | [AdminID]: " .. Character:getId() .. " / [TargetID]: " .. CharacterTarget:getId() .. " [FUNÇÃO]: AddItem / [NOME]: " .. args[2] .. " / Quantidade " .. tonumber(args[3]))
-                    else
-                        User:notify("error", "Usuario não escolheu um personagem ainda!")
-                    end
-                else
-                    User:notify("error", "Usuario invalido!")
-                end
-            else
-                if #args == 2 then
-                    Character:getInventory():addItem(args[1], tonumber(args[2]))
---                    API.logs("./savedata/giveitem.txt", os.date() .. " | [AdminID]: " .. Character:getId() .. " / [TargetID]: " .. args[1] .. " [FUNÇÃO]: AddItem / [NOME]: " .. args[1] .. " / Quantidade " .. tonumber(args[2]))
-                end
-            end
-        else
+        if not Character:hasGroupOrInheritance("admin") then
             User:notify("error", "Você não tem permissão!")
+            return
+        end
+
+        local toAddItemId = args[1]
+        local toAddItemQuantity = tonumber(args[2])
+
+        local toAddUser = User
+        local toAddCharacter = Character
+
+        if numArgs >= 3 then
+            local targetUserId = tonumber(args[1])
+
+            local UserTarget = API.getUserFromUserId(targetUserId)
+            
+            if UserTarget == nil then
+                User:notify("error", "Usuario invalido!")
+                return
+            end
+
+            local CharacterTarget = UserTarget:getCharacter()
+
+            if CharacterTarget == nil then
+                User:notify("error", "Usuario não escolheu um personagem ainda!")
+                return
+            end
+
+            toAddItemId = args[2]
+            toAddItemQuantity = tonumber(args[3])
+
+            toAddUser = UserTarget
+            toAddCharacter = CharacterTarget
+        end
+
+        if toAddCharacter:getInventory():addItem(toAddItemId, toAddItemQuantity) then
+
+            -- API.logs("./savedata/giveitem.txt",  os.date() .. " | [AdminID]: " .. Character:getId() .. " / [TargetID]: " .. CharacterTarget:getId() .. " [FUNÇÃO]: AddItem / [NOME]: " .. args[2] .. " / Quantidade " .. tonumber(args[3]))
+            -- API.logs("./savedata/giveitem.txt",  os.date() .. " | [AdminID]: " .. Character:getId() .. " / [TargetID]: " .. args[1]                 .. " [FUNÇÃO]: AddItem / [NOME]: " .. args[1] .. " / Quantidade " .. tonumber(args[2]))
+
+            local toAddUserName = GetPlayerName(toAddUser:getSource())
+
+            local toAddItemName = API.getItemDataFromId(toAddItemId):getName()
+
+            API.addGameLogEntryWithCharacter(Character:getId(), 'ADMIN_ADD_ITEM',
+                toAddUserName           ,      toAddUser:getId(),
+                toAddCharacter:getName(), toAddCharacter:getId(),
+                toAddItemName           ,            toAddItemId,
+                toAddItemQuantity
+            )
+        else
+            User:notify("error", "Algum erro ocorreu ao tentar enviar o item!")
         end
     end
 )

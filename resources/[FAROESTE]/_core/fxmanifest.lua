@@ -56,6 +56,10 @@ server_scripts {
 	"server/manager/HorseManager.lua",
 	"server/manager/PosseManager.lua",
 	"server/manager/AreaManager.lua",
+
+	"server/Logging.lua",
+	"server/LoggingHelper.lua",
+	"server/LoggingHook*.lua",
 }
 
 files {

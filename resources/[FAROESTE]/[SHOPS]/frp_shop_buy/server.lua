@@ -176,6 +176,15 @@ AddEventHandler(
 
             if inventory:addItem(addItemId, addItemQuantity) then
                 user:notify('item', addItemId, addItemQuantity)
+
+                local addItemName = API.getItemDataFromId(addItemId):getName()
+
+                -- API.addGameLogEntryWithCharacter(character:getId(), 'SHOP_TRANSACTION',
+                --     addItemName        ,       addItemId,
+                --     addItemQuantity    ,
+                --     transactionPriceBuy, currencyItemId,
+                --     'Compra'
+                -- )
             else
                 user:notify('error', 'Falha ao concluir a transição :/')
 

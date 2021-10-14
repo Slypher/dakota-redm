@@ -393,6 +393,11 @@ function API.Inventory(id, capacity, slots)
 
             syncToViewers(self.viewersSources, sync, self:getWeight())
 
+            Logging.addGameLogEntryWithCharacter(self:getCharId(), 'ADD_INVENTORY_ITEM',
+                itemData:getName(), itemId,
+                itemAmount
+            )
+
             return true, candidatesSlots
         end
         return false
@@ -491,6 +496,11 @@ function API.Inventory(id, capacity, slots)
         end
 
         syncToViewers(self.viewersSources, sync, self:getWeight())
+
+        Logging.addGameLogEntryWithCharacter(self:getCharId(), 'REMOVE_INVENTORY_ITEM',
+            itemData:getName(), itemId,
+            itemAmount
+        )
 
         return true
     end
