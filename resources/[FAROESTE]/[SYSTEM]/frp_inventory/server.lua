@@ -289,6 +289,10 @@ AddEventHandler(
             User:closeInventory()
             return
         end
+        
+        if User:getIsViewingSecondaryInventoryFlagEnabled('DISABLE_REMOVE_ITEMS') then
+            return
+        end
 
         slotId = tonumber(slotId)
 

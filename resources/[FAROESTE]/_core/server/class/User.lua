@@ -10,6 +10,9 @@ function API.User(source, id, ipAddress)
     self.ipAddress = ipAddress or "0.0.0.0"
     self.posseId = nil
 
+    self.viewingPrimaryInventoryFlags = eInventoryFlag.NONE
+    self.viewingSecondaryInventoryFlags = eInventoryFlag.NONE
+
     -- @return The source or player server id
     self.getSource = function()
         return self.source
@@ -210,6 +213,62 @@ function API.User(source, id, ipAddress)
         Inventory:viewAsSecondary(self:getSource())
     end
 
+    -- Essa funciona não é para ser usada diretamente
+    -- use as funções abaixo:
+    -- `setViewingPrimaryInventoryFlagEnabled`
+    -- `setViewingSecondaryInventoryFlagEnabled`
+    self.setViewingInventoryFlagEnabled = function(this, flags, flag, enabled)
+        if type(flag) == 'string' then
+
+            if not eInventoryFlag[flag] then
+                error( ('Flag `%s` não é uma InventoryFlag.'):format(flag) )
+            end
+
+            flag = eInventoryFlag[flag]
+        end
+
+        if enabled then
+            flags |= flag
+        else
+            flags &= ~flag
+        end
+
+        return flags
+    end
+
+    -- Essa funciona não é para ser usada diretamente
+    -- use as funções abaixo:
+    -- `getIsViewingPrimaryInventoryFlagEnabled`
+    -- `getIsViewingSecondaryInventoryFlagEnabled`
+    self.getIsViewingInventoryFlagEnabled = function(this, flags, flag)
+        if type(flag) == 'string' then
+
+            if not eInventoryFlag[flag] then
+                error( ('Flag `%s` não é uma InventoryFlag.'):format(flag) )
+            end
+
+            flag = eInventoryFlag[flag]
+        end
+
+        return (flags & flag) ~= 0
+    end
+
+    self.setViewingPrimaryInventoryFlagEnabled = function(this, flag, enabled)
+        self.viewingPrimaryInventoryFlags = self:setViewingInventoryFlagEnabled(self.viewingPrimaryInventoryFlags, flag, enabled)
+    end
+
+    self.setViewingSecondaryInventoryFlagEnabled = function(this, flag, enabled)
+        self.viewingSecondaryInventoryFlags = self:setViewingInventoryFlagEnabled(self.viewingSecondaryInventoryFlags, flag, enabled)
+    end
+
+    self.getIsViewingPrimaryInventoryFlagEnabled = function(this, flag)
+        return self:getIsViewingInventoryFlagEnabled(self.viewingPrimaryInventoryFlags, flag)
+    end
+
+    self.getIsViewingSecondaryInventoryFlagEnabled = function(this, flag)
+        return self:getIsViewingInventoryFlagEnabled(self.viewingSecondaryInventoryFlags, flag)
+    end
+
     self.closeInventory = function()
         TriggerClientEvent("FRP:INVENTORY:NUICloseNoCallback", self:getSource())
 
@@ -220,6 +279,9 @@ function API.User(source, id, ipAddress)
         if self.secondaryViewingInventory ~= nil then
             self.secondaryViewingInventory:removeViewer(self)
         end
+
+        self.viewingPrimaryInventoryFlags = eInventoryFlag.NONE
+        self.viewingSecondaryInventoryFlags = eInventoryFlag.NONE
     end
 
     self.getPrimaryInventoryViewing = function()

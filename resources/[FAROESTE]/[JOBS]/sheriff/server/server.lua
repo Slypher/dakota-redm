@@ -251,9 +251,8 @@ AddEventHandler(
 			User:viewInventory()
 			local InventoryTarget = CharacterTarget:getInventory()
             User:viewInventoryAsSecondary(InventoryTarget)
+			User:setViewingSecondaryInventoryFlagEnabled('DISABLE_REMOVE_ITEMS', true)
 		end
-	
-
 	end
 )
 

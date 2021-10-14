@@ -858,3 +858,8 @@ function canFitHotbarSlot(slotId, itemId)
     --     return itemData:isThrowable(itemId)
     -- end
 end
+
+eInventoryFlag = {
+    NONE = 0,
+    DISABLE_REMOVE_ITEMS = 1 << 0,
+}
