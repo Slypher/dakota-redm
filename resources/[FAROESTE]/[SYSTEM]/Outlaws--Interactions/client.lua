@@ -40,7 +40,7 @@ function StartInteractionAtObject(interaction)
     local z = interaction.z + objectCoords.z
     local h = interaction.heading + objectHeading
 
-    TaskStartScenarioAtPosition(PlayerPedId(), GetHashKey(interaction.scenario), x, y, z, h, -1, false, true)
+    TaskStartScenarioAtPosition(PlayerPedId(), GetHashKey(interaction.scenario), x, y, z, h, -1, true, false)
 
     CurrentInteraction = interaction
 end
