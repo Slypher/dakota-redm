@@ -18,6 +18,10 @@ function API.User(source, id, ipAddress)
         return self.source
     end
 
+    self.getName = function()
+        return GetPlayerName(self:getSource())
+    end
+
     -- @return the user_id
     self.getId = function()
         return self.id

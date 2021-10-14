@@ -41,6 +41,8 @@ function registerDiscordLog(formatId, format, discordChannelWebhook)
     gFormatIdToDiscordChannelWebhook[formatId] = discordChannelWebhook
 end
 
+local CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM = 'https://discord.com/api/webhooks/898264157466525757/AiK3xbreQY9NFUnv7EaarwSkBrZ5xmSiAmOVTwe5C6o_wxX6CT-M569Og-e4lJ7pPIes'
+
 registerDiscordLog('ADD_INVENTORY_ITEM',
 [[
 User: %s(%d).
@@ -49,7 +51,7 @@ Item: %s(%s).
 Qntd: %d.
 Motivo: Desconhecido.
 ]],
-'https://discord.com/api/webhooks/898264157466525757/AiK3xbreQY9NFUnv7EaarwSkBrZ5xmSiAmOVTwe5C6o_wxX6CT-M569Og-e4lJ7pPIes'
+CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
 )
 
 registerDiscordLog('REMOVE_INVENTORY_ITEM',
@@ -60,7 +62,35 @@ Item: %s(%s).
 Qntd: %d.
 Motivo: Desconhecido.
 ]],
-'https://discord.com/api/webhooks/898264157466525757/AiK3xbreQY9NFUnv7EaarwSkBrZ5xmSiAmOVTwe5C6o_wxX6CT-M569Og-e4lJ7pPIes'
+CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
+)
+
+registerDiscordLog('MOVE_INVENTORY_ITEM_TO_PRIMARY',
+[[
+User: %s(%d).
+Char: %s(%d).
+DeInventario: %s,
+DeUser: %s(%d).
+DeChar: %s(%d).
+Item: %s(%s).
+Qntd: %d.
+Motivo: Desconhecido.
+]],
+CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
+)
+
+registerDiscordLog('MOVE_INVENTORY_ITEM_TO_SECONDARY',
+[[
+User: %s(%d).
+Char: %s(%d).
+ParaInventario: %s,
+ParaUser: %s(%d).
+ParaChar: %s(%d).
+Item: %s(%s).
+Qntd: %d.
+Motivo: Desconhecido.
+]],
+CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
 )
 
 -- registerDiscordLog('SHOP_TRANSACTION',

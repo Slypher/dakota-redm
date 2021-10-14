@@ -286,7 +286,7 @@ function API.Inventory(id, capacity, slots)
         return Slot
     end
 
-    self.addItem = function(this, itemId, itemAmount, itemMetaData)
+    self.addItem = function(this, itemId, itemAmount, itemMetaData, disableInternalLog)
         itemAmount = math.floor(math.abs(itemAmount))
 
         local itemData = API.getItemDataFromId(itemId)
@@ -393,17 +393,19 @@ function API.Inventory(id, capacity, slots)
 
             syncToViewers(self.viewersSources, sync, self:getWeight())
 
-            Logging.addGameLogEntryWithCharacter(self:getCharId(), 'ADD_INVENTORY_ITEM',
-                itemData:getName(), itemId,
-                itemAmount
-            )
+            if not disableInternalLog then
+                Logging.addGameLogEntryWithCharacter(self:getCharId(), 'ADD_INVENTORY_ITEM',
+                    itemData:getName(), itemId,
+                    itemAmount
+                )
+            end
 
             return true, candidatesSlots
         end
         return false
     end
 
-    self.removeItem = function(this, slotId, itemId, itemAmount)
+    self.removeItem = function(this, slotId, itemId, itemAmount, disableInternalLog)
         itemAmount = math.floor(math.abs(itemAmount))
 
         local itemData = API.getItemDataFromId(itemId)
@@ -497,10 +499,12 @@ function API.Inventory(id, capacity, slots)
 
         syncToViewers(self.viewersSources, sync, self:getWeight())
 
-        Logging.addGameLogEntryWithCharacter(self:getCharId(), 'REMOVE_INVENTORY_ITEM',
-            itemData:getName(), itemId,
-            itemAmount
-        )
+        if not disableInternalLog then
+            Logging.addGameLogEntryWithCharacter(self:getCharId(), 'REMOVE_INVENTORY_ITEM',
+                itemData:getName(), itemId,
+                itemAmount
+            )
+        end
 
         return true
     end

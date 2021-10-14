@@ -275,6 +275,33 @@ AddEventHandler(
     end
 )
 
+function addMoveInventoryItemGameLogEntry(primaryOrSecondaryStr, User, secondaryInventory, toMoveItemId, toMoveItemName, toMoveItemAmount)
+    local fromInventoryId = secondaryInventory:getId()
+    local fromCharacterId = secondaryInventory:getCharId() or -1
+
+    local fromUserId = -1
+    local fromUserName = '?'
+
+    local fromCharacterName = '?'
+
+    local fromUser = API.getUserFromCharId(fromCharacterId)
+
+    if fromUser then
+        fromUserId = fromUser:getId()
+        fromUserName = fromUser:getName()
+
+        fromCharacterName = fromUser:getCharacter():getName()
+    end
+
+    API.addGameLogEntryWithCharacter(User:getCharacter():getId(), ('MOVE_INVENTORY_ITEM_TO_%s'):format(primaryOrSecondaryStr),
+        fromInventoryId  ,
+        fromUserName     ,      fromUserId,
+        fromCharacterName, fromCharacterId,
+        toMoveItemName   ,    toMoveItemId,
+        toMoveItemAmount
+    )
+end
+
 RegisterNetEvent("FRP:INVENTORY:moveSlotToPrimary")
 AddEventHandler(
     "FRP:INVENTORY:moveSlotToPrimary",
@@ -314,13 +341,21 @@ AddEventHandler(
             itemAmount = 1
         end
 
-        if (primaryInventory:getWeight() + (Slot:getItemData():getWeight() * itemAmount)) >= primaryInventory:getCapacity() then
+        local itemData = Slot:getItemData()
+
+        if (primaryInventory:getWeight() + (itemData:getWeight() * itemAmount)) >= primaryInventory:getCapacity() then
             User:notify("error", "Baú cheio!")
             return
         end
 
-        if primaryInventory:addItem(Slot:getItemId(), itemAmount, Slot:getItemMetaData()) then
-            secondaryInventory:removeItem(slotId, Slot:getItemId(), itemAmount)
+        local toMoveItemId = Slot:getItemId()
+
+        if primaryInventory:addItem(toMoveItemId, itemAmount, Slot:getItemMetaData(), true) then
+            secondaryInventory:removeItem(slotId, toMoveItemId, itemAmount, true)
+
+            local toMoveItemName = itemData:getName()
+
+            addMoveInventoryItemGameLogEntry('PRIMARY', User, secondaryInventory, toMoveItemId, toMoveItemName, itemAmount)
         end
     end
 )
@@ -360,13 +395,21 @@ AddEventHandler(
             itemAmount = 1
         end
 
-        if (secondaryInventory:getWeight() + (Slot:getItemData():getWeight() * itemAmount)) >= secondaryInventory:getCapacity() then
+        local itemData = Slot:getItemData()
+
+        if (secondaryInventory:getWeight() + (itemData:getWeight() * itemAmount)) >= secondaryInventory:getCapacity() then
             User:notify("error", "Baú cheio!")
             return
         end
 
-        if secondaryInventory:addItem(Slot:getItemId(), itemAmount, Slot:getItemMetaData()) then
-            primaryInventory:removeItem(slotId, Slot:getItemId(), itemAmount)
+        local toMoveItemId = Slot:getItemId()
+
+        if secondaryInventory:addItem(toMoveItemId, itemAmount, Slot:getItemMetaData(), true) then
+            primaryInventory:removeItem(slotId, toMoveItemId, itemAmount, true)
+
+            local toMoveItemName = itemData:getName()
+
+            addMoveInventoryItemGameLogEntry('SECONDARY', User, secondaryInventory, toMoveItemId, toMoveItemName, itemAmount)
         end
     end
 )
