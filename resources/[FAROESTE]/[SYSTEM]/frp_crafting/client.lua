@@ -619,22 +619,24 @@ AddEventHandler(
 
         local playerPed = PlayerPedId()
 
-        local playerPosition = GetEntityCoords(playerPed)
+        local playerPosition = GetEntityCoords(playerPed, true)
 
         local _, groundZ, _ = GetGroundZAndNormalFor_3dCoord(playerPosition.x, playerPosition.y, playerPosition.z)
 
         local nearestCraftingConfig = GetNearestCraftingConfig(DEFAULT_CRAFTING_POSITION_RADIUS) or {}
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestCampfirePosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestCalderonPosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestPadariaPosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestPadaria2Position(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestFerreiroPosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestFerreiro2Position(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        local lookAtPosition = nearestCraftingConfig.position or GetNearestFerreiro3Position(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
+        local lookAtPosition = nearestCraftingConfig.position or GetNearestCampfirePosition(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestCalderonPosition(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestPadariaPosition(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestPadaria2Position(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestFerreiroPosition(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestFerreiro2Position(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
+        local lookAtPosition = lookAtPosition or GetNearestFerreiro3Position(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
         --local lookAtPosition = nearestCraftingConfig.position or GetNearestArmeiroPosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
-        
-        local dir = lookAtPosition - playerPosition
-        local desiredHeading = GetHeadingFromVector_2d(dir.x, dir.y)
+
+        local dx = lookAtPosition.x - playerPosition.x
+        local dy = lookAtPosition.y - playerPosition.y
+
+        local desiredHeading = GetHeadingFromVector_2d(dx, dy)
 
         ClearPedTasks(playerPed)
 
