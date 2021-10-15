@@ -633,6 +633,10 @@ AddEventHandler(
         local lookAtPosition = lookAtPosition or GetNearestFerreiro3Position(DEFAULT_CRAFTING_POSITION_RADIUS) -- or playerPosition
         --local lookAtPosition = nearestCraftingConfig.position or GetNearestArmeiroPosition(DEFAULT_CRAFTING_POSITION_RADIUS) or playerPosition
 
+        if not lookAtPosition then
+            lookAtPosition = playerPosition
+        end
+
         local dx = lookAtPosition.x - playerPosition.x
         local dy = lookAtPosition.y - playerPosition.y
 
