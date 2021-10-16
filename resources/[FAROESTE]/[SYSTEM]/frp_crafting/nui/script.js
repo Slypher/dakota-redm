@@ -23,7 +23,7 @@ window.addEventListener("message", function(event) {
             }
 
             $.each(x, function(i, y) {
-                $.each(y, function(cIndex, z) {
+                $.each(Array.from(y), function(cIndex, z) {
 
                     cIndex += 1;
 
