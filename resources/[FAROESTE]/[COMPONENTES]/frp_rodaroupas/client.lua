@@ -242,7 +242,7 @@ function getComponentByCategory(ped, categoryHash)
     -- GetNumComponentsInPed
     local numMetaAssets = Citizen.InvokeNative(0x90403E8107B60E81, ped)
 
-    if numMetaAssets <= 0 then
+    if numMetaAssets == false or numMetaAssets <= 0 then
         return
     end
 
