@@ -1037,7 +1037,7 @@ RegisterNUICallback(
     "Confirm",
     function()
         local dados = {
-            ["Mustache"] = MustacheUsing,
+            ["mustache"] = MustacheUsing,
             ["hair"] = HairUsing
         }
 
