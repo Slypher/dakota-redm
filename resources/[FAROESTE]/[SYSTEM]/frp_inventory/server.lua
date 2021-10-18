@@ -63,8 +63,6 @@ AddEventHandler(
         if itemWasAdded then
             local itemData = API.getItemDataFromId(itemId)
             if itemData:getType() == "weapon" then
-                local itemAmmoInClip = d_serveronly.itemWeaponAmmoInClip
-                local itemAmmoInWeapon = d_serveronly.itemWeaponAmmoInWeapon
 
                 local slotWeaponWasAddedTo
 
@@ -77,8 +75,6 @@ AddEventHandler(
 
                 local Slot = Inventory:getSlots()[slotWeaponWasAddedTo]
 
-                Slot:setAmmoInClip(itemAmmoInClip)
-                Slot:setAmmoInWeapon(itemAmmoInWeapon)
             end
 
             dropPopulation[index] = nil
@@ -181,8 +177,6 @@ AddEventHandler(
         local itemId = Slot:getItemId()
         local itemAmount = Slot:getItemAmount()
         local itemMetaData = Slot:getItemMetaData()
-        local itemAmmoInClip = Slot:getAmmoInClip()
-        local itemAmmoInWeapon = Slot:getAmmoInWeapon()
 
         if Inventory:removeItem(slotId, itemId, itemAmount) then
             math.randomseed(os.time())
@@ -198,8 +192,6 @@ AddEventHandler(
             }
 
             local d_serveronly = {
-                itemWeaponAmmoInClip = itemAmmoInClip or 0,
-                itemWeaponAmmoInWeapon = itemAmmoInWeapon or 0,
                 deletionTimestamp = os.time() + (60 * 10)
             }
 
@@ -559,6 +551,71 @@ AddEventHandler(
         end
     end
 )
+
+RegisterNetEvent('net.playerReloadedInventoryWeapon', function(reloadedWeaponSlotId, reloadedAmmoHash, addedAmmoAmount)
+    if addedAmmoAmount > 25 then
+        return
+    end
+
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local primaryInventory = character:getInventory()
+
+    if primaryInventory == nil then
+        return
+    end
+
+    local ammoType = API.getAmmoTypeFromHash(reloadedAmmoHash)
+
+    if not ammoType then
+        return
+    end
+
+    primaryInventory:updateEquippedWeaponAmmo(reloadedWeaponSlotId, ammoType, addedAmmoAmount, 0)
+end)
+
+RegisterNetEvent('net.playerShotInventoryWeapon', function(shotWeaponSlotId)
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local primaryInventory = character:getInventory()
+
+    if primaryInventory == nil then
+        return
+    end
+    
+    local weaponSlot = primaryInventory:getSlotById(shotWeaponSlotId)
+
+    if not weaponSlot then
+        return
+    end
+
+    local weaponItemId = weaponSlot:getItemId()
+    local weaponType = API.getWeaponTypeFromItemId(weaponItemId)
+
+    local isWeaponThrown = API.getIsWeaponTypeThrown(weaponType)
+
+    if isWeaponThrown then
+        primaryInventory:removeItem(shotWeaponSlotId, weaponItemId, weaponSlot:getItemAmount(), true)
+    else
+        primaryInventory:updateEquippedWeaponAmmo(shotWeaponSlotId, nil, -1, -1)
+    end
+end)
 
 -- RegisterCommand(
 --     "garmas",

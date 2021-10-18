@@ -12,6 +12,11 @@ local HOTBARSLOT_FROM_CONTROLHASH = {
     [`INPUT_SELECT_QUICKSELECT_MELEE_NO_UNARMED`] = 5,
 }
 
+local gWhereWeaponIsAtSlot = {}
+
+local gHasReceivedFirstAck = false
+local gIsReloadingOrShooting = false
+
 Citizen.CreateThread(
     function()
         while true do
@@ -47,79 +52,116 @@ Citizen.CreateThread(
     end
 )
 
-local whereWeaponIsAtSlot = {}
-local isReloadingOrShooting = false
-
 Citizen.CreateThread(
     function()
 
+        local playerPed = PlayerPedId()
+
+        RemoveAllPedWeapons(playerPed, true, true)
+        
+        -- RemoveAllPedAmmo
+        Citizen.InvokeNative(0x1B83C0DEEBCBB214, playerPed)
+
         local lastUsedWeaponHash
         local currUsedWeaponHash
+
+        local currUsedAmmoHash
+
+        local isReloading = false
+        local ammoInClipBeforeReloading
 
         while true do
             Citizen.Wait(0)
 
             local ped = PlayerPedId()
 
-            local _, currentWeapon = GetCurrentPedWeapon(ped, true, 0, true)
+            if gHasReceivedFirstAck then
+                local _, currentWeapon = GetCurrentPedWeapon(ped, true, 0, true)
 
-            if currUsedWeaponHash ~= currentWeapon then
-                lastUsedWeaponHash = currUsedWeaponHash
+                if currUsedWeaponHash ~= currentWeapon then
+                    lastUsedWeaponHash = currUsedWeaponHash
 
-                currUsedWeaponHash = currentWeapon
-            end
+                    currUsedWeaponHash = currentWeapon
 
-            if currentWeapon ~= GetHashKey("weapon_lasso") then
+                    -- GetPedAmmoTypeFromWeapon
+                    currUsedAmmoHash = Citizen.InvokeNative(0x7FEAD38B326B9F74, ped, currUsedWeaponHash)
+                end
 
-                -- IsPedReloading
-                if IsPedShooting(ped) or Citizen.InvokeNative(0x24B100C68C645951, ped) then
-
+                if currentWeapon ~= `weapon_lasso` then
                     -- IsPedReloading
-                    while Citizen.InvokeNative(0x24B100C68C645951, ped) do
-                        Citizen.Wait(0)
-                    end
+                    if Citizen.InvokeNative(0x24B100C68C645951, ped) then
+                        if not isReloading then
+                            isReloading = true
 
-                    isReloadingOrShooting = true
+                            _, ammoInClipBeforeReloading = GetAmmoInClip(ped, currentWeapon)
+                        end
+                    else
+                        if isReloading then
+                            isReloading = false
 
-                    local weaponHashUsedToShoot = currUsedWeaponHash
+                            _, ammoInClipAfterReloading = GetAmmoInClip(ped, currentWeapon)
 
-                    -- O player usou uma arma jogável e então aconteceu uma coisa ou outra:
-                    -- O player mudou ficou sem arma nenhuma na mão
-                    -- ou ele trocou para outra arma jogável.
-                    if currUsedWeaponHash == `WEAPON_UNARMED`
-                        -- IsWeaponThrowable
-                        or Citizen.InvokeNative(0x30E7C16B12DA8211, currUsedWeaponHash)
-                        -- IsWeaponMeleeWeapon
-                        or Citizen.InvokeNative(0x959383DCD42040DA, currUsedWeaponHash) then
-                        
-                        -- IsWeaponThrowable
-                        if lastUsedWeaponHash and Citizen.InvokeNative(0x30E7C16B12DA8211, lastUsedWeaponHash)then
-                            
-                            -- GetCoordsOfProjectileTypeWithinDistance
-                            local hasProjectile, projectilePos = Citizen.InvokeNative(0xD73C960A681052DF, ped, lastUsedWeaponHash, 2.0, Citizen.PointerValueVector(), false, true, Citizen.ReturnResultAnyway())
+                            local ammoAddedAmount = ammoInClipAfterReloading - ammoInClipBeforeReloading
 
-                            if hasProjectile then
-                                weaponHashUsedToShoot = lastUsedWeaponHash
+                            local reloadedWeaponSlotId = getWeaponSlotIdFromHash(currentWeapon)
+
+                            local currWeaponEntity = Citizen.InvokeNative(0x3B390A939AF0B5FC, ped, 0)
+
+                            local ammoHashThisFrame = Citizen.InvokeNative(0x7E7B19A4355FEE13, ped, currWeaponEntity)
+
+                            if reloadedWeaponSlotId then
+                                TriggerServerEvent('net.playerReloadedInventoryWeapon', reloadedWeaponSlotId, ammoHashThisFrame, ammoAddedAmount)
                             end
                         end
                     end
 
-                    for weaponId, slotId in pairs(whereWeaponIsAtSlot) do
+                    if IsPedShooting(ped) or IsPedPlantingBomb(ped) then
 
-                        if weaponHashUsedToShoot == GetHashKey(weaponId) then
-                            local _, inClip = GetAmmoInClip(ped, weaponHashUsedToShoot)
-
-                            local inWeapon = GetAmmoInPedWeapon(ped, weaponHashUsedToShoot)
-                            local ammoRemaining = math.floor(inWeapon - inClip)
-
-                            TriggerServerEvent("FRP:INVENTORY:SaveWeaponAmmoOnDB", slotId, inClip, ammoRemaining)
+                        -- #WARNING: Vai bloquear a thread toda, nada mais vai executar, talvez dê merda.
+                        while IsPedPlantingBomb(ped) do
+                            Wait(0)
                         end
+
+                        local weaponHashUsedToShoot = currUsedWeaponHash
+
+                        -- O player usou uma arma jogável e então aconteceu uma coisa ou outra:
+                        -- O player mudou ficou sem arma nenhuma na mão
+                        -- ou ele trocou para outra arma jogável.
+
+                        -- IsWeaponThrowable
+                        if Citizen.InvokeNative(0x30E7C16B12DA8211, lastUsedWeaponHash)then
+                        
+                            -- GetCoordsOfProjectileTypeWithinDistance
+                            local hasProjectile, projectilePos = Citizen.InvokeNative(0xD73C960A681052DF, ped, lastUsedWeaponHash, 2.0, Citizen.PointerValueVector(), false, true, Citizen.ReturnResultAnyway())
+                            if hasProjectile then
+                                weaponHashUsedToShoot = lastUsedWeaponHash
+                            end
+                        end
+
+                        local shotWeaponSlotId = getWeaponSlotIdFromHash(weaponHashUsedToShoot)
+
+                        -- Remover o item caso seja um throwable
+                        TriggerServerEvent('net.playerShotInventoryWeapon', shotWeaponSlotId)
                     end
+
+                    -- Verificar quando o player muda de tipo de munição e
+                    -- enviar para o servidor para poder zerar o numero de munições no clip.
                 end
             end
         end
     end
 )
+
+function getWeaponSlotIdFromHash(weaponHash)
+    for weaponId, slotId in pairs(gWhereWeaponIsAtSlot) do
+        if weaponHash == GetHashKey(weaponId) then
+            return slotId
+        end
+    end
+
+    return nil
+end
+
 --[[
 local currentlyTryingToSendItem = false
 local prompt_senditem
@@ -422,6 +464,7 @@ end
 
 function computeSlots(table, asPrimary)
     local ped = PlayerPedId()
+
     for slotId, values in pairs(table) do
         local itemInfo = ItemList[values.name]
 
@@ -429,9 +472,25 @@ function computeSlots(table, asPrimary)
             local itemId = values.name
             local itemAmount = values.amount[1]
 
-            local ammoInClip = values.amount[2]
-            local ammoInWeapon = values.amount[3]
-           
+            local weaponMetadata = values.info
+
+            if weaponMetadata == '[]' then
+                weaponMetadata = { }
+            end
+
+            -- Valor padrões para armas jogáveis.
+            local ammoInClip = -1
+            local ammoInWeapon = -1
+
+            local selectedAmmoType = weaponMetadata.selected_ammo_type
+
+            if selectedAmmoType then
+                local ammoCountOfType = weaponMetadata[selectedAmmoType] or 0
+
+                ammoInClip = weaponMetadata.ammo_in_clip or 0
+                ammoInWeapon = math.max(ammoCountOfType - ammoInClip, 0)
+            end
+            
             values.itemName = itemInfo.name
             values.itemDescription = itemInfo.description or "Descrição"
             values.itemStackSize = itemInfo.stackSize or 1
@@ -439,24 +498,29 @@ function computeSlots(table, asPrimary)
             local itemType = itemInfo.type
 
             if itemInfo.type == "weapon" and asPrimary then
-                -- ammoInClip = ammoInClip - 1
                 values.amount[2] = ammoInClip
                 values.amount[3] = ammoInWeapon
 
                 if (slotId >= 129 and slotId <= 132) then
-                    -- if not shotOrReloaded then
                     local weaponId = "weapon_" .. itemId
                     local weaponHash = GetHashKey(weaponId)
 
-                    whereWeaponIsAtSlot[weaponId] = nil
+                    -- Armas jogáveis só podem ter uma munição por vez.
+                    --
+                    -- IsWeaponThrowable
+                    if Citizen.InvokeNative(0x30E7C16B12DA8211, weaponHash) then
+                        ammoInWeapon = 1
+                    end
+
+                    gWhereWeaponIsAtSlot[weaponId] = nil
 
                     if itemAmount > 0 then
-                        for wId, slot in pairs(whereWeaponIsAtSlot) do
+                        for wId, slot in pairs(gWhereWeaponIsAtSlot) do
                             if slot == slotId and weaponId ~= wId then
                                 local foundHash = GetHashKey(wId)
                                 SetPedAmmo(ped, foundHash, 0)
                                 RemoveWeaponFromPed(ped, foundHash)
-                                whereWeaponIsAtSlot[wId] = nil
+                                gWhereWeaponIsAtSlot[wId] = nil
                             end
                         end
 
@@ -466,21 +530,44 @@ function computeSlots(table, asPrimary)
                             Citizen.InvokeNative(0x5E3BDDBCB83F3D84, ped, weaponHash, ammoInWeapon, true, true)
                         end
 
-                        SetPedAmmo(ped, weaponHash, ammoInWeapon)
+                        local selectedAmmoHash = GetHashKey(selectedAmmoType)
+
+                        for key, value in pairs(weaponMetadata) do
+                            if string.find(key, 'ammo_') then
+
+                                local ammoType = key
+                                local ammoHash = GetHashKey(ammoType)
+
+                                local amountCount = value
+
+                                -- Não funciona :/
+                                --
+                                -- EnableAmmoTypeForPedWeapon
+                                -- Citizen.InvokeNative(0x23FB9FACA28779C1, ped, weaponHash, ammoHash)
+
+                                -- SetPedAmmoByType
+                                Citizen.InvokeNative(0x5FD1E1F011E76D7E, ped, ammoHash, amountCount)
+                            end
+                        end
+
+                        -- SetPedWeaponAmmoType
+                        Citizen.InvokeNative(0xCC9C4393523833E2, ped, weaponHash, selectedAmmoHash)
+
                         SetAmmoInClip(ped, weaponHash, ammoInClip)
 
-                        whereWeaponIsAtSlot[weaponId] = slotId
+                        gWhereWeaponIsAtSlot[weaponId] = slotId
                     else
                         if HasPedGotWeapon(ped, weaponHash, false) then
                             SetPedAmmo(ped, weaponHash, 0)
                             RemoveWeaponFromPed(ped, weaponHash)
                         end
                     end
-                -- end
                 end
             end
         end
     end
+
+    gHasReceivedFirstAck = true
 
     return table
 end
@@ -707,7 +794,6 @@ AddEventHandler('poke_planting:regar1', function(source)
             local object = CreateObject(plant2, x, y, z, true, true, false)
             local plantCount = #myPlants2+1
             myPlants2[plantCount] = {["object"] = object, ['x'] = x, ['y'] = y, ['z'] = z, ['stage'] = 2, ['timer'] = 150, ['hash'] = hash1, ['hash2'] = hash2, ['hash3'] = hash3}
-            print(myPlants2[plantCount],myPlants2[plantCount]['object'])
             PlaceObjectOnGroundProperly(myPlants2[plantCount].object)
             SetEntityAsMissionEntity(myPlants2[plantCount].object, true)
             SetModelAsNoLongerNeeded(plant2)

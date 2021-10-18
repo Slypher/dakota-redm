@@ -277,7 +277,14 @@ function API.User(source, id, ipAddress)
         TriggerClientEvent("FRP:INVENTORY:NUICloseNoCallback", self:getSource())
 
         if self.primaryViewingInventory ~= nil then
-            self.primaryViewingInventory:removeViewer(self)
+
+            local character = self:getCharacter()
+            local characterId = character ~= nil and character:getId() or nil
+
+            -- Somente remover como viewer caso não seja o proprio inventário.
+            if not characterId or self.primaryViewingInventory:getCharId() ~= characterId then
+                self.primaryViewingInventory:removeViewer(self)
+            end
         end
 
         if self.secondaryViewingInventory ~= nil then

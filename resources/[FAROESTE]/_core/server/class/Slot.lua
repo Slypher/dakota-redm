@@ -34,6 +34,10 @@ function API.Slot(slotId, itemId, itemAmount, ammoInClip, ammoInWeapon, infoData
         return self.itemMetaData
     end
 
+    self.setItemMetaData = function(this, metadata)
+        self.itemMetaData = metadata
+    end
+
     self.setItemAmount = function(this, v)
         self.itemAmount = v
     end
@@ -79,7 +83,7 @@ function API.Slot(slotId, itemId, itemAmount, ammoInClip, ammoInWeapon, infoData
     end
 
     self.getSyncData = function()
-        return {name = self.itemId, amount = {self.itemAmount,self:getAmmoInClip(), self:getAmmoInWeapon()}, info = self.itemMetaData}
+        return {name = self.itemId, amount = {self.itemAmount}, info = self.itemMetaData}
     end
 
     return self

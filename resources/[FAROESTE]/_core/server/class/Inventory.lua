@@ -144,8 +144,6 @@ function API.Inventory(id, capacity, slots)
 
                 self:setSlot(slotIdTo, Slot:getItemId(), amount, nil, Slot:getItemMetaData())
                 local newSlot = self.slots[slotIdTo]
-                newSlot:setAmmoInClip(Slot:getAmmoInClip())
-                newSlot:setAmmoInWeapon(Slot:getAmmoInWeapon())
 
                 sync[slotId] = Slot:getSyncData()
                 sync[slotIdTo] = newSlot:getSyncData()
@@ -211,35 +209,118 @@ function API.Inventory(id, capacity, slots)
                 local itemTypeTo = SlotTo:getItemData():getType()
 
                 if itemType == "ammo" and itemTypeTo == "weapon" then
-                    if getAmmoTypeFromWeaponType("weapon_" .. SlotTo:getItemId()) == Slot:getItemId() then
-                        Slot:removeItemAmount(amount)
-                        SlotTo:setAmmoInWeapon(SlotTo:getAmmoInWeapon() + amount)
+                    local ammoSlot = Slot
+                    local weaponSlot = SlotTo
 
-                        local gotRemoved = false
-                        if Slot:getItemAmount() <= 0 then
-                            gotRemoved = true
-                            self.slots[slotId] = nil
-                            Citizen.CreateThread(
-                                function()
-                                    API_Database.execute("UPDATE:inv_remove_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId})
-                                end
+                    local weaponItemId = weaponSlot:getItemId()
+                    local weaponType = getWeaponTypeFromItemId(weaponItemId)
+
+                    -- Esses tipos de armas não aceitam munições.
+                    if getIsWeaponTypeLasso(weaponType) or getIsWeaponTypeMelee(weaponType) then
+                        return false
+                    end
+
+                    local ammoType = ammoSlot:getItemId()
+
+                    if not doesAmmoTypeFitWeaponType(ammoType, weaponType) then
+                        return false
+                    end
+
+                    local weaponMetadata = weaponSlot:getItemMetaData()
+
+                    if weaponMetadata == '[]' then
+                        weaponMetadata = { }
+                    end
+
+                    local equippedAmmoOfTypeCount = weaponMetadata[ammoType] or 0
+
+                    local toEquipAmmoAmount = ammoSlot:getItemAmount()
+
+                    -- Tentar remover/equipar todas as munições atualmente no slot.
+                    local toRemoveAmmoAmount = toEquipAmmoAmount
+
+                    local maxEquippedAmmoCount = getMaxEquippedAmmoCountForWeaponType(weaponType)
+
+                    -- Verificar se o numero de munições irá ultrapassar o máximo
+                    -- caso ultrapasse, pegar o numero máximo que da para equipar.
+                    if toEquipAmmoAmount + equippedAmmoOfTypeCount > maxEquippedAmmoCount then
+                        toRemoveAmmoAmount = maxEquippedAmmoCount - equippedAmmoOfTypeCount
+                    end
+
+                    -- Não dá para equipar mais munição desse tipo
+                    -- a arma já está no limite...
+                    if toRemoveAmmoAmount <= 0 then
+                        return false
+                    end
+
+                    local newEquippedAmmoCountOfType = equippedAmmoOfTypeCount + toRemoveAmmoAmount
+
+                    -- Ué?
+                    if newEquippedAmmoCountOfType <= 0 then
+                        return false
+                    end
+
+                    weaponMetadata[ammoType] = newEquippedAmmoCountOfType
+
+                    if not weaponMetadata.selected_ammo_type then
+                        weaponMetadata.selected_ammo_type = ammoType
+                        weaponMetadata.ammo_in_clip = 0
+                    end
+
+                    weaponSlot:setItemMetaData(weaponMetadata)
+
+                    -- Remover a quantidade do slot de munição...
+                    ammoSlot:removeItemAmount(toRemoveAmmoAmount)
+
+                    local ammoSlotSyncData = ammoSlot:getSyncData()
+                    local weaponSlotSyncData = weaponSlot:getSyncData()
+
+                    local inventoryId = self:getId()
+
+                    local ammoSlotId = ammoSlot:getId()
+                    local ammoSlotUpdateFn
+
+                    -- Foram removidas todas as munições do slot...
+                    if ammoSlot:getItemAmount() <= 0 then
+                        
+                        self.slots[ammoSlotId] = nil
+
+                        ammoSlotUpdateFn = function()
+                            API_Database.execute("UPDATE:inv_remove_slot",
+                                {
+                                    ['inv_id'] = inventoryId,
+                                    ['slot_id'] = ammoSlotId,
+                                }
                             )
                         end
-
-                        Citizen.CreateThread(
-                            function()
-                                if gotRemoved == false then
-                                    local slot_data = json.encode(Slot:getSyncData())
-                                    API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotId, ['slot_value'] = slot_data})
-                                end
-                                local slot_dataTo = json.encode(SlotTo:getSyncData())
-                                API_Database.execute("UPDATE:inv_update_slot", {['inv_id'] = self:getId(), ['slot_id'] = slotIdTo, ['slot_value'] = slot_dataTo})
-                            end
-                        )
-
-                        sync[slotId] = Slot:getSyncData()
-                        sync[slotIdTo] = SlotTo:getSyncData()
+                    else
+                        ammoSlotUpdateFn = function()
+                            API_Database.execute("UPDATE:inv_update_slot",
+                                {
+                                    ['inv_id'] = inventoryId,
+                                    ['slot_id'] = ammoSlotId,
+                                    ['slot_value'] = json.encode(ammoSlotSyncData),
+                                }
+                            )
+                        end
                     end
+
+                    Citizen.CreateThread(function()
+                        ammoSlotUpdateFn()
+
+                        local weaponSlotId = weaponSlot:getId()
+
+                        API_Database.execute("UPDATE:inv_update_slot",
+                            {
+                                ['inv_id'] = inventoryId,
+                                ['slot_id'] = weaponSlotId,
+                                ['slot_value'] = json.encode(weaponSlotSyncData),
+                            }
+                        )
+                    end)
+
+                    sync[slotId] = ammoSlotSyncData
+                    sync[slotIdTo] = weaponSlotSyncData
                 else
                     -- Segurar a referencia para o slot por enquanto.
                     local copySlot = SlotTo
@@ -599,6 +680,94 @@ function API.Inventory(id, capacity, slots)
         syncToViewers({[_source] = true}, sync, self:getWeight())
     end
 
+    self.updateEquippedWeaponAmmo = function(this, weaponSlotId, newAmmoType, changeAmmoInClip, changeAmmoTotal)
+        if weaponSlotId < 129 or weaponSlotId > 132 then
+            return false
+        end
+
+        local weaponSlot = self.slots[weaponSlotId]
+
+        if not weaponSlot then
+            return false
+        end
+
+        local weaponItemId = weaponSlot:getItemId()
+        local weaponType = getWeaponTypeFromItemId(weaponItemId)
+
+        -- Não é uma arma registrada...
+        if not weaponType then
+            return false
+        end
+
+        local anyUpdates = false
+
+        local equippedWeaponMetadata = weaponSlot:getItemMetaData()
+
+        if newAmmoType then
+            equippedWeaponMetadata.selected_ammo_type = newAmmoType
+
+            anyUpdates = true
+        end
+
+        local selectedAmmoType = equippedWeaponMetadata.selected_ammo_type
+
+        if not selectedAmmoType then
+            return false
+        end
+
+        -- Pode ser uma quantidade negativa ou positiva.
+        if changeAmmoInClip ~= nil then
+            local ammoInClip = equippedWeaponMetadata.ammo_in_clip or 0
+
+            local newAmmoInClip = ammoInClip + changeAmmoInClip
+            
+            -- Limitar o entre 0 e ?
+            newAmmoInClip = math.min(newAmmoInClip, getMaxEquippedAmmoInClipForWeaponType(weaponType))
+            newAmmoInClip = math.max(newAmmoInClip, 0)
+
+            equippedWeaponMetadata.ammo_in_clip = newAmmoInClip
+
+            anyUpdates = true
+        end
+
+        -- Pode ser uma quantidade negativa ou positiva.
+        if changeAmmoTotal ~= nil then
+            local selectedAmmoTotalCount = equippedWeaponMetadata[selectedAmmoType] or 0
+
+            local newSelectedAmmoTotalCount = selectedAmmoTotalCount + changeAmmoTotal
+            
+            newSelectedAmmoTotalCount = math.min(newSelectedAmmoTotalCount, getMaxEquippedAmmoCountForWeaponType(weaponType))
+            newSelectedAmmoTotalCount = math.max(newSelectedAmmoTotalCount, 0)
+
+            equippedWeaponMetadata[selectedAmmoType] = newSelectedAmmoTotalCount > 0 and newSelectedAmmoTotalCount or nil
+
+            anyUpdates = true
+        end
+
+        if not anyUpdates then
+            return false
+        end
+
+        local equippedWeaponSlotSyncData = weaponSlot:getSyncData()
+
+        -- #TODO: Não fazer uma query diretamente, atualizar as munições periodicamente.
+        Citizen.CreateThread(
+            function()
+                API_Database.execute("UPDATE:inv_update_slot",
+                    {
+                        ['inv_id'] = self:getId(),
+                        ['slot_id'] = weaponSlotId,
+                        ['slot_value'] = json.encode(equippedWeaponSlotSyncData)
+                    }
+                )
+            end
+        )
+
+        syncToViewers(self.viewersSources, { [weaponSlotId] = equippedWeaponSlotSyncData }, self:getWeight())
+
+        return true
+    end
+
     self.getSlotsWithItemId = function(this, itemId)
         local ret = { }
 
@@ -867,3 +1036,51 @@ eInventoryFlag = {
     NONE = 0,
     DISABLE_REMOVE_ITEMS = 1 << 0,
 }
+
+function doesAmmoTypeFitWeaponType(ammoType, weaponType)
+    local supportedWeaponTypes = LOOKUP_AMMOTYPE_TO_SUPPORTED_WEAPONTYPES[ammoType]
+
+    return (supportedWeaponTypes ~= nil and supportedWeaponTypes[weaponType] ~= nil)
+end
+
+function getWeaponInfoByType(weaponType)
+    return WEAPON_INFO_DATABASE[weaponType]
+end
+
+function getMaxEquippedAmmoCountForWeaponType(weaponType)
+    return getWeaponInfoByType(weaponType)?.max_ammo
+end
+
+function getMaxEquippedAmmoInClipForWeaponType(weaponType)
+    return getWeaponInfoByType(weaponType)?.max_ammo_in_clip
+end
+
+function getWeaponGroupByType(weaponType)
+    return getWeaponInfoByType(weaponType)?.group
+end
+
+function getIsWeaponTypeMelee(weaponType)
+    return getWeaponGroupByType(weaponType) == 'group_melee'
+end
+
+function getIsWeaponTypeLasso(weaponType)
+    return getWeaponGroupByType(weaponType) == 'group_melee'
+end
+
+function getIsWeaponTypeThrown(weaponType)
+    return getWeaponGroupByType(weaponType) == 'group_thrown'
+end
+
+function getWeaponTypeFromItemId(itemId)
+    return 'weapon_' .. itemId
+end
+
+function getAmmoTypeFromHash(ammoHash)
+    return LOOKUP_AMMOHASH_TO_AMMOTYPE[ammoHash]
+end
+
+API.getWeaponTypeFromItemId = getWeaponTypeFromItemId
+
+API.getIsWeaponTypeThrown = getIsWeaponTypeThrown
+
+API.getAmmoTypeFromHash = getAmmoTypeFromHash

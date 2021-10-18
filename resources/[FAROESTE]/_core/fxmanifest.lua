@@ -33,6 +33,8 @@ server_scripts {
 	"config/XPSystem.lua",
 	"config/Chests.lua",
 	"config/Permissions.lua",
+	"config/WeaponInfoDatabase.lua",
+	"config/WeaponInfoLookup.lua",
 	---------------------
 	"server/Database.lua",
 	"server/_Main.lua",

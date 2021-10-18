@@ -526,7 +526,7 @@ function drawHotbar() {
 
             $(`#primary .hotbar #${slotId}`).removeClass('empty');
 
-            if (itemId != 'lasso') {
+            if (itemId != 'lasso' && ( (ammoInClip >= 0) && ammoInWeapon >= 0) ) {
                 $(`#primary .hotbar #${slotId}`).append(`
                     <img src="images/items/${itemId}.png" onerror="this.src='images/_placeholder.png'">
                     <div class="counter">${ammoInClip}/${ammoInWeapon}</div>
@@ -614,7 +614,7 @@ function drawPrimary() {
             var displayItemAmount = false;
                       
 
-            if (ammoInClip == undefined && ammoInWeapon == undefined) {
+            if (ammoInClip == undefined && ammoInWeapon == undefined || ( ammoInClip < 0 || ammoInWeapon < 0) ) {
                 
                 if (itemStackSize != -1) {
                     if (itemId != "lasso") {
@@ -809,7 +809,7 @@ function drawSecondary() {
 
             var displayItemAmount = false;
 
-            if (ammoInClip == undefined && ammoInWeapon == undefined) {
+            if (ammoInClip == undefined && ammoInWeapon == undefined | ( ammoInClip < 0 || ammoInWeapon < 0)) {
                 if (itemStackSize != -1) {
                     if (itemId != "lasso") {
                         $(`#secondary-inventory .slot-container`).append(`
