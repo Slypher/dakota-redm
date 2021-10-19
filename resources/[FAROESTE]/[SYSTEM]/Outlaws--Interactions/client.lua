@@ -170,7 +170,7 @@ end, false)
 
 CreateThread(function()
   while true do Wait(0)
-    local E = IsControlJustReleased(0, Keys['LALT'])
+    local E = IsControlJustReleased(0, `INPUT_PHOTO_MODE_PC`)
     if ((E) and not CheckForStop) then CheckForStop = true StartInteraction() end
     if ((E) and CheckForStop) then CheckForStop = false StopInteraction() end
   end

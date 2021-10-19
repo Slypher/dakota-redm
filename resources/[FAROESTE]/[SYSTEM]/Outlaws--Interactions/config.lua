@@ -1,7 +1,7 @@
 Config = {}
 
 -- Control to start/stop interactions. Comment this out to disable the control.
-Config.InteractControl = 0x3076E97C--0x2EAB0795 -- F6
+Config.InteractControl = `INPUT_PC_FREE_LOOK` -- LALT
 
 
 
