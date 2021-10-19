@@ -116,6 +116,9 @@ function API.Inventory(id, capacity, slots)
                     fromSlotMetadata.selected_ammo_type = defaultAmmoType
 
                     fromSlotMetadata[defaultAmmoType] = (fromSlotMetadata[defaultAmmoType] or 0) + (oldAmmoInWeapon + oldAmmoInClip)
+
+                    Slot:setAmmoInClip(0)
+                    Slot:setAmmoInWeapon(0)
                 end
             end
         end
