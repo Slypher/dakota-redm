@@ -121,7 +121,7 @@ function API.Chest(id)
                 targetId = charId
             end
             if self.inventories == nil or self.inventories[targetId] == nil then
-                local inventoryIdThisChestForTargetId = self:getId() .. ":" .. targetId
+                local inventoryIdThisChestForTargetId = "chest:" .. self:getId() .. ":" .. targetId
                 local query = API_Database.query("SELECT:inv_select_slots_and_capacity", {inv_id = inventoryIdThisChestForTargetId})
                 local slots = {}
 
