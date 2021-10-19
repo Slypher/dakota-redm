@@ -983,3 +983,19 @@ RegisterCommand(
         end
     end
 )
+
+function updateReplicatedNumConnectedPlayers()
+    GlobalState.numConnectedPlayers = GetNumPlayerIndices()
+end
+
+AddEventHandler('playerJoining', function()
+    updateReplicatedNumConnectedPlayers()
+end)
+
+AddEventHandler('playerDropped', function()
+    updateReplicatedNumConnectedPlayers()
+end)
+
+CreateThread(function()
+    updateReplicatedNumConnectedPlayers()
+end)

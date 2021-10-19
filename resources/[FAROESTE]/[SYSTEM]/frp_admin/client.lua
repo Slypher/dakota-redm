@@ -409,18 +409,13 @@ AddEventHandler(
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(5000)
-		players = {}
-		for i = 0,64 do
-			if NetworkIsPlayerActive(i) then
-				table.insert(players,i)
-			end
-		end
-		SetDiscordAppId(881997599140360272	)
+		SetDiscordAppId(881997599140360272)
 		SetDiscordRichPresenceAsset('logo')
-        SetRichPresence("Habitantes: "..#players)
+        SetRichPresence("Habitantes: " .. GlobalState.numConnectedPlayers or 1)
 		SetDiscordRichPresenceAssetText('discord.gg/dakotarp')
 		SetDiscordRichPresenceAssetSmall('logo')
         SetDiscordRichPresenceAssetSmallText('discord.gg/dakotarp')
+
+		Citizen.Wait(5000)
 	end
 end)
