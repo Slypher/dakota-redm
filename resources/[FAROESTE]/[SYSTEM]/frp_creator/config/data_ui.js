@@ -80,7 +80,7 @@ const uiMenuData = {
             inputs:
             [                                         
                 { name: "Cicatrizes", subTitle: 'Selecione o tipo de Cicatrizes.', id: "scars", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 16, steps: 1 },                    
-                { name: "Espinhas", subTitle: 'Selecione o tipo de Espinhas.', id: "acne", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 1.9, steps: 1 }, 
+                { name: "Espinhas", subTitle: 'Selecione o tipo de Espinhas.', id: "acne", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 1, steps: 1 }, 
                 { name: "Manchas", subTitle: 'Selecione o tipo de Manchas.', id: "complex", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 14, steps: 1 }, 
                 { name: "Tampão", subTitle: 'Selecione o tipo de Tampão.', id: "disc", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 16, steps: 1 }, 
                 { name: "Sardas", subTitle: 'Selecione o tipo de Sardas.', id: "freckles", type: "number", typeOfOverlay: 'model', minValue: 0, value: 0, maxValue: 15, steps: 1 },  
@@ -155,8 +155,8 @@ const uiMenuData = {
                 { name: "Largura", subTitle: 'Modifique a largura da boca.', id: "mouth_width", type: "number", minValue: -1.9,   hashFeacture: 0xF065, value: 0, maxValue: 1.9, steps: 0.1 },                    
                 { name: "Pos. Horizontal", subTitle: 'Modifique a posição horizontal da boca.', id: "mouth_x_pos", type: "number", minValue: -1.9,    hashFeacture: 0x7AC3, value: 0, maxValue: 1.9, steps: 0.1 },                    
                 { name: "Pos. Vertical", subTitle: 'Modifique a posição vertical da boca.', id: "mouth_y_pos", type: "number", minValue: -1.9,    hashFeacture: 0x410D, value: 0, maxValue: 1.9, steps: 0.1 },                    
-                { name: "Lábio Inferior", subTitle: 'Personalizar o lábio inferior.', id: "lip_lower", type: "button", value: null, focusedMenuIndex: 12 },
-                { name: "Lábio Supeiror", subTitle: 'Personalizar o lábio superior.', id: "lip_upper", type: "button", value: null, focusedMenuIndex: 11 },
+                { name: "Lábio Inferior", subTitle: 'Personalizar o lábio inferior.', id: "lip_lower", type: "button", value: null, focusedMenuIndex: 13 },
+                { name: "Lábio Superior", subTitle: 'Personalizar o lábio superior.', id: "lip_upper", type: "button", value: null, focusedMenuIndex: 12 },
             ]
         },  
         {
