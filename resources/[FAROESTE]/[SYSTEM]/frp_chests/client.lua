@@ -244,6 +244,8 @@ Citizen.CreateThread(
                     if IsControlJustPressed(0, 0xCEFD9220) then -- E
                         -- print("Opened")
                         TriggerServerEvent("FRP:CHESTS:Open", closestChestId)
+
+                        Wait(1000)
                     end
                 end
             end
