@@ -33,8 +33,6 @@ server_scripts {
 	"config/XPSystem.lua",
 	"config/Chests.lua",
 	"config/Permissions.lua",
-	"config/WeaponInfoDatabase.lua",
-	"config/WeaponInfoLookup.lua",
 	---------------------
 	"server/Database.lua",
 	"server/_Main.lua",
@@ -62,6 +60,11 @@ server_scripts {
 	"server/Logging.lua",
 	"server/LoggingHelper.lua",
 	"server/LoggingHook*.lua",
+}
+
+shared_scripts {
+	"config/WeaponInfoDatabase.lua",
+	"config/WeaponInfoLookup.lua",
 }
 
 files {

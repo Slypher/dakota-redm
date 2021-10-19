@@ -478,9 +478,8 @@ function computeSlots(table, asPrimary)
                 weaponMetadata = { }
             end
 
-            -- Valor padrões para armas jogáveis.
-            local ammoInClip = -1
-            local ammoInWeapon = -1
+            local ammoInClip = 0
+            local ammoInWeapon = 0
 
             local selectedAmmoType = weaponMetadata.selected_ammo_type
 
@@ -498,6 +497,18 @@ function computeSlots(table, asPrimary)
             local itemType = itemInfo.type
 
             if itemInfo.type == "weapon" and asPrimary then
+
+                local weaponItemId = itemId
+                local weaponType = 'weapon_' .. itemId
+
+                local weaponInfo = WEAPON_INFO_DATABASE[weaponType]
+
+                -- Desabilitar aparecer a quantidade de munição nos slots.
+                if not weaponInfo or (weaponInfo and weaponInfo.group == 'group_thrown') then
+                    ammoInClip = -1
+                    ammoInWeapon = -1
+                end
+
                 values.amount[2] = ammoInClip
                 values.amount[3] = ammoInWeapon
 

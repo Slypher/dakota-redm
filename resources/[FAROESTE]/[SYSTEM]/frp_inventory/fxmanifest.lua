@@ -5,6 +5,8 @@ rdr3_warning "I acknowledge that this is a prerelease build of RedM, and I am aw
 client_scripts {
     "@_core/lib/utils.lua",
     "@_core/config/Items.lua",
+    "@_core/config/WeaponInfoDatabase.lua",
+    "@_core/config/WeaponInfoLookup.lua",
     "client.lua",
     "client_drop.lua"
 }
