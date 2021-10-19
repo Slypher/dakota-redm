@@ -406,9 +406,8 @@ function triggerUse(User, itemData, Slot)
         -- cAPI.VaryPlayerStamina(source, 15)
         --cAPI.VaryPlayerCore(source, 1, 20)
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -60)
+        API.varyHunger2(source, -35)
         --cAPI.VarySickness(source, 10)
-
         User:closeInventory()
         return true
     end
@@ -526,13 +525,13 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "cafe" then
         cAPI.TaskInteraction(source, "drink_tonic")
-        API.varyThirst2(source, -50)
+        API.varyThirst2(source, -35)
         User:closeInventory()
         return true
     end
     if itemId == "vitamina" then
         cAPI.TaskInteraction(source, "drink_tonic")
-        API.varyThirst2(source, -55)
+        API.varyThirst2(source, -35)
         User:closeInventory()
         return true
     end
