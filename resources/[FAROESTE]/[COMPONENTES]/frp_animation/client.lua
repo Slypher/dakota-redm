@@ -60,8 +60,9 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         if ragdoll then
-          Citizen.InvokeNative(0xAE99FB955581844A, PlayerPedId(), 10000, 10000, 0, 0, 0, 0)
-       end
+            -- TaskKnockedOut
+            Citizen.InvokeNative(0xF90427F00A495A28, PlayerPedId(), 0, false)
+        end
     end
 end)
 
