@@ -22,14 +22,21 @@ AddEventHandler(
                 User:notify("error", "Quantia inválida!")
                 return
             else
-                Character:setData(Character:getId(), "metaData", "banco", tonumber(call - (amount * 100)))
-                Wait(100)
-                Inventory:addItem("money", amount * 100)
-                User:notify("item", "money", amount)
-                Wait(100)
-                -- TriggerClientEvent("redemrp_notification:start",_source, "Withdrawal made.." , 2, "success")
-                Wait(1000)
-                TriggerEvent("FRP:BANKING:balance", _source)
+                local dollarItemAmount = amount * 100
+
+                if Inventory:addItem("money", dollarItemAmount, nil, true) then
+                    Character:setData(Character:getId(), "metaData", "banco", tonumber(call - (dollarItemAmount)))
+
+                    User:notify("item", "money", dollarItemAmount)
+
+                    TriggerEvent("FRP:BANKING:balance", _source)
+
+                    API.addGameLogEntryWithCharacter(Character:getId(), 'BANK_DOLLAR_WITHDRAW',
+                        amount
+                    )
+                else
+                    User:notify("error", "Ocorreu uma falha ao concluir a transação!")
+                end
             end
         end
     end
@@ -51,14 +58,21 @@ AddEventHandler(
                 User:notify("error", "Quantia inválida!")
                 return
             else
-                Character:setData(Character:getId(), "metaData", "banco", tonumber(call + (amount * 100)))
-                Wait(100)
-                Inventory:removeItem(-1, "money", amount * 100)
-                User:notify("item", "money", -(amount))
-                Wait(100)
-                -- TriggerClientEvent("redemrp_notification:start",_source, "Withdrawal made.." , 2, "success")
-                Wait(1000)
-                TriggerEvent("FRP:BANKING:balance", _source)
+                local dollarItemAmount = amount * 100
+
+                if Inventory:removeItem(-1, "money", dollarItemAmount) then
+                    Character:setData(Character:getId(), "metaData", "banco", tonumber(call + (dollarItemAmount)))
+                    
+                    User:notify("item", "money", -(dollarItemAmount))
+                    
+                    TriggerEvent("FRP:BANKING:balance", _source)
+
+                    API.addGameLogEntryWithCharacter(Character:getId(), 'BANK_DOLLAR_DEPOSIT',
+                        amount
+                    )
+                else
+                    User:notify("error", "Ocorreu uma falha ao concluir a transação!")
+                end
             end
         end
     end
