@@ -50,21 +50,21 @@ function API.Chest(id)
         local Character = User:getCharacter()
         local charId = Character:getId()
 
-        if self:isGlobal() then
-            if self.groups then
-                local hasAnyGroup = false
-                for _, v in pairs(self.groups) do
-                    if Character:hasGroupOrInheritance(v) then
-                        hasAnyGroup = true
-                        break
-                    end
-                end
-
-                if hasAnyGroup == false then
-                    return
+        if self.groups then
+            local hasAnyGroup = false
+            for _, v in pairs(self.groups) do
+                if Character:hasGroupOrInheritance(v) then
+                    hasAnyGroup = true
+                    break
                 end
             end
 
+            if hasAnyGroup == false then
+                return
+            end
+        end
+
+        if self:isGlobal() then
             local higherThanOne = false
             if self.inventories ~= nil then
                 for k, v in pairs(self.inventories) do
