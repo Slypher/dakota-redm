@@ -533,7 +533,7 @@ function computeSlots(table, asPrimary)
                         local selectedAmmoHash = GetHashKey(selectedAmmoType)
 
                         for key, value in pairs(weaponMetadata) do
-                            if string.find(key, 'ammo_') then
+                            if string.find(key, 'ammo_') and tonumber(value) ~= nil then
 
                                 local ammoType = key
                                 local ammoHash = GetHashKey(ammoType)
@@ -544,6 +544,17 @@ function computeSlots(table, asPrimary)
                                 --
                                 -- EnableAmmoTypeForPedWeapon
                                 -- Citizen.InvokeNative(0x23FB9FACA28779C1, ped, weaponHash, ammoHash)
+
+                                -- GetPedAmmoByType
+                                local ammoOfType = Citizen.InvokeNative(0x39D22031557946C1, ped, ammoHash, Citizen.ResultAsInteger())
+
+                                -- Remover o excesso de munição
+                                if ammoOfType > amountCount then
+                                    local ammoExcess = ammoOfType - amountCount
+
+                                    -- RemoveAmmoFromPedByType
+                                    Citizen.InvokeNative(0xB6CFEC32E3742779, ped, ammoHash, ammoExcess, `REMOVE_REASON_DEBUG`)
+                                end
 
                                 -- SetPedAmmoByType
                                 Citizen.InvokeNative(0x5FD1E1F011E76D7E, ped, ammoHash, amountCount)
