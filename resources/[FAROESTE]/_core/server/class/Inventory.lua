@@ -101,8 +101,6 @@ function API.Inventory(id, capacity, slots)
         -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
         -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
         do
-            local fromSlotMetadata = Slot:getItemMetaData()
-
             local oldAmmoInClip = Slot:getAmmoInClip()
             local oldAmmoInWeapon = Slot:getAmmoInWeapon()
             
@@ -113,9 +111,17 @@ function API.Inventory(id, capacity, slots)
                 local defaultAmmoType = getDefaultAmmoTypeForWeapon(weaponType)
 
                 if defaultAmmoType then
+                    local fromSlotMetadata = Slot:getItemMetaData()
+
+                    if fromSlotMetadata == '[]' then
+                        fromSlotMetadata = { }
+                    end
+
                     fromSlotMetadata.selected_ammo_type = defaultAmmoType
 
                     fromSlotMetadata[defaultAmmoType] = (fromSlotMetadata[defaultAmmoType] or 0) + (oldAmmoInWeapon + oldAmmoInClip)
+
+                    Slot:setItemMetaData(fromSlotMetadata)
 
                     Slot:setAmmoInClip(0)
                     Slot:setAmmoInWeapon(0)
