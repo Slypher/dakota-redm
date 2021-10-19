@@ -736,6 +736,10 @@ function API.Inventory(id, capacity, slots)
 
         local equippedWeaponMetadata = weaponSlot:getItemMetaData()
 
+        if equippedWeaponMetadata == '[]' then
+            equippedWeaponMetadata = { }
+        end
+
         if newAmmoType then
             equippedWeaponMetadata.selected_ammo_type = newAmmoType
 
