@@ -248,6 +248,10 @@ function API.Inventory(id, capacity, slots)
                     local weaponItemId = weaponSlot:getItemId()
                     local weaponType = getWeaponTypeFromItemId(weaponItemId)
 
+                    if not WEAPON_INFO_DATABASE[weaponType] then
+                        return false
+                    end
+
                     -- Esses tipos de armas não aceitam munições.
                     if getIsWeaponTypeLasso(weaponType) or getIsWeaponTypeMelee(weaponType) then
                         return false
@@ -728,7 +732,7 @@ function API.Inventory(id, capacity, slots)
         local weaponType = getWeaponTypeFromItemId(weaponItemId)
 
         -- Não é uma arma registrada...
-        if not weaponType then
+        if not WEAPON_INFO_DATABASE[weaponType] then
             return false
         end
 
