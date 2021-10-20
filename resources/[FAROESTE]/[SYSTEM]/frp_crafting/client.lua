@@ -38,6 +38,8 @@ AddEventHandler(
         craftingNuiIsOpen = false
         shouldShowPrompt = false
 
+        releasePromptGroup()
+
         if clearTasks == nil or clearTasks ~= false then
             ClearPosCrafting()
         end
@@ -82,6 +84,8 @@ RegisterNUICallback(
         )
 
         if shouldShowPrompt then
+            createPromptGroup()
+
             PromptSetVisible(prompt_craft, true)
             PromptSetVisible(prompt_cancel, false)
 
@@ -89,33 +93,41 @@ RegisterNUICallback(
             selected_cIndex = cIndex
             selected_name = _tempParsedConfig[cGroup].craftings[cIndex].output[1].name
             selected_time = inputlist.time
+        else
+            releasePromptGroup()
         end
     end
 )
 
+function createPromptGroup()
+    prompt_group = GetRandomIntInRange(0, 0xffffff)
+
+    prompt_craft = PromptRegisterBegin()
+    PromptSetControlAction(prompt_craft, 0xDFF812F9)
+    PromptSetText(prompt_craft, CreateVarString(10, "LITERAL_STRING", "Produzir"))
+    PromptSetEnabled(prompt_craft, true)
+    PromptSetVisible(prompt_craft, true)
+    PromptSetHoldMode(prompt_craft, true)
+    PromptSetGroup(prompt_craft, prompt_group)
+    PromptRegisterEnd(prompt_craft)
+
+    prompt_cancel = PromptRegisterBegin()
+    PromptSetControlAction(prompt_cancel, 0x05CA7C52)
+    PromptSetText(prompt_cancel, CreateVarString(10, "LITERAL_STRING", "Parar"))
+    PromptSetEnabled(prompt_cancel, true)
+    PromptSetVisible(prompt_cancel, true)
+    PromptSetHoldMode(prompt_cancel, true)
+    PromptSetGroup(prompt_cancel, prompt_group)
+    PromptRegisterEnd(prompt_cancel)
+end
+
+function releasePromptGroup()
+    PromptDelete(prompt_craft)
+    PromptDelete(prompt_cancel)
+end
+
 Citizen.CreateThread(
     function()
-        prompt_group = GetRandomIntInRange(0, 0xffffff)
-
-        prompt_craft = PromptRegisterBegin()
-        PromptSetControlAction(prompt_craft, 0xDFF812F9)
-        PromptSetText(prompt_craft, CreateVarString(10, "LITERAL_STRING", "Produzir"))
-        PromptSetEnabled(prompt_craft, true)
-        PromptSetVisible(prompt_craft, true)
-        PromptSetHoldMode(prompt_craft, true)
-        PromptSetGroup(prompt_craft, prompt_group)
-        PromptRegisterEnd(prompt_craft)
-
-        prompt_cancel = PromptRegisterBegin()
-        -- 0x05CA7C52
-        PromptSetControlAction(prompt_cancel, 0x05CA7C52)
-        PromptSetText(prompt_cancel, CreateVarString(10, "LITERAL_STRING", "Parar"))
-        PromptSetEnabled(prompt_cancel, true)
-        PromptSetVisible(prompt_cancel, true)
-        PromptSetHoldMode(prompt_cancel, true)
-        PromptSetGroup(prompt_cancel, prompt_group)
-        PromptRegisterEnd(prompt_cancel)
-
         while true do
             Citizen.Wait(0)
 
@@ -658,11 +670,7 @@ AddEventHandler(
     "onResourceStop",
     function(resourceName)
         if (GetCurrentResourceName() == resourceName) then
-            -- PromptDelete(prompt)
             TriggerEvent("FRP:CRAFT:ShouldClose")
-
-            PromptDelete(prompt_craft)
-            PromptDelete(prompt_cancel)
         end
     end
 )
