@@ -49,6 +49,38 @@ WEAPON_INFO_DATABASE = {
         useable_ammo_types = { 'ammo_repeater', 'ammo_repeater_express', 'ammo_repeater_express_explosive', 'ammo_repeater_high_velocity' },
     },
 
+    ['rifle_boltaction'] = {
+        group = 'group_repeater',
+        max_ammo = 50,
+        max_ammo_in_clip = 5,
+        useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
+    },
+    ['rifle_springfield'] = {
+        group = 'group_repeater',
+        max_ammo = 50,
+        max_ammo_in_clip = 1,
+        useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
+    },
+
+    ['sniperrifle_carcano'] = {
+        group = 'group_repeater',
+        max_ammo = 50,
+        max_ammo_in_clip = 6,
+        useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
+    },
+    ['sniperrifle_rollingblock'] = {
+        group = 'group_repeater',
+        max_ammo = 50,
+        max_ammo_in_clip = 1,
+        useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
+    },
+    ['sniperrifle_rollingblock_exotic'] = {
+        group = 'group_repeater',
+        max_ammo = 50,
+        max_ammo_in_clip = 1,
+        useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
+    },
+
     ['weapon_revolver_cattleman'] = {
         group = 'group_revolver',
         max_ammo = 150,
