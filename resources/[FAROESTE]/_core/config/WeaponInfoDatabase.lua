@@ -49,33 +49,33 @@ WEAPON_INFO_DATABASE = {
         useable_ammo_types = { 'ammo_repeater', 'ammo_repeater_express', 'ammo_repeater_express_explosive', 'ammo_repeater_high_velocity' },
     },
 
-    ['rifle_boltaction'] = {
-        group = 'group_repeater',
+    ['weapon_rifle_boltaction'] = {
+        group = 'group_rifle',
         max_ammo = 50,
         max_ammo_in_clip = 5,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
     },
-    ['rifle_springfield'] = {
-        group = 'group_repeater',
+    ['weapon_rifle_springfield'] = {
+        group = 'group_rifle',
         max_ammo = 50,
         max_ammo_in_clip = 1,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
     },
 
-    ['sniperrifle_carcano'] = {
-        group = 'group_repeater',
+    ['weapon_sniperrifle_carcano'] = {
+        group = 'group_sniper',
         max_ammo = 50,
         max_ammo_in_clip = 6,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
     },
-    ['sniperrifle_rollingblock'] = {
-        group = 'group_repeater',
+    ['weapon_sniperrifle_rollingblock'] = {
+        group = 'group_sniper',
         max_ammo = 50,
         max_ammo_in_clip = 1,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
     },
-    ['sniperrifle_rollingblock_exotic'] = {
-        group = 'group_repeater',
+    ['weapon_sniperrifle_rollingblock_exotic'] = {
+        group = 'group_sniper',
         max_ammo = 50,
         max_ammo_in_clip = 1,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
@@ -224,6 +224,13 @@ WEAPON_INFO_DATABASE = {
     },
     ['weapon_thrown_throwing_knives'] = {
         group = 'group_thrown',
+        max_ammo = 1,
+        max_ammo_in_clip = 0,
+        useable_ammo_types = { },
+    },
+
+    ['weapon_melee_hatchet'] = {
+        group = 'group_melee',
         max_ammo = 1,
         max_ammo_in_clip = 0,
         useable_ammo_types = { },
