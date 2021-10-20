@@ -753,7 +753,13 @@ function API.Inventory(id, capacity, slots)
         local selectedAmmoType = equippedWeaponMetadata.selected_ammo_type
 
         if not selectedAmmoType then
-            return false
+            selectedAmmoType = getDefaultAmmoTypeForWeapon(weaponType)
+
+            equippedWeaponMetadata.selected_ammo_type = selectedAmmoType
+
+            equippedWeaponMetadata[selectedAmmoType] = 0
+
+            anyUpdates = true
         end
 
         -- Pode ser uma quantidade negativa ou positiva.
@@ -784,6 +790,8 @@ function API.Inventory(id, capacity, slots)
 
             anyUpdates = true
         end
+
+        weaponSlot:setItemMetaData(equippedWeaponMetadata)
 
         if not anyUpdates then
             return false
