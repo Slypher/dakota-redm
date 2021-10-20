@@ -123,12 +123,18 @@ WEAPON_INFO_DATABASE = {
         max_ammo_in_clip = 6,
         useable_ammo_types = { 'ammo_revolver', 'ammo_revolver_express', 'ammo_revolver_express_explosive', 'ammo_revolver_high_velocity', 'ammo_revolver_split_point' },
     },
-    -- ['weapon_revolver_lemat'] = {
-    --     group = 'group_revolver',
-    --     max_ammo = 200,
-    --     max_ammo_in_clip = 9,
-    --     useable_ammo_types = { 'ammo_revolver', 'ammo_revolver_express', 'ammo_revolver_express_explosive', 'ammo_revolver_high_velocity', 'ammo_revolver_split_point' },
-    -- },
+    ['weapon_revolver_navy'] = {
+        group = 'group_revolver',
+        max_ammo = 200,
+        max_ammo_in_clip = 6,
+        useable_ammo_types = { 'ammo_revolver', 'ammo_revolver_express', 'ammo_revolver_express_explosive', 'ammo_revolver_high_velocity', 'ammo_revolver_split_point' },
+    },
+    ['weapon_revolver_lemat'] = {
+        group = 'group_revolver',
+        max_ammo = 200,
+        max_ammo_in_clip = 9,
+        useable_ammo_types = { 'ammo_revolver', 'ammo_revolver_express', 'ammo_revolver_express_explosive', 'ammo_revolver_high_velocity', 'ammo_revolver_split_point' },
+    },
     ['weapon_revolver_schofield'] = {
         group = 'group_revolver',
         max_ammo = 100,
