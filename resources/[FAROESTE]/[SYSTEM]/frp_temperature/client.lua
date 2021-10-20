@@ -64,7 +64,7 @@ Citizen.CreateThread(
                 end
             elseif tempAtPed <= 0 then
                 Citizen.InvokeNative(0xCB9401F918CB0F75, ped, "Cold_Stamina", 1, 500)
-                cAPI.VaryPlayerHealth(-2)
+                cAPI.VaryPlayerHealth(-1)
             end
         end
     end
