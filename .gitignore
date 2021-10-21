@@ -8,5 +8,7 @@ citizen/system_resources/
 cache
 *.bat
 *.txt
+bus.md
 savedata
 resources/redemrp_inventory
+imgui.ini
