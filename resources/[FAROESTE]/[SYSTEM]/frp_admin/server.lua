@@ -862,7 +862,8 @@ RegisterCommand(
 
 CreateThread(
     function()
-        API_Database.prepare("FCRP/UpdatePedByChar", 'UPDATE characters_appearence SET model = @ped , clothes = \'{"Outfit":"0"}\' WHERE charid = @charid')
+
+        API_Database.prepare("FCRP/UpdatePedByChar", 'UPDATE characters_appearence SET model = @ped , clothes = \'{"Outfit":"0"}\', enabledComponents = \'{"Outfit":"0"}\', faceFeatures = \'{}\' WHERE charid = @charid')
         API_Database.prepare("FCRP/GetCharacter", "SELECT * from characters WHERE charid = @charid")
         API_Database.prepare("FCRP/GetCharacterLikeCharName", "SELECT * FROM characters where characterName like @charname")
         API_Database.prepare("FCRP/DeleteCharacter", "DELETE FROM characters WHERE charid = @charid")
@@ -913,11 +914,17 @@ RegisterCommand(
         if Character:hasGroupOrInheritance("admin") then
             local rows = API_Database.query("FCRP/GetCharacter", {charid = args[1]})    
             if #rows == 1 then
-                API_Database.query("FCRP/DeleteHorseByChar", {charid = rows[1].charid})
-                API_Database.query("FCRP/DeleteInventoreByChar", {charid = rows[1].charid})
-                API_Database.query("FCRP/DeleteCharacterAppearence", {charid = rows[1].charid})
-                API_Database.query("FCRP/DeleteCharacter", {charid = rows[1].charid})
-                TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char: "..rows[1].characterName.." Foi deletado com sucesso.", 2000)
+                local resposta = cAPI.prompt(User:getSource(), "Tem certeza que quer apagar: "..rows[1].characterName, "")
+                if resposta == "sim" then
+                    Wait(1000)
+                    API_Database.query("FCRP/DeleteHorseByChar", {charid = rows[1].charid})
+                    API_Database.query("FCRP/DeleteInventoreByChar", {charid = rows[1].charid})
+                    API_Database.query("FCRP/DeleteCharacterAppearence", {charid = rows[1].charid})
+                    API_Database.query("FCRP/DeleteCharacter", {charid = rows[1].charid})
+                    TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char: "..rows[1].characterName.." Foi deletado com sucesso.", 2000) 
+                else
+                    TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Fique tranquilo, nada foi apagado.", 2000) 
+                end
             else
                 TriggerClientEvent("FRP:NOTIFY:Simple", User:getSource(), "Char não encontrado", 2000)    
             end

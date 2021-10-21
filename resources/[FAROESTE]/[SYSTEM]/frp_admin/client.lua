@@ -419,3 +419,17 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5000)
 	end
 end)
+
+RegisterCommand(
+    "rotate",
+    function()
+        if cAPI.hasGroup("admin") then
+            local pped = PlayerPedId()
+            local h = GetEntityRotation(pped)
+            print(h)
+        else
+            cAPI.notify("error", "Não não")
+        end
+    end,
+    false
+)

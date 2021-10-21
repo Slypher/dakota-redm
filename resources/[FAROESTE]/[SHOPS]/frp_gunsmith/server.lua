@@ -7,24 +7,24 @@ cAPI = Tunnel.getInterface("API")
 local verificationData = {
     -- min_level, price_dollar, price_gold
     --["REVOLVER_DOUBLEACTION"] = {0, 200, 10},
-    ["revolver_cattleman"] = {0, 5000, 10},
+    ["revolver_cattleman"] = {0, 2500, 10},
     --["REVOLVER_SCHOFIELD"] = {0, 200, 10},
-    ["revolver_lemat"] = {0, 12000, 25},
+    ["revolver_lemat"] = {0, 6000, 25},
     --["revolver_navy"] = {0, 200, 10},
 
     --["pistol_volcanic"] = {0, 200, 10},
     --["PISTOL_MAUSER"] = {0, 200, 10},
     --["PISTOL_SEMIAUTO"] = {0, 200, 10},
 
-    ["repeater_carbine"] = {0, 6400, 15},
+    ["repeater_carbine"] = {0, 3200, 15},
     --["REPEATER_EVANS"] = {0, 200, 10},
     --["REPEATER_WINCHESTER"] = {0, 200, 10},
-    ["repeater_henry"] = {0, 8000, 45},
+    ["repeater_henry"] = {0, 4000, 45},
 
     --["rifle_varmint"] = {0, 200, 10},
 
     --["RIFLE_SPRINGFIELD"] = {0, 200, 10},
-    ["rifle_boltaction"] = {0, 9000, 50},
+    ["rifle_boltaction"] = {0, 4500, 50},
 
     --["shotgun_sawedoff"] = {0, 200, 10},
     --["SHOTGUN_DOUBLEBARREL"] = {0, 200, 10},
@@ -33,7 +33,7 @@ local verificationData = {
 
     --["thrown_throwing_knives"] = {0, 200, 10},
     --["melee_cleaver"] = {0, 200, 10},
-    ["melee_knife"] = {0, 500, 1},
+    ["melee_knife"] = {0, 250, 1},
 
 
     -- AMMO
