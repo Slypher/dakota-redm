@@ -96,39 +96,6 @@ function API.Inventory(id, capacity, slots)
             return false
         end
 
-        -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
-        -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.        -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
-        -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
-        -- #TODO: Remover esse código, é temporario por conta das alterações que tiveram relacionados a munição.
-        do
-            local oldAmmoInClip = Slot:getAmmoInClip()
-            local oldAmmoInWeapon = Slot:getAmmoInWeapon()
-            
-            if (oldAmmoInClip and oldAmmoInClip > 0) or (oldAmmoInWeapon and oldAmmoInWeapon > 0) then
-                local weaponItemId = Slot:getItemId()
-                local weaponType = getWeaponTypeFromItemId(weaponItemId)
-
-                local defaultAmmoType = getDefaultAmmoTypeForWeapon(weaponType)
-
-                if defaultAmmoType then
-                    local fromSlotMetadata = Slot:getItemMetaData()
-
-                    if fromSlotMetadata == '[]' then
-                        fromSlotMetadata = { }
-                    end
-
-                    fromSlotMetadata.selected_ammo_type = defaultAmmoType
-
-                    fromSlotMetadata[defaultAmmoType] = (fromSlotMetadata[defaultAmmoType] or 0) + (oldAmmoInWeapon + oldAmmoInClip)
-
-                    Slot:setItemMetaData(fromSlotMetadata)
-
-                    Slot:setAmmoInClip(0)
-                    Slot:setAmmoInWeapon(0)
-                end
-            end
-        end
-
         local first, last = getFirstLastSlots(Slot:getItemId())
 
         -- Slot youre trying to move the item
