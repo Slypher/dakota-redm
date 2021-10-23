@@ -132,18 +132,24 @@ function cAPI.SetSkin(ped, componentArray)
             if index ~= "porte" then
                 if type(componentHash) ~= "table" then
 
-                    componentHash = tonumber(componentHash)
+                    -- #REMOVEME: Temporário, remover a verificação do 'Mustache'
+                    -- #REMOVEME: Temporário, remover a verificação do 'Mustache'
+                    -- #REMOVEME: Temporário, remover a verificação do 'Mustache'
+                    -- #REMOVEME: Temporário, remover a verificação do 'Mustache'
+                    if index ~= 'Mustache' then
+                        componentHash = tonumber(componentHash)
 
-                    if componentHash ~= 0 then
-                        -- Doesn't need to be requested !!!!!!
-                        NativeSetPedComponentEnabled(ped, componentHash, true, true)
+                        if componentHash ~= 0 then
+                            -- Doesn't need to be requested !!!!!!
+                            NativeSetPedComponentEnabled(ped, componentHash, true, true)
+                        end
+
+                        -- while not NativeHasPedComponentLoaded(ped) do
+                        --     Wait(10)
+                        -- end
+
+                        -- SetModelAsNoLongerNeeded(componentHash)
                     end
-
-                    -- while not NativeHasPedComponentLoaded(ped) do
-                    --     Wait(10)
-                    -- end
-
-                    -- SetModelAsNoLongerNeeded(componentHash)
                 else         
 
                     local categoryIndex = index
