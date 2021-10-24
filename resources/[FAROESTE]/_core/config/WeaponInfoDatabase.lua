@@ -197,6 +197,12 @@ WEAPON_INFO_DATABASE = {
         max_ammo_in_clip = 0,
         useable_ammo_types = { 'ammo_arrow', 'ammo_arrow_dynamite', 'ammo_arrow_fire', 'ammo_arrow_improved', 'ammo_arrow_poison', 'ammo_arrow_small_game' },
     },
+    ['weapon_bow_improved'] = {
+        group = 'group_bow',
+        max_ammo = 40,
+        max_ammo_in_clip = 0,
+        useable_ammo_types = { 'ammo_arrow', 'ammo_arrow_dynamite', 'ammo_arrow_fire', 'ammo_arrow_improved', 'ammo_arrow_poison', 'ammo_arrow_small_game' },
+    },
 
     ['weapon_thrown_dynamite'] = {
         group = 'group_thrown',
