@@ -967,10 +967,8 @@ end
 function getSlotsWithEqualItemId(slots, itemId)
     local equalSlots = {}
 
-    local first, last = getFirstLastSlots(itemId)
-
-    for slotId = first, last do
-        if slots[slotId] ~= nil and slots[slotId]:getItemId() == itemId then
+    for slotId, slot in pairs(slots) do
+        if slot:getItemId() == itemId then
             table.insert(equalSlots, slotId)
         end
     end
