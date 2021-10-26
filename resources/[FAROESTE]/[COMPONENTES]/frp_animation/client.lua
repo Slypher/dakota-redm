@@ -514,25 +514,189 @@ end)
 ----------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
 
+local eDrunkStage = {
+    SOBER = 0,
+    SLIGHTLY_DRUNK = 1,
+    MODERATELY_DRUNK = 2,
+    VERY_DRUNK = 3,
+}
+
+local DRUNK_STAGE_DURATION = 90000
+
+local gPlayerDrunkStage = eDrunkStage.SOBER
+local gTimeOfPlayerDrunkStage
+local gNumGulps = 0
+
+local gHasDrunkStageReducerInstance = false
+
+function setPlayerDrunk(drunkStage)
+
+    -- if gPlayerDrunkStage == drunkStage then
+    --     return
+    -- end
+
+    local playerPedId = PlayerPedId()
+
+    if drunkStage == eDrunkStage.SOBER then
+        -- Intensidade da estado de bebado / Locomotion.
+        Citizen.InvokeNative(0x406CCF555B04FAD3, playerPedId, 0, 0.0)
+
+        Citizen.InvokeNative(0x4285804FD65D8066, 'DRUNK_SHAKE', 0)
+
+        AnimpostfxStop('PlayerDrunk01')
+
+        Citizen.InvokeNative(0x37D7BDBA89F13959, 'PlayerDrunk01')
+
+        -- Remover o locomotion type atual 'very_drunk'
+        Citizen.InvokeNative(0x58F7DB5BD8FA2288, playerPedId)
+
+    elseif drunkStage == eDrunkStage.SLIGHTLY_DRUNK then
+        Citizen.InvokeNative(0x406CCF555B04FAD3, playerPedId, 1, 0.25)
+
+        ShakeGameplayCam('DRUNK_SHAKE', 1.0)
+
+        AnimpostfxPlay('PlayerDrunk01')
+
+        Citizen.InvokeNative(0x58F7DB5BD8FA2288, playerPedId)
+
+        SetGameplayCamShakeAmplitude(0.4)
+
+        Citizen.InvokeNative(0xCAB4DD2D5B2B7246, 'PlayerDrunk01', 0.4)
+
+    elseif drunkStage == eDrunkStage.MODERATELY_DRUNK then
+        Citizen.InvokeNative(0x406CCF555B04FAD3, playerPedId, 1, 0.60)
+
+        ShakeGameplayCam('DRUNK_SHAKE', 1.0)
+
+        AnimpostfxPlay('PlayerDrunk01')
+
+        Citizen.InvokeNative(0x58F7DB5BD8FA2288, playerPedId)
+
+        Citizen.InvokeNative(0x89F5E7ADECCCB49C, playerPedId, 'very_drunk')
+
+        SetGameplayCamShakeAmplitude(0.6)
+
+        Citizen.InvokeNative(0xCAB4DD2D5B2B7246, 'PlayerDrunk01', 0.7)
+
+    elseif drunkStage == eDrunkStage.VERY_DRUNK then
+        Citizen.InvokeNative(0x406CCF555B04FAD3, playerPedId, 1, 1.0)
+
+        ShakeGameplayCam('DRUNK_SHAKE', 1.0)
+
+        AnimpostfxPlay('PlayerDrunk01')
+
+        Citizen.InvokeNative(0x58F7DB5BD8FA2288, playerPedId)
+
+        Citizen.InvokeNative(0x89F5E7ADECCCB49C, playerPedId, 'very_drunk')
+
+        SetGameplayCamShakeAmplitude(0.8)
+
+        Citizen.InvokeNative(0xCAB4DD2D5B2B7246, 'PlayerDrunk01', 0.9)
+    end
+
+    gPlayerDrunkStage = drunkStage
+    gTimeOfPlayerDrunkStage = GetGameTimer()
+
+    if not gHasDrunkStageReducerInstance then
+        createDrunkStageReducerThread()
+    end
+end
+
+function createDrunkStageReducerThread()
+    gHasDrunkStageReducerInstance = true
+
+    CreateThread(function()
+        while gPlayerDrunkStage > eDrunkStage.SOBER do
+            Wait(0)
+
+            if GetGameTimer() - gTimeOfPlayerDrunkStage >= DRUNK_STAGE_DURATION then
+                setPlayerDrunk(gPlayerDrunkStage - 1)
+            end
+        end
+
+        gHasDrunkStageReducerInstance = false
+    end)
+end
+
+function handleUseGenericAlcoholItem()
+    local playerPedId = PlayerPedId()
+
+    CreateThread(function()
+        -- IsPedRunningTaskItemInteraction
+        while Citizen.InvokeNative(0xEC7E480FF8BD0BED, playerPedId) do
+            Wait(0)
+
+            -- if HasAnimEventFired(playerPedId, -219856583) then
+            --     print('A')
+            -- end
+
+            -- Deu um gole na bebida.
+            if HasAnimEventFired(playerPedId, 442509369) then
+                if gPlayerDrunkStage == eDrunkStage.SOBER then
+                    gNumGulps = gNumGulps + 1
+                    
+                    if gNumGulps >= 3 then
+                        setPlayerDrunk(eDrunkStage.SLIGHTLY_DRUNK)
+
+                        gNumGulps = 0
+                    end
+                end
+            end
+
+            -- Finalizou a animação
+            if HasAnimEventFired(playerPedId, 574156416) then
+                gPlayerDrunkStage = math.min(gPlayerDrunkStage + 1, eDrunkStage.VERY_DRUNK)
+
+                setPlayerDrunk(gPlayerDrunkStage)
+
+                -- O frasco tava ficando preso na mão, então a gente cancela imediatamente
+                ClearPedTasks(playerPedId)
+            end
+        end
+    end)
+end
+
 RegisterNetEvent('DKT:ANIMATION:whisky')
 AddEventHandler('DKT:ANIMATION:whisky', function(source, args)
-    local propEntity = CreateObject(GetHashKey("s_inv_flask01x"), GetEntityCoords(PlayerPedId()), false, true, false, false, true)
+    local playerPedId = PlayerPedId()
 
-    local task = TaskItemInteraction_2(PlayerPedId(), -1199896558, propEntity, GetHashKey("p_bottleBeer01x_PH_R_HAND"), GetHashKey("DRINK_BOTTLE@Bottle_Cylinder_D1-55_H18_Neck_A8_B1-8_TABLE_HOLD"), 1, 0, -1.0)
-Wait(10000)
-    TriggerEvent('wwrp:drunk1')
-end
-)
+    local bottleModelHash = `P_BOTTLEJD01X`
+
+    if not HasModelLoaded(bottleModelHash) then
+        RequestModel(bottleModelHash)
+
+        while not HasModelLoaded(bottleModelHash) do
+            Wait(0)
+        end
+    end
+
+    local propEntity = CreateObject(bottleModelHash, GetEntityCoords(playerPedId), false, true, false, false, true)
+
+    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_WHISKEY`, propEntity, GetHashKey("P_BOTTLEJD01X_PH_R_HAND"), -68870885, 1, 0, 0.0)
+
+    handleUseGenericAlcoholItem()
+end)
 
 RegisterNetEvent('DKT:ANIMATION:cerveja')
 AddEventHandler('DKT:ANIMATION:cerveja', function(source, args)
-    local propEntity = CreateObject(GetHashKey("p_bottleBeer01a"), GetEntityCoords(PlayerPedId()), false, true, false, false, true)
+    local playerPedId = PlayerPedId()
 
-    local task = TaskItemInteraction_2(PlayerPedId(), -1199896558, propEntity, GetHashKey("p_bottleBeer01x_PH_R_HAND"), GetHashKey("DRINK_BOTTLE@Bottle_Cylinder_D1-55_H18_Neck_A8_B1-8_TABLE_HOLD"), 1, 0, -1.0)
-Wait(10000)
-    TriggerEvent('wwrp:drunk1')
-end
-)
+    local bottleModelHash = `p_bottleBeer01a`
+
+    if not HasModelLoaded(bottleModelHash) then
+        RequestModel(bottleModelHash)
+
+        while not HasModelLoaded(bottleModelHash) do
+            Wait(0)
+        end
+    end
+
+    local propEntity = CreateObject(bottleModelHash, GetEntityCoords(playerPedId), false, true, false, false, true)
+
+    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_BEER`, propEntity, GetHashKey("P_BOTTLEBEER01X_PH_R_HAND"), -664271430, 1, 0, 0.0)
+    
+    handleUseGenericAlcoholItem()
+end)
 
 RegisterCommand(
     "prato",
@@ -1499,6 +1663,9 @@ AddEventHandler(
     "onResourceStop",
     function(resourceName)
         if GetCurrentResourceName() == resourceName or resourceName == "_core" then
+
+            setPlayerDrunk(eDrunkStage.SOBER)
+
             for _, prompt in pairs(prompts) do
                 PromptDelete(prompt)
             end
