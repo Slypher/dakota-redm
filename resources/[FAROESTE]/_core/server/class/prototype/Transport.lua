@@ -158,6 +158,57 @@ CreateThread(function()
         ]]
     )
 
+    -- CREATE TABLE IF NOT EXISTS `transport` (
+    -- `transportId` int(11) NOT NULL AUTO_INCREMENT,
+    -- `type` enum('Unknown','Horse','VehicleDraft','VehicleBoat') NOT NULL DEFAULT 'Unknown',
+    -- `modelName` tinytext NOT NULL,
+    -- `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+    -- PRIMARY KEY (`transportId`)
+    -- );
+
+    -- CREATE TABLE IF NOT EXISTS `transport_horse` (
+    -- `id` int(11) NOT NULL AUTO_INCREMENT,
+    -- `transportId` int(11) NOT NULL,
+    -- `isMale` tinyint(1) NOT NULL DEFAULT 1,
+    -- `apparels` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '{}',
+    -- PRIMARY KEY (`id`),
+    -- UNIQUE KEY `transportId` (`transportId`),
+    -- CONSTRAINT `FK_transport_horse_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`) ON DELETE CASCADE ON UPDATE NO ACTION
+    -- );
+
+    -- -- Copiando estrutura para tabela dakota.transport_state
+    -- CREATE TABLE IF NOT EXISTS `transport_state` (
+    -- `id` int(11) NOT NULL AUTO_INCREMENT,
+    -- `transportId` int(11) NOT NULL,
+    -- `currHealth` float NOT NULL DEFAULT 100,
+    -- `currDirtLevel` float NOT NULL DEFAULT 0,
+    -- `lossType` enum('None','Dead','Destroyed') NOT NULL DEFAULT 'None',
+    -- `dateOfLoss` timestamp NOT NULL DEFAULT current_timestamp(),
+    -- PRIMARY KEY (`id`),
+    -- UNIQUE KEY `transportId` (`transportId`),
+    -- CONSTRAINT `FK_transport_state_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
+    -- );
+
+    -- CREATE TABLE IF NOT EXISTS `transport_state_horse` (
+    -- `id` int(11) NOT NULL AUTO_INCREMENT,
+    -- `transportId` int(11) NOT NULL,
+    -- `isInWrithe` tinyint(1) NOT NULL DEFAULT 0,
+    -- `bodyWeight` float NOT NULL DEFAULT 0.5,
+    -- PRIMARY KEY (`id`),
+    -- UNIQUE KEY `transportId` (`transportId`),
+    -- CONSTRAINT `FK_transport_state_horse_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
+    -- );
+
+    -- CREATE TABLE IF NOT EXISTS `transport_state_vehicle_draft` (
+    -- `id` int(11) NOT NULL AUTO_INCREMENT,
+    -- `transportId` int(11) NOT NULL,
+    -- `brokenWheelFlags` int(11) NOT NULL DEFAULT 0,
+    -- `brokenDoorFlags` int(11) NOT NULL DEFAULT 0,
+    -- PRIMARY KEY (`id`),
+    -- UNIQUE KEY `transportId` (`transportId`),
+    -- CONSTRAINT `FK__transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
+    -- );
+
     -- run_test()
 end)
 
