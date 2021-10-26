@@ -60,6 +60,10 @@ server_scripts {
 	"server/Logging.lua",
 	"server/LoggingHelper.lua",
 	"server/LoggingHook*.lua",
+
+	"server/class/prototype/fwPool.lua",
+	"server/class/prototype/enum.lua",
+	"server/class/prototype/Transport.lua",
 }
 
 shared_scripts {
