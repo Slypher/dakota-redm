@@ -1658,6 +1658,147 @@ end
 function NativeUipromptIsControlActionActive(control)
     return Citizen.InvokeNative(0x1BE19185B8AFE299, control)
 end
+local DOG_ANIMATIONS = {
+    {
+        name = "dorme",
+        dictionary = "amb_creature_mammal@world_dog_sleeping@idle",
+        anim = "idle_a",
+        flag =  2
+    },
+    {
+        name = "senta",
+        dictionary = "amb_creature_mammal@world_dog_sitting@react_look@exit",
+        anim = "front_exit",
+        flag =  2
+    },
+    {
+        name = "oi",
+        dictionary = "amb_creature_mammal@world_dog_begging@base",
+        anim = "base",
+        flag =  2
+    },
+    {
+        name = "procura",
+        dictionary = "amb_creature_mammal@world_dog_sniffing_ground_wander@wander_e@walk_enter",
+        anim = "enter",
+        flag =  0
+    },
+    {
+        name = "come",
+        dictionary = "amb_creature_mammal@world_dog_eating_ground@idle_a",
+        anim = "idle_c",
+        flag =  1
+    },
+    {
+        name = "bebe",
+        dictionary = "amb_creature_mammal@world_dog_eating_ground@idle_a",
+        anim = "idle_c",
+        flag =  1
+    },
+    {
+        name = "deita",
+        dictionary = "amb_creature_mammal@world_dog_resting@react_look@enter",
+        anim = "front_enter",
+        flag =  2
+    },
+    {
+        name = "aqui",
+        dictionary = "amb_creature_mammal@world_dog_digging@base",
+        anim = "base",
+        flag =  1
+    },
+    {
+        name = "late",
+        dictionary = "amb_creature_mammal@world_dog_guard_growl@idle",
+        anim = "idle_a",
+        flag =  1
+    },
+    {
+        name = "coco",
+        dictionary = "amb_creature_mammal@world_dog_pooping@react_look@loop",
+        anim = "front_loop",
+        flag =  2
+    },
+    {
+        name = "chore",
+        dictionary = "amb_creature_mammal@world_dog_howling@idle0",
+        anim = "idle_e",
+        flag =  0
+    },
+    {
+        name = "mija",
+        dictionary = "amb_creature_mammal@world_dog_mark_territory_a@stand_exit",
+        anim = "exit_right_no_dig",
+        flag =  0
+    }
+}
+
+local DOG_PED_MODELS = {
+    `a_c_dogamericanfoxhound_01`,											
+    `a_c_dogaustraliansheperd_01`,										
+    `a_c_dogbluetickcoonhound_01`,											
+    `a_c_dogcatahoulacur_01`,										
+    `a_c_dogchesbayretriever_01`,								
+    `a_c_dogcollie_01`,									
+    `a_c_doghobo_01`,										
+    `a_c_doghound_01`,										
+    `a_c_doghusky_01`,									
+    `a_c_doglab_01`,										
+    `a_c_dogpoodle_01`,									
+    `a_c_dogrufus_01`,										
+    `a_c_dogstreet_01`,									
+    `re_lostdog_dogs_01`,
+}
+
+RegisterCommand(
+    'dog',
+    function(source, args)
+        local playerPedId = PlayerPedId()
+        local playerPedModelHash = GetEntityModel(playerPedId)
+
+        local pedIsAllowed = false
+
+        for _, model in ipairs(DOG_PED_MODELS) do
+            if model == playerPedModelHash then
+                pedIsAllowed = true
+
+                break
+            end
+        end
+
+        if not pedIsAllowed then
+            return
+        end
+        
+        local targetAnimation = args[1]
+
+        local dict, anim, flag
+
+        for _, animation in ipairs(DOG_ANIMATIONS) do 
+            if animation.name == targetAnimation then
+                dict = animation.dictionary
+                anim = animation.anim
+                flag = animation.flag
+
+                break
+            end
+        end
+
+        if not dict then
+            return
+        end
+
+        RequestAnimDict(dict)
+
+        while not HasAnimDictLoaded(dict) do
+            Citizen.Wait(0)
+        end
+
+        TaskPlayAnim(playerPedId, dict, anim, 2.0, -2.0, -1, flag, 0, true, 0, false, 0, false)
+
+        RemoveAnimDict(dict)
+    end
+)
 
 AddEventHandler(
     "onResourceStop",
