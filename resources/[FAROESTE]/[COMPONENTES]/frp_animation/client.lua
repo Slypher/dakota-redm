@@ -35,55 +35,36 @@ Citizen.CreateThread(
     end
 )
 
--------------------------------------------------------------------------------------
--- BACKSPACE PARAR ANIMAÇÃO
--------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(8)
-        if (IsControlJustPressed(0,0x156F7119))  then
-            print('limpar animação')
-            Wait(100)
-            ClearPedTasks(PlayerPedId())
-        end
-    end
-end)
-
 ---------------------------------------------------------------------------------
-local ragdoll = false
+local gShouldRagdoll = false
 
-function setRagdoll(flag)
-    ragdoll = flag
+function handleUpdatePlayerRagdollState()
+    Citizen.CreateThread(function()
+        while gShouldRagdoll do
+            Citizen.Wait(0)
+
+            local playerPedId = PlayerPedId()
+
+            if not IsPedRagdoll(playerPedId) then
+                SetPedToRagdoll(playerPedId, 0, 1, 0, false, false, false)
+            end
+
+            ResetPedRagdollTimer(playerPedId)
+        end
+    end)
 end
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        if ragdoll then
-            -- TaskKnockedOut
-            Citizen.InvokeNative(0xF90427F00A495A28, PlayerPedId(), 0, false)
-        end
-    end
-end)
 
+        -- Z Key.
+        if IsControlJustPressed(0, `INPUT_GAME_MENU_TAB_LEFT_SECONDARY`) then
+            gShouldRagdoll = not gShouldRagdoll
 
-ragdol = true
-RegisterNetEvent("Ragdoll")
-AddEventHandler("Ragdoll", function()
-    if (ragdol) then
-		setRagdoll(true)
-		ragdol = false
-        Wait(1000)
-		setRagdoll(false)
-		ragdol = true
-	end
-end)
--- ragdoll
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        if (IsControlJustPressed(0,0x26E9DC00))  then            
-            TriggerEvent("Ragdoll")
+            if gShouldRagdoll then
+                handleUpdatePlayerRagdollState()
+            end
         end
     end
 end)
