@@ -23,6 +23,9 @@ tempCam2 = nil
 tempCam = nil
 groundCam = nil
 
+local gClosestShopCenterPos
+local gClosestShopHeading
+
 local gZoomInterpolationCam
 
 local adding2 = true
@@ -310,7 +313,8 @@ AddEventHandler(
 
             TriggerServerEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled')
 
-            TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
+            -- TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
+            NetworkStartSoloTutorialSession()
         else
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
         end
@@ -412,56 +416,38 @@ function SetEveryoneAsInvisible(invisible)
     NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
 end
 
-function createCamera()
+function createCamera(centerPos, pedHeading)
+    centerPos = gClosestShopCenterPos
+    pedHeading = gClosestShopHeading
 
     local playerPed = PlayerPedId()
 
-    SetEntityCoords(playerPed, -329.755, 775.333, 121.634)
-    SetEntityHeading(playerPed, 286.07)
+    local _, groundZ, _ = GetGroundZAndNormalFor_3dCoord(centerPos.x, centerPos.y, centerPos.z)
 
-    groundCam = CreateCam("DEFAULT_SCRIPTED_CAMERA", -329.755, 775.333, 121.634)
-    SetCamCoord(groundCam, -327.643,774.342,121.646)
-    SetCamRot(groundCam, -10.0, 0.0, 152.09)
-    SetCamActive(groundCam, true)
-    RenderScriptCams(true, false, 1, true, true)
+    SetEntityCoords(playerPed, centerPos.xy, groundZ or centerPos.z)
+    SetEntityHeading(playerPed, pedHeading)
 
-    --Wait(3000)
+    FreezeEntityPosition(playerPed, true)
 
-    -- last camera, create interpolate
-    fixedCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-    SetCamCoord(fixedCam, -327.643,774.342,121.646)
-    SetCamRot(fixedCam, 1.0, 0, 55.09)
-    cAPI.OutFade(500) -- It is blocking?
-    SetCamActive(fixedCam, true)
-    SetCamActiveWithInterp(fixedCam, groundCam, 1000, true, true)
-
-    TriggerEvent("FRP:NOTIFY:Simple", "Utilize as teclas A e D para rotacionar o personagem, e as setas do teclado para selecionar as opções.", 10000)
-
-    Wait(1000)
-
-    DestroyCam(groundCam)
-    groundCam = nil
-
-    createZoomInterpCamera()
+    createCameraInternal()
 end
 
-function createPeds()
-    for k, v in pairs(peds) do
-        if choosePed[k] == nil then
-            local waiting = 0
-            local hash = GetHashKey(peds[k].genrer)
-            RequestModel(hash)
-            while not HasModelLoaded(hash) do
-                Citizen.Wait(10)
-            end
-            choosePed[k] = CreatePed(hash, peds[k].x, peds[k].y, peds[k].z - 0.5, peds[k].h, false, 0)
-            Citizen.InvokeNative(0x283978A15512B2FE, choosePed[k], true)
-            Citizen.InvokeNative(0x58A850EAEE20FAA3, choosePed[k])
-            -- NetworkSetEntityInvisibleToNetwork(choosePed[k], true)
-            SetVehicleHasBeenOwnedByPlayer(choosePed[k], true)
-        -- SetModelAsNoLongerNeeded(hash)
-        end
-    end
+function createCameraInternal()
+    local playerPed = PlayerPedId()
+
+    local offsetPos = GetOffsetFromEntityInWorldCoords(playerPed, 1.1, 1.1, 0.1)
+
+    fixedCam = CreateCam('DEFAULT_SCRIPTED_CAMERA')
+
+    SetCamCoord(fixedCam, offsetPos)
+    PointCamAtEntity(fixedCam, playerPed, 0.0, 0.0, 0.0, false)
+    SetCamActive(fixedCam, true)
+    RenderScriptCams(true, false, 1, true, true)
+
+    -- It is blocking?
+    cAPI.OutFade(500)
+
+    createZoomInterpCamera(offsetPos)
 end
 
 HatUsing = nil
@@ -1232,7 +1218,6 @@ RegisterNUICallback(
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Wait(4000)
         Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         --SetEntityVisible(PlayerPedId(), true)
@@ -1250,7 +1235,6 @@ RegisterNUICallback(
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Wait(4000)
         Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         --SetEntityVisible(PlayerPedId(), true)
@@ -1267,7 +1251,6 @@ AddEventHandler(
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Wait(4000)
         Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         --SetEntityVisible(PlayerPedId(), true)
@@ -1318,7 +1301,6 @@ AddEventHandler(
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Wait(4000)
         Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         --SetEntityVisible(PlayerPedId(), true)
@@ -1338,6 +1320,8 @@ function DestroyClothingMenu()
     DestroyCam(fixedCam)
     DestroyCam(gZoomInterpolationCam)
 
+    FreezeEntityPosition(PlayerPedId(), false)
+
     fixedCam = nil
     gZoomInterpolationCam = nil
 
@@ -1349,27 +1333,46 @@ function DestroyClothingMenu()
         }
     )
 
-    TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
+    -- TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
+    NetworkEndTutorialSession()
 end
 
 Citizen.CreateThread(
     function()
         local shops = {
-        --    vector3(-762.85, -1291.97, 43.84), -- Blackwater
-        --    vector3(2549.83, -1160.05, 53.73), -- SAINT DENIS
-            vector3(-329.393,774.892,121.634) --Valentine
+            --    vector3(-762.85, -1291.97, 43.84), -- Blackwater
+            --    vector3(2549.83, -1160.05, 53.73), -- SAINT DENIS
+
+            -- Valentine
+            {
+                position = vec3(-329.393, 774.892, 120.834),
+                heading = 286.07,
+            },
+
+            -- BlackWater.
+            {
+                position = vec3(-767.693, -1294.545, 43.041),
+                heading = 286.07,
+            },
         }
 
         while true do
             Citizen.Wait(0)
+
             local pPosition = GetEntityCoords(PlayerPedId())
 
-            for _, shopPosition in pairs(shops) do
-                if #(pPosition - shopPosition) <= 1.5 then
-                    positionBack = shopPosition
+            for _, shopInfo in pairs(shops) do
+                local shopPos = shopInfo.position
+
+                if #(pPosition - shopPos) <= 1.5 then
+                    positionBack = shopPos
+
+                    gClosestShopCenterPos = shopPos
+                    gClosestShopHeading = shopInfo.heading
+
                     DrawTxt("Pressione ALT para abrir a loja de roupas.", 0.85, 0.95, 0.35, 0.35, true, 255, 255, 255, 200, true, 10000)
+
                     if IsControlJustReleased(0, 0xE8342FF2) then -- LEFT ALT
-                        print("presses")
                         TriggerEvent("FRP:STORECLOTHES:OpenClothingMenu")
                     end
                 end
@@ -1559,11 +1562,12 @@ RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPiece
     TriggerServerEvent('AddPlayerClothingPieces', toAddClothingPieces)
 end)
 
-function createZoomInterpCamera()
+function createZoomInterpCamera(cameraPos)
     if not gZoomInterpolationCam then
         gZoomInterpolationCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-        SetCamCoord(gZoomInterpolationCam, -327.643,774.342,121.646)
-        SetCamRot(gZoomInterpolationCam, 1.0, 0, 55.09)
+
+        SetCamCoord(gZoomInterpolationCam, cameraPos)
+        PointCamAtEntity(gZoomInterpolationCam, PlayerPedId(), 0.0, 0.0, 0.0, false)
         SetCamActive(gZoomInterpolationCam, true)
     end
 end

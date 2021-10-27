@@ -97,8 +97,9 @@ local doorStates = {
     [1331491364] = {isOpen = true, pair = 1876749464},
     [3804893186] = {isOpen = true}, -- store cloth saint denis
     [586229709] = {isOpen = true}, -- Doctor's office at Saint Dennis
-    [1104407261] = {isOpen = true} -- Doctor's office at Saint Dennis
+    [1104407261] = {isOpen = true}, -- Doctor's office at Saint Dennis
     -- [1276527334] = {isOpen = true} -- Doctor's office at Saint Dennis -- Not useable
+    [3277501452] = { isOpen = true}, -- Porta da loja de roupas de BlackWater.
 }
 
 -- TALVEZ MUDAR O SISTEMA PARA O CLIENT SÓ PEDIR O SYNC
