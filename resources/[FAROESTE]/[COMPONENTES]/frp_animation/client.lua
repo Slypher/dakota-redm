@@ -35,6 +35,15 @@ Citizen.CreateThread(
     end
 )
 
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        if (IsControlJustPressed(0,0x156F7119))  then
+            ClearPedTasks(PlayerPedId())
+        end
+    end
+end)
+
 ---------------------------------------------------------------------------------
 local gShouldRagdoll = false
 
