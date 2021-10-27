@@ -84,8 +84,8 @@ AddEventHandler('FRP:MEDIC:revive', function(data)
 end)
 
 RegisterNetEvent("mediconotification")
-AddEventHandler("mediconotification", function(coords, bank)
-	TriggerEvent("FRP:NOTIFY:Simple", 'Telegrama: Um civil foi avistado desmaiado neste local', 5000)
+AddEventHandler("mediconotification", function(notifierPlayerUserId, coords)
+	TriggerEvent("FRP:NOTIFY:Simple", ('Telegrama: Um civil(%d) foi avistado desmaiado neste local'):format(notifierPlayerUserId) , 5000)
 	local blip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, coords.x, coords.y, coords.z, 20.0)
 	Wait(30000)--Timer del blip per gli sceriffi
 	RemoveBlip(blip)
@@ -94,20 +94,8 @@ end)
 RegisterCommand("medico", function(ped, coords)	
     local ped = PlayerPedId()
     local coords = GetEntityCoords(ped)
-			TriggerServerEvent("mediconotify", GetPlayers(), coords)
+		TriggerServerEvent("mediconotify", coords)
 end)
-
-function GetPlayers()
-  local players = {}
-
-  for i = 0, 47 do
-      if NetworkIsPlayerActive(i) then
-          table.insert(players, GetPlayerServerId(i))
-      end
-  end
-
-  return players
-end
 
 function isNearPlayer()
 	local player, distance = GetClosestPlayer()

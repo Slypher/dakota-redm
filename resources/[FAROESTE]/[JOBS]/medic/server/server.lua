@@ -136,20 +136,23 @@ end)
 
 
 RegisterNetEvent("mediconotify")
-AddEventHandler("mediconotify", function(players, coords)
-    for each, player in ipairs(players) do
-        local _source = source
-	    local User = API.getUserFromSource(_source)
-	    local Character = User:getCharacter()
-		local MedicoON = API.getUsersByGroup("medic")
-        if Character ~= nil then
+AddEventHandler("mediconotify", function(coords)
+	local _source = source
+
+	local User = API.getUserFromSource(_source)
+	local userId = User:getId()
+
+	local Character = User:getCharacter()
+	
+	if Character ~= nil then
 		TriggerClientEvent("FRP:NOTIFY:Simple", source, "Você enviou um Pombo Correio aos Medicos!", 6000)
+
+		local MedicoON = API.getUsersByGroup("medic")
+
 		for i = 1, #MedicoON do
-				TriggerClientEvent("mediconotification", MedicoON[i].getSource(), coords)
-			end
-        end
-        
-    end
+			TriggerClientEvent("mediconotification", MedicoON[i]:getSource(), userId, coords)
+		end
+	end
 end)
 
 AddEventHandler('itemWithRessurectingPropertiesWasUsed', function(user, usedItemSlot, shouldConsumeItem, consumeOnStart)
@@ -188,4 +191,47 @@ AddEventHandler('itemWithRessurectingPropertiesWasUsed', function(user, usedItem
 	TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Reanimado com sucesso.', 5000)
 
 	character:varyExp(10)
+end)
+
+local function avisoMedicoNotify(sourceToSend, nomeMedico, nomePaciente, messagem)
+    TriggerClientEvent('FRP:NOTIFY:Simple', sourceToSend, ('Médico(a) %s informa ao paciente : [ %s ]'):format(string.upper(nomeMedico), nomePaciente), 5000)
+    TriggerClientEvent('FRP:NOTIFY:Simple', sourceToSend, '    ' .. messagem, 5000)
+end
+
+RegisterCommand('avisomedico', function(source, args, rawCommand)
+	local _source = source
+	local user = API.getUserFromSource(_source)
+	local character = user:getCharacter()
+
+	if not character:hasGroupOrInheritance('medic') then
+		user:notify('error', 'Você não tem permissão!')
+		return
+	end
+
+	local messagem = cAPI.prompt(_source, 'Mensagem:', '')
+
+	local patientUser = API.getUserFromUserId(tonumber(args[1]))
+	
+	if not patientUser then
+		TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'patient não encontrado', 5000)
+		return
+	end
+
+	if #messagem <= 0 then
+		TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Favor preencher a mensagem!', 5000)
+		return
+	end
+
+	local patient = patientUser:getCharacter()
+	local patientName = patient:getName()
+
+	local medicos = API.getUsersByGroup('medic')
+
+	local characterName = character:getName()
+
+	for _, medico in pairs(medicos) do
+		avisoMedicoNotify(medico:getSource(), string.upper(characterName), patientName, messagem)
+	end
+
+	avisoMedicoNotify(patient:getSource(), string.upper(characterName), patientName, messagem)
 end)
