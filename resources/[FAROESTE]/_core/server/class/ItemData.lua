@@ -578,11 +578,12 @@ if itemId == "olhosdeaguia" then -- ATIVAR OS OLHOS DE AGUIA POR UM PERIODO DE T
     API.varyThirst2(source, -20)
     return true
 end
-if itemId == "ervamedicinal" then -- REVIVE E CURA
-    cAPI.TaskInteraction(source, "drink_tonic")
-    API.varyThirst2(source, -20)
-    return true
-end
+
+    if itemId == "ervamedicinal" then -- REVIVE E CURA
+        TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
+        return false
+    end
+
 if itemId == "ervaveneno" then -- COMEÇA A CAUSAR DANO DEPOIS DE ALGUM TEMPO
     cAPI.TaskInteraction(source, "drink_tonic")
     API.varyThirst2(source, -20)

@@ -4,6 +4,8 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
+local ScClientRPC = Tunnel.getInterface(GetCurrentResourceName())
+
 local ReviveEnable = false
 local target = nil
 local sort = nil
@@ -121,7 +123,7 @@ AddEventHandler('FRP:MEDIC:revive', function(source, target)
 		Wait(10000)
 		TriggerClientEvent('FRP:RESPAWN:PlayerUp', target)
 		Character:varyExp(10)
-		Inventory:addItem('money', 500)	
+		-- Inventory:addItem('money', 500)	
 		TriggerClientEvent('FRP:NOTIFY:Simple', _source, 'Reanimado com sucesso.', 5000)
 		print('Reanimado com sucesso.')
 	else
@@ -148,4 +150,42 @@ AddEventHandler("mediconotify", function(players, coords)
         end
         
     end
+end)
+
+AddEventHandler('itemWithRessurectingPropertiesWasUsed', function(user, usedItemSlot, shouldConsumeItem, consumeOnStart)
+	local playerId = user:getSource()
+
+	local inRangeNetPlayers = ScClientRPC.getPlayersServerIdInRangeOfPlayer(playerId, 3.0, true, 1)
+
+	if #inRangeNetPlayers <= 0 then
+		TriggerClientEvent('chatMessage', playerId, 'SISTEMA', { 255, 255, 255 }, 'Ninguem por perto')
+		return
+	end
+
+	local character = user:getCharacter()
+	local inventory = character:getInventory()
+
+	local function consumeItem()
+		return inventory:removeItem(usedItemSlot:getId(), usedItemSlot:getItemId(), 1)
+	end
+
+	if (shouldConsumeItem and consumeOnStart) and not consumeItem() then
+		TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Você não tem mais o item?', 5000)
+		return
+	end
+
+	Wait(10000)
+
+	if shouldConsumeItem and not consumeItem() then
+		TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Você não tem mais o item?', 5000)
+		return
+	end
+
+	local revivedNetPlayerId = inRangeNetPlayers[1]
+
+	TriggerClientEvent('FRP:RESPAWN:PlayerUp', revivedNetPlayerId)
+
+	TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Reanimado com sucesso.', 5000)
+
+	character:varyExp(10)
 end)
