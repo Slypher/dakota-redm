@@ -972,44 +972,6 @@ RegisterNUICallback(
     end
 )
 
-
-local Badge = false
-RegisterCommand(
-    "badge",
-    function(source, args, rawCommand)
-        if cAPI.hasGroup('trooper') then
-            if not Badge then
-                setcloth2(0x1FC12C9C)
-                print(GetHashKey(0x3F7F3587))
-            --  SetPedAsCop(PlayerPedId(),true)
-                Citizen.InvokeNative(0xBB03C38DD3FB7FFD, PlayerPedId(), true)
-                Badge = true
-            else
-                Citizen.InvokeNative(0xBB03C38DD3FB7FFD, PlayerPedId(), false)
-
-                Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3F7F3587, 0) -- SPURS REMOVE
-                Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-                Badge = false
-            end
-        end
-        if cAPI.hasGroup('sheriff') then
-            if not Badge then
-                setcloth2(0xDB4C451D)
-                print(GetHashKey(0x3F7F3587))
-            --  SetPedAsCop(PlayerPedId(),true)
-                Citizen.InvokeNative(0xBB03C38DD3FB7FFD, PlayerPedId(), true)
-                Badge = true
-            else
-                Citizen.InvokeNative(0xBB03C38DD3FB7FFD, PlayerPedId(), false)
-
-                Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3F7F3587, 0) -- SPURS REMOVE
-                Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
-                Badge = false
-            end
-        end
-    end
-)
-
 function setcloth2(hash)
     local model2 = hash
     if not HasModelLoaded(model2) then
