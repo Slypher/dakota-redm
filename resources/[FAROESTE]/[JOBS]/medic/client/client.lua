@@ -216,6 +216,8 @@ function getPlayersServerIdInRangeOfLocalPlayer(range, deadOnly, limit)
 	for _, playerIndex in ipairs(players) do
 		table.insert(netPlayers, GetPlayerServerId(playerIndex))
 	end
+
+  return netPlayers
 end
 
 ScClientRPC.getPlayersServerIdInRangeOfPlayer = getPlayersServerIdInRangeOfLocalPlayer
