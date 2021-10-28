@@ -1135,7 +1135,7 @@ RegisterCommand(
             else
                 Citizen.InvokeNative(0xBB03C38DD3FB7FFD, PlayerPedId(), false)
 
-                Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xDB4C451D, 0) -- SPURS REMOVE
+                Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x1FC12C9C, 0) -- SPURS REMOVE
                 Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
                 Badge = false
             end
