@@ -201,6 +201,10 @@ function getPlayersInRangeOfLocalPlayer(range, deadOnly, limit)
 		end
 	end
 
+  for i = 1, #inRangePlayers do
+    inRangePlayers[i] = inRangePlayers[i][1]
+  end
+
 	return inRangePlayers
 end
 
