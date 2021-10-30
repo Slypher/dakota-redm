@@ -1,255 +1,167 @@
-local gTransportIdPool    = fwPoolCreate()
-local gHorseIdPool        = fwPoolCreate()
-local gVehicleDraftIdPool = fwPoolCreate()
+gTransportPool = { }
 
-local gTransportsType      = { }
-local gTransportsModelName = { }
+local gTransportIdToIndex =  { }
 
-local gStatesTransportCurrHealth    = { }
-local gStatesTransportCurrDirtLevel = { }
-local gStatesTransportLossType      = { }
-local gStatesTransportDateOfLoss    = { }
+function addTransport(transportId, type, modelName)
+    local transportIndex = #gTransportPool + 1
 
-local gStatesHorseIsInWrithe = { }
-local gStatesHorseBodyWeight = { }
+    gTransportPool[transportIndex] = {
+        transportId = transportId,
+        type        = type,
+        modelName   = modelName,
 
-local gStatesVehicleDraftBrokenWheelFlags = { }
-local gStatesVehicleDraftBrokenDoorFlags  = { }
+        isCreated   = false,
+        entity      = nil,
 
-enum 'eTransportType' {
-    Unknown      = 0,
-    Horse        = 1,
-    VehicleDraft = 2,
-    VehicleBoat  = 3,
-}
+        state       = { },
+    }
 
-function CreateTransportStoreInDatabase()
+    gTransportIdToIndex[transportId] = transportIndex
+
+    return transportIndex
 end
 
-function RequestTransportKeepInMemory(transportId)
+function removeTransportByIndex(transportIndex)
+    local transportId = gTransportPool[transportIndex]
+
+    if not transportId then
+        return false
+    end
+
+    table.remove(gTransportPool, transportIndex)
+
+    gTransportIdToIndex[transportId] = nil
+    
+    -- Reorganizar o mapeamento de id para index.
+    for itTransportIndex = transportIndex, #gTransportPool do
+        local itTransportId = gTransportPool[itTransportIndex]
+
+        gTransportIdToIndex[itTransportId] = itTransportIndex
+    end
+
+    return true
+end
+
+function removeTransportById(transportId)
+    local transportIndex = gTransportIdToIndex[transportId]
+    
+    if not transportIndex then
+        return false
+    end
+
+    return removeTransportByIndex(transportIndex)
+end
+
+function assertTransportIndexIsValid(transportIndex)
+    assert(gTransportPool[transportIndex] ~= nil)
+end
+
+function setTransportAsHorseForIndex(transportIndex, isMale, apparels)
+    assertTransportIndexIsValid(transportIndex)
+
+    local transportData = gTransportPool[transportIndex]
+
+    transportData.isMale = isMale or true
+
+    transportData.APPAREL_BEDROLL   = apparels[1]
+    transportData.APPAREL_BLANKET   = apparels[2]
+    transportData.APPAREL_HORN      = apparels[3]
+    transportData.APPAREL_SADDLEBAG = apparels[4]
+    transportData.APPAREL_STIRRUP   = apparels[5]
+    transportData.APPAREL_SADDLE    = apparels[6]
+    transportData.APPAREL_LATERN    = apparels[7]
+    transportData.APPAREL_MANES     = apparels[8]
+    transportData.APPAREL_TAILS     = apparels[9]
+
+    -- Propriedades doa aforje quando ele está fora do cavalo.
+    transportData.isSaddlebagDettached = false
+    transportData.dettachedSaddlebagNetworkId = nil
+end
+
+function requestTransportKeepInMemory(transportId)
     local result = API_Database.query('transport/get-transport-include-all-scopes', { transportId = transportId })
 
     if not result then
         return
     end
 
-    -- #REMOVE: Para teste, id temporário aleátorio para duplicatas.
-    if gTransportIdPool:getIndexById(transportId) then
-        transportId = GetGameTimer()
-    end
-
     local transportWithAllScopes = result[1]
 
-    AddTransportFromObject(transportId, transportWithAllScopes)
+    addTransportFromDatabaseObject(transportWithAllScopes)
 end
 
-function AddTransportFromObject(transportId, object)
+function addTransportFromDatabaseObject(object)
     local transportTypeName = object.type
-    local transportTypeEnum = eTransportType[transportTypeName]
+    local transportTypeEnum = eTransportType[object.type]
 
-    -- print( ('RequestTransportKeepInMemory :: (%d) :: object ::'):format(transportId) , json.encode(object, { indent = true }))
+    local transportIndex = addTransport(object.transportId, transportTypeEnum, object.modelName)
 
-    print('AddTransportFromObject :: transportType', transportTypeName)
-
-    local transportIndex = gTransportIdPool:add(transportId)
-
-    gTransportsType     [transportIndex] = transportTypeEnum
-    gTransportsModelName[transportIndex] = object.modelName
-
-    gStatesTransportCurrHealth   [transportIndex] = object.currHealth
-    gStatesTransportCurrDirtLevel[transportIndex] = object.currDirtLevel
-    gStatesTransportLossType     [transportIndex] = object.lossType
-    gStatesTransportDateOfLoss   [transportIndex] = object.dateOfLoss
+    setTransportStateForIndex(
+        transportIndex,
+        object.currHealth,
+        object.currDirtLevel,
+        object.lossType,
+        object.dateOfLoss
+    )
 
     if transportTypeEnum == eTransportType.Horse then
-        local transportHorseIndex = gHorseIdPool:add(transportId)
-
-        gStatesHorseIsInWrithe[transportHorseIndex] = object.isInWrithe
-        gStatesHorseBodyWeight[transportHorseIndex] = object.bodyWeight
+        setTransportStateHorseForIndex(
+            transportIndex,
+            object.isInWrithe,
+            object.bodyWeight
+        )
     end
 
     if transportTypeEnum == eTransportType.VehicleDraft then
-        local transportVehicleDraftIndex = gVehicleDraftIdPool:add(transportId)
-
-        gStatesVehicleDraftBrokenWheelFlags[transportVehicleDraftIndex] = object.brokenWheelFlags
-        gStatesVehicleDraftBrokenDoorFlags [transportVehicleDraftIndex] = object.brokenDoorFlags
+        setTransportStateVehicleDraftForIndex(
+            transportIndex,
+            object.brokenWheelFlags,
+            object.brokenDoorFlags
+        )
     end
 end
 
-function SetTransportAsNoLongerNeeded(transportId)
-end
+--[[
+    # Cavalo Temporário: Cavalos que estão no processo de ser domados, não serão salvos ao banco de dados.
 
-function ReleaseTransport(transportId)
-    local transportIndex = gTransportIdPool:getIndexById(transportId)
+    # StateBag:
+        transport__transportId
+        transport__ownerServerId
+    
+    # Tasks: Todos os players vão manter um thread para verificar se algum cavalo em escopo(que o player seja netOwner) está precisando executar uma task.
 
-    if not transportIndex then
-        return
-    end
+    # Ações:
+        > Mandar Fugir:
+            * flag de `taskFlee`, principalmente no statebag (necessário?)
+            * servidor aguardar X segundos, enviar para o netOwner verificar próximidade com outros players
+            e se alguem está vendo o cavalo, caso a resposta seja negativa, deletar o cavalo.
+        > Seguir:
+            * flag de `taskFollow` no statebag.
+            * netOwner vai pegar o ped do dono do cavalo via statebag: 'transport__ownerServerId'.
 
-    gTransportIdPool:removeByIndex(transportIndex)
+    # Alforje:
+        * Quando desanexado, verificar caso a entidade seja deletada.
+        * Enquanto desanexado, ter statebag `transport__isSaddlebag`.
 
-    local transportType = gTransportsType[transportIndex]
+    # Carroça:
+        * Fazer o requesto da carroça, saber quais cavalos estão presos e fazer o request dos cavalos logo após.
 
-    table.remove(gTransportsType     , transportIndex)
-    table.remove(gTransportsModelName, transportIndex)
+    # Extras:
+        Escolher o cavalo principal/secundario no estábulo em que ele foi colocado.
 
-    table.remove(gStatesTransportCurrHealth   , transportIndex)
-    table.remove(gStatesTransportCurrDirtLevel, transportIndex)
-    table.remove(gStatesTransportLossType     , transportIndex)
-    table.remove(gStatesTransportDateOfLoss   , transportIndex)
+        Mas não faz sentido, ja que ninguem guarda o cavalo no estábulo :thinking:
 
-    if transportType == eTransportType.Horse then
-        local transportHorseIndex = gHorseIdPool:getIndexById(transportId)
-
-        gHorseIdPool:removeByIndex(transportHorseIndex)
+        Jogador chama o cavalo preferido quando estiver proximo ao estábulo,
+        esse cavalo agora vai ser o 'Cavalo Ativo' da sessão.
         
-        table.remove(gStatesHorseIsInWrithe, transportHorseIndex)
-        table.remove(gStatesHorseBodyWeight, transportHorseIndex)
-    end
+        Se o jogador mandar o cavalo fugir próximo ao estábulo, o jogador não
+        terá mais um 'Cavalo Ativo'.
 
-    if transportType == eTransportType.VehicleDraft then
-        local transportVehicleDraftIndex = gVehicleDraftIdPool:getIndexById(transportId)
-        
-        gVehicleDraftIdPool:removeByIndex(transportVehicleDraftIndex)
+        Se o jogador mandar o 'Cavalo Ativo' longe do estábulo, ele ainda poderá
+        chamar o cavalo novamente.
 
-        table.remove(gStatesVehicleDraftBrokenWheelFlags, transportVehicleDraftIndex)
-        table.remove(gStatesVehicleDraftBrokenDoorFlags , transportVehicleDraftIndex)
-    end
-end
+        //
 
-CreateThread(function()
-    API_Database.prepare(
-        'transport/get-transport-include-all-scopes',
-        [[
-        SELECT
-            t.transportId,
-            t.type,
-            t.modelName,
-
-            th.isMale,
-            th.apparels,
-
-            ts.currHealth,
-            ts.currDirtLevel,
-            ts.lossType,
-            ts.dateOfLoss,
-            
-            tsh.isInWrithe,
-            tsh.bodyWeight,
-            
-            tsvd.brokenWheelFlags,
-            tsvd.brokenDoorFlags
-            
-        FROM transport AS t
-            LEFT JOIN transport_horse AS th
-                ON t.transportId = th.transportId
-                
-            LEFT JOIN transport_state AS ts
-                ON t.transportId = ts.transportId
-                
-            LEFT JOIN transport_state_horse AS tsh
-                ON t.transportId = tsh.transportId
-                
-            LEFT JOIN transport_state_vehicle_draft AS tsvd
-                ON t.transportId = tsvd.transportId
-                
-        WHERE t.transportId = @transportId
-        LIMIT 1
-        ]]
-    )
-
-    -- CREATE TABLE IF NOT EXISTS `transport` (
-    -- `transportId` int(11) NOT NULL AUTO_INCREMENT,
-    -- `type` enum('Unknown','Horse','VehicleDraft','VehicleBoat') NOT NULL DEFAULT 'Unknown',
-    -- `modelName` tinytext NOT NULL,
-    -- `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-    -- PRIMARY KEY (`transportId`)
-    -- );
-
-    -- CREATE TABLE IF NOT EXISTS `transport_horse` (
-    -- `id` int(11) NOT NULL AUTO_INCREMENT,
-    -- `transportId` int(11) NOT NULL,
-    -- `isMale` tinyint(1) NOT NULL DEFAULT 1,
-    -- `apparels` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '{}',
-    -- PRIMARY KEY (`id`),
-    -- UNIQUE KEY `transportId` (`transportId`),
-    -- CONSTRAINT `FK_transport_horse_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`) ON DELETE CASCADE ON UPDATE NO ACTION
-    -- );
-
-    -- -- Copiando estrutura para tabela dakota.transport_state
-    -- CREATE TABLE IF NOT EXISTS `transport_state` (
-    -- `id` int(11) NOT NULL AUTO_INCREMENT,
-    -- `transportId` int(11) NOT NULL,
-    -- `currHealth` float NOT NULL DEFAULT 100,
-    -- `currDirtLevel` float NOT NULL DEFAULT 0,
-    -- `lossType` enum('None','Dead','Destroyed') NOT NULL DEFAULT 'None',
-    -- `dateOfLoss` timestamp NOT NULL DEFAULT current_timestamp(),
-    -- PRIMARY KEY (`id`),
-    -- UNIQUE KEY `transportId` (`transportId`),
-    -- CONSTRAINT `FK_transport_state_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
-    -- );
-
-    -- CREATE TABLE IF NOT EXISTS `transport_state_horse` (
-    -- `id` int(11) NOT NULL AUTO_INCREMENT,
-    -- `transportId` int(11) NOT NULL,
-    -- `isInWrithe` tinyint(1) NOT NULL DEFAULT 0,
-    -- `bodyWeight` float NOT NULL DEFAULT 0.5,
-    -- PRIMARY KEY (`id`),
-    -- UNIQUE KEY `transportId` (`transportId`),
-    -- CONSTRAINT `FK_transport_state_horse_transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
-    -- );
-
-    -- CREATE TABLE IF NOT EXISTS `transport_state_vehicle_draft` (
-    -- `id` int(11) NOT NULL AUTO_INCREMENT,
-    -- `transportId` int(11) NOT NULL,
-    -- `brokenWheelFlags` int(11) NOT NULL DEFAULT 0,
-    -- `brokenDoorFlags` int(11) NOT NULL DEFAULT 0,
-    -- PRIMARY KEY (`id`),
-    -- UNIQUE KEY `transportId` (`transportId`),
-    -- CONSTRAINT `FK__transport` FOREIGN KEY (`transportId`) REFERENCES `transport` (`transportId`)
-    -- );
-
-    -- run_test()
-end)
-
-function run_test()
-    RequestTransportKeepInMemory(1)
-
-    Wait(0)
-
-    RequestTransportKeepInMemory(1)
-
-    Wait(0)
-
-    RequestTransportKeepInMemory(1)
-
-    -- json_encode('gTransportsType', gTransportsType)
-    -- json_encode('gTransportsModelName', gTransportsModelName)
-    -- json_encode('gStatesTransportCurrHealth', gStatesTransportCurrHealth)
-    -- json_encode('gStatesTransportCurrDirtLevel', gStatesTransportCurrDirtLevel)
-    -- json_encode('gStatesTransportLossType', gStatesTransportLossType)
-    -- json_encode('gStatesTransportDateOfLoss', gStatesTransportDateOfLoss)
-    -- json_encode('gStatesHorseIsInWrithe', gStatesHorseIsInWrithe)
-    -- json_encode('gStatesHorseBodyWeight', gStatesHorseBodyWeight)
-    -- json_encode('gStatesVehicleDraftBrokenWheelFlags', gStatesVehicleDraftBrokenWheelFlags)
-    -- json_encode('gStatesVehicleDraftBrokenDoorFlags', gStatesVehicleDraftBrokenDoorFlags)
-
-    Wait(0)
-
-    ReleaseTransport(1)
-
-    -- json_encode('gTransportsType', gTransportsType)
-    -- json_encode('gTransportsModelName', gTransportsModelName)
-    -- json_encode('gStatesTransportCurrHealth', gStatesTransportCurrHealth)
-    -- json_encode('gStatesTransportCurrDirtLevel', gStatesTransportCurrDirtLevel)
-    -- json_encode('gStatesTransportLossType', gStatesTransportLossType)
-    -- json_encode('gStatesTransportDateOfLoss', gStatesTransportDateOfLoss)
-    -- json_encode('gStatesHorseIsInWrithe', gStatesHorseIsInWrithe)
-    -- json_encode('gStatesHorseBodyWeight', gStatesHorseBodyWeight)
-    -- json_encode('gStatesVehicleDraftBrokenWheelFlags', gStatesVehicleDraftBrokenWheelFlags)
-    -- json_encode('gStatesVehicleDraftBrokenDoorFlags', gStatesVehicleDraftBrokenDoorFlags)
-end
-
-function json_encode(name, ref)
-    print(name, json.encode(ref, { indent = true }))
-end
+        A 'Carroça Ativa', caso não tenha nenhuma cavalo preso a ela, sairá desse estado na primeira vez em que o player
+        'mandar embora' a carroça, tendo que voltar no estábulo para selecionar ela de novo.
+]]

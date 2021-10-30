@@ -61,9 +61,18 @@ server_scripts {
 	"server/LoggingHelper.lua",
 	"server/LoggingHook*.lua",
 
-	"server/class/prototype/fwPool.lua",
-	"server/class/prototype/enum.lua",
-	"server/class/prototype/Transport.lua",
+	-- "server/class/prototype/fwPool.lua",
+	-- "server/class/prototype/enum.lua",
+
+	-- "server/class/prototype/eTransportType.lua",
+	-- "server/class/prototype/eLossType.lua",
+
+	-- "server/class/prototype/TransportSchema.lua",
+	
+	-- "server/class/prototype/Transport.lua",
+	-- "server/class/prototype/TransportState.lua",
+
+	-- "server/class/prototype/TransportTest.lua",
 }
 
 shared_scripts {
