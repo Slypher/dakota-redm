@@ -35,8 +35,19 @@ RegisterCommand('everyone_drunk', function(source, args, rawCommand)
     if doesPlayerHaveAdminPermissions(source) then
         GlobalState.everyoneDrunk = not GlobalState.everyoneDrunk
 
-        TriggerClientEvent('forceMaxDrunkState', -1)
+        TriggerClientEvent('ackSetVeryDrunk', -1)
 
         print('everyoneDrunk!', GlobalState.everyoneDrunk)
+    end
+end)
+
+RegisterCommand('set_everyone_slightly_drunk', function(source, args, rawCommand)
+    if doesPlayerHaveAdminPermissions(source) then
+        GlobalState.keepDrunk = false
+        GlobalState.everyoneDrunk = false
+
+        TriggerClientEvent('forceSlightyDrunk', -1)
+
+        print('everyoneSlightlyDrunk!', GlobalState.everyoneDrunk)
     end
 end)

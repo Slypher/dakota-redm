@@ -657,9 +657,9 @@ function handleUseGenericAlcoholItem()
 
             -- Finalizou a animação
             if HasAnimEventFired(playerPedId, 108107462) --[[ HasAnimEventFired(playerPedId, 574156416) ]] then
-                gPlayerDrunkStage = math.min(gPlayerDrunkStage + 1, eDrunkStage.VERY_DRUNK)
+                local playerDrunkStage = math.min(gPlayerDrunkStage + 1, eDrunkStage.VERY_DRUNK)
 
-                setPlayerDrunk(gPlayerDrunkStage)
+                setPlayerDrunk(playerDrunkStage)
 
                 -- O frasco tava ficando preso na mão, então a gente cancela imediatamente
                 ClearPedTasks(playerPedId)
@@ -675,13 +675,17 @@ function ensureEveryoneDrunkState()
 end
 
 -- Quando o comando every_drunk é usado.
-RegisterNetEvent('forceMaxDrunkState', ensureEveryoneDrunkState)
+RegisterNetEvent('ackSetVeryDrunk', ensureEveryoneDrunkState)
 
 -- Quando o script é iniciado
 CreateThread(ensureEveryoneDrunkState)
 
 -- Quando o player seleciona um character.
 RegisterNetEvent('FRP:EVENTS:CharacterSetRole', ensureEveryoneDrunkState)
+
+RegisterNetEvent('forceSlightyDrunk', function()
+    setPlayerDrunk(eDrunkStage.SLIGHTLY_DRUNK)
+end)
 
 RegisterNetEvent('DKT:ANIMATION:whisky')
 AddEventHandler('DKT:ANIMATION:whisky', function(source, args)
@@ -720,7 +724,7 @@ AddEventHandler('DKT:ANIMATION:cerveja', function(source, args)
 
     local propEntity = CreateObject(bottleModelHash, GetEntityCoords(playerPedId), false, true, false, false, true)
 
-    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_BEER`, propEntity, GetHashKey("P_BOTTLEBEER01X_PH_R_HAND"), -664271430, 1, 0, 0.0)
+    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_BEER`, propEntity, GetHashKey("P_BOTTLEBEER01X_PH_R_HAND"), `DRINK_BOTTLE@Bottle_Cylinder_D1-55_H18_Neck_A8_B1-8_UNCORK`, 1, 0, 0.0)
     
     handleUseGenericAlcoholItem()
 end)
