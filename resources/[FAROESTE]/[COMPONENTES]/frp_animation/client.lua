@@ -668,13 +668,20 @@ function handleUseGenericAlcoholItem()
     end)
 end
 
-RegisterNetEvent('forceMaxDrunkState', function()
-    setPlayerDrunk(GlobalState.everyoneDrunk and eDrunkStage.VERY_DRUNK or eDrunkStage.SOBER)
-end)
+function ensureEveryoneDrunkState()
+    if GlobalState.everyoneDrunk then
+        setPlayerDrunk(eDrunkStage.VERY_DRUNK)
+    end
+end
 
-CreateThread(function()
-    setPlayerDrunk(GlobalState.everyoneDrunk and eDrunkStage.VERY_DRUNK or eDrunkStage.SOBER)
-end)
+-- Quando o comando every_drunk é usado.
+RegisterNetEvent('forceMaxDrunkState', ensureEveryoneDrunkState)
+
+-- Quando o script é iniciado
+CreateThread(ensureEveryoneDrunkState)
+
+-- Quando o player seleciona um character.
+RegisterNetEvent('FRP:EVENTS:CharacterSetRole', ensureEveryoneDrunkState)
 
 RegisterNetEvent('DKT:ANIMATION:whisky')
 AddEventHandler('DKT:ANIMATION:whisky', function(source, args)
