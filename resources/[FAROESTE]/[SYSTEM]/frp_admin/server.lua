@@ -863,7 +863,7 @@ RegisterCommand(
 CreateThread(
     function()
 
-        API_Database.prepare("FCRP/UpdatePedByChar", 'UPDATE characters_appearence SET model = @ped , clothes = \'{"Outfit":"0"}\', enabledComponents = \'{"Outfit":"0"}\', faceFeatures = \'{}\' WHERE charid = @charid')
+        API_Database.prepare("FCRP/UpdatePedByChar", 'UPDATE characters_appearence SET model = @ped , clothes = \'{"Outfit":"0"}\', enabledComponents = \'{}\', faceFeatures = \'{}\' WHERE charid = @charid')
         API_Database.prepare("FCRP/GetCharacter", "SELECT * from characters WHERE charid = @charid")
         API_Database.prepare("FCRP/GetCharacterLikeCharName", "SELECT * FROM characters where characterName like @charname")
         API_Database.prepare("FCRP/DeleteCharacter", "DELETE FROM characters WHERE charid = @charid")

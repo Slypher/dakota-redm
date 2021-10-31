@@ -20,8 +20,8 @@ ItemList = {
         name = "Binoculos",
         weight = 1.0,
         description = "Um pequeno binoculos com uma lente excepcional, capaz de ver um rato a vários metros de distância, não olhe para o sol!",
-        stackSize = 1
-        --worldModel = "s_interact_lantern03x_pickup"
+        stackSize = 1,
+        worldModel = "w_binoculars01x"
     },
     ["melee_broken_sword"] = {
         type = "weapon",
@@ -831,42 +831,48 @@ ItemList = {
         name = "Pirita de Ferro",
         weight = 2.2,
         description = "Ferro recém minerado, está em forma de pirita, e por isso é tão pesado.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_miningpan01x"
     },
     ["minerioouro"] = {
         type = "generic",
         name = "Ouro Bruto",
         weight = 4.0,
         description = "Ouro recém minerado, está em forma bruta, e por isso é tão pesado, não deixa ter ter um alto valor.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_goldnuggetgroup01x"
     },
     ["mineriocobre"] = {
         type = "generic",
         name = "Minério de Cobre",
         weight = 1.2,
         description = "Uma pedra de cobre bem suja e danificada, pode ser processada para virar uma barra.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_skippingstone01x"
     },
     ["pedra"] = {
         type = "generic",
         name = "Pedra",
         weight = 0.6,
         description = "Algumas rochas pequenas.",
-        stackSize = 40
+        stackSize = 40,
+        worldModel = "p_rockthrow02x"
     },
     ["carvao"] = {
         type = "generic",
         name = "Carvão",
         weight = 1.0,
         description = "Pedaços de madeira queimada.",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_cs_miningpan01x"
     },
     ["garimpo"] = {
         type = "generic",
         name = "Bateia de Garimpo",
         weight = 0.3,
         description = "Quem sabe você não encontra ouro?",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "p_cs_miningpan01x"
     },
 
 
@@ -879,35 +885,40 @@ ItemList = {
         name = " Fibra Vegetal",
         weight = 0.02,
         description = "As Fibras vegetais são coletadas de plantas, e são usadas para muitas coisas.",
-        stackSize = 50
+        stackSize = 50,
+        worldModel = "p_woodplank04x"
     },
     ["madeiraruim"] = {
         type = "generic",
         name = "Madeira de Má Qualidade",
         weight = 1.2,
         description = "Uma madeira de má qualidade, excelente para ser queimada.",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_cs_woodpile01x"
     },
     ["madeiraboa"] = {
         type = "generic",
         name = "Madeira de Boa Qualidade",
         weight = 1.2,
         description = "Essa madeira serve pra fazer de tudo!",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_woodplank04x"
     },
     ["madeirarefinada"] = {
         type = "generic",
         name = "Madeira Refinada",
         weight = 0.8,
         description = "Esta pronta para ser utilizada.",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_woodplank04x"
     },
     ["tabua"] = {
         type = "generic",
         name = "Tábua de Madeira",
         weight = 1.0,
         description = "Esta pronta para ser utilizada em construções e outras coisas.",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_woodplank04x"
     },
 
 -------------------------------------------------------------------------------------------------------------
@@ -923,7 +934,7 @@ ItemList = {
     },
     ["penarapina"] = {
         type = "generic",
-        name = "Pluma de Garça-Vermelha",
+        name = "Pena de ave de rápida",
         weight = 0.015,
         description = "A pena de uma ave de rápina, é excelente para fazer boas ferramentas",
         stackSize = 25
@@ -944,9 +955,9 @@ ItemList = {
     },
     ["penapicapau"] = {
         type = "generic",
-        name = "Pena de Condor",
+        name = "Pena de Pica-Pau",
         weight = 0.02,
-        description = "Uma pena da maior ave do mundo.",
+        description = "Se o Pica-Pau tivesse comunicado a polícia, nada disso teria acontecido",
         stackSize = 25
     },
     ["tirascouro"] = {
@@ -1177,84 +1188,96 @@ ItemList = {
         name = "Semente de Tabaco",
         weight = 0.2,
         description = "Uma semente de fumo, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["cenouraseed"] = {
         type = "planting",
         name = "Semente de Cenoura",
         weight = 0.2,
         description = "Uma pequena semente de cenoura, será que é selvagem ou comum?!",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["feijaoseed"] = {
         type = "planting",
         name = "Semente de Feijao",
         weight = 0.2,
         description = "Uma pequeno grão de feijão que servira de semente, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["trigoseed"] = {
         type = "planting",
         name = "Semente de Trigo",
         weight = 0.2,
         description = "Uma pequena semente de trigo, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["algodaoseed"] = {
         type = "planting",
         name = "Semente de Algodão",
         weight = 0.2,
         description = "Uma pequena semente de Algodão, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["batataseed"] = {
         type = "planting",
         name = "Muda de Batata",
         weight = 0.2,
         description = "Uma pequena batata que dara mais batatas, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["tomateseed"] = {
         type = "planting",
         name = "Semente de Tomate",
         weight = 0.2,
         description = "Uma semente de tomate, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["lupuloseed"] = {
         type = "planting",
         name = "Semente de Lupúlo",
         weight = 0.2,
         description = "Uma pequena lasca de semente, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["repolhoseed"] = {
         type = "planting",
         name = "Semente de Repolho",
         weight = 0.2,
         description = "Uma pequena semente de repolho, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["alfaceseed"] = {
         type = "planting",
         name = "Semente de Alface",
         weight = 0.2,
         description = "Uma pequena semente de alface, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["papolaseed"] = {
         type = "planting",
         name = "Semente de Papoula",
         weight = 0.2,
         description = "Uma pequena lasca de uma semente, pode ser plantada.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["sugarcaneseed"] = {
         type = "planting",
         name = "Muda de Cana-de-açúcar",
         weight = 0.2,
         description = "Um pequeno pedaço de cana-de-açúcar, pode ser plantado.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     --[[["marijuana_seed"] = {
         type = "planting",
@@ -1268,77 +1291,88 @@ ItemList = {
         name = "Semente de Milho",
         weight = 0.2,
         description = "Um pequeno grão de milho, pode ser plantado.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["agaveseed"] = {
         type = "planting",
         name = "Muda de Agave",
         weight = 0.2,
         description = "Uma pequena muda de espinho, pode ser plantado.",
-        stackSize = 15
+        stackSize = 15,
+        worldModel = "s_inv_coinsack01x"
     },
     ["wateringcan"] = {
         type = "planting",
         name = "Balde",
         weight = 2.0,
         description = "Balde feito de barra de ferro, é bem resistente e está cheio de água.",
-        stackSize = 7
+        stackSize = 7,
+        worldModel = "p_bucket03x"
     },
     ["sacodeadubo"] = {
         type = "planting",
         name = "Saco de Adubo",
         weight = 1.0,
         description = "Excelente para o crescimento de pastagens e outras plantas.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_sacklarge01x"
     },
     ["saco"] = {
         type = "generic",
         name = "Saco",
         weight = 0.1,
         description = "Excelente para guardar coisas.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_ambsack02x"
     },
     ["tabaco"] = {
         type = "generic",
         name = "Tabaco",
         weight = 0.2,
         description = "Cuidado com o pulmão... Cof Cof!",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "s_inv_indtobacco01cx"
     },
     ["milho"] = {
         type = "edible",
         name = "Milho",
         weight = 0.2,
         description = "Um masto de cereal cultivado em terras férteis. Alimento humano e animal.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_corn02x"
     },
     ["trigo"] = {
         type = "generic",
         name = "Trigo",
         weight = 0.2,
         description = "Coloque no canto da boca e torne-se um legitimo caipira.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_handfulofhay"
     },
     ["cenoura"] = {
         type = "generic",
         name = "Cenoura",
         weight = 0.1,
         description = "Uma raíz laranjada, os coelhos adoram.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_carrot01x"
     },
     ["alface"] = {
         type = "generic",
         name = "Alface",
         weight = 0.3,
         description = "Não é mato.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "s_lettuce01x"
     },
     ["tomate"] = {
         type = "generic",
         name = "Tomate",
         weight = 0.2,
         description = "Não use em manifestações, e nem de pro cavalo.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_applerotten01x"
     },
     ["agave"] = {
         type = "generic",
@@ -1352,28 +1386,33 @@ ItemList = {
         name = "Batata",
         weight = 0.5,
         description = "Boa para fazer pure.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_potato01x"
     },
     ["puredebatata"] = {
         type = "edible",
         name = "Batata",
         weight = 2.5,
         description = "Algumas batatas amassadas.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_mashedpotato02x"
+
     },
     ["algodao"] = {
         type = "generic",
         name = "Algodão",
         weight = 0.1,
         description = "Materia prima para confecção de tecidos.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_applerotten01x"
     },
     ["acucar"] = {
         type = "generic",
         name = "Açúcar",
         weight = 0.5,
         description = "hmmm, Docinho!",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "p_cs_sugarbag01x"
     },
     ["canaacucar"] = {
         type = "generic",
@@ -1387,7 +1426,8 @@ ItemList = {
         name = "Garrafa de Álcool",
         weight = 0.5,
         description = "Pode te deixar bebado em instantes.",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "p_bottle02x"
     },
     ["feijao"] = {
         type = "generic",
@@ -1408,7 +1448,8 @@ ItemList = {
         name = "Papoula",
         weight = 0.5,
         description = "O extrato da papoula pode servir para diversos fins, sejam medicinais ou não.",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "s_inv_prariepoppy01bx"
     },
     ["lupulo"] = {
         type = "generic",
@@ -1422,59 +1463,66 @@ ItemList = {
         name = "Pó de Café",
         weight = 0.5,
         description = "Café em pó para fazer café.",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "s_coffeetin01x"
     },
     ["farinha"] = {
         type = "generic",
         name = "Farinha",
         weight = 0.5,
         description = "Aquele pó que vem depois de moer muito trigo. É farinha tá!",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "p_floursack07x"
     },
-
------------------------------------------------------------------------------------------------------------------------
----------------------------------------------PLANTAÇÃO TERMINA AQUI----------------------------------------------------
------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------ARMAS COMEÇA AQUI------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------
-
+    
+    -----------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------PLANTAÇÃO TERMINA AQUI----------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------
+    
+    -----------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------ARMAS COMEÇA AQUI------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------
+    
     --                               REVOLVER
     ["corpodevaqueiro"] = {
         type = "kit",
         name = "Base do Vaqueiro",
-        weight = 0.457,
-        description = "Utilizado para ser o corpo de um revólver de vaqueiro.",
-        stackSize = 5
+            weight = 0.457,
+            description = "Utilizado para ser o corpo de um revólver de vaqueiro.",
+            stackSize = 5,
+            worldModel = "w_dis_rev_cattleman01_2"
     },
     ["corpodeacaodupla"] = {
         type = "kit",
         name = "Base do Ação-Dupla",
         weight = 0.4,
         description = "Utilizado para ser o corpo de um revólver de ação-dupla.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rev_doubleaction01"
     },
     ["corpodelemat"] = {
         type = "kit",
         name = "Base do Lemat",
         weight = 1.28,
         description = "Utilizado para ser o corpo de um revólver lemat.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rev_cattleman01_2"
     },
     ["corpodeschotfield"] = {
         type = "kit",
         name = "Base do Schotfield",
         weight = 0.78,
         description = "Utilizado para ser o corpo de um revólver schotfield.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rev_schofield01"
     },
     ["corpodenavy"] = {
         type = "kit",
         name = "Base da Marinha",
         weight = 0.66,
         description = "Utilizado para ser o corpo de um revólver da marinha.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rev_cattleman01_2"
     },
     --                               PISTOLAS
     ["corpodevolcanic"] = {
@@ -1482,50 +1530,65 @@ ItemList = {
         name = "Base da Volcanic",
         weight = 1.5,
         description = "Utilizado para ser o corpo de uma pistola volcanic.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_pis_volcanic01"
     },
     ["corpodemauser"] = {
         type = "kit",
         name = "Base da Mauser",
         weight = 1.66,
         description = "Utilizado para ser o corpo de uma pistola mauser.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_pistol_m189902"
     },
     ["corpodesemiauto"] = {
         type = "kit",
         name = "Base da Semi-Auto",
         weight = 0.62,
         description = "Utilizado para ser o corpo de uma pistola semi-automatica.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_pistol_m189902"
     },
                                     -- CARABINAS
+    ["corpodepragas"] = {
+        type = "kit",
+        name = "Base da Anti-Pragas",
+        weight = 3.96,
+        description = "Utilizado para ser o corpo de uma anti-pragas.",
+        stackSize = 5,
+        worldModel = "w_dis_rep_carbine01_1"
+    },
     ["corpodecarabina"] = {
         type = "kit",
         name = "Base da Carabina",
         weight = 3.96,
         description = "Utilizado para ser o corpo de uma carabina de repetição.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rep_carbine01_1"
     },
     ["corpodeevans"] = {
         type = "kit",
         name = "Base da Evans",
         weight = 3.66,
         description = "Utilizado para ser o corpo de uma evans de repetição.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rep_carbine01_1"
     },
     ["corpodehenry"] = {
         type = "kit",
         name = "Base da Henry",
         weight = 3.72,
         description = "Utilizado para ser o corpo de um henry de repetição.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rep_henry01"
     },
     ["corpodelancaster"] = {
         type = "kit",
         name = "Base da Lancaster",
         weight = 2.92,
         description = "Utilizado para ser o corpo de uma lancaster de repetição .",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rep_winchester01"
     },
                                     -- RIFLE
     ["corpodeferrolho"] = {
@@ -1533,21 +1596,24 @@ ItemList = {
         name = "Base do Ferrolho",
         weight = 3.256,
         description = "Utilizado para ser o corpo de um rifle de ferrolho.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rif_springfield01"
     },
     ["corpodespringfield"] = {
         type = "kit",
         name = "Base do Springfield",
         weight = 3.66,
         description = "Utilizado para ser o corpo de um rifle springfield.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rif_springfield01"
     },
     ["corpoderolling"] = {
         type = "kit",
         name = "Base do Rolling Block",
         weight = 3.68,
         description = "Utilizado para ser o corpo de um rifle de precisão rolling block.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_rif_rollingblock01"
     },
                                     -- ESCOPETAS
     ["corpodeescopeta"] = {
@@ -1555,21 +1621,25 @@ ItemList = {
         name = "Base Cano-Duplo",
         weight = 2.32,
         description = "Utilizado para ser o corpo de uma escopeta de cano-duplo.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_sho_doublebarrel01"
     },
     ["corpodeserrada"] = {
         type = "kit",
         name = "Base Escopeta Serrada",
         weight = 1.82,
         description = "Utilizado para ser o corpo de uma escopeta de cano-serrado.",
-        stackSize = 5
+        stackSize = 5,
+        worldModel = "w_dis_sho_sawed01"
     },
     ["canodearma"] = {
         type = "kit",
         name = "Cano de Arma",
         weight = 0.5,
         description = "O cano é por onde o projétil passa quando disparado.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "w_revolver_cattleman01_barrel02"
+        
     },
     ["caodearma"] = {
         type = "kit",
@@ -1590,14 +1660,16 @@ ItemList = {
         name = "Caixa de Cartuchos vázios",
         weight = 0.5,
         description = "Uma caixa de cartuchos usada para criar munições.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_ammocase_loot"
     },
     ["sacopolvora"] = {
         type = "kit",
         name = "Saco de Pólvora",
         weight = 1.0,
         description = "utilizada para encher os cartuchos e fazer explosivos .",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_coinsack01x"
     },
     ["ammo_22"] = {
         type = "ammo",
@@ -1605,7 +1677,7 @@ ItemList = {
         weight = 0.1,
         description = "Munição produzida especialmente para o Rifle Anti-pragas.",
         stackSize = 60,
-        worldModel = "s_inv_shotgunammo01x"
+        worldModel = "s_inv_varmint_rifleammo01x"
     },
     ['ammo_pistol_express'] = {
         type = 'ammo',
@@ -1745,7 +1817,7 @@ ItemList = {
     },
     ["ammo_shotgun"] = {
         type = "ammo",
-        name = "Munição de Shotgun",
+        name = "Munição de Escopeta",
         weight = 0.1,
         description = "Munição produzida especialmente para shotguns.",
         stackSize = 35,
@@ -1753,66 +1825,24 @@ ItemList = {
     },
     ['ammo_shotgun_buckshot_incendiary'] = {
         type = 'ammo',
-        name = 'Munição de Shotgun Incendiária',
+        name = 'Munição de Escopeta Incendiária',
         weight = 0.1,
         description = 'Munição produzida especialmente para shotguns. É inflamável e incendeia ao contato.',
         stackSize = 35,
     },
     ['ammo_shotgun_express_explosive'] = {
         type = 'ammo',
-        name = 'Munição de Shotgun Explosiva',
+        name = 'Munição de Escopeta Explosiva',
         weight = 0.1,
         description = 'Munição produzida especialmente para shotguns. Explode ao contato.',
         stackSize = 35,
     },
     ['ammo_shotgun_slug'] = {
         type = 'ammo',
-        name = 'Munição de Shotgun Slug',
+        name = 'Munição de Escopeta Balote',
         weight = 0.1,
         description = 'Munição produzida especialmente para shotguns.',
         stackSize = 35,
-    },
-    ["ammo_arrow"] = {
-        type = "ammo",
-        name = "Flecha",
-        weight = 0.2,
-        description = "Munição produzida especialmente para arcos.",
-        stackSize = 25
-    },
-    ['ammo_arrow_dynamite'] = {
-        type = 'ammo',
-        name = 'Flecha Explosiva',
-        weight = 0.2,
-        description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
-        stackSize = 25,
-    },
-    ['ammo_arrow_fire'] = {
-        type = 'ammo',
-        name = 'Flecha Explosiva',
-        weight = 0.2,
-        description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
-        stackSize = 10,
-    },
-    ['ammo_arrow_improved'] = {
-        type = 'ammo',
-        name = 'Flecha Aprimorada',
-        weight = 0.3,
-        description = 'Flecha encoberta por uma linha de metal extremamente letal.',
-        stackSize = 25,
-    },
-    ['ammo_arrow_poison'] = {
-        type = 'ammo',
-        name = 'Flecha',
-        weight = 0.2,
-        description = 'Uma flecha venenosa.',
-        stackSize = 25,
-    },
-    ['ammo_arrow_small_game'] = {
-        type = 'ammo',
-        name = 'Flecha',
-        weight = 0.2,
-        description = 'Munição produzida especialmente para arcos.',
-        stackSize = 25,
     },
     ["ammo_pistol"] = {
         type = "ammo",
@@ -1846,35 +1876,40 @@ ItemList = {
         name = "Agulha",
         weight = 0.01,
         description = "Ideal para confecção de peças de roup... Aii meu dedo!",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "p_threadneedle01x" --p_knittingneedle01x  p_threadneedle01x
     },
     ["linha"] = {
         type = "kit",
         name = "Rolo de Linha",
         weight = 0.01,
         description = "Feita a partir do algodão ou de fibras.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_sewingkit01bx"
     },
     ["tecidobranco"] = {
         type = "kit",
         name = "Tecido Branco",
         weight = 0.1,
         description = "Junto com uma agulha e linha isso pode virar uma peça de roupa muito boa.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "mp001_s_mp_clothesfolded02x"
     },
     ["pecaroupabranca"] = {
         type = "kit",
-        name = "Peça de Roupa Branca",
+        name = "Peças de Roupas",
         weight = 0.5,
         description = "Feita de algodão da mais alta qualidade.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_ambclothseat01x"
     },
     ["roupas"] = {
-        type = "generic",
+        type = "kit",
         name = "Roupas",
         weight = 0.5,
         description = "Uma muda de roupas para cada ocasião, troque de roupas onde quiser.",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "s_clothesrolled01x"
     },
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -1892,42 +1927,48 @@ ItemList = {
         name = "Prego",
         weight = 0.07,
         description = "Utilizado para criação e fixação de alguns itens.",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "p_threadneedle01x"
     },
     ["parafuso"] = {
         type = "generic",
         name = "Parafuso",
         weight = 0.1,
         description = "Usado principalmente para juntar as partes de uma arma.",
-        stackSize = 40
+        stackSize = 40,
+        worldModel = "p_threadneedle01x"
     },
     ["lata"] = {
         type = "generic",
         name = "Lata Vazia",
         weight = 0.1,
         description = "Utilizado para colocar alimentos.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_threadneedle01x"
     },
     ["barracobre"] = {
         type = "generic",
         name = "Barra de Cobre",
         weight = 1.0,
         description = "Uma barra de cobre, serve para alguma coisa.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_threadneedle01x"
     },
     ["barraouro"] = {
         type = "generic",
         name = "Barra de Ouro",
         weight = 2.5,
         description = "Uma Barra de Ouro, você pode comprar muitas coisas agora, ou investir!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_threadneedle01x"
     },
     ["barraferro"] = {
         type = "generic",
         name = "Barra de Ferro",
         weight = 1.0,
         description = "É o básico necessário para fazer qualquer coisa que funcione direito",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_threadneedle01x"
     },
     ["picareta"] = {
         type = "generic",
@@ -1999,7 +2040,7 @@ ItemList = {
         weight = 1.6,
         description = "Um simples conjunto de ferramentas.",
         stackSize = 1,
-        worldModel = "p_cratetools01x" -- TESTE FERRAMENTAS
+        worldModel = "p_toolbox01x"
     },
     ["melee_knife"] = {
         type = "weapon",
@@ -2017,7 +2058,7 @@ ItemList = {
         stackSize = 1,
         worldModel = "w_melee_machete01"
     },
-
+    
     ------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------FERREIRO TERMINA AQUI-------------------------------------------------
     ------------------------------------------------------------------------------------------------------------------------
@@ -2025,13 +2066,14 @@ ItemList = {
     ------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------INDIO COMEÇA AQUI-----------------------------------------------------
     ------------------------------------------------------------------------------------------------------------------------
-
+    
     ["ammo_arrow"] = {
         type = "ammo",
         name = "Flecha",
         weight = 0.2,
         description = "Munição produzida especialmente para arcos.",
-        stackSize = 25
+        stackSize = 25,
+        worldModel = "w_sp_bowarrow_arrow"
     },
     ['ammo_arrow_dynamite'] = {
         type = 'ammo',
@@ -2039,6 +2081,7 @@ ItemList = {
         weight = 0.2,
         description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
         stackSize = 25,
+        worldModel = "w_sp_bowarrow_dynamite"
     },
     ['ammo_arrow_fire'] = {
         type = 'ammo',
@@ -2046,6 +2089,7 @@ ItemList = {
         weight = 0.2,
         description = 'Esta é uma flecha composta por um alto valor de pólvora inflamável, explode ao contato.',
         stackSize = 10,
+        worldModel = "w_sp_bowarrow_fire"
     },
     ['ammo_arrow_improved'] = {
         type = 'ammo',
@@ -2053,6 +2097,7 @@ ItemList = {
         weight = 0.3,
         description = 'Sua ponta é uma pedra muito afiada, suas penas são de rápina, extremamente letal.',
         stackSize = 25,
+        worldModel = "w_sp_bowarrow_arrow"
     },
     ['ammo_arrow_poison'] = {
         type = 'ammo',
@@ -2060,6 +2105,7 @@ ItemList = {
         weight = 0.2,
         description = 'Uma flecha venenosa.',
         stackSize = 25,
+        worldModel = "w_sp_bowarrow_arrow"
     },
     ['ammo_arrow_small_game'] = {
         type = 'ammo',
@@ -2067,6 +2113,7 @@ ItemList = {
         weight = 0.2,
         description = 'Munição produzida especialmente para arcos.',
         stackSize = 25,
+        worldModel = "w_sp_bowarrow_arrow_smallgame"
     },
     ["thrown_tomahawk"] = {
         type = "weapon",
@@ -2095,7 +2142,8 @@ ItemList = {
         name = "Pedra Afiada",
         weight = 2.0,
         description = "Essa faca foi feita atráves de duas pedras, é muito afiada.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "w_melee_knife03"
     },
     ["corda"] = {
         type = "generic",
@@ -2281,14 +2329,16 @@ ItemList = {
         name = "Dólar",
         weight = 0.001,
         description = "Uma nota de valor, pode ser usada para comprar diversos itens. É a moeda da economia.",
-        stackSize = -1
+        stackSize = -1,
+        worldModel = "p_moneystack01x"
     },
     ["gold"] = {
         type = "valuable",
         name = "Ouro",
         weight = 0.001,
         description = "Uma brilhante e cara grama de ouro.",
-        stackSize = -1
+        stackSize = -1,
+        worldModel = "p_goldnuggetgroup01x"
     },
 
 
@@ -2350,21 +2400,24 @@ ItemList = {
         name = "Cassis",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_blackcurrant01x"
     },
     ["cassisdourado"] = {
         type = "generic",
         name = "Cassis Dourado",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_goldencurrant01x"
     },
     ["tabacoindiano"] = {
         type = "generic",
         name = "Tabaco Indiano",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_indtobacco01cx"
     },
     ["oregano"] = {
         type = "generic",
@@ -2385,7 +2438,8 @@ ItemList = {
         name = "Ginseng Americano",
         weight = 0.3,
         description = "Fruto folha, útil para sarar doenças.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_ginseng01dx"
     },
     ["amora"] = {
         type = "generic",
@@ -2413,7 +2467,8 @@ ItemList = {
         name = "Bardana",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_burdock01x"
     },
     --[[["taboa"] = {
         type = "generic",
@@ -2427,28 +2482,32 @@ ItemList = {
         name = "Menta-Silvestre",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_wildmint01x"
     },
     ["parasol"] = {
         type = "generic",
         name = "Cogumelo Guarda-Sol",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_parasol01bx"
     },
     ["cantarelo"] = {
         type = "generic",
         name = "Cantarelo",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_chanterelles"
     },
     ["boletobaio"] = {
         type = "generic",
         name = "Boleto Baio",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_baybolete"
     },
     ["milfolhas"] = {
         type = "generic",
@@ -2462,7 +2521,8 @@ ItemList = {
         name = "Gotas de Violeta",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_viosnwdrp01bx"
     },
     ["beijaflor"] = {
         type = "generic",
@@ -2490,35 +2550,39 @@ ItemList = {
         name = "Maitake",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_ramshead"
     },
     ["quinina"] = {
         type = "generic",
         name = "Quinina Silvestre",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10 
     },
     ["cenouraselvagem"] = {
         type = "generic",
         name = "Cenoura Selvagem",
         weight = 0.4,
         description = "",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_wildcarrot01cx"
     },
     ["ginsengalaska"] = {
         type = "generic",
         name = "Ginseng do Alaska",
         weight = 0.4,
         description = "Reside em regiões montanosas e frias normalmente, é um ótimo ingrediente de um bom chá.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_ginseng01dx"
     },
     ["oleandro"] = {
         type = "generic",
         name = "Sálvia Oleandro",
         weight = 0.6,
         description = "Pequena flor de flocos, é medicinal.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_inv_orleander01cx"
     },
     ["frasco"] = {
         type = "generic",
@@ -2535,14 +2599,16 @@ ItemList = {
         name = "Quimicos",
         weight = 0.3,
         description = "Produtos quimicos utilizados em varias coisas...",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_bottlemedicine21x"
     },
     ["mosto"] = {
         type = "generic",
         name = "Mosto",
         weight = 0.3,
         description = "É uma mistura açucarada destinada à fermentação alcoólica.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_re_jug01x"
     },
     ["moonshinetradicional"] = {
         type = "beverage",
@@ -2550,7 +2616,8 @@ ItemList = {
         weight = 0.9,
         varOnUse = 1.0,
         description = "Bebida Ilegal de alto teor alcólico, esta variedade é uma tradição ilegal entre os fazendeiros.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_re_jug01x"
     },
     ["moonshinedourado"] = {
         type = "beverage",
@@ -2558,7 +2625,8 @@ ItemList = {
         weight = 0.9,
         varOnUse = 1.0,
         description = "Bebida Ilegal de alto teor alcólico, esta variedade é refrescante como ver ouro na sombra.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_re_jug01x"
     },
     ["moonshineinverno"] = {
         
@@ -2567,7 +2635,8 @@ ItemList = {
         weight = 0.9,
         varOnUse = 1.0,
         description = "Bebida Ilegal de alto teor alcólico, esta variedade é tem cheiro de violetas no inverno.",
-        stackSize = 30
+        stackSize = 30,
+        worldModel = "p_re_jug01x"
     },
     ["extratodepapoula"] = {
         type = "generic",
@@ -2581,6 +2650,7 @@ ItemList = {
         name = "Ópio",
         weight = 0.5,
         description = "Use com moderação.",
-        stackSize = 45
+        stackSize = 45,
+        worldModel = "s_inv_cocainegum01x"
     },
 }

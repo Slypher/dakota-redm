@@ -1,1570 +1,1640 @@
 Config = {
 
-        -----------------------------------------------------------------------------------------------------------------------------------------------------
-        ---------------------------------------------------------------CRAFTS-SEM-PROPS----------------------------------------------------------------------
-        -----------------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------CRAFTS-SEM-PROPS----------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+    {
+        craftings = 
         {
-            craftings = 
             {
-                {
-                    time = 5,
-                    input = {
-                        {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}}, 
-                        {item = "gordura", amount = 1, alias = {"carvao"}}, 
-                    },
-                    output = {
-                        {item = "melee_torch", amount = 1, name = "Tocha"}
-                    }
+                time = 5,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}}, 
+                    {item = "gordura", amount = 1, alias = {"carvao"}}, 
                 },
-                {
-                    time = 20,
-                    input = {
-                        {item = "pedra", amount = 6},
-                        {item = "madeiraboa", amount = 4, alias = {"madeiraruim"}}, 
-                        
-                    },
-                    output = {
-                        {item = "campfiresmall", amount = 1, name = "Fogueira Pequena"}
-                    }
+                output = {
+                    {item = "melee_torch", amount = 1, name = "Tocha"}
+                }
+            },
+            {
+                time = 20,
+                input = {
+                    {item = "pedra", amount = 6},
+                    {item = "madeiraboa", amount = 4, alias = {"madeiraruim"}}, 
+                    
                 },
-                {
-                    time = 20,
-                    input = {
-                        {item = "pedra", amount = 6},
-                        {item = "madeiraboa", amount = 4, alias = {"madeiraruim"}}, 
-                        
-                    },
-                    output = {
-                        {item = "campfirebig", amount = 1, name = "Fogueira Grande"}
-                    }
-                },  
-            }
-        },
-        
-        -----------------------------------------------------------------------------------------------------------------------------------------------------
-        ---------------------------------------------------------------------FOGUEIRA------------------------------------------------------------------------
-        -----------------------------------------------------------------------------------------------------------------------------------------------------
+                output = {
+                    {item = "campfiresmall", amount = 1, name = "Fogueira Pequena"}
+                }
+            },
+            {
+                time = 20,
+                input = {
+                    {item = "pedra", amount = 6},
+                    {item = "madeiraboa", amount = 4, alias = {"madeiraruim"}}, 
+                    
+                },
+                output = {
+                    {item = "campfirebig", amount = 1, name = "Fogueira Grande"}
+                }
+            },  
+            {
+                time = 10,
+                input = {
+                    {item = "couro", amount = 1},
+                    {item = "melee_knife", amount = 1, alias = {"melee_hatchet,melee_knife_jawbone"}, remove = false},
+                },
+                output = {
+                    {item = "tirascouro", amount = 6, name = "Tiras de Couro"}
+                }
+            },  
+        }
+    },
+    
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------FOGUEIRA------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+    {
+        campfire = true,
+        craftings = 
         {
-            campfire = true,
-            craftings = 
+            -------------------------------------- PEIXES 
+            
             {
-                -------------------------------------- PEIXES 
-                
-                {
-                    time = 30,
-                    input = {
-                        {item = "smallfish", amount = 1},
-                        {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
-                    },
-                    output = {
-                        {item = "peixepequenoassado", amount = 1, name = "Peixe Pequeno Assado"},
-                    }
+                time = 30,
+                input = {
+                    {item = "smallfish", amount = 1},
+                    {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
                 },
-                {
-                    time = 35,
-                    input = {
-                        {item = "mediumfish", amount = 1},
-                        {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
-                    },
-                    output = {
-                        {item = "peixemedioassado", amount = 1, name = "Peixe Médio Assado"}
-                    }
+                output = {
+                    {item = "peixepequenoassado", amount = 1, name = "Peixe Pequeno Assado"},
+                }
+            },
+            {
+                time = 35,
+                input = {
+                    {item = "mediumfish", amount = 1},
+                    {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
                 },
-                {
-                    time = 40,
-                    input = {
-                        {item = "largefish", amount = 1}, 
-                        {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
-                    },
-                    output = {
-                        {item = "peixegrandeassado", amount = 1, name = "Peixe Grande Assado"}
-                    }
+                output = {
+                    {item = "peixemedioassado", amount = 1, name = "Peixe Médio Assado"}
+                }
+            },
+            {
+                time = 40,
+                input = {
+                    {item = "largefish", amount = 1}, 
+                    {item = "mentasilvestre", amount = 1, alias = {"oregano", "tomilhorastejante"}},
                 },
+                output = {
+                    {item = "peixegrandeassado", amount = 1, name = "Peixe Grande Assado"}
+                }
+            },
 
-                -------------------------------------- PLANTAS 
-                {
-                    time = 15,
-                    input = {
-                        {item = "milho", amount = 1}, 
-                    },
-                    output = {
-                        {item = "milhoassado", amount = 1, name = "Milho Assado"}
-                    }
+            -------------------------------------- PLANTAS 
+            {
+                time = 15,
+                input = {
+                    {item = "milho", amount = 1}, 
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "batata", amount = 1}, 
-                    },
-                    output = {
-                        {item = "batataassada", amount = 1, name = "Batata Assada"}
-                    }
+                output = {
+                    {item = "milhoassado", amount = 1, name = "Milho Assado"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "batata", amount = 1}, 
                 },
+                output = {
+                    {item = "batataassada", amount = 1, name = "Batata Assada"}
+                }
+            },
 
-                -------------------------------------- CARNES 
-                {
-                    time = 40,
-                    input = {
-                        {item = "carneruim", amount = 1, alias = {"carneboa", "carneperfeita"}},
-                        {item = "gordura", amount = 1}, 
-                    },
-                    output = {
-                        {item = "carnefrita", amount = 1, name = "Carne Frita"}
-                    }
+            -------------------------------------- CARNES 
+            {
+                time = 40,
+                input = {
+                    {item = "carneruim", amount = 1, alias = {"carneboa", "carneperfeita"}},
+                    {item = "gordura", amount = 1}, 
                 },
-                {
-                    time = 40,
-                    input = {
-                        {item = "carneruim", amount = 1},
-                    },
-                    output = {
-                        {item = "carneruimassada", amount = 1, name = "Carne Assada"}
-                    }
+                output = {
+                    {item = "carnefrita", amount = 1, name = "Carne Frita"}
+                }
+            },
+            {
+                time = 40,
+                input = {
+                    {item = "carneruim", amount = 1},
                 },
-                {
-                    time = 50,
-                    input = {
-                        {item = "carneboa", amount = 1}, 
-                        {item = "tomilhorastejante", amount = 3},
-                    },
-                    output = {
-                        {item = "carneboaassada", amount = 1, name = "Carne Boa Assada"}
-                    }
+                output = {
+                    {item = "carneruimassada", amount = 1, name = "Carne Assada"}
+                }
+            },
+            {
+                time = 50,
+                input = {
+                    {item = "carneboa", amount = 1}, 
+                    {item = "tomilhorastejante", amount = 3},
                 },
-                {
-                    time = 60,
-                    input = {
-                        {item = "carneperfeita", amount = 1},
-                        {item = "oregano", amount = 3},
-                        {item = "tomilhorastejante", amount = 3},
-                    },
-                    output = {
-                        {item = "carneprimeiraassada", amount = 1, name = "Carne de Primeira Assada"}
-                    }
+                output = {
+                    {item = "carneboaassada", amount = 1, name = "Carne Boa Assada"}
+                }
+            },
+            {
+                time = 60,
+                input = {
+                    {item = "carneperfeita", amount = 1},
+                    {item = "oregano", amount = 3},
+                    {item = "tomilhorastejante", amount = 3},
                 },
-                {
-                    time = 20,
-                    input = {
-                        {item = "carneave", amount = 1},
-                        {item = "gordura", amount = 2},
-                    },
-                    output = {
-                        {item = "carneavefrita", amount = 1, name = "Ave Frita"}
-                    }
+                output = {
+                    {item = "carneprimeiraassada", amount = 1, name = "Carne de Primeira Assada"}
+                }
+            },
+            {
+                time = 20,
+                input = {
+                    {item = "carneave", amount = 1},
+                    {item = "gordura", amount = 2},
                 },
+                output = {
+                    {item = "carneavefrita", amount = 1, name = "Ave Frita"}
+                }
+            },
 
-                -------------------------------------- BEBIDA 
-                {
-                    time = 15,
-                    input = {
-                        {item = "pocafe", amount = 1},
-                        {item = "agua", amount = 1},
-                    },
-                    output = {
-                        {item = "cafe", amount = 1, name = "Café"}
-                    }
+            -------------------------------------- BEBIDA 
+            {
+                time = 15,
+                input = {
+                    {item = "pocafe", amount = 1},
+                    {item = "agua", amount = 1},
                 },
+                output = {
+                    {item = "cafe", amount = 1, name = "Café"}
+                }
+            },
 
-                -------------------------------------- ITENS 
-                {
-                    time = 15,
-                    input = {
-                        {item = "madeiraruim", amount = 5},
-                    },
-                    output = {
-                        {item = "carvao", amount = 3, name = "Carvão"}
-                    }
+            -------------------------------------- ITENS 
+            {
+                time = 15,
+                input = {
+                    {item = "madeiraruim", amount = 3},
                 },
-            }
-        },
+                output = {
+                    {item = "carvao", amount = 3, name = "Carvão"}
+                }
+            },
+        }
+    },
 
 
-        ---------------------------------------------------------------------------------------------------
-        --------------------------------------------- CARDERON --------------------------------------------
-        ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    --------------------------------------------- CARDERON --------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    {
+        Calderon = true,
+        craftings = 
         {
-            Calderon = true,
-            craftings = 
+            -------------------------------------- SOPAS
             {
-                -------------------------------------- SOPAS
-                {
-                    time = 40,
-                    input = {
-                        {item = "cenoura", amount = 4},
-                        {item = "batata", amount = 4},
-                        {item = "agua", amount = 2},
-                        {item = "milho", amount = 4},
-                        {item = "carneave", amount = 4},
-                    },
-                    output = {
-                        {item = "sopa", amount = 1, name = "Sopa"}
-                    }
+                time = 40,
+                input = {
+                    {item = "cenoura", amount = 4},
+                    {item = "batata", amount = 4},
+                    {item = "agua", amount = 2},
+                    {item = "milho", amount = 4},
+                    {item = "carneave", amount = 4},
                 },
-                {
-                    time = 40,
-                    input = {
-                        {item = "molhotomate", amount = 2},
-                        {item = "carneperfeita", amount = 6},
-                        {item = "agua", amount = 2},
-                        {item = "batata", amount = 6},
-                        {item = "cenoura", amount = 6},
-                    },
-                    output = {
-                        {item = "sopadecarne", amount = 1, name = "Ensopado de Carne"}
-                    }
+                output = {
+                    {item = "sopa", amount = 1, name = "Sopa"}
+                }
+            },
+            {
+                time = 40,
+                input = {
+                    {item = "molhotomate", amount = 2},
+                    {item = "carneperfeita", amount = 6},
+                    {item = "agua", amount = 2},
+                    {item = "batata", amount = 6},
+                    {item = "cenoura", amount = 6},
                 },
-                -------------------------------------- COMIDAS 
-                {
-                    time = 30,
-                    input = {
-                        {item = "batata", amount = 10},
-                    },
-                    output = {
-                        {item = "puredebatata", amount = 1, name = "Pure de Batata"}
-                    }
+                output = {
+                    {item = "sopadecarne", amount = 1, name = "Ensopado de Carne"}
+                }
+            },
+            --[[{
+                time = 40,
+                input = {
+                    {item = "agua", amount = 2},
+                    {item = "oregano", amount = 3},
+                    {item = "cantarelo", amount = 3},
+                    {item = "cenouraselvagem", amount = 6},
                 },
-            }
-        },
+                output = {
+                    {item = "sopaselvagem", amount = 1, name = "Ensopado Selvagem"}
+                }
+            },]]
+            -------------------------------------- COMIDAS 
+            {
+                time = 30,
+                input = {
+                    {item = "batata", amount = 10},
+                },
+                output = {
+                    {item = "puredebatata", amount = 1, name = "Pure de Batata"}
+                }
+            },
+        }
+    },
 
-        ---------------------------------------------------------------------------------------------------
-        -------------------------------------------- XAMA -------------------------------------------------
-        ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    -------------------------------------------- XAMA -------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
 
+    {
+        group = "xama",
+        craftings = 
         {
-            group = "xama",
-            craftings = 
+            
+            -------------------------------------------- ERVAS MEDICINAL ------------------------------------------
             {
-                
-                -------------------------------------------- ERVAS MEDICINAL ------------------------------------------
-                {
-                    time = 15,
-                    input = {
-                        {item = "milfolhas", amount = 5}, 
-                        {item = "ginsengalaska", amount = 2}, 
-                        {item = "gualteria", amount = 1}, 
-                        {item = "melee_knife_jawbone", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "ervamedicinal", amount = 1, name = "Erva Medicinal"},
-                    }
+                time = 15,
+                input = {
+                    {item = "milfolhas", amount = 5}, 
+                    {item = "ginsengalaska", amount = 2}, 
+                    {item = "gualteria", amount = 1}, 
+                    {item = "melee_knife_jawbone", amount = 1, remove = false}
                 },
-                -------------------------------------------- ERVAS DE VENENO ------------------------------------------
-                --[[{
-                    time = 15,
-                    input = {
-                        {item = "asclepia", amount = 5}, 
-                        {item = "beijaflor", amount = 5}, 
-                        {item = "oleandro", amount = 5}, 
-                        {item = "melee_knife_jawbone", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "ervadeveneno", amount = 1, name = "Erva de Veneno"},
-                    }
-                },]]
-                -------------------------------------------- ERVAS OLHOS DE ÁGUIA ------------------------------------------
-                --[[{
-                    time = 20,
-                    input = {
-                        {item = "tabacoindiano", amount = 5}, 
-                        {item = "tomilhorastejante", amount = 5}, 
-                        {item = "violeta", amount = 5}, 
-                        {item = "melee_knife_jawbone", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "olhosdeaguia", amount = 1, name = "Visão de Águia"},
-                    }
-                },]]
-                -------------------------------------------- ERVAS RAÍZES DA TERRA ------------------------------------------
-                --[[
-                    time = 15,
-                    input = {
-                        {item = "cantarelo", amount = 5}, 
-                        {item = "maitake", amount = 3}, 
-                        {item = "boletobaio", amount = 4}, 
-                        {item = "melee_knife_jawbone", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "raizesdaterra", amount = 1, name = "Raízes da Terra"},
-                    }
-                },]]
-            }
-        },
+                output = {
+                    {item = "ervamedicinal", amount = 1, name = "Erva Medicinal"},
+                }
+            },
+            -------------------------------------------- ERVAS DE VENENO ------------------------------------------
+            --[[{
+                time = 15,
+                input = {
+                    {item = "asclepia", amount = 5}, 
+                    {item = "beijaflor", amount = 5}, 
+                    {item = "oleandro", amount = 5}, 
+                    {item = "melee_knife_jawbone", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "ervadeveneno", amount = 1, name = "Erva de Veneno"},
+                }
+            },]]
+            -------------------------------------------- ERVAS OLHOS DE ÁGUIA ------------------------------------------
+            --[[{
+                time = 20,
+                input = {
+                    {item = "tabacoindiano", amount = 5}, 
+                    {item = "tomilhorastejante", amount = 5}, 
+                    {item = "violeta", amount = 5}, 
+                    {item = "melee_knife_jawbone", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "olhosdeaguia", amount = 1, name = "Visão de Águia"},
+                }
+            },]]
+            -------------------------------------------- ERVAS RAÍZES DA TERRA ------------------------------------------
+            --[[
+                time = 15,
+                input = {
+                    {item = "cantarelo", amount = 5}, 
+                    {item = "maitake", amount = 3}, 
+                    {item = "boletobaio", amount = 4}, 
+                    {item = "melee_knife_jawbone", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "raizesdaterra", amount = 1, name = "Raízes da Terra"},
+                }
+            },]]
+        }
+    },
 
 
+    {
+        group = "indio",
+        craftings = 
         {
-            group = "indio",
-            craftings = 
+            -------------------------------------------- MADEIRA REFINADA ------------------------------------------
             {
-                -------------------------------------------- MADEIRA REFINADA ------------------------------------------
-                {
-                    time = 15,
-                    input = {
-                        {item = "madeiraboa", amount = 1}, 
-                        --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
-                    },
-                    output = {
-                        {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"},
-                    }
+                time = 15,
+                input = {
+                    {item = "madeiraboa", amount = 1}, 
+                    --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
+                    {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
                 },
-                -------------------------------------------- VARA DE PESCA ------------------------------------------
-                --[[
-                {
-                    time = 20,
-                    input = {
-                        {item = "corda", amount = 1}, 
-                        {item = "madeirarefinada", amount = 3}, 
-                    },
-                    output = {
-                        {item = "fishingrod", amount = 1, name = "Vara de Pesca"},
-                    }
-                },]]
-                -------------------------------------------- FACA DE CAÇADOR ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "madeirarefinada", amount = 1}, 
-                        {item = "melee_knife_jawbone", amount = 1}, 
-                    },
-                    output = {
-                        {item = "melee_knife", amount = 1, name = "Faca de Caça"},
-                    }
-                },
-                -------------------------------------------- MACHADINHA ------------------------------------------
-                {
-                    time = 30,
-                    input = {
-                        {item = "madeirarefinada", amount = 2}, 
-                        {item = "fibra", amount = 5, alias = {"tirascouro"}}, 
-                        {item = "melee_knife_jawbone", amount = 2}, 
-                    },
-                    output = {
-                        --{item = "thrown_tomahawk", amount = 1, name = "Machadinha"},
-                        {item = "melee_hatchet", amount = 1, name = "Machadinha"},
-                    }
-                },
-                -------------------------------------------- ARCO SIMPLES ------------------------------------------
-                {
-                    time = 30,
-                    input = {
-                        {item = "fibra", amount = 10}, 
-                        {item = "estruturasimples", amount = 1}, 
-                    },
-                    output = {
-                        {item = "bow", amount = 1, name = "Arco Simples"},
-                    }
-                },
-                -------------------------------------------- ARCO CURVADO ------------------------------------------
-                {
-                    time = 30,
-                    input = {
-                        {item = "corda", amount = 1},
-                        {item = "tirascouro", amount = 2},
-                        {item = "estruturacurvada", amount = 1},
-                    },
-                    output = {
-                        {item = "bow_improved", amount = 1, name = "Arco Curvado"},
-                    }
-                },
-                -------------------------------------------- ESTRUTURA DE ARCO ------------------------------------------
-                {
-                    time = 30,
-                    input = {
-                        {item = "madeiraboa", amount = 3}, 
-                        --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
-                    },
-                    output = {
-                        {item = "estruturasimples", amount = 1, name = "Estrutura de Arco"},
-                    }
-                },
-                -------------------------------------------- ESTRUTURA DE ARCO CURVADA ------------------------------------------
-                {
-                    time = 30,
-                    input = {
-                        {item = "madeirarefinada", amount = 4}, 
-                        --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
-                        {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
-                    },
-                    output = {
-                        {item = "estruturacurvada", amount = 1, name = "Estrutura de Arco Curvada"},
-                    }
-                },
-                -------------------------------------------- LASSO ------------------------------------------
-                {
-                    time = 30,
-                    input = { 
-                        {item = "corda", amount = 3,}
-                    },
-                    output = {
-                        {item = "lasso", amount = 1, name = "Laço"},
-                    }
-                },
-                -------------------------------------------- CORDA ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "fibra", amount = 10}, 
-                        {item = "melee_knife_jawbone", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "corda", amount = 1, name = "Corda"},
-                    }
-                },
-                -------------------------------------------- LINHA ------------------------------------------
-                {
-                    time = 15,
-                    input = {
-                        {item = "algodao", amount = 10, alias = {"fibra"}},
-                    },
-                    output = {
-                        {item = "linha", amount = 5, name = "Rolo de Linha"}
-                    }
-                },
-                -------------------------------------------- PONTA DE FLECHA ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "pedra", amount = 10}, 
-                    },
-                    output = {
-                        {item = "pontadeflecha", amount = 40, name = "Ponta de Flecha"},
-                    }
-                },
-                -------------------------------------------- PEDRA AFIADA ------------------------------------------
-                {
-                    time = 15,
-                    input = {
-                        {item = "pedra", amount = 2},                     
-                    },
-                    output = {
-                        {item = "melee_knife_jawbone", amount = 1, name = "Pedra Afiada"},
-                    }
-                },
-                -------------------------------------------- FLECHA NORMAL ------------------------------------------
-                {
-                    time = 10,
-                    input = {
-                        {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
-                        {item = "madeirarefinada", amount = 4},
-                        {item = "pena", amount = 10},
-                        {item = "pontadeflecha", amount = 20}, 
-                    },
-                    output = {
-                        {item = "ammo_arrow", amount = 40, name = "Flecha Normal"},
-                    }
-                },
-                --[[
-                -------------------------------------------- FLECHA APRIMORADA ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
-                        {item = "madeirarefinada", amount = 4},
-                        {item = "penarapina", amount = 5},
-                        {item = "melee_knife_jawbone", amount = 5}, 
-                    },
-                    output = {
-                        {item = "ammo_arrow_improved", amount = 10, name = "Flecha Melhorada"},
-                    }
-                },
-                -------------------------------------------- FLECHA PEQUENA ------------------------------------------
-                {
-                    time = 10,
-                    input = {
-                        {item = "madeirarefinada", amount = 4},
-                    },
-                    output = {
-                        {item = "ammo_arrow_small_game", amount = 40, name = "Flecha Pequena"},
-                    }
-                },
-                -------------------------------------------- FLECHA ENVENENADA ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "ammo_arrow", amount = 2}, 
-                        {item = "ervadeveneno", amount = 2},                    
-                    },
-                    output = {
-                        {item = "ammo_arrow_poison", amount = 5, name = "Flecha Envenenada"},
-                    }
-                },
-                -------------------------------------------- FLECHA INCENDIÁRIA ------------------------------------------
-                {
-                    time = 20,
-                    input = {
-                        {item = "ammo_arrow", amount = 1}, 
-                        {item = "gordura", amount = 1},  
-                    },
-                    output = {
-                        {item = "ammo_arrow_fire", amount = 5, name = "Flecha Incendiária"},
-                    }
-                },]]
-            }
-        },
-
-        ---------------------------------------------------------------------------------------------------
-        ---------------------------------------- FERREIRO | FUNDIÇÃO --------------------------------------
-        ---------------------------------------------------------------------------------------------------
-        
-
-        {    
-            group = "ferreiro",
-            position = vec3(-369.409,796.127,116.192),  -- No position, its global
-            --Ferreiro = true,
-            craftings = 
+                output = {
+                    {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"},
+                }
+            },
+            -------------------------------------------- VARA DE PESCA ------------------------------------------
+            --[[
             {
-                {
-                                    -- BARRA DE FERRO
-                    time = 40,
-                    input = {
-                        {item = "minerioferro", amount = 6},
-                        {item = "carvao", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "barraferro", amount = 1, name = "Barra de Ferro"},
-                    }
+                time = 20,
+                input = {
+                    {item = "corda", amount = 1}, 
+                    {item = "madeirarefinada", amount = 3}, 
                 },
-                {
-                                    -- BARRA DE COBRE
-                    time = 40,
-                    input = {
-                        {item = "mineriocobre", amount = 6},
-                        {item = "carvao", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "barracobre", amount = 1, name = "Barra de Cobre"},
-                    }
+                output = {
+                    {item = "fishingrod", amount = 1, name = "Vara de Pesca"},
+                }
+            },]]
+            -------------------------------------------- FACA DE CAÇADOR ------------------------------------------
+            {
+                time = 20,
+                input = {
+                    {item = "madeirarefinada", amount = 1}, 
+                    {item = "melee_knife_jawbone", amount = 1}, 
                 },
-                {
-                                    -- BARRA DE OURO
-                    time = 60,
-                    input = {
-                        {item = "pepitadeouro", amount = 50},
-                        {item = "carvao", amount = 15},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "barraouro", amount = 1, name = "Barra de Ouro"}
-                    }
+                output = {
+                    {item = "melee_knife", amount = 1, name = "Faca de Caça"},
+                }
+            },
+            -------------------------------------------- MACHADINHA ------------------------------------------
+            {
+                time = 30,
+                input = {
+                    {item = "madeirarefinada", amount = 2}, 
+                    {item = "fibra", amount = 5, alias = {"tirascouro"}}, 
+                    {item = "melee_knife_jawbone", amount = 2}, 
                 },
-            }
-        },
-        ---------------------------------------------------------------------------------------------------
-        ---------------------------------------- FERREIRO | BIGORNA ---------------------------------------
-        ---------------------------------------------------------------------------------------------------
+                output = {
+                    --{item = "thrown_tomahawk", amount = 1, name = "Machadinha"},
+                    {item = "melee_hatchet", amount = 1, name = "Machadinha"},
+                }
+            },
+            -------------------------------------------- ARCO SIMPLES ------------------------------------------
+            {
+                time = 30,
+                input = {
+                    {item = "fibra", amount = 10}, 
+                    {item = "estruturasimples", amount = 1}, 
+                },
+                output = {
+                    {item = "bow", amount = 1, name = "Arco Simples"},
+                }
+            },
+            -------------------------------------------- ARCO CURVADO ------------------------------------------
+            {
+                time = 30,
+                input = {
+                    {item = "corda", amount = 1},
+                    {item = "tirascouro", amount = 2},
+                    {item = "estruturacurvada", amount = 1},
+                },
+                output = {
+                    {item = "bow_improved", amount = 1, name = "Arco Curvado"},
+                }
+            },
+            -------------------------------------------- ESTRUTURA DE ARCO ------------------------------------------
+            {
+                time = 30,
+                input = {
+                    {item = "madeiraboa", amount = 3}, 
+                    --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
+                    {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
+                },
+                output = {
+                    {item = "estruturasimples", amount = 1, name = "Estrutura de Arco"},
+                }
+            },
+            -------------------------------------------- ESTRUTURA DE ARCO CURVADA ------------------------------------------
+            {
+                time = 30,
+                input = {
+                    {item = "madeirarefinada", amount = 4}, 
+                    --{item = "melee_knife_jawbone", amount = 1, alias = {"thrown_tomahawk"}, remove = false},
+                    {item = "melee_knife_jawbone", amount = 1, alias = {"melee_hatchet"}, remove = false},
+                },
+                output = {
+                    {item = "estruturacurvada", amount = 1, name = "Estrutura de Arco Curvada"},
+                }
+            },
+            -------------------------------------------- LASSO ------------------------------------------
+            {
+                time = 30,
+                input = { 
+                    {item = "corda", amount = 3,}
+                },
+                output = {
+                    {item = "lasso", amount = 1, name = "Laço"},
+                }
+            },
+            -------------------------------------------- CORDA ------------------------------------------
+            {
+                time = 20,
+                input = {
+                    {item = "fibra", amount = 10}, 
+                    {item = "melee_knife_jawbone", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "corda", amount = 1, name = "Corda"},
+                }
+            },
+            -------------------------------------------- LINHA ------------------------------------------
+            {
+                time = 15,
+                input = {
+                    {item = "algodao", amount = 10, alias = {"fibra"}},
+                },
+                output = {
+                    {item = "linha", amount = 5, name = "Rolo de Linha"}
+                }
+            },
+            -------------------------------------------- PONTA DE FLECHA ------------------------------------------
+            {
+                time = 20,
+                input = {
+                    {item = "pedra", amount = 10}, 
+                },
+                output = {
+                    {item = "pontadeflecha", amount = 40, name = "Ponta de Flecha"},
+                }
+            },
+            -------------------------------------------- PEDRA AFIADA ------------------------------------------
+            {
+                time = 15,
+                input = {
+                    {item = "pedra", amount = 2},                     
+                },
+                output = {
+                    {item = "melee_knife_jawbone", amount = 1, name = "Pedra Afiada"},
+                }
+            },
+            -------------------------------------------- FLECHA NORMAL ------------------------------------------
+            {
+                time = 10,
+                input = {
+                    {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
+                    {item = "madeirarefinada", amount = 4},
+                    {item = "pena", amount = 10},
+                    {item = "pontadeflecha", amount = 20}, 
+                },
+                output = {
+                    {item = "ammo_arrow", amount = 40, name = "Flecha Normal"},
+                }
+            },
+            
+            -------------------------------------------- FLECHA APRIMORADA ------------------------------------------
+            --[[{
+                time = 20,
+                input = {
+                    {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
+                    {item = "madeirarefinada", amount = 4},
+                    {item = "penarapina", amount = 5},
+                    {item = "melee_knife_jawbone", amount = 5}, 
+                },
+                output = {
+                    {item = "ammo_arrow_improved", amount = 10, name = "Flecha Melhorada"},
+                }
+            },]]
+            -------------------------------------------- FLECHA PEQUENA ------------------------------------------
+            {
+                time = 10,
+                input = {
+                    {item = "madeirarefinada", amount = 4},
+                },
+                output = {
+                    {item = "ammo_arrow_small_game", amount = 40, name = "Flecha Pequena"},
+                }
+            },
+            -------------------------------------------- FLECHA ENVENENADA ------------------------------------------
+            {
+                time = 20,
+                input = {
+                    {item = "ammo_arrow", amount = 2}, 
+                    {item = "ervadeveneno", amount = 2},                    
+                },
+                output = {
+                    {item = "ammo_arrow_poison", amount = 5, name = "Flecha Envenenada"},
+                }
+            },
+            -------------------------------------------- FLECHA INCENDIÁRIA ------------------------------------------
+            {
+                time = 20,
+                input = {
+                    {item = "ammo_arrow", amount = 1}, 
+                    {item = "gordura", amount = 1},  
+                },
+                output = {
+                    {item = "ammo_arrow_fire", amount = 5, name = "Flecha Incendiária"},
+                }
+            },
+        }
+    },
+
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------- FERREIRO | FUNDIÇÃO --------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    
+
+    {    
+        group = "ferreiro",
+        position = vec3(-369.409,796.127,116.192),  -- No position, its global
+        --Ferreiro = true,
+        craftings = 
         {
-            group = "ferreiro",
-            --position = vec3(-369.484,796.221,116.196),  -- No position, its global
-            Ferreiro2 = true,
-            craftings = 
             {
-                {
-                                    -- FERRAMENTAS
-                    time = 20,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "ferramentas", amount = 1, name = "Caixa de Ferramentas"},
-                    }
+                                -- BARRA DE FERRO
+                time = 30,
+                input = {
+                    {item = "minerioferro", amount = 3},
+                    --{item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CABEÇA DE PICARETA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "cabecapicareta", amount = 1, name = "Cabeça de Picareta"},
-                    }
-                },
-                {
-                                    -- CABEÇA DE MACHADO
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "cabecamachado", amount = 1, name = "Cabeça de Machado"},
-                    }
-                },
-                {
-                                    -- CABEÇA DE PÁ
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "cabecapa", amount = 1, name = "Cabeça de Pá"}
-                    }
-                },
-                {
-                                    -- CABEÇA DE ENXADA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "cabecaenxada", amount = 1, name = "Cabeça de Enxada"}
-                    }
-                },
-                {
-                                    -- LÂMINA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "lamina", amount = 1, name = "Lâmina"},
-                    }
-                },
-                {
-                                    -- CANO DE ARMA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "canodearma", amount = 1, name = "Cano de Arma"},
-                    }
-                },
-                {
-                                    -- CÃO DE ARMA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "caodearma", amount = 4, name = "Cães de Arma"},
-                    }
-                },
-                {
-                                    -- GATILHO DE ARMA
-                    time = 25,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "gatilhodearma", amount = 4, name = "Gatilhos de Arma"},
-                    }
-                },
-                {
-                                    -- PREGOS
-                    time = 10,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "prego", amount = 20, name = "Pregos"},
-                    }
-                },
-                {
-                                    -- PARAFUSOS
-                    time = 10,
-                    input = {
-                        {item = "barraferro", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "parafuso", amount = 10, name = "Parafusos"},
-                    }
-                },
-            }
-        },
-
-        ---------------------------------------------------------------------------------------------------------------
-        ------------------------------------------------FERREIRO | CRIAÇÃO---------------------------------------------
-        ---------------------------------------------------------------------------------------------------------------
-
-        {    
-            group = "ferreiro",
-            --position = vec3(-277.220,779.328,119.504),  -- No position, its global
-            Ferreiro3 = true,
-            craftings = 
+                output = {
+                    {item = "barraferro", amount = 1, name = "Barra de Ferro"},
+                }
+            },
             {
-                {
-                                    -- PICARETA
-                    time = 20,
-                    input = {
-                        {item = "cabecapicareta", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 4},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "picareta", amount = 1, name = "Picareta"},
-                    }
+                                -- BARRA DE COBRE
+                time = 30,
+                input = {
+                    {item = "mineriocobre", amount = 3},
+                    --{item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- MACHADO
-                    time = 20,
-                    input = {
-                        {item = "cabecamachado", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "melee_hatchet", amount = 1, name = "Machado"},
-                    }
+                output = {
+                    {item = "barracobre", amount = 1, name = "Barra de Cobre"},
+                }
+            },
+            {
+                                -- BARRA DE OURO
+                time = 40,
+                input = {
+                    {item = "pepitadeouro", amount = 25},
+                    {item = "carvao", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- PÁ
-                    time = 20,
-                    input = {
-                        {item = "cabecapa", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 2},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "pa", amount = 1, name = "Pá"}
-                    }
-                },
-                {
-                                    -- ENXADA
-                    time = 20,
-                    input = {
-                        {item = "cabecaenxada", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 2},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "enxada", amount = 1, name = "Enxada"}
-                    }
-                },
-                {
-                                    -- FACÃO
-                    time = 20,
-                    input = {
-                        {item = "lamina", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "melee_machete", amount = 1, name = "Facão"},
-                    }
-                },
-                {
-                                    -- FACA
-                    time = 20,
-                    input = {
-                        {item = "lamina", amount = 1},
-                        {item = "madeirarefinada", amount = 1},
-                        {item = "prego", amount = 3},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "melee_knife", amount = 1, name = "Faca de Caça"},
-                    }
-                },
-                {
-                                    -- GAZUA
-                    time = 20,
-                    input = {
-                        {item = "parafuso", amount = 5},
-                        {item = "barracobre", amount = 1},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "lockpick", amount = 1, name = "Gazua"},
-                    }
-                },
-            }
-        },
-
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        -----------------------------------------------------------------ARMEIRO | CRIAÇÃO------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-
+                output = {
+                    {item = "barraouro", amount = 1, name = "Barra de Ouro"}
+                }
+            },
+        }
+    },
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------- FERREIRO | BIGORNA ---------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    {
+        group = "ferreiro",
+        --position = vec3(-369.484,796.221,116.196),  -- No position, its global
+        Ferreiro2 = true,
+        craftings = 
         {
-            group = "armeiro",
-            position = vec3(-277.121,779.223,119.504),  -- No position, its global
-            --Armeiro = true,
-            craftings = 
             {
-                {
-                                    -- REVOLVER DE AÇÃO-DUPLA
-                    time = 25,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderevolver", amount = 1},
-                        {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "revolver_doubleaction", amount = 1, name = "Revólver de Ação-Dupla"},
-                    }
+                                -- FERRAMENTAS
+                time = 20,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- REVOLVER DE VAQUEIRO
-                    time = 25,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderevolver", amount = 1},
-                        {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "revolver_cattleman", amount = 1, name = "Revólver de Vaqueiro"},
-                    }
+                output = {
+                    {item = "ferramentas", amount = 1, name = "Caixa de Ferramentas"},
+                }
+            },
+            {
+                                -- LAMPIÃO
+                time = 20,
+                input = {
+                    {item = "barracobre", amount = 1},
+                    {item = "gordura", amount = 1},
+                    {item = "tecidobranco", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- REVOLVER SCHOTFIELD
-                    time = 25,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderevolver", amount = 1},
-                        {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "revolver_schofield", amount = 1, name = "Revólver Schotfield"},
-                    }
+                output = {
+                    {item = "melee_davy_lantern", amount = 1, name = "Lampião"},
+                }
+            },
+            {
+                                -- LATA
+                time = 20,
+                input = {
+                    {item = "barracobre", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- REVOLVER LEMAT
-                    time = 25,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderevolver", amount = 1},
-                        {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "revolver_lemat", amount = 1, name = "Revólver Lemat"},
-                    }
+                output = {
+                    {item = "lata", amount = 10, name = "Latas"},
+                }
+            },
+            {
+                                -- BALDE
+                time = 20,
+                input = {
+                    {item = "barraferro", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- REVOLVER DA MARINHA
-                    time = 25,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderevolver", amount = 1},
-                        {item = "parafuso", amount = 5},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "revolver_navy", amount = 1, name = "Revólver da Marinha"},
-                    }
+                output = {
+                    {item = "wateringcan", amount = 1, name = "Balde"},
+                }
+            },
+            {
+                                -- CABEÇA DE PICARETA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- PISTOLA VOLCANIC
-                    time = 30,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodepistola", amount = 1},
-                        {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "pistol_volcanic", amount = 1, name = "Pistola Volcanic"},
-                    }
+                output = {
+                    {item = "cabecapicareta", amount = 1, name = "Cabeça de Picareta"},
+                }
+            },
+            {
+                                -- CABEÇA DE MACHADO
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- PISTOLA MAUSER
-                    time = 30,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodepistola", amount = 1},
-                        {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "pistol_mauser", amount = 1, name = "Pistola Mauser"},
-                    }
+                output = {
+                    {item = "cabecamachado", amount = 1, name = "Cabeça de Machado"},
+                }
+            },
+            {
+                                -- CABEÇA DE PÁ
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- PISTOLA SEMI-AUTO
-                    time = 30,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodepistola", amount = 1},
-                        {item = "parafuso", amount = 6},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "pistol_semiauto", amount = 1, name = "Pistola Semi-Auto"},
-                    }
+                output = {
+                    {item = "cabecapa", amount = 1, name = "Cabeça de Pá"}
+                }
+            },
+            {
+                                -- CABEÇA DE ENXADA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CARABINA DE REPETIÇÃO
-                    time = 40,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodecarabina", amount = 1},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "repeater_carbine", amount = 1, name = "Carabina de Repetição"}
-                    }
+                output = {
+                    {item = "cabecaenxada", amount = 1, name = "Cabeça de Enxada"}
+                }
+            },
+            {
+                                -- LÂMINA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CARABINA LANCASTER
-                    time = 40,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodecarabina", amount = 1},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "repeater_winchester", amount = 1, name = "Lancaster de Repetição"}
-                    }
+                output = {
+                    {item = "lamina", amount = 1, name = "Lâmina"},
+                }
+            },
+            {
+                                -- CANO DE ARMA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CARABINA HENRY
-                    time = 40,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodecarabina", amount = 1},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "repeater_henry", amount = 1, name = "Henry de Repetição"}
-                    }
+                output = {
+                    {item = "canodearma", amount = 2, name = "Cano de Arma"},
+                }
+            },
+            {
+                                -- CÃO DE ARMA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CARABINA VARMINT
-                    time = 40,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodecarabina", amount = 1},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "rifle_varmint", amount = 1, name = "Rifle Anti-Pragas"}
-                    }
+                output = {
+                    {item = "caodearma", amount = 4, name = "Cães de Arma"},
+                }
+            },
+            {
+                                -- GATILHO DE ARMA
+                time = 25,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- CARABINA EVANS
-                    time = 40,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodecarabina", amount = 1},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "repeater_evans", amount = 1, name = "Evans de Repetição"}
-                    }
+                output = {
+                    {item = "gatilhodearma", amount = 4, name = "Gatilhos de Arma"},
+                }
+            },
+            {
+                                -- PREGOS
+                time = 10,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- RIFLE SPRINGFIELD
-                    time = 50,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderifle", amount = 1},
-                        {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "rifle_springfield", amount = 1, name = "Rifle Springfield"}
-                    }
+                output = {
+                    {item = "prego", amount = 20, name = "Pregos"},
+                }
+            },
+            {
+                                -- PARAFUSOS
+                time = 10,
+                input = {
+                    {item = "barraferro", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                                    -- RIFLE DE FERROLHO
-                    time = 50,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpoderifle", amount = 1},
-                        {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "rifle_boltaction", amount = 1, name = "Rifle de Ferrolho"}
-                    }
-                },
-                {
-                                    -- RIFLE ROLLING BLOCK
-                    time = 70,
-                    input = {
-                        {item = "canodearma", amount = 1},
-                        {item = "caodearma", amount = 1},
-                        {item = "gatilhodearma", amount = 1},
-                        {item = "corpodesniper", amount = 1},
-                        {item = "parafuso", amount = 10},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "sniperrifle_rollingblock", amount = 1, name = "Rifle Rolling Block"}
-                    }
-                },
-                {
-                                    -- ESCOPETA SERRADA
-                    time = 60,
-                    input = {
-                        {item = "canodearma", amount = 2},
-                        {item = "caodearma", amount = 2},
-                        {item = "gatilhodearma", amount = 2},
-                        {item = "corpodeescopeta", amount = 2},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "shotgun_sawedoff", amount = 1, name = "Escopeta de Cano-Serrado"},
-                    }
-                },
-                {
-                                    -- ESCOPETA CANO-DUPLO
-                    time = 70,
-                    input = {
-                        {item = "canodearma", amount = 2},
-                        {item = "caodearma", amount = 2},
-                        {item = "gatilhodearma", amount = 2},
-                        {item = "corpodeescopeta", amount = 2},
-                        {item = "parafuso", amount = 8},
-                        {item = "ferramentas", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
-                    }
-                },
-                --{
-                                    -- ESCOPETA DE ELEFANTE
-                --    time = 60,
-                --    input = {
-                --        {item = "canodearma", amount = 2},
-                --        {item = "caodearma", amount = 2},
-                --        {item = "gatilhodearma", amount = 2},
-                --        {item = "corpodeescopeta", amount = 2},
-                --        {item = "parafuso", amount = 8},
-                --        {item = "ferramentas", amount = 1, remove = false}
-                --    },
-                --    output = {
-                --        {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
-                --    }
-                --},
-                {
-                                    -- MUNIÇÕES REVOLVER
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 1},
-                    },
-                    output = {
-                        {item = "ammo_revolver", amount = 10, name = "Munição de Revolver"},
-                    }
-                },
-                {
-                                    -- MUNIÇÕES PISTOLA
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 1},
-                    },
-                    output = {
-                        {item = "ammo_pistol", amount = 10, name = "Munição de Pistola"},
-                    }
-                },
-                {
-                                    -- MUNIÇÕES ANTI-PRAGAS
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 1},
-                    },
-                    output = {
-                        {item = "ammo_22", amount = 10, name = "Munição Anti-Pragas"},
-                    }
-                },
-                {
-                                    -- MUNIÇÕES CARABINA
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 2},
-                    },
-                    output = {
-                        {item = "ammo_repeater", amount = 10, name = "Munição de Carabina"},
-                    }
-                },
-                {
-                                    -- MUNIÇÕES RIFLE
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 3},
-                    },
-                    output = {
-                        {item = "ammo_rifle", amount = 10, name = "Munição de Rifle"},
-                    }
-                },
-                {
-                                    -- MUNIÇÕES ESCOPETA
-                    time = 10,
-                    input = {
-                        {item = "caixacartuchos", amount = 1},
-                        {item = "sacopolvora", amount = 4},
-                    },
-                    output = {
-                        {item = "ammo_shotgun", amount = 10, name = "Munição de Escopeta"},
-                    }
-                },
-            }
-        },
+                output = {
+                    {item = "parafuso", amount = 10, name = "Parafusos"},
+                }
+            },
+        }
+    },
 
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        ----------------------------------------------------------------- PADARIA | MESA -------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        
+    ---------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------FERREIRO | CRIAÇÃO---------------------------------------------
+    ---------------------------------------------------------------------------------------------------------------
+
+    {    
+        group = "ferreiro",
+        --position = vec3(-277.220,779.328,119.504),  -- No position, its global
+        Ferreiro3 = true,
+        craftings = 
         {
-            -- position = vec3(0, 0, 0) -- No position, its global
-            group = "padeiro",
-            Padaria = true,
-            craftings = 
             {
-                {
-                    time = 20,
-                    input = {
-                        {item = "farinha", amount = 1},
-                        {item = "acucar", amount = 1}
-                    },
-                    output = {
-                        {item = "massadepao", amount = 1, name = "Massa de Pão"}
-                    }
+                                -- PICARETA
+                time = 20,
+                input = {
+                    {item = "cabecapicareta", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 4},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                    time = 20,
-                    input = {
-                        {item = "farinha", amount = 1},
-                        {item = "acucar", amount = 1}
-                    },
-                    output = {
-                        {item = "massadebiscoito", amount = 1, name = "Massa de Biscoito"}
-                    }
+                output = {
+                    {item = "picareta", amount = 1, name = "Picareta"},
+                }
+            },
+            {
+                                -- MACHADO
+                time = 20,
+                input = {
+                    {item = "cabecamachado", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                    time = 20,
-                    input = {
-                        {item = "farinha", amount = 1},
-                        {item = "acucar", amount = 1}
-                    },
-                    output = {
-                        {item = "massadebolacha", amount = 1, name = "Massa de Bolacha"}
-                    }
+                output = {
+                    {item = "melee_hatchet", amount = 1, name = "Machado"},
+                }
+            },
+            {
+                                -- PÁ
+                time = 20,
+                input = {
+                    {item = "cabecapa", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-            }
-        },
+                output = {
+                    {item = "pa", amount = 1, name = "Pá"}
+                }
+            },
+            {
+                                -- ENXADA
+                time = 20,
+                input = {
+                    {item = "cabecaenxada", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "enxada", amount = 1, name = "Enxada"}
+                }
+            },
+            {
+                                -- FACÃO
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_machete", amount = 1, name = "Facão"},
+                }
+            },
+            {
+                                -- FACA
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_knife", amount = 1, name = "Faca de Caça"},
+                }
+            },
+            --[[
+            {
+                                -- GAZUA
+                time = 20,
+                input = {
+                    {item = "parafuso", amount = 5},
+                    {item = "barracobre", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "lockpick", amount = 1, name = "Gazua"},
+                }
+            },]]
+        }
+    },
 
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------ARMEIRO | CRIAÇÃO------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        ---------------------------------------------------------------PADARIA | FORNO----------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+    {
+        group = "armeiro",
+        position = vec3(-277.121,779.223,119.504),  -- No position, its global
+        --Armeiro = true,
+        craftings = 
         {
-            -- position = vec3(0, 0, 0) -- No position, its global
-            group = "padeiro",
-            Padaria2 = true,
-            craftings = 
             {
-                {
-                    time = 30,
-                    input = {
-                        {item = "carvao", amount = 1},
-                        {item = "massadebolacha", amount = 1}
-                    },
-                    output = {
-                        {item = "bolacha", amount = 6, name = "Bolacha"}
-                    }
+                                -- REVOLVER DE AÇÃO-DUPLA
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeacaodupla", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                    time = 30,
-                    input = {
-                        {item = "carvao", amount = 1},
-                        {item = "massadebiscoito", amount = 1}
-                    },
-                    output = {
-                        {item = "biscoito", amount = 6, name = "Biscoito"}
-                    }
+                output = {
+                    {item = "revolver_doubleaction", amount = 1, name = "Revólver de Ação-Dupla"},
+                }
+            },
+            {
+                                -- REVOLVER DE VAQUEIRO
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevaqueiro", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-                {
-                    time = 30,
-                    input = {
-                        {item = "carvao", amount = 1},
-                        {item = "massadepao", amount = 1},
-                    },
-                    output = {
-                        {item = "pao", amount = 4, name = "Pão"}
-                    }
+                output = {
+                    {item = "revolver_cattleman", amount = 1, name = "Revólver de Vaqueiro"},
+                }
+            },
+            {
+                                -- REVOLVER SCHOTFIELD
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeschotfield", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
                 },
-            }
-        },
+                output = {
+                    {item = "revolver_schofield", amount = 1, name = "Revólver Schotfield"},
+                }
+            },
+            {
+                                -- REVOLVER LEMAT
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelemat", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_lemat", amount = 1, name = "Revólver Lemat"},
+                }
+            },
+            {
+                                -- REVOLVER DA MARINHA
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodenavy", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_navy", amount = 1, name = "Revólver da Marinha"},
+                }
+            },
+            {
+                                -- PISTOLA VOLCANIC
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevolcanic", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_volcanic", amount = 1, name = "Pistola Volcanic"},
+                }
+            },
+            {
+                                -- PISTOLA MAUSER
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodemauser", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_mauser", amount = 1, name = "Pistola Mauser"},
+                }
+            },
+            {
+                                -- PISTOLA SEMI-AUTO
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodesemiauto", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_semiauto", amount = 1, name = "Pistola Semi-Auto"},
+                }
+            },
+            {
+                                -- CARABINA DE REPETIÇÃO
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodecarabina", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_carbine", amount = 1, name = "Carabina de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA LANCASTER
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelancaster", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_winchester", amount = 1, name = "Lancaster de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA HENRY
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodehenry", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_henry", amount = 1, name = "Henry de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA VARMINT
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodepragas", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_varmint", amount = 1, name = "Rifle Anti-Pragas"}
+                }
+            },
+            {
+                                -- CARABINA EVANS
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeevans", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_evans", amount = 1, name = "Evans de Repetição"}
+                }
+            },
+            {
+                                -- RIFLE SPRINGFIELD
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodespringfield", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_springfield", amount = 1, name = "Rifle Springfield"}
+                }
+            },
+            {
+                                -- RIFLE DE FERROLHO
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "corpodeferrolho", amount = 1},
+                    {item = "corpoderifle", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_boltaction", amount = 1, name = "Rifle de Ferrolho"}
+                }
+            },
+            {
+                                -- RIFLE ROLLING BLOCK
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpoderolling", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "sniperrifle_rollingblock", amount = 1, name = "Rifle Rolling Block"}
+                }
+            },
+            {
+                                -- ESCOPETA SERRADA
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeserrada", amount = 2},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_sawedoff", amount = 1, name = "Escopeta de Cano-Serrado"},
+                }
+            },
+            {
+                                -- ESCOPETA CANO-DUPLO
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeescopeta", amount = 2},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
+                }
+            },
+            --{
+                                -- ESCOPETA DE ELEFANTE
+            --    time = 60,
+            --    input = {
+            --        {item = "canodearma", amount = 2},
+            --        {item = "caodearma", amount = 2},
+            --        {item = "gatilhodearma", amount = 2},
+            --        {item = "corpodeescopeta", amount = 2},
+            --        {item = "parafuso", amount = 8},
+            --        {item = "ferramentas", amount = 1, remove = false}
+            --    },
+            --    output = {
+            --        {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
+            --    }
+            --},
+            {
+                                -- MUNIÇÕES REVOLVER
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_revolver", amount = 10, name = "Munição de Revolver"},
+                }
+            },
+            {
+                                -- MUNIÇÕES PISTOLA
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_pistol", amount = 10, name = "Munição de Pistola"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ANTI-PRAGAS
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_22", amount = 10, name = "Munição Anti-Pragas"},
+                }
+            },
+            {
+                                -- MUNIÇÕES CARABINA
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 2},
+                },
+                output = {
+                    {item = "ammo_repeater", amount = 10, name = "Munição de Carabina"},
+                }
+            },
+            {
+                                -- MUNIÇÕES RIFLE
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 3},
+                },
+                output = {
+                    {item = "ammo_rifle", amount = 10, name = "Munição de Rifle"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ESCOPETA
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 4},
+                },
+                output = {
+                    {item = "ammo_shotgun", amount = 10, name = "Munição de Escopeta"},
+                }
+            },
+        }
+    },
 
-
-        ---------------------------------------------------------------------------------------------------
-        --------------------------------------- FAZENDEIRO | LATA -----------------------------------------
-        ---------------------------------------------------------------------------------------------------
-
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------- PADARIA | MESA -------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    {
+        -- position = vec3(0, 0, 0) -- No position, its global
+        group = "padeiro",
+        Padaria = true,
+        craftings = 
         {
-            position = vec3(1357.599,-1248.308,79.951), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 15,
-                    input = {
-                        {item = "lata", amount = 1},
-                        {item = "tomate", amount = 4},
-                        --{item = "melee_knife", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "molhotomate", amount = 1, name = "Molho de Tomate"}
-                    }
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1},
+                    {item = "gordura", amount = 1}
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "milho", amount = 4},
-                        {item = "lata", amount = 1},
-                    },
-                    output = {
-                        {item = "milholata", amount = 1, name = "Milho Enlatado"}
-                    }
+                output = {
+                    {item = "massadepao", amount = 1, name = "Massa de Pão"}
+                }
+            },
+            {
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1}
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "feijao", amount = 4},
-                        {item = "lata", amount = 1},
-                    },
-                    output = {
-                        {item = "feijaolata", amount = 1, name = "Feijão Enlatado"}
-                    }
+                output = {
+                    {item = "massadebiscoito", amount = 1, name = "Massa de Biscoito"}
+                }
+            },
+            {
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1}
                 },
-            }
-        },
-        ---------------------------------------------ADUBO---------------------------------
+                output = {
+                    {item = "massadebolacha", amount = 1, name = "Massa de Bolacha"}
+                }
+            },
+        }
+    },
+
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------PADARIA | FORNO----------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    {
+        -- position = vec3(0, 0, 0) -- No position, its global
+        group = "padeiro",
+        Padaria2 = true,
+        craftings = 
         {
-            position = vec3(-873.196,318.333,96.283), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 15,
-                    input = {
-                        {item = "pa", amount = 1, remove = false},
-                        {item = "osso", amount = 10},
-                    },
-                    output = {
-                        {item = "podeosso", amount = 5, name = "Pó de Osso"}
-                    }
+                time = 30,
+                input = {
+                    {item = "carvao", amount = 1},
+                    {item = "massadebolacha", amount = 1}
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "pa", amount = 1, remove = false},
-                        {item = "podeosso", amount = 10},
-                        {item = "saco", amount = 1},
-                    },
-                    output = {
-                        {item = "sacodeadubo", amount = 1, name = "Saco de Adubo"}
-                    }
+                output = {
+                    {item = "bolacha", amount = 6, name = "Bolacha"}
+                }
+            },
+            {
+                time = 30,
+                input = {
+                    {item = "carvao", amount = 1},
+                    {item = "massadebiscoito", amount = 1}
+                },
+                output = {
+                    {item = "biscoito", amount = 6, name = "Biscoito"}
+                }
+            },
+            {
+                time = 30,
+                input = {
+                    {item = "carvao", amount = 1},
+                    {item = "massadepao", amount = 1},
+                },
+                output = {
+                    {item = "pao", amount = 4, name = "Pão"}
+                }
+            },
+        }
+    },
+
+
+    ---------------------------------------------------------------------------------------------------
+    --------------------------------------- FAZENDEIRO | LATA -----------------------------------------
+    ---------------------------------------------------------------------------------------------------
+
+    {
+        position = vec3(1357.599,-1248.308,79.951), -- No position, its global
+        craftings = 
+        {
+            {
+                time = 15,
+                input = {
+                    {item = "lata", amount = 1},
+                    {item = "tomate", amount = 4},
+                    --{item = "melee_knife", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "molhotomate", amount = 1, name = "Molho de Tomate"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "milho", amount = 4},
+                    {item = "lata", amount = 1},
+                },
+                output = {
+                    {item = "milholata", amount = 1, name = "Milho Enlatado"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "feijao", amount = 4},
+                    {item = "lata", amount = 1},
+                },
+                output = {
+                    {item = "feijaolata", amount = 1, name = "Feijão Enlatado"}
+                }
+            },
+        }
+    },
+    ---------------------------------------------ADUBO---------------------------------
+    {
+        position = vec3(-873.196,318.333,96.283), -- No position, its global
+        craftings = 
+        {
+            {
+                time = 15,
+                input = {
+                    {item = "pa", amount = 1, remove = false},
+                    {item = "osso", amount = 10},
+                },
+                output = {
+                    {item = "podeosso", amount = 5, name = "Pó de Osso"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "pa", amount = 1, remove = false},
+                    {item = "podeosso", amount = 5},
+                    {item = "saco", amount = 1},
+                },
+                output = {
+                    {item = "sacodeadubo", amount = 1, name = "Saco de Adubo"}
                 }
             }
-        },
+        }
+    },
 -------------------------------------------------MOINHO--------------------------------------------
+    {
+        position = vec3(1053.885,-1123.756,67.891), -- No position, its global
+        craftings = 
         {
-            position = vec3(1053.885,-1123.756,67.891), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 15,
-                    input = {
-                        {item = "money", amount = 1},
-                        {item = "trigo", amount = 4},
-                        --{item = "melee_knife", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "farinha", amount = 1, name = "Pacote de Farinha"}
-                    }
+                time = 15,
+                input = {
+                    {item = "money", amount = 1},
+                    {item = "trigo", amount = 4},
+                    --{item = "melee_knife", amount = 1, remove = false}
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "money", amount = 1},
-                        {item = "canaacucar", amount = 4},
-                    },
-                    output = {
-                        {item = "acucar", amount = 1, name = "Açúcar"}
-                    }
+                output = {
+                    {item = "farinha", amount = 1, name = "Pacote de Farinha"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "money", amount = 1},
+                    {item = "canaacucar", amount = 4},
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "money", amount = 10},
-                        {item = "canaacucar", amount = 4},
-                    },
-                    output = {
-                        {item = "alcool", amount = 1, name = "Álcool"}
-                    }
+                output = {
+                    {item = "acucar", amount = 1, name = "Açúcar"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "money", amount = 10},
+                    {item = "canaacucar", amount = 4},
                 },
-            }
-        },
+                output = {
+                    {item = "alcool", amount = 1, name = "Álcool"}
+                }
+            },
+        }
+    },
 
 -------------------------------------------------LENHADOR--------------------------------------------
+    {
+        position = vec3(-1821.705,-423.195,160.052), -- No position, its global
+        craftings = 
         {
-            position = vec3(-1821.705,-423.195,160.052), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 15,
-                    input = {
-                        {item = "madeiraboa", amount = 1},
-                        {item = "melee_hatchet", amount = 1, remove = false},
-                    },
-                    output = {
-                        {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
-                    }
+                time = 15,
+                input = {
+                    {item = "madeiraboa", amount = 1},
+                    {item = "melee_hatchet", amount = 1, remove = false},
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "madeirarefinada", amount = 2},
-                        {item = "melee_hatchet", amount = 1, remove = false},
-                    },
-                    output = {
-                        {item = "tabua", amount = 1, name = "Tábua"}
-                    }
+                output = {
+                    {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "madeirarefinada", amount = 2},
+                    {item = "melee_hatchet", amount = 1, remove = false},
                 },
-            }
-        },
+                output = {
+                    {item = "tabua", amount = 1, name = "Tábua"}
+                }
+            },
+        }
+    },
 
 --------------------------------------ALFAIATE-------------------------------
+    {
+        position = vec3(1410.200,-1283.656,81.594), -- No position, its global
+        craftings = 
         {
-            position = vec3(1410.200,-1283.656,81.594), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 20,
-                    input = {
-                        {item = "algodao", amount = 10, alias = {"fibra"}},
-                    },
-                    output = {
-                        {item = "linha", amount = 5, name = "Rolo de Linha"}
-                    }
+                time = 20,
+                input = {
+                    {item = "algodao", amount = 10, alias = {"fibra"}},
                 },
-            }
-        },
+                output = {
+                    {item = "linha", amount = 5, name = "Rolo de Linha"}
+                }
+            },
+        }
+    },
 
+    {
+        group = "alfaiate",
+        position = vec3(-766.793,-1291.068,43.839), -- No position, its global
+        craftings = 
         {
-            group = "alfaiate",
-            position = vec3(-766.793,-1291.068,43.839), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 30,
-                    input = {
-                        {item = "algodao", amount = 10},
-                        {item = "linha", amount = 3},
-                        {item = "agulha", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "tecidobranco", amount = 5, name = "Tecido Branco"}
-                    }
+                time = 20,
+                input = {
+                    {item = "algodao", amount = 10},
+                    {item = "linha", amount = 3},
+                    {item = "agulha", amount = 1, remove = false}
                 },
-                {
-                    time = 50,
-                    input = {
-                        {item = "tecidobranco", amount = 5},
-                        {item = "linha", amount = 2},
-                        {item = "agulha", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "roupas", amount = 1, name = "Peça de Roupa Branca"}
-                    }
+                output = {
+                    {item = "tecidobranco", amount = 5, name = "Tecido Branco"}
+                }
+            },
+            {
+                time = 30,
+                input = {
+                    {item = "tecidobranco", amount = 5},
+                    {item = "linha", amount = 2},
+                    {item = "agulha", amount = 1, remove = false}
                 },
-                {
-                    time = 15,
-                    input = {
-                        {item = "tecidobranco", amount = 2},
-                        {item = "linha", amount = 1},
-                        {item = "agulha", amount = 1, remove = false}
-                    },
-                    output = {
-                        {item = "saco", amount = 1, name = "Saco"}
-                    }
+                output = {
+                    {item = "roupas", amount = 1, name = "Conjunto de Roupas"}
+                }
+            },
+            {
+                time = 30,
+                input = {
+                    {item = "tecidobranco", amount = 5},
+                    {item = "linha", amount = 2},
+                    {item = "agulha", amount = 1, remove = false}
                 },
-            }
-        },
+                output = {
+                    {item = "pecaroupabranca", amount = 1, name = "Peças de Roupa Branca"}
+                }
+            },
+            {
+                time = 15,
+                input = {
+                    {item = "tecidobranco", amount = 2},
+                    {item = "linha", amount = 1},
+                    {item = "agulha", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "saco", amount = 1, name = "Saco"}
+                }
+            },
+        }
+    },
 
 
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        --------------------------------------------------------------- MOONSHINE --------------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------- MOONSHINE --------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
 --[[
+    {
+        position = vec3(1450.939,371.232,89.884), -- No position, its global
+        craftings = 
         {
-            position = vec3(1450.939,371.232,89.884), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 50,
-                    input = {
-                        {item = "milholata", amount = 3},
-                        {item = "alcool", amount = 1},
-                        {item = "mosto", amount = 1},
-                    },
-                    output = {
-                        {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
-                    }
+                time = 50,
+                input = {
+                    {item = "milholata", amount = 3},
+                    {item = "alcool", amount = 1},
+                    {item = "mosto", amount = 1},
                 },
-                {
-                    time = 50,
-                    input = {
-                        {item = "cassisdourado", amount = 6},
-                        {item = "mentasilvestre", amount = 6},
-                        {item = "alcool", amount = 3},
-                        {item = "mosto", amount = 1},
-                    },
-                    output = {
-                        {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
-                    }
+                output = {
+                    {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
+                }
+            },
+            {
+                time = 50,
+                input = {
+                    {item = "cassisdourado", amount = 6},
+                    {item = "mentasilvestre", amount = 6},
+                    {item = "alcool", amount = 3},
+                    {item = "mosto", amount = 1},
                 },
-                {
-                    time = 50,
-                    input = {
-                        {item = "gualteria", amount = 8},
-                        {item = "violeta", amount = 8},
-                        {item = "alcool", amount = 3},
-                        {item = "mosto", amount = 1},
-                    },
-                    output = {
-                        {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
-                    }
+                output = {
+                    {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
+                }
+            },
+            {
+                time = 50,
+                input = {
+                    {item = "gualteria", amount = 8},
+                    {item = "violeta", amount = 8},
+                    {item = "alcool", amount = 3},
+                    {item = "mosto", amount = 1},
                 },
-            }
-        },
+                output = {
+                    {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
+                }
+            },
+        }
+    },
 ]]
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
-        --------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+    {
+        position = vec3(-828.745,-1319.372,43.587), -- No position, its global
+        craftings = 
         {
-            position = vec3(-828.745,-1319.372,43.587), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 22,
-                    input = {
-                        {item = "lupulo", amount = 4},
-                        {item = "alcool", amount = 1},
-                        {item = "agua", amount = 2},
-                    },
-                    output = {
-                        {item = "cerveja", amount = 1, name = "Cerveja"}
-                    }
+                time = 22,
+                input = {
+                    {item = "lupulo", amount = 4},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 2},
                 },
-                {
-                    time = 22,
-                    input = {
-                        {item = "milho", amount = 6},
-                        {item = "trigo", amount = 6},
-                        {item = "alcool", amount = 1},
-                        {item = "agua", amount = 1},
-                    },
-                    output = {
-                        {item = "whisky", amount = 1, name = "Whisky"}
-                    }
+                output = {
+                    {item = "cerveja", amount = 1, name = "Cerveja"}
+                }
+            },
+            {
+                time = 22,
+                input = {
+                    {item = "milho", amount = 6},
+                    {item = "trigo", amount = 6},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 1},
                 },
-                {
-                    time = 22,
-                    input = {
-                        {item = "agave", amount = 10},
-                        {item = "alcool", amount = 3},
-                        {item = "agua", amount = 2},
-                    },
-                    output = {
-                        {item = "tequila", amount = 1, name = "Tequila"}
-                    }
+                output = {
+                    {item = "whisky", amount = 1, name = "Whisky"}
+                }
+            },
+            {
+                time = 22,
+                input = {
+                    {item = "agave", amount = 10},
+                    {item = "alcool", amount = 3},
+                    {item = "agua", amount = 2},
                 },
-            }
-        },
+                output = {
+                    {item = "tequila", amount = 1, name = "Tequila"}
+                }
+            },
+        }
+    },
 
 
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
-        ------------------------------------------------------------------ OPIO ----------------------------------------------------------------------------
-        ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------ OPIO ----------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 --[[
+    {
+        position = vec3(-329.753,-150.822,51.074), -- No position, its global
+        craftings = 
         {
-            position = vec3(-329.753,-150.822,51.074), -- No position, its global
-            craftings = 
             {
-                {
-                    time = 50,
-                    input = {
-                        {item = "papola", amount = 4},
-                        {item = "quimicos", amount = 1},
-                        {item = "frasco", amount = 1},
-                    },
-                    output = {
-                        {item = "extratodepapoula", amount = 1, name = "Extrato de Papoula"}
-                    }
+                time = 40,
+                input = {
+                    {item = "papola", amount = 4},
+                    {item = "quimicos", amount = 2},
+                    {item = "frasco", amount = 1},
                 },
-                {
-                    time = 50,
-                    input = {
-                        {item = "extratodepapoula", amount = 1},
-                        {item = "quimicos", amount = 1},
-                        {item = "tecidobranco", amount = 1},
-                    },
-                    output = {
-                        {item = "opio", amount = 1, name = "Ópio"}
-                    }
+                output = {
+                    {item = "extratodepapoula", amount = 1, name = "Extrato de Papoula"}
+                }
+            },
+            {
+                time = 40,
+                input = {
+                    {item = "extratodepapoula", amount = 1},
+                    {item = "quimicos", amount = 1},
+                    {item = "tecidobranco", amount = 1},
                 },
-            }
-        },
+                output = {
+                    {item = "opio", amount = 1, name = "Ópio"}
+                }
+            },
+        }
+    },
 ]]
 
 
@@ -1586,5 +1656,5 @@ Config = {
 
 
 
-    --}
+--}
 }

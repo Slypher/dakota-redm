@@ -309,8 +309,8 @@ subMenuConfigs = {
                     navAngle = 285,
                     minRadiusPercent = 0.6,
                     maxRadiusPercent = 0.9,
-                    labels = {"Chaps", "Esporas", "Polainas", "Luvas", "Cartucheira", "Coldre\nPrimario", "Coldre\nSecundário","Cinto", "Anéis", "Fivela", "Lenços", "Gravatas", "Bracelete", "Manoplas"},
-                    commands = {"chaps", "esporas", "polainas", "luvas", "cartucheira", "coldre", "coldre2","cinto", "aneis", "fivela", "lencos", "gravatas", "bracelete", "manoplas"}
+                    labels = {"Chaps", "Esporas", "Polainas", "Luvas", "Cartucheira", "Coldre\nPrimario", "Coldre\nSecundário","Cinto", "Anéis", "Fivela", "Mascara", "Lenços", "Gravatas", "Bracelete", "Manoplas"},
+                    commands = {"chaps", "esporas", "polainas", "luvas", "cartucheira", "coldre", "coldre2","cinto", "aneis", "fivela", "mascara", "lencos", "gravatas", "bracelete", "manoplas"}
                 }
             }
         }

@@ -94,6 +94,14 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
     -- AÇOUGUE BLACKWATER
     CreatePedWithAudio(`U_M_M_TumButcher_01`, vec3(-753.067,-1284.851,42.496), 268.86)
 
+--------------------------------------LOJA DE INSUMOS------------------------------------------------
+    -- VENDA DE INSUMOS
+    CreatePedWithAudio(`CS_AberdeenPigFarmer`, vec3(1363.859,-1288.305,76.123), -102.83)
+
+--------------------------------------ALFAIATARIA------------------------------------------------
+    -- Alfaiataria de Saint Denis
+    CreatePedWithAudio(`A_F_M_SDObeseWomen_01`, vec3(2554.386,-1166.607,52.684), 89.76)
+
 --------------------------------------MOONSHINER------------------------------------------------
     -- MOONSHINER NEVE
     CreatePedWithAudio(`CS_famousgunslinger_02`, vec3(-945.832,2170.719,341.085), 14.16)
@@ -101,6 +109,10 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
 -----------------------------------------CAPITÃO------------------------------------------------
     -- CAPITÃO PESCADOR
     CreatePedWithAudio(`CS_BeatenUpCaptain`, vec3(336.538,-672.327,41.817), -75.00)
+
+-----------------------------------------COLECIONADORA------------------------------------------------
+    -- TIA MAGGIE
+    CreatePedWithAudio(`CS_mrsgeddes`, vec3(-1676.415,-341.063,169.785), -120.00)
 
 end)
 

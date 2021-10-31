@@ -8,11 +8,11 @@ local HOURLY_PAYMENT_PER_GROUP = {
 
 	["marshall"] = { payment = 800 },
 	["delegado"] = { payment = 500 },
-	["sheriff"]  = { payment = 400 },
-	["trooper"]  = { payment = 250 }, -- $2.50
-	["recruta"]  = { payment =  75 }, -- $0.75
+	["sheriff"]  = { payment = 600 },
+	["trooper"]  = { payment = 450 }, -- $2.50
+	["recruta"]  = { payment = 100 }, -- $0.75
 
-	["medic"] 	 = { payment = 250 },
+	["medic"] 	 = { payment = 100 },
 }
 
 -- local withHoldingPaymentToUsers = {}

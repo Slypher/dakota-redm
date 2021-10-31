@@ -11,9 +11,9 @@ function load(interiorId)
         -- REVOLVERS
         -- price_dollar, price_gold, amount
         --{"REVOLVER_DOUBLEACTION", 31700, 10, 1, "w_revolver_doubleaction01"},
-        {"revolver_cattleman", 2500, 10, 1, "w_revolver_cattleman01"},
+        --------{"revolver_cattleman", 2500, 10, 1, "w_revolver_cattleman01"},
         --{"REVOLVER_SCHOFIELD", 31700, 30, 1, "w_revolver_schofield01"},
-        {"revolver_lemat", 6000, 25, 1, "w_revolver_lemat01"},
+        --------{"revolver_lemat", 6000, 25, 1, "w_revolver_lemat01"},
         --{"revolver_navy", 257, 35, 1, "w_revolver_navy01"}, -- ERA PRA SER O NAVY
 
         -- PISTOLS
@@ -22,28 +22,29 @@ function load(interiorId)
         --{"PISTOL_SEMIAUTO", 30000, 1400, 1, "w_pistol_semiauto01"},
 
         -- CARABINAS
-        {"repeater_carbine", 3200, 15, 1, "w_repeater_carbine01"},
+        --------{"repeater_carbine", 3200, 15, 1, "w_repeater_carbine01"},
         --{"REPEATER_EVANS", 9000, 400, 1, "w_repeater_evans01"},
         --{"REPEATER_WINCHESTER", 23400, 1000, 1, "w_repeater_winchester01"},
-        {"repeater_henry", 4000, 45, 1, "w_repeater_henry01"},
+        --------{"repeater_henry", 4000, 45, 1, "w_repeater_henry01"},
         
         -- ANTI-PRAGAS
         --{"rifle_varmint", 7200, 300, 1, "w_repeater_pumpaction01"}, -- NÃO ESTÁ CARREGANDO
         
         -- RIFLE
         --{"RIFLE_SPRINGFIELD", 21600, 900, 1, "w_rifle_springfield01"},
-        {"rifle_boltaction", 4500, 50, 1, "w_rifle_boltaction01"},
+        --------{"rifle_boltaction", 4500, 50, 1, "w_rifle_boltaction01"},
 
         -- ESCOPETAS
         --{"shotgun_sawedoff", 6500, 1500, 1, "w_shotgun_sawed01"},
         --{"SHOTGUN_DOUBLEBARREL", 6500, 1500, 1, "w_shotgun_doublebarrel01"},
 
         -- SNIPER RIFLE
-        {"sniperrifle_rollingblock", 14000, 70, 1, "w_rifle_rollingblock01"},
+        --------{"sniperrifle_rollingblock", 14000, 70, 1, "w_rifle_rollingblock01"},
 
         -- ARMAS BRANCAS
         --{"thrown_throwing_knives", 250, 50, 1, "w_melee_tomahawk03"},
         --{"melee_cleaver", 8, 1, 1, "p_cleaver01x"},
+        {"kit_binoculars", 1000, 1, 1, "w_binoculars01x"},
         {"melee_knife", 250, 1, 1, "w_melee_knife02"},
     }
 
@@ -74,8 +75,8 @@ function load(interiorId)
         {"ammo_pistol", 300, 1, 20, "s_inv_pistolammo01x"},
         {"ammo_repeater", 300, 1, 20, "s_inv_repeat_rifleammo01x"},
         {"ammo_rifle", 400, 1, 20, "s_inv_rifleammo01x"},
+        {"ammo_22", 300, 1, 20, "s_inv_varmint_rifleammo01x"},
         {"ammo_shotgun", 400, 1, 20, "s_inv_shotgunammo01x"},
-        {"ammo_22", 300, 1, 20, "s_inv_shotgunammo01x"}
     }
 
     -- a = vec3(table.unpack(gunsmith_data.point3))

@@ -41,5 +41,8 @@ config_file_STATICCHESTS = {
     {"static:armeiro:1", -283.657,778.408,119.443 - 0.89, 90.0, 1, 100, "armeiro"}, -- VALENTINE
 
     -- #    DOCTOR
-    {"static:medic:1", -288.720,812.972,119.325 - 0.89, 8.00, 0, 100, "medic"} -- VALENTINE
+    {"static:medic:1", -288.720,812.972,119.325 - 0.89, 8.00, 0, 100, "medic"}, -- VALENTINE
+
+    -- #    ALFAIATE
+    {"static:alfaiate:1", -768.204,-1292.480,43.835 - 0.89, 86.25, 0, 100, "alfaiate"}, -- Blackwater
 }
