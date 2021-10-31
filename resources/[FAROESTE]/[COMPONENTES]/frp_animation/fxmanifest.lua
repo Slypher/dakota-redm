@@ -12,5 +12,6 @@ client_scripts {
 
 -- Server Scripts
 server_scripts {
+	"@_core/lib/utils.lua",
 	'server.lua',    
 }

@@ -539,10 +539,9 @@ local gNumGulps = 0
 local gHasDrunkStageReducerInstance = false
 
 function setPlayerDrunk(drunkStage)
-
-    -- if gPlayerDrunkStage == drunkStage then
-    --     return
-    -- end
+    if gPlayerDrunkStage == drunkStage then
+        return
+    end
 
     local playerPedId = PlayerPedId()
 
@@ -615,7 +614,7 @@ function createDrunkStageReducerThread()
     gHasDrunkStageReducerInstance = true
 
     CreateThread(function()
-        while gPlayerDrunkStage > eDrunkStage.SOBER do
+        while gPlayerDrunkStage > eDrunkStage.SOBER and not GlobalState.keepDrunk do
             Wait(0)
 
             if GetGameTimer() - gTimeOfPlayerDrunkStage >= DRUNK_STAGE_DURATION then
@@ -635,10 +634,6 @@ function handleUseGenericAlcoholItem()
         while Citizen.InvokeNative(0xEC7E480FF8BD0BED, playerPedId) do
             Wait(0)
 
-            -- if HasAnimEventFired(playerPedId, -219856583) then
-            --     print('A')
-            -- end
-
             -- Deu um gole na bebida.
             if HasAnimEventFired(playerPedId, 442509369) then
                 if gPlayerDrunkStage == eDrunkStage.SOBER then
@@ -652,8 +647,16 @@ function handleUseGenericAlcoholItem()
                 end
             end
 
+            -- -- Funciona
+            -- if HasAnimEventFired(playerPedId, 2089200315) then
+            --     print('chug?')
+
+            --     Citizen.InvokeNative(0xCB9401F918CB0F75, playerPedId, "GENERIC_ALCOHOL_BLOCK_CHUG_A", true, 1)
+            --     Citizen.InvokeNative(0xCB9401F918CB0F75, playerPedId, "GENERIC_ALCOHOL_ALLOW_CHUG_B", true, 1)
+            -- end
+
             -- Finalizou a animação
-            if HasAnimEventFired(playerPedId, 574156416) then
+            if HasAnimEventFired(playerPedId, 108107462) --[[ HasAnimEventFired(playerPedId, 574156416) ]] then
                 gPlayerDrunkStage = math.min(gPlayerDrunkStage + 1, eDrunkStage.VERY_DRUNK)
 
                 setPlayerDrunk(gPlayerDrunkStage)
@@ -664,6 +667,14 @@ function handleUseGenericAlcoholItem()
         end
     end)
 end
+
+RegisterNetEvent('forceMaxDrunkState', function()
+    setPlayerDrunk(GlobalState.everyoneDrunk and eDrunkStage.VERY_DRUNK or eDrunkStage.SOBER)
+end)
+
+CreateThread(function()
+    setPlayerDrunk(GlobalState.everyoneDrunk and eDrunkStage.VERY_DRUNK or eDrunkStage.SOBER)
+end)
 
 RegisterNetEvent('DKT:ANIMATION:whisky')
 AddEventHandler('DKT:ANIMATION:whisky', function(source, args)
@@ -681,7 +692,7 @@ AddEventHandler('DKT:ANIMATION:whisky', function(source, args)
 
     local propEntity = CreateObject(bottleModelHash, GetEntityCoords(playerPedId), false, true, false, false, true)
 
-    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_WHISKEY`, propEntity, GetHashKey("P_BOTTLEJD01X_PH_R_HAND"), -68870885, 1, 0, 0.0)
+    TaskItemInteraction_2(playerPedId, `CONSUMABLE_SALOON_WHISKEY`, propEntity, GetHashKey("P_BOTTLEJD01X_PH_R_HAND"), `DRINK_BOTTLE@Bottle_Cylinder_D1-3_H30-5_Neck_A13_B2-5_UNCORK`, 1, 0, 0.0)
 
     handleUseGenericAlcoholItem()
 end)
