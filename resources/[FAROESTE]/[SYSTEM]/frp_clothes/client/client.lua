@@ -1365,14 +1365,14 @@ function NativeSetPedComponentEnabled(ped, componentHash, immediately, isMp)
 
     Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, immediately, isMp, true)
 
-    NativeFixMeshIssues(ped, categoryHash)
+    RefreshShopItemsOnMetaped(ped, categoryHash)
 end
 
 function NativeUpdatePedVariation(ped)
     Citizen.InvokeNative(0xCC8CA3E88256E58F, ped, false, true, true, true, false)
 end
 
-function NativeFixMeshIssues(ped, categoryHash)
+function RefreshShopItemsOnMetaped(ped, categoryHash)
     -- _REFRESH_SHOP_ITEMS_ON_METAPED
     Citizen.InvokeNative(0x59BD177A1A48600A, ped, categoryHash)
 end
@@ -1457,6 +1457,8 @@ local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`SKIRTS`] = 'skirts',
     [`MASKS_LARGE`] = 'MASKS_LARGE',
     [`EYEWEAR`] = 'eyewear',
+    [`GUNBELT_ACCS`] = 'gunbelt_accs',
+    [`DRESSES`] = 'dresses',
 }
 
 RegisterNetEvent('storeCurrentComponentsIntoClothingItem', function(slotId)
@@ -1468,6 +1470,8 @@ RegisterNetEvent('storeCurrentComponentsIntoClothingItem', function(slotId)
     local metapedType = N_0xec9a1261bf0ce510(playerPed)
 
     local toRemoveClothingPieces = { }
+
+    RefreshShopItemsOnMetaped()
 
     -- GetNumComponentsInPed
     for i = 1, N_0x90403e8107b60e81(playerPed) do
@@ -1499,10 +1503,14 @@ RegisterNetEvent('storeCurrentComponentsIntoClothingItem', function(slotId)
     TriggerServerEvent('FRP:RequestStoreComponentsIntoClothingItem', slotId, clothingPieceShopitemsAsHex)
 
     TriggerServerEvent('RemovePlayerClothingPieces', toRemoveClothingPieces, true)
+
+    RefreshShopItemsOnMetaped()
 end)
 
 RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPieceShopitemsAsHex)
     local playerPed = PlayerPedId()
+
+    RefreshShopItemsOnMetaped()
 
     -- Remover todas os componentes atuais.
     for shopitemCategoryHash, _ in pairs(ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES) do
@@ -1539,6 +1547,8 @@ RegisterNetEvent('FRP:SetPlayerClothingFromClothingItem', function(clothingPiece
     end
 
     TriggerServerEvent('AddPlayerClothingPieces', toAddClothingPieces)
+
+    RefreshShopItemsOnMetaped()
 end)
 
 function createZoomInterpCamera(cameraPos)
