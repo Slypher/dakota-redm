@@ -292,7 +292,6 @@ RegisterCommand(
         hided = false
         CamActive = false
         cAPI.InFade(500)
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
 
         SetEveryoneAsInvisible()
     end
@@ -307,7 +306,6 @@ AddEventHandler(
             hided = false
             CamActive = false
             cAPI.InFade(500)
-            Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
 
             SetEveryoneAsInvisible()
 
@@ -392,27 +390,27 @@ AddEventHandler(
 )
 
 function SetEveryoneAsInvisible(invisible)
-    local playerId = PlayerId()
+    -- local playerId = PlayerId()
 
-    if invisible then
-        NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)
-        while inCustomization do
-            Citizen.Wait(0)
-            for _, pid in pairs(GetActivePlayers()) do
-                if pid ~= playerId then
-                    SetEntityVisible(GetPlayerPed(pid), false)
-                end
-            end
-        end
-    end
+    -- if invisible then
+    --     NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)
+    --     while inCustomization do
+    --         Citizen.Wait(0)
+    --         for _, pid in pairs(GetActivePlayers()) do
+    --             if pid ~= playerId then
+    --                 SetEntityVisible(GetPlayerPed(pid), false)
+    --             end
+    --         end
+    --     end
+    -- end
 
-    for _, pid in pairs(GetActivePlayers()) do
-        if pid ~= playerId then
-            SetEntityVisible(GetPlayerPed(pid), true)
-        end
-    end
+    -- for _, pid in pairs(GetActivePlayers()) do
+    --     if pid ~= playerId then
+    --         SetEntityVisible(GetPlayerPed(pid), true)
+    --     end
+    -- end
 
-    NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
+    -- NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
 end
 
 function createCamera(centerPos, pedHeading)
