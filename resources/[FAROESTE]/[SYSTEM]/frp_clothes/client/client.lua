@@ -313,8 +313,7 @@ AddEventHandler(
 
             TriggerServerEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled')
 
-            -- TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
-            NetworkStartSoloTutorialSession()
+            TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
         else
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
         end
@@ -1192,13 +1191,13 @@ RegisterNUICallback(
         TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
         
         DestroyClothingMenu()
+
         cAPI.InFade(500)
+
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
-        NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
-        --SetEntityVisible(PlayerPedId(), true)
+
         cAPI.OutFade(500)
     end
 )
@@ -1209,13 +1208,13 @@ RegisterNUICallback(
         TriggerServerEvent("FRP:CLOTHES:fechar", dados, true)
 
         DestroyClothingMenu()
+
         cAPI.InFade(500)
+
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
-        NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
-        --SetEntityVisible(PlayerPedId(), true)
+        
         cAPI.OutFade(500)
     end
 )
@@ -1225,13 +1224,13 @@ AddEventHandler(
     "FRP:CLOTHES:DrawOldClothing",
     function()
         DestroyClothingMenu()
+
         cAPI.InFade(500)
+        
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
-        NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
-        --SetEntityVisible(PlayerPedId(), true)
+        
         cAPI.OutFade(500)
     end
 )
@@ -1275,13 +1274,11 @@ AddEventHandler(
         -- Esse codepath se quer é usado?
         -- TriggerServerEvent("FRP:CLOTHES:SavePlayerClothing", dados, true)
         DestroyClothingMenu()
-        cAPI.InFade(500)
+        
         if positionBack ~= nil then
             SetEntityCoords(PlayerPedId(), positionBack)
         end
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), false)
-        NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
-        --SetEntityVisible(PlayerPedId(), true)
+
         cAPI.OutFade(500)
     end
 )
@@ -1311,8 +1308,7 @@ function DestroyClothingMenu()
         }
     )
 
-    -- TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
-    NetworkEndTutorialSession()
+    TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
 end
 
 Citizen.CreateThread(
