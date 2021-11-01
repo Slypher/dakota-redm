@@ -1144,23 +1144,15 @@ RegisterCommand(
 )
 
 function setcloth2(hash)
-    local model2 = hash
-    if not HasModelLoaded(model2) then
-        Citizen.InvokeNative(0xFA28FE3A6246FC30, model2)
-    end
-
     NativeSetPedComponentEnabled(PlayerPedId(), tonumber(hash), true, true)
-    --Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), tonumber(hash), true, true, true)
+
+    NativeUpdatePedVariation(PlayerPedId())
 end
 
 function setcloth(hash)
-    local model2 = GetHashKey(tonumber(hash))
-    if not HasModelLoaded(model2) then
-        Citizen.InvokeNative(0xFA28FE3A6246FC30, model2)
-    end
-
     NativeSetPedComponentEnabled(PlayerPedId(), tonumber(hash), true, true)
-    --Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), tonumber(hash), true, true, true)
+
+    NativeUpdatePedVariation(PlayerPedId())
 end
 
 RegisterNUICallback(
@@ -1371,9 +1363,9 @@ function NativeSetPedComponentEnabled(ped, componentHash, immediately, isMp)
     local categoryHash = NativeGetPedComponentCategory(not IsPedMale(ped), componentHash)
     -- print(componentHash, categoryHash, NativeGetMetapedType(ped))
 
-    NativeFixMeshIssues(ped, categoryHash)
-
     Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, componentHash, immediately, isMp, true)
+
+    NativeFixMeshIssues(ped, categoryHash)
 end
 
 function NativeUpdatePedVariation(ped)
@@ -1381,6 +1373,7 @@ function NativeUpdatePedVariation(ped)
 end
 
 function NativeFixMeshIssues(ped, categoryHash)
+    -- _REFRESH_SHOP_ITEMS_ON_METAPED
     Citizen.InvokeNative(0x59BD177A1A48600A, ped, categoryHash)
 end
 
