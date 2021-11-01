@@ -43,7 +43,9 @@ RegisterNetEvent(
 
 AddEventHandler(
     "onResourceStop",
-    function()
-      GlobalState.sinalFumacaCoolDown = false
+    function(resource)
+		if resource == GetCurrentResourceName() then
+			GlobalState.sinalFumacaCoolDown = false
+		end
     end
 )

@@ -328,11 +328,13 @@ end
 AddEventHandler(
     "onResourceStop",
     function(resourceName)
-        for _, d in pairs(witnessList) do
-            local w_entity = d.entity
-            local w_blip = d.blip
+        if resourceName == GetCurrentResourceName() then
+            for _, d in pairs(witnessList) do
+                local w_entity = d.entity
+                local w_blip = d.blip
 
-            RemoveBlip(w_blip)
+                RemoveBlip(w_blip)
+            end
         end
     end
 )
