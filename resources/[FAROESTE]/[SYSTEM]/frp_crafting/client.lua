@@ -23,6 +23,9 @@ local _tempParsedConfig
 
 local DEFAULT_CRAFTING_POSITION_RADIUS = 1.5
 
+local CONTROL_HASH_CRAFT = 0xDFF812F9
+local CONTROL_HASH_STOP = 0x05CA7C52
+
 RegisterNetEvent("FRP:CRAFT:ShouldClose")
 AddEventHandler(
     "FRP:CRAFT:ShouldClose",
@@ -83,6 +86,8 @@ RegisterNUICallback(
             }
         )
 
+        -- print('crafting :: should prompts be drawing', shouldShowPrompt)
+
         if shouldShowPrompt then
             createPromptGroup()
 
@@ -93,6 +98,12 @@ RegisterNUICallback(
             selected_cIndex = cIndex
             selected_name = _tempParsedConfig[cGroup].craftings[cIndex].output[1].name
             selected_time = inputlist.time
+
+            -- print('crafting :: selected_name was choosen', selected_name)
+
+            -- print('crafting :: is prompt_craft valid', Citizen.InvokeNative(0x347469FBDD1589A9, prompt_craft))
+            -- print('crafting :: is prompt_craft active', Citizen.InvokeNative(0x546E342E01DE71CF, prompt_craft))
+            -- print('crafting :: is prompt_craft enabled', Citizen.InvokeNative(0x0D00EDDFB58B7F28, prompt_craft))
         else
             releasePromptGroup()
         end
@@ -102,8 +113,10 @@ RegisterNUICallback(
 function createPromptGroup()
     prompt_group = GetRandomIntInRange(0, 0xffffff)
 
+    -- print('crafting :: prompt group was just created', prompt_group)
+
     prompt_craft = PromptRegisterBegin()
-    PromptSetControlAction(prompt_craft, 0xDFF812F9)
+    PromptSetControlAction(prompt_craft, CONTROL_HASH_CRAFT)
     PromptSetText(prompt_craft, CreateVarString(10, "LITERAL_STRING", "Produzir"))
     PromptSetEnabled(prompt_craft, true)
     PromptSetVisible(prompt_craft, true)
@@ -112,7 +125,7 @@ function createPromptGroup()
     PromptRegisterEnd(prompt_craft)
 
     prompt_cancel = PromptRegisterBegin()
-    PromptSetControlAction(prompt_cancel, 0x05CA7C52)
+    PromptSetControlAction(prompt_cancel, CONTROL_HASH_STOP)
     PromptSetText(prompt_cancel, CreateVarString(10, "LITERAL_STRING", "Parar"))
     PromptSetEnabled(prompt_cancel, true)
     PromptSetVisible(prompt_cancel, true)
@@ -122,8 +135,17 @@ function createPromptGroup()
 end
 
 function releasePromptGroup()
-    PromptDelete(prompt_craft)
-    PromptDelete(prompt_cancel)
+    -- print('crafting :: trying to release stuff')
+
+    if prompt_craft and prompt_cancel then
+        PromptDelete(prompt_craft)
+        PromptDelete(prompt_cancel)
+
+        prompt_craft = nil
+        prompt_cancel = nil
+
+        -- print('crafting :: released stuff')
+    end
 end
 
 Citizen.CreateThread(
@@ -148,7 +170,7 @@ Citizen.CreateThread(
                         DisableAllControlActions(1)
                         DisableAllControlActions(2)
 
-                        EnableControlAction(0, 0x05CA7C52, true)
+                        EnableControlAction(0, CONTROL_HASH_STOP, true)
 
                         PromptSetActiveGroupThisFrame(prompt_group, CreateVarString(10, "LITERAL_STRING", selected_name), 0, 0, 0, 0)
 
@@ -184,9 +206,13 @@ Citizen.CreateThread(
                 SetGameplayCamRelativePitch(0.0, 1.0)
 
                 if shouldShowPrompt then
-                    EnableControlAction(0, 0xDFF812F9, true)
+                    EnableControlAction(0, CONTROL_HASH_CRAFT, true)
 
                     PromptSetActiveGroupThisFrame(prompt_group, CreateVarString(10, "LITERAL_STRING", selected_name), 0, 0, 0, 0)
+
+                    -- if IsControlJustPressed(0, CONTROL_HASH_CRAFT) then
+                    --     print('crafting :: craft control is active and was pressed')
+                    -- end
 
                     if PromptHasHoldModeCompleted(prompt_craft) then
                         isCrafting = true
@@ -197,6 +223,8 @@ Citizen.CreateThread(
                         craftingEndGameTimer = GetGameTimer() + (selected_time * 1000)
 
                         TriggerEvent("FRP:CRAFT:ShouldClose", false)
+
+                        -- print('crafting :: prompt_craft hold mode was completed')
 
                     -- Citizen.InvokeNative(0x6FB1DA3CA9DA7D90, "cook_meat_sizzle_loop", playerPed, "Player_Campfire_Sounds", false, 0, 0)
                     -- Citizen.InvokeNative(0x9821B68CD3E05F2B, "distanceToFlame", 1.0, "cook_meat_sizzle_loop", "Player_Campfire_Sounds")
@@ -334,7 +362,7 @@ end
 --------------------------------------------FERREIRO-------------------------------------------------
 function GetNearestFerreiroPosition(radius)
     local models = {
-        "p_forge01x ",        
+        "p_forge01x",        
     }
 
     local playerPosition = GetEntityCoords(PlayerPedId())
