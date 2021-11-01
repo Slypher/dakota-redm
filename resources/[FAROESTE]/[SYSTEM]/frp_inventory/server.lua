@@ -617,6 +617,33 @@ RegisterNetEvent('net.playerShotInventoryWeapon', function(shotWeaponSlotId)
     end
 end)
 
+RegisterNetEvent('net.playerSwitchInventoryWeaponAmmo', function(weaponSlotId, newAmmoHash)
+
+    local playerId = source
+
+    local user = API.getUserFromSource(playerId)
+
+    local character = user:getCharacter()
+
+    if not character then
+        return
+    end
+
+    local primaryInventory = character:getInventory()
+
+    if primaryInventory == nil then
+        return
+    end
+
+    local ammoType = API.getAmmoTypeFromHash(newAmmoHash)
+
+    if not ammoType then
+        return
+    end
+
+    primaryInventory:updateEquippedWeaponAmmo(weaponSlotId, ammoType, 0, 0)
+end)
+
 -- RegisterCommand(
 --     "garmas",
 --     function(source, args)

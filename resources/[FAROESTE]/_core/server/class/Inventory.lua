@@ -712,6 +712,11 @@ function API.Inventory(id, capacity, slots)
         end
 
         if newAmmoType then
+            -- Zerar a quantidade no pente caso mude de tipo de munição.
+            if equippedWeaponMetadata.selected_ammo_type ~= newAmmoType then
+                equippedWeaponMetadata.ammo_in_clip = 0
+            end
+
             equippedWeaponMetadata.selected_ammo_type = newAmmoType
 
             anyUpdates = true

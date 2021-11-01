@@ -70,6 +70,9 @@ Citizen.CreateThread(
         local isReloading = false
         local ammoInClipBeforeReloading
 
+        local switchedWeaponThisFrame = false
+        local switchedAmmoThisFrame = false
+
         while true do
             Citizen.Wait(0)
 
@@ -83,35 +86,56 @@ Citizen.CreateThread(
 
                     currUsedWeaponHash = currentWeapon
 
+                    switchedWeaponThisFrame = true
+                end
+
+                local currWeaponEntity = Citizen.InvokeNative(0x3B390A939AF0B5FC, ped, 0)
+
+                local ammoHashThisFrame = Citizen.InvokeNative(0x7E7B19A4355FEE13, ped, currWeaponEntity)
+
+                if ammoHashThisFrame ~= currUsedAmmoHash then
                     -- GetPedAmmoTypeFromWeapon
-                    currUsedAmmoHash = Citizen.InvokeNative(0x7FEAD38B326B9F74, ped, currUsedWeaponHash)
+                    currUsedAmmoHash = ammoHashThisFrame
+
+                    -- Ignorar a troca de munição caso o player tenha trocado de arma.
+                    if not switchedWeaponThisFrame then
+                        switchedAmmoThisFrame = true
+                    end
                 end
 
                 if currentWeapon ~= `weapon_lasso` then
-                    -- IsPedReloading
-                    if Citizen.InvokeNative(0x24B100C68C645951, ped) then
-                        if not isReloading then
-                            isReloading = true
 
-                            _, ammoInClipBeforeReloading = GetAmmoInClip(ped, currentWeapon)
+                    -- Não da para recarregar com o arco :O
+                    if currentWeapon ~= `weapon_bow` and currentWeapon ~= `weapon_bow_improved` then
+                        -- IsPedReloading
+                        if Citizen.InvokeNative(0x24B100C68C645951, ped) then
+                            if not isReloading then
+                                isReloading = true
+
+                                _, ammoInClipBeforeReloading = GetAmmoInClip(ped, currentWeapon)
+                            end
+                        else
+                            if isReloading then
+                                isReloading = false
+
+                                _, ammoInClipAfterReloading = GetAmmoInClip(ped, currentWeapon)
+
+                                local ammoAddedAmount = ammoInClipAfterReloading - ammoInClipBeforeReloading
+
+                                local reloadedWeaponSlotId = getWeaponSlotIdFromHash(currentWeapon)
+
+                                local currWeaponEntity = Citizen.InvokeNative(0x3B390A939AF0B5FC, ped, 0)
+
+                                local ammoHashThisFrame = Citizen.InvokeNative(0x7E7B19A4355FEE13, ped, currWeaponEntity)
+
+                                if reloadedWeaponSlotId then
+                                    TriggerServerEvent('net.playerReloadedInventoryWeapon', reloadedWeaponSlotId, ammoHashThisFrame, ammoAddedAmount)
+                                end
+                            end
                         end
                     else
-                        if isReloading then
-                            isReloading = false
-
-                            _, ammoInClipAfterReloading = GetAmmoInClip(ped, currentWeapon)
-
-                            local ammoAddedAmount = ammoInClipAfterReloading - ammoInClipBeforeReloading
-
-                            local reloadedWeaponSlotId = getWeaponSlotIdFromHash(currentWeapon)
-
-                            local currWeaponEntity = Citizen.InvokeNative(0x3B390A939AF0B5FC, ped, 0)
-
-                            local ammoHashThisFrame = Citizen.InvokeNative(0x7E7B19A4355FEE13, ped, currWeaponEntity)
-
-                            if reloadedWeaponSlotId then
-                                TriggerServerEvent('net.playerReloadedInventoryWeapon', reloadedWeaponSlotId, ammoHashThisFrame, ammoAddedAmount)
-                            end
+                        if switchedAmmoThisFrame then
+                            TriggerServerEvent('net.playerSwitchInventoryWeaponAmmo', getWeaponSlotIdFromHash(currentWeapon), currUsedAmmoHash)
                         end
                     end
 
@@ -148,6 +172,9 @@ Citizen.CreateThread(
                     -- enviar para o servidor para poder zerar o numero de munições no clip.
                 end
             end
+
+            switchedWeaponThisFrame = false
+            switchedAmmoThisFrame = false
         end
     end
 )
@@ -528,24 +555,39 @@ function computeSlots(table, asPrimary)
                     if itemAmount > 0 then
                         for wId, slot in pairs(gWhereWeaponIsAtSlot) do
                             if slot == slotId and weaponId ~= wId then
-                                local foundHash = GetHashKey(wId)
-                                SetPedAmmo(ped, foundHash, 0)
-                                RemoveWeaponFromPed(ped, foundHash)
+                                local foundWeaponHash = GetHashKey(wId)
+
+                                RemoveWeaponFromPed(ped, foundWeaponHash, true, `REMOVE_REASON_DEBUG`)
+
                                 gWhereWeaponIsAtSlot[wId] = nil
                             end
                         end
 
+                        local selectedAmmoHash = GetHashKey(selectedAmmoType)
+
                         if not HasPedGotWeapon(ped, weaponHash, false) then
-                            -- GiveWeaponToPed(ped, weaponHash, ammoInWeapon, false, false)
-                            -- cAPI.giveWeapon(weaponId, ammoInWeapon, false)
+
+                            -- Zerar todos os tipos de munições para essa arma. Vai ser devidamente setada logo após.
+                            for _, ammoType in ipairs(WEAPON_INFO_DATABASE[weaponType]?.useable_ammo_types) do
+                                local ammoHash = GetHashKey(ammoType)
+
+                                -- GetPedAmmoByType
+                                local ammoOfType = Citizen.InvokeNative(0x39D22031557946C1, ped, ammoHash, Citizen.ResultAsInteger())
+
+                                if ammoOfType > 0 then
+                                    -- RemoveAmmoFromPedByType
+                                    Citizen.InvokeNative(0xB6CFEC32E3742779, ped, ammoHash, ammoOfType, `REMOVE_REASON_DEBUG`)
+                                end
+                            end
+
                             Citizen.InvokeNative(0x5E3BDDBCB83F3D84, ped, weaponHash, ammoInWeapon, true, true)
                         end
 
-                        local selectedAmmoHash = GetHashKey(selectedAmmoType)
-
                         for key, value in pairs(weaponMetadata) do
-                            if string.find(key, 'ammo_') and tonumber(value) ~= nil then
-
+                            if string.find(key, 'ammo_')
+                                and key ~= 'ammo_in_clip'
+                                and key ~= 'selected_ammo_type'
+                            then
                                 local ammoType = key
                                 local ammoHash = GetHashKey(ammoType)
 
@@ -580,7 +622,6 @@ function computeSlots(table, asPrimary)
                         gWhereWeaponIsAtSlot[weaponId] = slotId
                     else
                         if HasPedGotWeapon(ped, weaponHash, false) then
-                            SetPedAmmo(ped, weaponHash, 0)
                             RemoveWeaponFromPed(ped, weaponHash)
                         end
                     end
