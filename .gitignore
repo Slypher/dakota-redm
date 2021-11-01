@@ -9,6 +9,7 @@ cache
 *.bat
 *.txt
 bus.md
+timing.md
 savedata
 resources/redemrp_inventory
 imgui.ini
