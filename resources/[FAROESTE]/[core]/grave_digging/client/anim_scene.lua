@@ -1,13 +1,24 @@
-function createTreasureDiggingGrabAnimScene(position, heading)
+function createTreasureDiggingGrabAnimScene(position, heading, useNothingScenario)
 
 	-- STREAMING::REQUEST_MODEL(joaat("MP005_P_COLLECTORSHOVEL01"), false);
 
 	-- requestUpdateActiveDigSiteState(eDiggingSitePointState.CREATE_ENTITIES)
 
+	local shovelModelHash = `MP005_P_COLLECTORSHOVEL01`
+
+	RequestModel(shovelModelHash)
+
+	while not HasModelLoaded(shovelModelHash) do
+		Wait(0)
+	end
+
 	local _, groundZ, _ = GetGroundZAndNormalFor_3dCoord(position.x, position.y, position.z)
 	position = vec3(position.xy, groundZ --[[ - 0.05 ]] --[[ Magic number? ]])
 
-	local animScene = CreateAnimScene('script@mech@treasure_hunting@grab', 64, 'PBL_GRAB_01', true, true)
+	local animSceneDict = useNothingScenario and 'script@mech@treasure_hunting@nothing' or 'script@mech@treasure_hunting@grab'
+	local animSceneAnim = useNothingScenario and 'PBL_NOTHING_01' or 'PBL_GRAB_01'
+
+	local animScene = CreateAnimScene(animSceneDict, 64, animSceneAnim, true, true)
 
 	LoadAnimScene(animScene)
 
@@ -26,10 +37,10 @@ function createTreasureDiggingGrabAnimScene(position, heading)
 
 	SetAnimSceneEntity(animScene, 'player', playerPed, 0)
 
-	return animScene
+	return animScene, animSceneAnim
 end
 
-function enterTreasureDiggingGrabAnimScene(animScene)
+function enterTreasureDiggingGrabAnimScene(animScene, animSceneAnim)
     local playerPed = PlayerPedId()
 
 	if IsPedOnMount(playerPed) then
@@ -39,27 +50,23 @@ function enterTreasureDiggingGrabAnimScene(animScene)
 	-- HidePedWeapons
 	Citizen.InvokeNative(0xFCCC886EDE3C63EC, playerPed, 2, false)
 
-    TaskEnterAnimScene(playerPed, animScene, 'player', 'PBL_GRAB_01', 1.48, 1, 128, 20000, -1.0)
+    TaskEnterAnimScene(playerPed, animScene, 'player', animSceneAnim, 1.48, 1, 128, 20000, -1.0)
 
 	requestUpdateActiveDigSiteState(eDiggingSitePointState.WAIT_TO_BE_DONE)
 
 	CreateThread(function()
-
-		print('starting...')
-
 		-- IsAnimSceneRunning
 		while not Citizen.InvokeNative(0xCBFC7725DE6CE2E0, animScene, false) do
 			Wait(0)
 		end
-
-		print('started')
 
 		-- IsAnimSceneFinished
 		while not Citizen.InvokeNative(0xD8254CB2C586412B, animScene, false) do
 			Wait(0)
 		end
 
-		print('finished')
+		-- DeleteAnimScene
+		Citizen.InvokeNative(0x84EEDB2C6E650000, animScene)
 
 		requestUpdateActiveDigSiteState(eDiggingSitePointState.DONE)
 

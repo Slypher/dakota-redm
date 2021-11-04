@@ -13,13 +13,13 @@ function getCircleDiameterFromPoints(center, points)
 end
 
 function createDiggingSiteVolumes()
-	for diggingSiteIndex, diggingSite in ipairs(DIGGING_SITES) do
+	for cluster, clusterData in ipairs(DIGGING_CLUSTERS) do
 
-		local center = diggingSite.center
+		local center = clusterData.center
 
-		local radius = getCircleDiameterFromPoints(center, diggingSite.positions)
+		local radius = getCircleDiameterFromPoints(center, clusterData.sites)
 
-		gDiggingSiteVolumeCenterAndRadius[diggingSiteIndex] = { center, radius * 1.5 }
+		gClusterVolumes[cluster] = { center, radius * 1.5 }
 	end
 end
 
@@ -43,11 +43,13 @@ end
 CreateThread(function()
 	createDiggingSiteVolumes()
 
-	-- while true do
-	-- 	Wait(0)
+	if ENABLED_DEBUG then
+		while true do
+			Wait(0)
 
-	-- 	for diggingSiteIndex, volume in ipairs(gDiggingSiteVolumeCenterAndRadius) do
-	-- 		drawVolumeBounds(volume)
-	-- 	end
-	-- end
+			for site, volume in ipairs(gClusterVolumes) do
+				drawVolumeBounds(volume)
+			end
+		end
+	end
 end)

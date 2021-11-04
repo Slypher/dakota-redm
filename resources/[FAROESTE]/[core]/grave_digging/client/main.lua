@@ -1,36 +1,40 @@
-gDiggingSiteVolumeCenterAndRadius = { }
-gCurrentDigCluster = nil
+gClusterVolumes = { }
 
 gIsMainThreadRunning = false
 gOnMainThreadStop = nil
 
 MAX_DIG_POINT_DETECTION_RANGE = 10.0
 
-gCurrentDigClusterSitesState = { }
+gClusterSitesState = { }
 
-gActiveDigSite = nil
+gCurrentCluster = nil
+gActiveSite = nil
 
-function getDiggingSiteIndexCollidingWithPlayer()
+ENABLED_DEBUG = false
+
+SITE_INTERACTION_MAX_DISTANCE = 0.8
+
+function getSiteFromPlayerPosition()
 	local playerPed = PlayerPedId()
 	local playerPos = GetEntityCoords(playerPed)
 
-	local collidingSiteIndex
+	local collidingSite
 
 	local collidingVolumeDistance
 
-	for diggingSiteIndex, volume in ipairs(gDiggingSiteVolumeCenterAndRadius) do
+	for diggingSiteIndex, volume in ipairs(gClusterVolumes) do
 		local volumeCenter, volumeRadius = volume[1], volume[2]
 
 		local distanceToVolume = #(playerPos - volumeCenter)
 
 		if distanceToVolume <= volumeRadius and (collidingVolumeDistance == nil or distanceToVolume < collidingVolumeDistance) then
-			collidingSiteIndex = diggingSiteIndex
+			collidingSite = diggingSiteIndex
 
 			collidingVolumeDistance = distanceToVolume
 		end
 	end
 
-	return collidingSiteIndex
+	return collidingSite
 end
 
 function ensureMainThread()
@@ -48,15 +52,13 @@ function ensureMainThread()
 
 		local upVector = vec3(0.0, 0.0, 5.0)
 
-		local interactableDigPoint
+		local interactableSite
 
 		local promptDig
 		local promptDigReenableAt
 
 		gOnMainThreadStop = function()
 			gIsMainThreadRunning = false
-
-			print('main thread is stopping')
 	
 			if promptDig then
 				PromptDelete(promptDig)
@@ -66,41 +68,13 @@ function ensureMainThread()
 			gOnMainThreadStop = nil
 		end
 
-		while gCurrentDigCluster and gIsMainThreadRunning do
-
-			-- if GetFrameCount() % 30 == 0 then
-			-- 	-- Atualizar a ped de vez em quando :P
-			-- 	playerPed = PlayerPedId()
-
-			-- 	local activeDiggingPointIndex = GlobalState[ ('digSiteActivePoint__%d'):format(gCurrentDigCluster) ]
-
-			-- 	activeDiggingPointPos = DIGGING_SITES[gCurrentDigCluster].positions[activeDiggingPointIndex]
-			-- end
-
-			-- if activeDiggingPointPos then
-			-- 	Citizen.InvokeNative(`DRAW_LINE` & 0xFFFFFFFF, activeDiggingPointPos, activeDiggingPointPos + vec3(0.0, 0.0, 5.0), 0, 255, 0, 255)
-
-			-- 	local distanceToDigPoint = #(GetEntityCoords(playerPed) - activeDiggingPointPos)
-
-			-- 	updateMetalDetectorBlackboardBasedOnDistance(distanceToDigPoint)
-
-			-- 	-- E Key.
-			-- 	if distanceToDigPoint <= 2.5 and IsControlJustPressed(0, 0xDFF812F9) then
-			-- 		if gIsPlayingAnimScene then
-			-- 			return
-			-- 		end
-				
-			-- 		gIsPlayingAnimScene = true
-				
-			-- 		local animScene = createTreasureDiggingGrabAnimScene(activeDiggingPointPos)
-				
-			-- 		enterTreasureDiggingGrabAnimScene(animScene)
-			-- 	end
-			-- end
+		while gCurrentCluster and gIsMainThreadRunning do
 
 			-- Debug, pode remover:
-			for digPoint, digPointPos in ipairs(DIGGING_SITES[gCurrentDigCluster].positions) do
-				Citizen.InvokeNative(`DRAW_LINE` & 0xFFFFFFFF, digPointPos, digPointPos + upVector, 0, 255, 0, 255)
+			if ENABLED_DEBUG then
+				for digPoint, sitePos in ipairs(DIGGING_CLUSTERS[gCurrentCluster].sites) do
+					Citizen.InvokeNative(`DRAW_LINE` & 0xFFFFFFFF, sitePos, sitePos + upVector, 0, 255, 0, 255)
+				end
 			end
 
 			if GetFrameCount() % 30 == 0 then
@@ -111,27 +85,35 @@ function ensureMainThread()
 				local playerPos = GetEntityCoords(playerPed)
 
 				-- Zerar o interágivel nesse frame, será re-setado caso necessário...
-				interactableDigPoint = nil
+				interactableSite = nil
 
 				-- Distancia máxima para verificar a distancia do ponto.
-				local lowestInteractableDigPointDistance = 1.5
+				local lowestinteractableSiteDistance = SITE_INTERACTION_MAX_DISTANCE
 
 				-- Pegar o ponto mais próximo nesse cluster...
-				for digPoint, digPointPos in ipairs(DIGGING_SITES[gCurrentDigCluster].positions) do
-					local distanceToDigPoint = #(playerPos - digPointPos)
+				for site, sitePos in ipairs(DIGGING_CLUSTERS[gCurrentCluster].sites) do
+					local distance = #(playerPos - sitePos)
 
-					if distanceToDigPoint < lowestInteractableDigPointDistance then
-						lowestInteractableDigPointDistance = distanceToDigPoint
+					if distance < lowestinteractableSiteDistance then
+						lowestinteractableSiteDistance = distance
 
-						interactableDigPoint = digPoint
+						interactableSite = site
 					end
 				end
-				
-				if interactableDigPoint and not gActiveDigSite then
+
+				if interactableSite and not gActiveSite then
 					-- O prompt vai ser usado, criar caso não exista.
 					if not promptDig then
 						promptDig = createPromptDig()
 					end
+
+					local knownState = getClusterSiteState(interactableSite)
+
+					local shouldPromptBeDisabled = (knownState and (knownState > eDiggingSitePointState.INVALID and knownState < eDiggingSitePointState.EMPTY))
+						or IsPedRagdoll(playerPed)
+
+					-- A cova tem um estado, está em progresso, desabilitar o prompt
+					PromptSetEnabled(promptDig, not shouldPromptBeDisabled)
 				else
 					-- O prompt não vai ser mais usado, então vai ser deletado.
 					if promptDig then
@@ -141,12 +123,14 @@ function ensureMainThread()
 				end
 			end
 
-			if interactableDigPoint then
+			if interactableSite then
 
 				-- Reabilitar o prompt caso tenha sido desabilitado
 				-- na ultima vez que foi pressionado.
 				if promptDigReenableAt and GetGameTimer() >= promptDigReenableAt then
 					PromptSetEnabled(promptDig, true)
+
+					promptDigReenableAt = nil
 				end
 
 				if PromptIsJustPressed(promptDig) then
@@ -156,11 +140,20 @@ function ensureMainThread()
 					promptDigReenableAt = GetGameTimer() + 500
 
 					-- Already playing the scene.
-					if gActiveDigSite then
+					if gActiveSite then
 						return
 					end
 
-					requestInitDigging(gCurrentDigCluster, interactableDigPoint)
+					local cluster = gCurrentCluster
+					local site = interactableSite
+
+					local knownState = getClusterSiteState(site)
+
+					-- A cova não possui nenhum estado ou está em estado de cooldown, então o player pode fazer um request
+					-- para começar a animação...
+					if not knownState or (knownState and (knownState <= eDiggingSitePointState.INVALID or knownState == eDiggingSitePointState.EMPTY)) then
+						requestInitDigging(cluster, site)
+					end
 				end
 			end
 
@@ -171,10 +164,10 @@ function ensureMainThread()
 	end)
 end
 
-function computePlayerHeadingFromDigPoint(digPointPos)
+function computePlayerHeadingForSite(sitePos)
 	-- Um pouquinho abaixo do ponto de cavar,
 	-- assumindo que os pontos são pegos a partir do meio do ped do player.
-	local rayStartPos = digPointPos + vec3(0.0, 0.0, -0.30)
+	local rayStartPos = sitePos + vec3(0.0, 0.0, -0.40)
 	
 	local rayLenght = 4.0
 
@@ -182,18 +175,38 @@ function computePlayerHeadingFromDigPoint(digPointPos)
 
 	local cX, cY, cZ = rayStartPos.x, rayStartPos.y, rayStartPos.z
 
-	for i = 0, 360, 20.0 do
-		i = math.rad(i)
+	local debugHitIdx
+
+	for idx = 0, 360, 20.0 do
+		i = math.rad(idx)
 
 		local X_deg0 = cX + (rayLenght * math.cos(i))
 		local Y_deg0 = cY + (rayLenght * math.sin(i))
 
 		local rayEndPos = vec3(X_deg0, Y_deg0, cZ)
 
-		-- StartExpensiveSynchronousShapeTestLosProbe
-		local rayHandle = Citizen.InvokeNative(0x377906D8A31E5586, rayStartPos, rayEndPos, -1, playerPed, 4)
+		-- -1
+		-- 3167
+		-- 339
 
-		local retval, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(rayHandle)
+		-- StartExpensiveSynchronousShapeTestLosProbe
+		-- local rayHandle = Citizen.InvokeNative(0x377906D8A31E5586, rayStartPos, rayEndPos, -1, playerPed, 7)
+
+		local rayHandle = StartShapeTestSweptSphere(rayStartPos, rayEndPos, 0.2, -1, playerPed, 8)
+
+		local retval, hit, endCoords, surfaceNormal, entityHit
+
+		while true do
+			retval, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(rayHandle)
+
+			Wait(0)
+
+			if retval ~= 1 then
+				break
+			end
+		end
+
+		-- print(retval, hit, endCoords, surfaceNormal, entityHit)
 
 		if hit == 1 then
 			local distanceToStart = #(rayStartPos - endCoords)
@@ -201,25 +214,31 @@ function computePlayerHeadingFromDigPoint(digPointPos)
 			if not lowestDistanceToStart or distanceToStart < lowestDistanceToStart then
 				lowestDistanceToStart = distanceToStart
 				closestHitPos = endCoords
+
+				if ENABLED_DEBUG then
+					debugHitIdx = idx
+				end
 			end
 		end
 	end
 
-	-- CreateThread(function()
-	-- 	while true do
-	-- 		Wait(0)
-	-- 		for i = 0, 360, 20.0 do
-	-- 			i = math.rad(i)
-		
-	-- 			local X_deg0 = cX + (rayLenght * math.cos(i))
-	-- 			local Y_deg0 = cY + (rayLenght * math.sin(i))
-		
-	-- 			local circlePoint = vec3(X_deg0, Y_deg0, cZ)
-		
-	-- 			Citizen.InvokeNative(`DRAW_LINE` & 0xFFFFFFFF, rayStartPos, circlePoint, closestHitPos == circlePoint and 255 or 0, 0, 0, 255)
-	-- 		end
-	-- 	end
-	-- end)
+	if ENABLED_DEBUG then
+		CreateThread(function()
+			while true do
+				Wait(0)
+				for idx = 0, 360, 20.0 do
+					i = math.rad(idx)
+			
+					local X_deg0 = cX + (rayLenght * math.cos(i))
+					local Y_deg0 = cY + (rayLenght * math.sin(i))
+			
+					local circlePoint = vec3(X_deg0, Y_deg0, cZ)
+			
+					Citizen.InvokeNative(`DRAW_LINE` & 0xFFFFFFFF, rayStartPos, circlePoint, idx == debugHitIdx and 255 or 0, 0, 0, 255)
+				end
+			end
+		end)
+	end
 
 	if not closestHitPos then
 		return nil
@@ -248,13 +267,15 @@ function updateMetalDetectorBlackboardBasedOnDistance(distance)
 end
 
 function onPlayerEnterDiggingSite(diggingSiteIndex)
-	TriggerServerEvent('playerEnterDiggingSite', diggingSiteIndex)
+	TriggerServerEvent('net.playerEnterDiggingSite', diggingSiteIndex)
 
 	ensureMainThread()
 end
 
 function onPlayerLeaveDiggingSite(diggingSiteIndex)
-	TriggerServerEvent('playerLeaveDiggingSite', diggingSiteIndex)
+	TriggerServerEvent('net.playerLeaveDiggingSite', diggingSiteIndex)
+
+	gClusterSitesState = { }
 end
 
 CreateThread(function()
@@ -263,18 +284,17 @@ CreateThread(function()
 	while true do
 		Wait(1000)
 
-		local collidingSiteIndex = getDiggingSiteIndexCollidingWithPlayer()
+		local collidingSite = getSiteFromPlayerPosition()
 
-		if gCurrentDigCluster ~= collidingSiteIndex then
+		if gCurrentCluster ~= collidingSite then
 
-			if gCurrentDigCluster == nil then
-				onPlayerEnterDiggingSite(collidingSiteIndex)
+			if gCurrentCluster == nil then
+				onPlayerEnterDiggingSite(collidingSite)
 			else
-				onPlayerLeaveDiggingSite(gCurrentDigCluster)
+				onPlayerLeaveDiggingSite(gCurrentCluster)
 			end
 
-			gCurrentDigCluster = collidingSiteIndex
-			gCurrentDigClusterSitesState = { }
+			gCurrentCluster = collidingSite
 		end
 	end
 end)
@@ -297,6 +317,14 @@ function createPromptDig()
 
 	return prompt
 end
+
+function getClusterSiteState(site)
+    return gClusterSitesState[site]
+end
+
+RegisterNetEvent('net.setSitesStateForCurrentCluster', function(sitesStateMap)
+	gClusterSitesState = sitesStateMap
+end)
 
 --[[
 RegisterCommand(
@@ -398,11 +426,15 @@ RegisterCommand(
 -- end)A
 
 RegisterNetEvent('net.digSiteStateUpdateAck', function(digCluster, digSite, digSiteState)
-	if gCurrentDigCluster ~= digCluster then
+	if gCurrentCluster ~= digCluster then
 		return
 	end
 
-	gCurrentDigClusterSitesState[digSite] = digSiteState
+	gClusterSitesState[digSite] = digSiteState
+
+	if digSiteState == eDiggingSitePointState.EMPTY then
+		gActiveSite = nil
+	end
 end)
 
 AddEventHandler('onResourceStop', function(resource)
