@@ -6,24 +6,21 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 shared_scripts {
     '@_core/lib/utils.lua',
+    '@_core/lib/enum.lua',
     'shared/shared.lua',
     'shared/digging_clusters.lua',
 }
 
 client_scripts {
-    'client/anim_scene.lua',
+    'client/main.lua',
     'client/volume.lua',
     'client/request.lua',
-    'client/main.lua',
 }
 
 server_scripts {
-    '@_core/lib/utils.lua',
     'server/server.lua',
     'server/loottable.lua',
     'server/loottable_generator.lua',
 }
 
 lua54 'yes'
-
--- exec './data.cfg'

@@ -78,6 +78,8 @@ server_scripts {
 shared_scripts {
 	"config/WeaponInfoDatabase.lua",
 	"config/WeaponInfoLookup.lua",
+
+	"lib/enum.lua",
 }
 
 files {

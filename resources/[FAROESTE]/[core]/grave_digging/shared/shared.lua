@@ -1,4 +1,4 @@
-eDiggingSitePointState = {
+enum 'eDiggingSitePointState' {
     INVALID              = -1,
     -- INIT                 =  0,
     HAS_LOOT_NONE        =  0,
@@ -12,7 +12,3 @@ eDiggingSitePointState = {
     DONE                 =  9,
     EMPTY                = 10,
 }
-
-function getDigSiteDiscriminator(digCluster, digSite)
-    return ('%d:%d'):format(digCluster, digSite)
-end

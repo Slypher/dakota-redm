@@ -52,14 +52,7 @@ function sendDigSiteStateUpdateAck(cluster, site)
     end
 end
 
-function getDigClusterAndSiteFromDiscriminator(digDiscriminator)
-    local a, b = string.strsplit(':', digDiscriminator)
-    return tonumber(a), tonumber(b)
-end
-
 function setDigSiteState(cluster, site, state)
-    local digDiscriminator = getDigSiteDiscriminator(cluster, site)
-
     if not gSitesState[cluster] then
         gSitesState[cluster] = { }
     end

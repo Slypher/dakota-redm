@@ -1,18 +1,22 @@
+Proxy = module('_core', 'lib/Proxy')
+
+HandheldShovelItem = Proxy.getInterface('HandheldShovelItem')
+
+ENABLED_DEBUG = false
+SITE_INTERACTION_MAX_DISTANCE = 0.8
+MAX_DIG_POINT_DETECTION_RANGE = 10.0
+
 gClusterVolumes = { }
 
 gIsMainThreadRunning = false
 gOnMainThreadStop = nil
-
-MAX_DIG_POINT_DETECTION_RANGE = 10.0
 
 gClusterSitesState = { }
 
 gCurrentCluster = nil
 gActiveSite = nil
 
-ENABLED_DEBUG = false
-
-SITE_INTERACTION_MAX_DISTANCE = 0.8
+gEnableScript = false
 
 function getSiteFromPlayerPosition()
 	local playerPed = PlayerPedId()
@@ -22,13 +26,13 @@ function getSiteFromPlayerPosition()
 
 	local collidingVolumeDistance
 
-	for diggingSiteIndex, volume in ipairs(gClusterVolumes) do
+	for site, volume in ipairs(gClusterVolumes) do
 		local volumeCenter, volumeRadius = volume[1], volume[2]
 
 		local distanceToVolume = #(playerPos - volumeCenter)
 
 		if distanceToVolume <= volumeRadius and (collidingVolumeDistance == nil or distanceToVolume < collidingVolumeDistance) then
-			collidingSite = diggingSiteIndex
+			collidingSite = site
 
 			collidingVolumeDistance = distanceToVolume
 		end
@@ -53,22 +57,49 @@ function ensureMainThread()
 		local upVector = vec3(0.0, 0.0, 5.0)
 
 		local interactableSite
+		local noInteractableSiteThisFrame = false
 
 		local promptDig
 		local promptDigReenableAt
 
+		local onDigPromptIsPressedHandler = AddEventHandler('onHandheldShovelItemDigPromptIsPressed', function()
+			if not interactableSite then
+				return
+			end
+
+			-- Desabilitar o prompt por X segundos...
+			HandheldShovelItem.setDigPromptEnabled(false)
+
+			promptDigReenableAt = GetGameTimer() + 500
+
+			-- Already playing the scene.
+			if gActiveSite then
+				return
+			end
+
+			local cluster = gCurrentCluster
+			local site = interactableSite
+
+			local knownState = getClusterSiteState(site)
+
+			-- A cova não possui nenhum estado ou está em estado de cooldown, então o player pode fazer um request
+			-- para começar a animação...
+			if not knownState or (knownState and (knownState <= eDiggingSitePointState.INVALID or knownState == eDiggingSitePointState.EMPTY)) then
+				requestInitDigging(cluster, site)
+			end
+		end)
+
 		gOnMainThreadStop = function()
 			gIsMainThreadRunning = false
-	
-			if promptDig then
-				PromptDelete(promptDig)
-				promptDig = nil
-			end
+
+			HandheldShovelItem.setDigPromptEnabled(true)
+
+			RemoveEventHandler(onDigPromptIsPressedHandler)
 
 			gOnMainThreadStop = nil
 		end
 
-		while gCurrentCluster and gIsMainThreadRunning do
+		while gCurrentCluster and gIsMainThreadRunning and gEnableScript do
 
 			-- Debug, pode remover:
 			if ENABLED_DEBUG then
@@ -86,6 +117,7 @@ function ensureMainThread()
 
 				-- Zerar o interágivel nesse frame, será re-setado caso necessário...
 				interactableSite = nil
+				noInteractableSiteThisFrame = true
 
 				-- Distancia máxima para verificar a distancia do ponto.
 				local lowestinteractableSiteDistance = SITE_INTERACTION_MAX_DISTANCE
@@ -98,29 +130,28 @@ function ensureMainThread()
 						lowestinteractableSiteDistance = distance
 
 						interactableSite = site
+						noInteractableSiteThisFrame = false
 					end
 				end
 
 				if interactableSite and not gActiveSite then
-					-- O prompt vai ser usado, criar caso não exista.
-					if not promptDig then
-						promptDig = createPromptDig()
-					end
-
 					local knownState = getClusterSiteState(interactableSite)
 
 					local shouldPromptBeDisabled = (knownState and (knownState > eDiggingSitePointState.INVALID and knownState < eDiggingSitePointState.EMPTY))
-						or IsPedRagdoll(playerPed)
 
 					-- A cova tem um estado, está em progresso, desabilitar o prompt
-					PromptSetEnabled(promptDig, not shouldPromptBeDisabled)
+					HandheldShovelItem.setDigPromptEnabled(not shouldPromptBeDisabled)
+					HandheldShovelItem.setCancelPromptEnabled(true)
 				else
-					-- O prompt não vai ser mais usado, então vai ser deletado.
-					if promptDig then
-						PromptDelete(promptDig)
-						promptDig = nil
+					-- Somente desaabilitar os prompts em um unico frame
+					if noInteractableSiteThisFrame then
+						HandheldShovelItem.setDigPromptEnabled(false)
 					end
 				end
+
+				HandheldShovelItem.setCancelPromptEnabled(not gActiveSite)
+
+				noInteractableSiteThisFrame = false
 			end
 
 			if interactableSite then
@@ -128,32 +159,13 @@ function ensureMainThread()
 				-- Reabilitar o prompt caso tenha sido desabilitado
 				-- na ultima vez que foi pressionado.
 				if promptDigReenableAt and GetGameTimer() >= promptDigReenableAt then
-					PromptSetEnabled(promptDig, true)
+					
+					-- Só reabilitar caso não esteja cavando :P
+					if not gActiveSite then
+						HandheldShovelItem.setDigPromptEnabled(true)
+					end
 
 					promptDigReenableAt = nil
-				end
-
-				if PromptIsJustPressed(promptDig) then
-
-					-- Desabilitar o prompt por X segundos...
-					PromptSetEnabled(promptDig, false)
-					promptDigReenableAt = GetGameTimer() + 500
-
-					-- Already playing the scene.
-					if gActiveSite then
-						return
-					end
-
-					local cluster = gCurrentCluster
-					local site = interactableSite
-
-					local knownState = getClusterSiteState(site)
-
-					-- A cova não possui nenhum estado ou está em estado de cooldown, então o player pode fazer um request
-					-- para começar a animação...
-					if not knownState or (knownState and (knownState <= eDiggingSitePointState.INVALID or knownState == eDiggingSitePointState.EMPTY)) then
-						requestInitDigging(cluster, site)
-					end
 				end
 			end
 
@@ -266,22 +278,24 @@ function updateMetalDetectorBlackboardBasedOnDistance(distance)
 	Citizen.InvokeNative(0x437C08DB4FEBE2BD, playerPed, 'MetalDetectorDetectionValue', detectionValue, 10)
 end
 
-function onPlayerEnterDiggingSite(diggingSiteIndex)
-	TriggerServerEvent('net.playerEnterDiggingSite', diggingSiteIndex)
+function onPlayerEnterDiggingSite(site)
+	TriggerServerEvent('net.playerEnterDiggingSite', site)
 
 	ensureMainThread()
 end
 
-function onPlayerLeaveDiggingSite(diggingSiteIndex)
-	TriggerServerEvent('net.playerLeaveDiggingSite', diggingSiteIndex)
+function onPlayerLeaveDiggingSite(site)
+	TriggerServerEvent('net.playerLeaveDiggingSite', site)
 
 	gClusterSitesState = { }
 end
 
-CreateThread(function()
+function init()
+	gEnableScript = true
+
 	createDiggingSiteVolumes()
 
-	while true do
+	while gEnableScript do
 		Wait(1000)
 
 		local collidingSite = getSiteFromPlayerPosition()
@@ -297,10 +311,18 @@ CreateThread(function()
 			gCurrentCluster = collidingSite
 		end
 	end
+end
+
+-- Quando o script iniciar, verificar se
+-- o player está segurando uma pá, e assim iniciar o script.
+CreateThread(function()
+	if HandheldShovelItem.isActive() then
+		init()
+	end
 end)
 
 function createPromptDig()
-	prompt = Citizen.InvokeNative(0x04F97DE45A519419)
+	local prompt = Citizen.InvokeNative(0x04F97DE45A519419)
 
 	PromptSetControlAction(prompt, 0x7F8D09B8)
 	PromptSetText(prompt, CreateVarString(10, 'LITERAL_STRING', 'Cavar'))
@@ -324,6 +346,14 @@ end
 
 RegisterNetEvent('net.setSitesStateForCurrentCluster', function(sitesStateMap)
 	gClusterSitesState = sitesStateMap
+end)
+
+AddEventHandler('onInitHandheldShovelItem', function()
+	init()
+end)
+
+AddEventHandler('onStopHandheldShovelItem', function()
+	gEnableScript = false
 end)
 
 --[[
@@ -444,3 +474,28 @@ AddEventHandler('onResourceStop', function(resource)
 		end
 	end
 end)
+
+-- function findDict()
+
+-- 	-- DatafileSelectActiveFile
+-- 	Citizen.InvokeNative(0x46102A0989AD80B5, )
+
+-- 	--- DatafileGetFileDict
+-- 	local sVar1 = Citizen.InvokeNative(0xBBD8CF823CAE557C, 0) -- Got main dict:
+
+-- 	-- DatadictGetDict
+-- 	local uParam5 = Citizen.InvokeNative(0x4D7A30130F46AC9C, sVar1, 'mission')
+
+-- 	-- DatadictGetDict
+-- 	local sVar242 = Citizen.InvokeNative(0x4D7A30130F46AC9C, uParam5, 'sPPH')
+
+-- 	-- sVar242, 'anims', ''
+
+-- 	-- DatadictGetString
+-- 	local s = Citizen.InvokeNative(0xE37B38C0B4E95DFA, sVar242, 'anims')
+
+-- 	print('sVar1', sVar1)
+-- 	print('uParam5', uParam5)
+-- 	print('sVar242', sVar242)
+-- 	print('s', s)
+-- end
