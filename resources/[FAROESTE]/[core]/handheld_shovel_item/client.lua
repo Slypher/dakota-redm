@@ -33,7 +33,7 @@ function createPromptNoGroup(controlHash, text)
 	PromptSetControlAction(prompt, controlHash)
 	PromptSetText(prompt, CreateVarString(10, 'LITERAL_STRING', text))
 
-	PromptSetEnabled(prompt, false)
+	PromptSetEnabled(prompt, true)
 	PromptSetVisible(prompt, true)
 
 	PromptSetStandardMode(prompt, true)
@@ -56,8 +56,6 @@ function createDigAndDropPrompts()
 
     PromptSetGroup(gPromptDig, gGroupPrompt)
     PromptSetGroup(gPromptCancel, gGroupPrompt)
-
-    PromptSetEnabled(gPromptCancel, true)
 end
 
 function drawPrompts()

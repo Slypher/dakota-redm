@@ -6,7 +6,11 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 shared_script '@_core/lib/utils.lua'
 
-server_script 'server.lua'
+server_scripts {
+    'loottable.lua',
+    'loottable_generator.lua',
+    'server.lua'
+}
 
 client_script 'client.lua'
 
