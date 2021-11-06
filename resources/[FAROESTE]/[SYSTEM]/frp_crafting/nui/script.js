@@ -66,28 +66,46 @@ window.addEventListener("message", function(event) {
 
         const time = event.data.data.time;
 
-        $.each(event.data.data, function(i, input) {
+        const useIconDescription = event.data.data.useIconDescription;
+        const useTextDescription = event.data.data.useTextDescription;
 
-            if (!(isNaN(i))) {
+        const descriptionText = event.data.data.descriptionText;
 
-                i = parseInt(i);
+        const iconDescriptionVisibilityFnName = useIconDescription ? 'show' : 'hide';
+        const textDescriptionVisibilityFnName = useTextDescription ? 'show' : 'hide';
 
-                const item = input.item;
-                const isActive = input.isActive;
+        $('.item-row')[iconDescriptionVisibilityFnName]();
+        $('.bottom__item_description')[textDescriptionVisibilityFnName]();
 
-                $('.item-row').append(`
-                    <div class="item ${isActive == true ? "" : "blocked"}">
-                        <img src="nui://frp_inventory/nui/images/items/${item}.png" onerror="this.src='nui://frp_inventory/nui/images/_placeholder.png'" />
-                    </div>
-                `);
+        if (useIconDescription)
+        {
+            $.each(event.data.data, function(i, input) {
 
-                if (i != Object.entries(event.data.data).filter(a => a[1].item).length) {
+                if (!(isNaN(i))) {
+    
+                    i = parseInt(i);
+    
+                    const item = input.item;
+                    const isActive = input.isActive;
+    
                     $('.item-row').append(`
-                        <span>+</span>
+                        <div class="item ${isActive == true ? "" : "blocked"}">
+                            <img src="nui://frp_inventory/nui/images/items/${item}.png" onerror="this.src='nui://frp_inventory/nui/images/_placeholder.png'" />
+                        </div>
                     `);
+    
+                    if (i != Object.entries(event.data.data).filter(a => a[1].item).length) {
+                        $('.item-row').append(`
+                            <span>+</span>
+                        `);
+                    }
                 }
-            }
-        });
+            });
+        }
+        else if (useTextDescription)
+        {
+            $('.bottom__item_description__text').text(descriptionText ?? 'Descrição não definida, que merda aconteceu?');
+        }
 
         $('.production-info').text(`Tempo de produção: ${time} secs`);
     }

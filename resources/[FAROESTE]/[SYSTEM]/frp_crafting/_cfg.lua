@@ -1512,49 +1512,64 @@ Config = {
     ----------------------------------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------------------- MOONSHINE --------------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
---[[
+    --[[
     {
         position = vec3(1450.939,371.232,89.884), -- No position, its global
-        craftings = 
+
+        useTextDescriptionAll = true,
+
+        craftings =
         {
             {
+                descriptionTextOverride = 'Tradição de corno',
+                
                 time = 50,
+
                 input = {
                     {item = "milholata", amount = 3},
                     {item = "alcool", amount = 1},
                     {item = "mosto", amount = 1},
                 },
+
                 output = {
                     {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
-                }
+                },
             },
             {
+                descriptionTextOverride = 'Tradição de Refresco',
+
                 time = 50,
+
                 input = {
                     {item = "cassisdourado", amount = 6},
                     {item = "mentasilvestre", amount = 6},
                     {item = "alcool", amount = 3},
                     {item = "mosto", amount = 1},
                 },
+
                 output = {
                     {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
                 }
             },
             {
+                descriptionTextOverride = 'Tradição de inverno',
+
                 time = 50,
+
                 input = {
                     {item = "gualteria", amount = 8},
                     {item = "violeta", amount = 8},
                     {item = "alcool", amount = 3},
                     {item = "mosto", amount = 1},
                 },
+
                 output = {
                     {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
                 }
             },
         }
     },
-]]
+    ]]
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------

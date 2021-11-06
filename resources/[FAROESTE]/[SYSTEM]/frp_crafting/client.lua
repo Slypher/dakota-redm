@@ -66,7 +66,11 @@ RegisterNUICallback(
         local cGroup = tonumber(cb.cGroup)
         local cIndex = tonumber(cb.cIndex)
 
-        local inputlist = deepcopy(_tempParsedConfig[cGroup].craftings[cIndex].input)
+        local selectedCraftingGroupInfo = _tempParsedConfig[cGroup]
+        local selectedCraftingEntryInfo = selectedCraftingGroupInfo.craftings[cIndex]
+        local selectedFirstOutputItemId = selectedCraftingEntryInfo.output[1].item
+
+        local inputlist = deepcopy(selectedCraftingEntryInfo.input)
 
         shouldShowPrompt = true
 
@@ -77,7 +81,26 @@ RegisterNUICallback(
             end
         end
 
-        inputlist.time = _tempParsedConfig[cGroup].craftings[cIndex].time
+        inputlist.time = selectedCraftingEntryInfo.time
+
+        -- inputList
+
+        local useIconDescriptionAll = selectedCraftingGroupInfo.useIconDescriptionAll
+        local useTextDescriptionAll = selectedCraftingGroupInfo.useTextDescriptionAll
+
+        local useIconDescription = useIconDescriptionAll or selectedCraftingEntryInfo.useIconDescription or true   -- Icones serão usados por padrão.
+        local useTextDescription = useTextDescriptionAll or selectedCraftingEntryInfo.useTextDescription or false
+
+        if useTextDescription then
+            useIconDescription = false
+        end
+
+        local descriptionText = useTextDescription and (selectedCraftingEntryInfo.descriptionTextOverride or ItemList[selectedFirstOutputItemId].description) or nil
+
+        inputlist.useIconDescription = useIconDescription
+        inputlist.useTextDescription = useTextDescription
+
+        inputlist.descriptionText = descriptionText
 
         SendNUIMessage(
             {
@@ -618,7 +641,7 @@ AddEventHandler(
                 f[cGroup] = nil
             else
                 for a, b in pairs(x) do
-                    if a ~= "craftings" then
+                    if a == "group" then
                         x[a] = nil
                     end
                 end
