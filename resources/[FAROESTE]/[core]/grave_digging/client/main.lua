@@ -3,7 +3,7 @@ Proxy = module('_core', 'lib/Proxy')
 HandheldShovelItem = Proxy.getInterface('HandheldShovelItem')
 
 ENABLED_DEBUG = false
-SITE_INTERACTION_MAX_DISTANCE = 0.8
+SITE_INTERACTION_MAX_DISTANCE = 1.0
 MAX_DIG_POINT_DETECTION_RANGE = 10.0
 
 gClusterVolumes = { }

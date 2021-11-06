@@ -4,6 +4,7 @@
 
 local Proxy = module('_core', 'lib/Proxy')
 
+GenericHandheldItem = Proxy.getInterface('GenericHandheldItem')
 HandheldShovelItem = Proxy.getInterface('HandheldShovelItem')
 
 GroundDiggingProxy = { }
@@ -38,8 +39,13 @@ end
 
 function onHandheldShovelItemDigPromptIsPressed()
     local hooks = {
+        onStart = function()
+            HandheldShovelItem.setDigPromptEnabled(false)
+        end,
         onFinish = function()
             TriggerServerEvent('net.playerDigRandomGroundSite')
+
+            HandheldShovelItem.setDigPromptEnabled(true)
         end,
     }
 
@@ -110,6 +116,10 @@ function startDiggingAnimScene(type, animScenePos, animSceneHeading, hooks)
 	-- HidePedWeapons
 	Citizen.InvokeNative(0xFCCC886EDE3C63EC, playerPed, 2, false)
 
+    ClearPedTasks(playerPed)
+
+    GenericHandheldItem.setHandheldItemVisible(false)
+
     TaskEnterAnimScene(playerPed, animScene, 'player', animSceneAnim, 1.48, 1, 128, 20000, -1.0)
 
     if hooks?.onStart then
@@ -133,6 +143,8 @@ function startDiggingAnimScene(type, animScenePos, animSceneHeading, hooks)
         if hooks?.onFinish then
             hooks.onFinish()
         end
+
+        GenericHandheldItem.setHandheldItemVisible(true)
 	end)
 end
 

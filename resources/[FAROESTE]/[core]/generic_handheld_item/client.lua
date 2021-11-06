@@ -45,21 +45,32 @@ function initHandheldItem(itemId)
 
     gCurrentHandheldEntity = handheldEntity
 
+    -- HidePedWeapons
+    Citizen.InvokeNative(0xFCCC886EDE3C63EC, playerPed, 0, true)
+
     AttachEntityToEntity(
         handheldEntity,
         playerPed,
         GetPedBoneIndex(playerPed, 7966),
-        vec3(0.0, 0.0, 0.0),
-        vec3(0.0, 0.0, 0.0),
+        vec3(0.0, 0.0, 0.15),
+        -1.0, 1.0, -30.0,
         false,
         false,
         false,
-        false,
-        2,
         true,
-        false,
-        false
+        2,
+        true
     )
+
+    -- AttachEntityToEntity(
+    --     handheldEntity,
+    --     playerPed,
+    --     GetPedBoneIndex(playerPed, 7966),
+    --     vec3(-0.2, 0.1, 0.0),
+    --     0.0, 80.0, -30.0, false, false, false, true, 2, true
+    -- )
+
+    -- TaskPlayAnim(PlayerPedId(), 'amb_wander@code_human_2handshovel_wander@base', 'base', 4.0, -4.0, -1, 25, 0.0, false, 0, false, 'RightArmOnly_filter', false)
 
 	Citizen.InvokeNative(0x923583741DC87BCE, playerPed, handheldLocoArch)
     Citizen.InvokeNative(0x89F5E7ADECCCB49C, playerPed, handheldLocoType)
@@ -110,6 +121,12 @@ function handleDetachConditions(handheldEntity)
 
             if GetFrameCount() % 30 == 0 then
                 playerPed = PlayerPedId()
+
+                local _, weaponHash = GetCurrentPedWeapon(playerPed, 0, 0, 0)
+
+                if weaponHash ~= `WEAPON_UNARMED` then
+                    stopHandheldItem(false)
+                end
             end
 
             if IsPedRagdoll(playerPed) then
@@ -124,6 +141,10 @@ Interface.stopHandheldItem = stopHandheldItem
 
 function Interface.getHandheldItemId()
     return gCurrentHandheldItemId
+end
+
+function Interface.setHandheldItemVisible(visible)
+    SetEntityVisible(gCurrentHandheldEntity, visible)
 end
 
 AddEventHandler('onResourceStop', function(resource)
