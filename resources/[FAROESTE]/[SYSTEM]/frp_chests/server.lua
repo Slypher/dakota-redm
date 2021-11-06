@@ -110,22 +110,9 @@ AddEventHandler(
     end
 )
 
-AddEventHandler(
-    "playerConnecting",
-    function(name, setReason)
-        local _source = source
-        TriggerClientEvent("FRP:CHESTS:SyncMultipleChests", _source, tempChests)
-    end
-)
-
-AddEventHandler(
-    "FRP:playerSpawned",
-    function(source, user_id, isFirstSpawn)
-        if isFirstSpawn then
-            API.syncChestsWithPlayer(source)
-        end
-    end
-)
+AddEventHandler('API:OnUserSelectCharacter', function(user, characterId)    
+    API.syncChestsWithPlayer(user:getSource())
+end)
 
 function getItemIdFromCapacity(capacity)
     if capacity == 25 then
