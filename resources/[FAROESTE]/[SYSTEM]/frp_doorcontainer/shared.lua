@@ -100,6 +100,9 @@ local doorStates = {
     [1104407261] = {isOpen = true}, -- Doctor's office at Saint Dennis
     -- [1276527334] = {isOpen = true} -- Doctor's office at Saint Dennis -- Not useable
     [3277501452] = { isOpen = true}, -- Porta da loja de roupas de BlackWater.
+
+    -- Portas usados no frp_robbery.
+    [3483244267] = { isOpen = false, canInteract = false },
 }
 
 -- TALVEZ MUDAR O SISTEMA PARA O CLIENT SÓ PEDIR O SYNC
@@ -241,6 +244,14 @@ Citizen.CreateThread(
                 }
             )
 
+            setControllableDoorsForGroup(
+                "admin",
+                {
+                    -- Portas usados no frp_robbery.
+                    3483244267,
+                }
+            )
+
             -- setControllableDoorsForGroup(
             --     "sheriff",
             --     {
@@ -274,19 +285,30 @@ Citizen.CreateThread(
                     end
 
                     local newDoorState = not doorStates[doorHash].isOpen
-                    doorStates[doorHash].isOpen = newDoorState
 
-                    if doorStates[doorHash].pair ~= nil then
-                        local doorPair = doorStates[doorHash].pair
-                        print("Porta " .. doorHash .. " com par, porém o par não foi definido ...")
-                        if doorStates[doorPair] and doorStates[doorPair].isOpen then
-                            doorStates[doorPair].isOpen = newDoorState
-                        end
-                    end
-
-                    TriggerClientEvent("FRP:DOORSTATECONTAINER:SetDoorState", -1, doorHash, newDoorState)
+                    TriggerEvent('setRegisteredDoorState', doorHash, newDoorState)
                 end
             )
+
+            AddEventHandler('setRegisteredDoorState', function(doorHash, doorState)
+                doorStates[doorHash].isOpen = doorState
+
+                if doorStates[doorHash].pair ~= nil then
+                    local doorPair = doorStates[doorHash].pair
+                    print("Porta " .. doorHash .. " com par, porém o par não foi definido ...")
+                    if doorStates[doorPair] and doorStates[doorPair].isOpen then
+                        doorStates[doorPair].isOpen = doorState
+                    end
+                end
+
+                TriggerClientEvent("FRP:DOORSTATECONTAINER:SetDoorState", -1, doorHash, doorState)
+            end)
+
+            -- AddEventHandler('setRegisteredDoorCanBeInteractedWith', function(doorHash, canInteract)
+            --     doorStates[doorHash].canInteract = canInteract
+
+            --     TriggerClientEvent('net.setRegisteredDoorCanBeInteractedWith', -1, doorHash, canInteract)
+            -- end)
 
             AddEventHandler(
                 "API:playerSpawned",
@@ -344,10 +366,14 @@ Citizen.CreateThread(
                 "FRP:DOORSTATECONTAINER:SetMultipleDoorsState",
                 function(_doorStates)
                     for doorHash, d in pairs(_doorStates) do
-                        doorStates[doorHash].isOpen = d.isOpen
+                        doorStates[doorHash] = d
                     end
                 end
             )
+
+            -- RegisterNetEvent('net.setRegisteredDoorCanBeInteractedWith', function(doorHash, canInteract)
+            --     doorStates[doorHash].canInteract = canInteract
+            -- end)
 
             local closestDoorHash
             local closestDoor_displayasclosed = false
@@ -431,6 +457,7 @@ Citizen.CreateThread(
                                 local hourCloseAt, hourOpenAt = doorStates[closestDoorHash].closeAt, doorStates[closestDoorHash].openAt
 
                                 local isOpen = doorStates[closestDoorHash].isOpen
+                                local canInteract = doorStates[closestDoorHash].canInteract
 
                                 if hourCloseAt and hourOpenAt then
                                     local hour = GetClockHours()
@@ -446,7 +473,7 @@ Citizen.CreateThread(
                                     end
                                 end
 
-                                if HasEntityClearLosToEntityInFront(ped, doorEntity, 0) and not playingUnlockAnimation then
+                                if canInteract and HasEntityClearLosToEntityInFront(ped, doorEntity, 0) and not playingUnlockAnimation then
                                     if isOpen == true then
                                         PromptSetActiveGroupThisFrame(prompt_group_close, CreateVarString(10, "LITERAL_STRING", "Porta"))
 

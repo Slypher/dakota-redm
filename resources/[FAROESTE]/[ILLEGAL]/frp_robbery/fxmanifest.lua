@@ -12,3 +12,10 @@ server_scripts {
     "@_core/lib/utils.lua",
     "server.lua"
 }
+
+shared_scripts {
+    'config.lua',
+    'shared.lua'
+}
+
+lua54 'yes'

@@ -41,22 +41,25 @@ local indexBeingRobbed_playerSourceWhoStarted = nil
 
 local robberyBeingEnded = false
 
+local INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS = 180
+
+function setReplicatedBankState(bankId, key, value)
+    GlobalState[ getStateBagKeyForBank(bankId, key) ] = value
+end
+
 RegisterNetEvent("FRP:ROBBERY:TryToStartRobbery")
 AddEventHandler(
     "FRP:ROBBERY:TryToStartRobbery",
-    function(index, participants)
+    function(index, participants, wasDynamiteUsed)
         local _source = source
         local User = API.getUserFromSource(_source)
 
         if interiorIndexBeingRobbed ~= nil then
-            -- print("Interior já está sendo roubado")
             TriggerClientEvent("FRP:NOTIFY:Simple", _source, "Esse local já está sendo roubado")
             return
         end
 
         if cooldownEndsAtTimeStamp > os.time() then
-            -- print("Fomos assaltados a pouco tempo, não temos dinheiro")
-            print("FRP_ROBBERY", cooldownEndsAtTimeStamp, cooldownEndsAtTimeStamp - os.time())
             TriggerClientEvent("FRP:NOTIFY:Simple", _source, "Fomos assaltados a pouco tempo, não temos dinheiro")
             return
         else
@@ -77,7 +80,18 @@ AddEventHandler(
         local maxParticipants = data[index].staticMaxParticipants
         local numParticipantsToCheck = #participants
 
-        countdownRobberyTime()
+        local bankId = index
+
+        local endingTime = data[indexBeingRobbed].staticSecondsToReward
+
+        if wasDynamiteUsed then
+            endingTime += INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS
+        end
+
+        setReplicatedBankState(bankId, 'hasStarted', true)
+        setReplicatedBankState(bankId, 'endNetworkTime', GetGameTimer() + (endingTime * 1000)) -- GetNetworkTime on client.
+
+        countdownRobberyTime(endingTime)
 
         for _, playerSource in pairs(GetPlayers()) do
             playerSource = tonumber(playerSource)
@@ -89,8 +103,8 @@ AddEventHandler(
                         isParticipant = true
                         -- if numParticipants < maxParticipants then
                         numParticipants = numParticipants + 1
-                        TriggerClientEvent("FRP:ROBBERY:StartRobbery", participantSource, index, true, indexBeingRobbed_seconds)
-                        participants[participantSource] = true
+                        TriggerClientEvent("FRP:ROBBERY:StartRobbery", participantSource, index, true)
+                        indexBeingRobbed_participants[participantSource] = index
                     --      API.logs("./savedata/roubobanco.txt","[USUARIOID]: "..Character:getId().. "Iniciou o roubo")
                     -- else
                     --     TriggerClientEvent("FRP:ROBBERY:StartRobberyAsBlocked", participantSource, index)
@@ -110,8 +124,8 @@ AddEventHandler(
     end
 )
 
-function countdownRobberyTime()
-    indexBeingRobbed_seconds = data[indexBeingRobbed].staticSecondsToReward
+function countdownRobberyTime(endsAt)
+    indexBeingRobbed_seconds = endsAt
 
     Citizen.CreateThread(
         function()
@@ -169,9 +183,16 @@ function endRobberyGiveReward()
         local Character = User:getCharacter()
 
         if Character ~= nil then
-            local reward = math.random(20000, data[indexBeingRobbed].staticReward)
+            local maxRewardInDollars = data[indexBeingRobbed].staticReward
+
+            if getReplicatedBankState(bankId, 'hasSafeExploded') then
+                maxRewardInDollars += 25000
+            end
+
+            local reward = math.random(20000, maxRewardInDollars)
+
             Character:getInventory():addItem("money", reward)
-            -- User:notify("success", "Você recebeu R$ " .. reward .. " pelo assalto")
+
             User:notify("item", "money", reward / 100)
         end
     end
@@ -181,7 +202,10 @@ function endRobberyGiveReward()
     indexBeingRobbed = nil
     indexBeingRobbed_seconds = 0
     indexBeingRobbed_participants = {}
+
     robberyBeingEnded = false
+
+    clearBankState(bankId)
 
     TriggerClientEvent("FRP:TOAST:New", -1, "alert", "O assalto acabou!")
     TriggerClientEvent("FRP:ROBBERY:EndRobbery", -1)
@@ -211,15 +235,69 @@ AddEventHandler(
             indexBeingRobbed_participants = {}
             robberyBeingEnded = false
 
+            clearBankState(bankId)
+
             TriggerClientEvent("FRP:ROBBERY:EndRobbery", -1)
         end
 
         API.NotifyUsersWithGroup("trooper", "-1 Assaltante")
-
-        -- print("Player " .. _source .. " left the robbery")
-        -- TriggerClientEvent('FRP:Notify', _source, "O " .. _source .. " left the robbery")
     end
 )
+
+-- Só vai ser executado pós iniciar um assalto com uma arma.
+RegisterNetEvent('net.ackBankRobberySafeDoorWasExploded', function()
+    local playerId = source
+    
+    local bankId = indexBeingRobbed_participants[playerId]
+
+    -- print('ackBankRobberySafeDoorWasExploded :: 0', bankId)
+
+    if not bankId then
+        return
+    end
+
+    -- print('ackBankRobberySafeDoorWasExploded :: 1')
+
+    if not getReplicatedBankState(bankId, 'hasStarted') then
+        return
+    end
+
+    -- print('ackBankRobberySafeDoorWasExploded :: 2')
+
+    -- Verificar se o banco tem um cofre.
+
+    local heistInfo = HEIST_BANK_INFO[bankId]
+
+    local explodableDoorSystemHash in heistInfo
+
+    if not explodableDoorSystemHash then
+        return
+    end
+
+    if getReplicatedBankState(bankId, 'hasSafeExploded') then
+        return
+    end
+
+    -- print('ackBankRobberySafeDoorWasExploded :: 3')
+
+    setReplicatedBankState(bankId, 'hasSafeExploded', true)
+
+    local endNetworkTime = getReplicatedBankState(bankId, 'endNetworkTime')
+
+    local newEndNetworkTime = endNetworkTime + (INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS * 1000) -- Aumentar o tempo em 1 minuto...
+
+    setReplicatedBankState(bankId, 'endNetworkTime', newEndNetworkTime) -- GetNetworkTime on client.
+
+    -- #TODO: Replicar a quantidade que será recibida, mostrar na HUD, talvez...
+
+    -- local oldRewardInDollars = getReplicatedBankState(bankId, 'rewardInDollars')
+    -- local newRewardInDollars = oldRewardInDollars + 25000
+
+    -- setReplicatedBankState(bankId, 'rewardInDollars', newRewardInDollars)
+
+    TriggerEvent('setRegisteredDoorState', explodableDoorSystemHash, true)
+    -- TriggerEvent('setRegisteredDoorCanBeInteractedWith', explodableDoorSystemHash, true)
+end)
 
 AddEventHandler(
     "playerDropped",
@@ -230,3 +308,31 @@ AddEventHandler(
         end
     end
 )
+
+function clearBankState(bankId)
+    setReplicatedBankState(bankId, 'hasStarted', nil)
+    setReplicatedBankState(bankId, 'hasSafeExploded', nil)
+    setReplicatedBankState(bankId, 'endNetworkTime', nil)
+
+    local bankInfo = HEIST_BANK_INFO[bankId]
+
+    if bankInfo then
+        local explodableDoorSystemHash in bankInfo
+
+        if explodableDoorSystemHash then
+            TriggerEvent('setRegisteredDoorState', explodableDoorSystemHash, false)
+        end
+    end
+end
+
+function clearBankStates()
+    for bankId, _ in pairs(data) do
+        clearBankState(bankId)
+    end
+end
+
+AddEventHandler('onResourceStop', function(resource)
+    if resource == GetCurrentResourceName() then
+        clearBankStates()
+    end
+end)

@@ -17,18 +17,26 @@ local interiors = {
     [2] = 42754, -- BANCO SAINT DENNIS
     [3] = 29442 -- BANCO RHODES
     --  [4] = 12290 -- BANCO VALENTINE
+
+    --[[
+        2644.385,-1299.759,52.204 Saint dennis.
+        1293.334,-1298.951,77.600 Rhodes.
+        -817.363,-1273.928,43.605 Black Water.
+        -307.966,769.112,118.991 Valentine.
+    ]]
 }
 
-local interiorIndexBeingRobbed = nil
+-- local interiorIndexBeingRobbed = nil
 local interiorIndexPlayerIsIn = nil
 
 local isParticipantOfRobbery = false
 local isBlockedByRobbery = false
 
-local secondsUntilRobberyEnds = nil
 local secondsUntilAbandonRobbery = nil
 
 local shootingToStartCooldown = false
+
+local gParticipatingBankId
 
 Citizen.CreateThread(
     function()
@@ -42,7 +50,6 @@ Citizen.CreateThread(
             if interiorIdPlayerIsIn ~= 0 then
                 for index, interiorId in pairs(interiors) do
                     if interiorIdPlayerIsIn == interiorId then
-                        -- print(index)
                         interiorIndexPlayerIsIn = index
                     end
                 end
@@ -53,109 +60,190 @@ Citizen.CreateThread(
     end
 )
 
+function getCurrentReplicatedBankState(key)
+    return getReplicatedBankState(interiorIndexPlayerIsIn, key)
+end
+
+function isCurrentBankBeingRobbed()
+    return getCurrentReplicatedBankState('hasStarted')
+end
+
+function canUseStartPathShootUp()
+    -- print('canUseStartPathShootUp :: 0')
+
+    if isCurrentBankBeingRobbed() then
+        return false
+    end
+
+    -- print('canUseStartPathShootUp :: 1')
+
+    if shootingToStartCooldown then
+        return false
+    end
+
+    -- print('canUseStartPathShootUp :: 2')
+
+    return true
+end
+
+function canUseStartPathPlantBomb()
+    -- print('canUseStartPathPlantBomb :: 1')
+
+    if isCurrentBankBeingRobbed() and getCurrentReplicatedBankState('hasSafeExploded') then
+        return false
+    end
+
+    -- print('canUseStartPathPlantBomb :: 0')
+
+    return true
+end
+
 Citizen.CreateThread(
     function()
         ClearPedTasksImmediately(PlayerPedId())
 
         --AddTextEntry("shoot_to_start", "Atire para começar o assalto")
         --AddTextEntry("wait_to_shoot", "Aguarde 10 segundos...")
-        local hashUnarmed = GetHashKey("WEAPON_UNARMED")
+
         while true do
             Citizen.Wait(0)
 
             if interiorIndexPlayerIsIn ~= nil then
+
                 local ped = PlayerPedId()
                 local retval, weaponHash = GetCurrentPedWeapon(ped, 1)
-                if weaponHash ~= hashUnarmed then
-                    if interiorIndexBeingRobbed == nil then
-                        if not shootingToStartCooldown then
-                            notify("Atire para começar o assalto.")
-                            --  TriggerEvent('FRP:Notify', 'Atire para começar o assalto.')
-                            if IsPedShooting(ped) then
-                                initShootingCountdown()
 
-                                -- print("Roubo começo!!")
+                local isUnarmed = weaponHash == `WEAPON_UNARMED`
 
-                                local playerId = PlayerId()
-                                local interiorIdPlayerIsIn = interiors[interiorIndexPlayerIsIn]
+                if not isUnarmed then
 
-                                local participants = {
-                                    GetPlayerServerId(playerId)
-                                }
+                    -- IsWeaponAGun
+                    local isWeaponAGun      = Citizen.InvokeNative(0x705BE297EEBDB95D, weaponHash)
+                    local isWeaponADynamite = weaponHash == `WEAPON_THROWN_DYNAMITE`
 
-                                for _, activePlayerId in pairs(GetActivePlayers()) do
-                                    if activePlayerId ~= playerId then
-                                        local activePlayerPed = GetPlayerPed(activePlayerId)
-                                        if activePlayerPed ~= 0 then
-                                            local activePlayerPedInterior = GetInteriorFromEntity(activePlayerPed)
-                                            if activePlayerPedInterior == interiorIdPlayerIsIn then
-                                                table.insert(participants, GetPlayerServerId(activePlayerId))
-                                            end
-                                        end
-                                    end
-                                end
+                    -- print('isWeaponAGun', isWeaponAGun)
+                    -- print('isWeaponADynamite', isWeaponADynamite)
 
-                                if NetworkIsSessionActive() == 1 then
-                                    TriggerServerEvent("FRP:ROBBERY:TryToStartRobbery", interiorIndexPlayerIsIn, participants)
-                                else
-                                    cAPI.notify("error", "Sessão solo!")
-                                end
-                            end
-                        else
-                            -- notify('Aguarde 10 segundos...')
-                            -- DisplayHelpTextThisFrame("wait_to_shoot", false)
-                            --TriggerEvent('FRP:Notify', 'Aguarde 10 segundos...')
-                        end
-                    else
+                    if isWeaponAGun and canUseStartPathShootUp() then
+                        notify('Atire para começar o assalto.')
+
                         if IsPedShooting(ped) then
-                        --notify('Roubo em andamento, aguarde...')
-                        -- print("Roubo em andamento, aguarde")
+                            initShootingCountdown()
+
+                            handleStartRobberyOnCurrentBank(false)
                         end
                     end
 
-                -- Block player actions if they are not an active participant
+                    if isWeaponADynamite and canUseStartPathPlantBomb() then
+                        notify('Plante a dinamite no cofre para começar o assalto.')
+
+                        if IsPedPlantingBomb(ped) then
+                            local bombObjectEntity = GetCurrentPedWeaponEntityIndex(ped, 0)
+                            
+                            -- print('is planting, hey', bombObjectEntity)
+
+                            while IsPedPlantingBomb(ped) do
+                                Wait(0)
+                            end
+
+                            -- print('waiting to fully plant')
+
+                            local onFinishPlantingBomb = function()
+
+                                -- print('onFinishPlantingBomb', onFinishPlantingBomb)
+
+                                local entityExplosionHandler = function()
+                                    -- print('exploded')
+
+                                    removeEntityExplosionHandler(entityExplosionHandler)
+
+                                    if isCurrentBankBeingRobbed() then
+                                        -- print('ack')
+
+                                        TriggerServerEvent('net.ackBankRobberySafeDoorWasExploded')
+                                    else
+                                        -- print('start')
+
+                                        handleStartRobberyOnCurrentBank(true)
+                                    end
+                                end
+
+                                addEntityExplosionHandler(entityExplosionHandler)
+                            end
+
+                            local heistInfo = HEIST_BANK_INFO[interiorIndexPlayerIsIn]
+
+                            local explodableDoorModelHash, explodableDoorPosition in heistInfo
+                        
+                            if explodableDoorModelHash and explodableDoorPosition then
+                                local entities = findEntitiesInRangeByModel(explodableDoorPosition, 1.0, explodableDoorModelHash)
+                                
+                                local explodableDoorEntity = entities[1]
+
+                                if explodableDoorEntity then
+                                    onPlayerPlantBombTestCollisionWithEntity(bombObjectEntity, explodableDoorEntity, onFinishPlantingBomb)
+                                end
+                            end
+                        end
+                    end
                 end
 
                 if isBlockedByRobbery then
-                    if interiorIndexBeingRobbed == nil then
+                    if not isCurrentBankBeingRobbed() then
                         isBlockedByRobbery = false
                         RemoveAnimDict("random@arrests@busted")
                         ClearPedTasks(ped)
                     else
                         -- DisableControlAction(0, 24, true)
-                        --  DisableControlAction(0, 25, true)
-                        --  DisableControlAction(0, 140, true)
-                        --  DisableControlAction(0, 141, true)
+                        -- DisableControlAction(0, 25, true)
+                        -- DisableControlAction(0, 140, true)
+                        -- DisableControlAction(0, 141, true)
                         -- DisableControlAction(0, 142, true)
-                        --  DisableControlAction(0, 257, true)
-                        --  DisableControlAction(0, 263, true)
-                        --   DisableControlAction(0, 264, true)
+                        -- DisableControlAction(0, 257, true)
+                        -- DisableControlAction(0, 263, true)
+                        -- DisableControlAction(0, 264, true)
 
-                        if weaponHash ~= hashUnarmed then
-                            SetCurrentPedWeapon(ped, hashUnarmed, true)
+                        if not isUnarmed then
+                            SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
                         end
+
                         if not IsEntityPlayingAnim(ped, "script_proc@robberies@homestead@lonnies_shack@deception", "hands_up_loop", 3) then
                             TaskPlayAnim(ped, "script_proc@robberies@homestead@lonnies_shack@deception", "hands_up_loop",  2.0, -2.0, -1, 67109393, 0.0, false, 1245184, false, "UpperbodyFixup_filter", false)
                         end
                     end
                 end
-                if interiorIndexPlayerIsIn == interiorIndexBeingRobbed then
-                    if secondsUntilRobberyEnds ~= nil then
-                        -- local hours = secondsUntilRobberyEnds / 3600
-                        local minutes = math.floor((secondsUntilRobberyEnds % 3600) / 60)
-                        local seconds = secondsUntilRobberyEnds % 60
-                        drawText(minutes .. " minutos e " .. seconds .. " segundos", true)
-                    end
+
+                if getCurrentReplicatedBankState('hasStarted') then
+                    local endNetworkTime = getCurrentReplicatedBankState('endNetworkTime')
+
+                    local timeToEnd__ms = endNetworkTime - GetNetworkTime()
+                    local timeToEnd__sec = timeToEnd__ms / 1000
+
+                    local minutes = math.floor((timeToEnd__sec % 3600) / 60)
+                    local seconds = timeToEnd__sec % 60
+
+                    drawText( ('%d minutos e %.0f segundos'):format(minutes, seconds), true)
                 end
             else
                 if secondsUntilAbandonRobbery ~= nil then
                     drawText("~r~Volte para dentro do banco! " .. math.floor((secondsUntilAbandonRobbery / 10)) .. " segundos", true)
                 end
             end
-            --print(secondsUntilAbandonRobbery)
+
+            -- :: continue ::
         end
     end
 )
+
+function getBankIdFromInterior(interiorId)
+    for bankId, info in pairs(HEIST_BANK_INFO) do
+        if info.interiorId == interiorId then
+            return bankId
+        end
+    end
+
+    return nil
+end
 
 function initCheckPedIsOutside()
     isParticipantOfRobbery = true
@@ -169,10 +257,13 @@ function initCheckPedIsOutside()
 
                 local ped = PlayerPedId()
 
-                local interiorIdBeingRobbed = interiors[interiorIndexBeingRobbed]
+                -- local interiorIdBeingRobbed = interiors[interiorIndexBeingRobbed]
                 local interiorIdPlayerIsIn = GetInteriorFromEntity(ped)
 
-                if interiorIdPlayerIsIn ~= interiorIdBeingRobbed then
+                local bankIdPlayerIsIn = getBankIdFromInterior(interiorIdPlayerIsIn)
+                -- local isInteriorABank = bankIdPlayerIsIn ~= nil
+
+                if gParticipatingBankId ~= bankIdPlayerIsIn then
                     if secondsUntilAbandonRobbery == nil then
                         secondsUntilAbandonRobbery = defaultSeconds
                     end
@@ -180,10 +271,8 @@ function initCheckPedIsOutside()
                     secondsUntilAbandonRobbery = secondsUntilAbandonRobbery - 1 -- Wait ms
                     if secondsUntilAbandonRobbery <= 0 then
                         if not isBlockedByRobbery then
-                            -- print("Você ficou tempo demais fora do roubo")
                             TriggerServerEvent("FRP:ROBBERY:PlayerAbandonedRobbery")
                         else
-                            -- print("Você ficou tempo demais fora do roubo blocked")
                             isBlockedByRobbery = false
                             ClearPedTasks(ped)
                         end
@@ -209,26 +298,6 @@ function initCheckPedIsOutside()
     )
 end
 
-function initSecondsCountdown(seconds)
-    -- print("got seconds", seconds)
-    secondsUntilRobberyEnds = seconds
-
-    Citizen.CreateThread(
-        function()
-            while secondsUntilRobberyEnds ~= nil do
-                Citizen.Wait(1000)
-                if secondsUntilRobberyEnds ~= nil then
-                    secondsUntilRobberyEnds = secondsUntilRobberyEnds - 1
-
-                    if secondsUntilRobberyEnds == 0 then
-                        secondsUntilRobberyEnds = nil
-                    end
-                end
-            end
-        end
-    )
-end
-
 function initShootingCountdown()
     shootingToStartCooldown = true
     seconds = 10
@@ -244,17 +313,45 @@ function initShootingCountdown()
     )
 end
 
+function handleStartRobberyOnCurrentBank(wasDynamiteUsed)
+    local playerId = PlayerId()
+    local interiorIdPlayerIsIn = interiors[interiorIndexPlayerIsIn]
+
+    local participants = {
+        GetPlayerServerId(playerId)
+    }
+
+    for _, activePlayerId in ipairs(GetActivePlayers()) do
+        if activePlayerId ~= playerId then
+            local activePlayerPed = GetPlayerPed(activePlayerId)
+            if activePlayerPed ~= 0 then
+                local activePlayerPedInterior = GetInteriorFromEntity(activePlayerPed)
+                if activePlayerPedInterior == interiorIdPlayerIsIn then
+                    table.insert(participants, GetPlayerServerId(activePlayerId))
+                end
+            end
+        end
+    end
+
+    TriggerServerEvent("FRP:ROBBERY:TryToStartRobbery", interiorIndexPlayerIsIn, participants, wasDynamiteUsed)
+end
+
 RegisterNetEvent("FRP:ROBBERY:StartRobbery")
 AddEventHandler(
     "FRP:ROBBERY:StartRobbery",
-    function(index, asParticipant, seconds)
-        interiorIndexBeingRobbed = index
+    function(index, asParticipant)
+        -- interiorIndexBeingRobbed = index
+
         if asParticipant then
+
+            gParticipatingBankId = index
+
             initCheckPedIsOutside()
-            initSecondsCountdown(seconds)
+
             cAPI.AddWantedTime(true, 30)
         end
-        TriggerEvent("FRP:TOAST:New", "alert", "O assalto acabará em " .. seconds .. " segundos")
+
+        -- TriggerEvent("FRP:TOAST:New", "alert", "O assalto acabará em " .. seconds .. " segundos")
     end
 )
 
@@ -262,7 +359,7 @@ RegisterNetEvent("FRP:ROBBERY:StartRobberyAsBlocked")
 AddEventHandler(
     "FRP:ROBBERY:StartRobberyAsBlocked",
     function(index)
-        interiorIndexBeingRobbed = index
+        -- interiorIndexBeingRobbed = index
         isBlockedByRobbery = true
         initCheckPedIsOutside()
 
@@ -276,14 +373,15 @@ RegisterNetEvent("FRP:ROBBERY:EndRobbery")
 AddEventHandler(
     "FRP:ROBBERY:EndRobbery",
     function()
-        interiorIndexBeingRobbed = nil
+        -- interiorIndexBeingRobbed = nil
 
         isParticipantOfRobbery = false
         isBlockedByRobbery = false
 
-        secondsUntilRobberyEnds = nil
         secondsUntilAbandonRobbery = nil
         shootingToStartCooldown = false
+
+        gParticipatingBankId = nil
     end
 )
 
@@ -340,16 +438,115 @@ function notify(_message)
     Citizen.InvokeNative(0xE9990552DEC71600)
 end
 
--- function drawText(text)
---     SetTextFont(0)
---     SetTextProportional(1)
---     SetTextScale(0.0, 0.3)
---     SetTextColour(128, 128, 128, 255)
---     SetTextDropshadow(0, 0, 0, 0, 255)
---     SetTextEdge(1, 0, 0, 0, 255)
---     SetTextDropShadow()
---     SetTextOutline()
---     SetTextEntry("STRING")
---     AddTextComponentString(text)
---     DrawText(0.5, 0.5)
--- end
+function onPlayerPlantBombTestCollisionWithEntity(bombObjectEntity, testCollsionEntity, onFinish)
+    local playerPed = PlayerPedId()
+
+    local wasCompletlyPlanted = not IsEntityAttachedToEntity(bombObjectEntity, playerPed)
+
+    if not wasCompletlyPlanted then
+        return
+    end
+
+    onPlayerCompletyPlantBomb(bombObjectEntity, testCollsionEntity, onFinish)
+end
+
+function onPlayerCompletyPlantBomb(bombObjectEntity, testCollsionEntity, onFinish)
+    local playerPed = PlayerPedId()
+
+    if not IsEntityTouchingEntity(bombObjectEntity, testCollsionEntity) then
+        return
+    end
+
+    if onFinish then
+        onFinish()
+    end
+end
+
+function findEntitiesInRangeByModel(position, range, modelHash)
+    local itemSet = CreateItemset(true)
+
+    local size = Citizen.InvokeNative(0x59B57C4B06531E1E, position, range, itemSet, 3, Citizen.ResultAsInteger())
+    -- number xPos, number yPox, number zPos, float distance, int itemSet, int entityType
+
+    local ret = { }
+
+    if size > 0 then
+        for index = 0, size - 1 do
+            local entity = GetIndexedItemInItemset(index, itemSet)
+
+            if GetEntityModel(entity) == modelHash then
+                table.insert(ret, entity)
+            end
+        end
+    end
+
+    if IsItemsetValid(itemSet) then
+        DestroyItemset(itemSet)
+    end
+
+    return ret
+end
+
+local gIsProcessingEntityExplosionEvent = false
+
+local gEntityExplosionHandlers = { }
+
+function addEntityExplosionHandler(handler)
+    table.insert(gEntityExplosionHandlers, handler)
+
+    processEntityExplosionEvent()
+end
+
+function removeEntityExplosionHandler(toRemoveHandler)
+    for i, handler in ipairs(gEntityExplosionHandlers) do
+        if handler == toRemoveHandler then
+            table.remove(gEntityExplosionHandlers, i)
+            break
+        end
+    end
+end
+
+function processEntityExplosionEvent()
+    if gIsProcessingEntityExplosionEvent then
+        return
+    end
+
+    gIsProcessingEntityExplosionEvent = true
+
+    CreateThread(function()
+        while gIsProcessingEntityExplosionEvent do
+            local size = GetNumberOfEvents(0)
+    
+            if size > 0 then
+                for i = 0, size - 1 do
+                    local eventAtIndex = GetEventAtIndex(0, i)
+    
+                    if eventAtIndex == `EVENT_ENTITY_EXPLOSION` then
+    
+                        local eventData = exports['research']:DataViewNativeGetEventData(0, i, 6)
+    
+                        local eventPerpetrator = eventData['0']
+                        -- local unk              = eventData['2']
+                        local eventWeaponHash  = eventData['4']
+    
+                        local playerPedId = PlayerPedId()
+    
+                        if eventPerpetrator == playerPedId then
+                            for _, handler in ipairs(gEntityExplosionHandlers) do
+                                handler()
+                            end
+                        end
+                    end
+                end
+            end
+    
+            if #gEntityExplosionHandlers <= 0 then
+                break
+            end
+    
+            Citizen.Wait(0)
+        end
+    
+        gIsProcessingEntityExplosionEvent = false
+    end)
+end
