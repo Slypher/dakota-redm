@@ -17,7 +17,11 @@ function initHandheldItem(itemId)
 
     local handheldUnknown = 'PITCH_FORKS'
 
-    -- Melhorar isso :P
+    -- #TODO
+    -- A defiinição de qual loco, animação ou objeto que devem ser criados/iniciados
+    -- não deveria ser feito por esse script
+    -- deve ser feito por quaisquer script que derivem desse, como
+    -- por exemplo o `handheld_shovel_item`
     if itemId == 'pa' then
         handheldModelHash = `MP005_P_COLLECTORSHOVEL01`
     end
