@@ -14,7 +14,7 @@ Citizen.CreateThread(
     function()
         while true do
             Citizen.Wait(5000)
-     
+            
             if IsPlayerPlaying(PlayerId()) and needs then
                 local ped = PlayerPedId()
 
@@ -22,7 +22,14 @@ Citizen.CreateThread(
                 local vhunger = 0
 
                 if IsPedOnFoot(ped) then
-                    local factor = math.min(cAPI.getSpeed(), 10)
+                    local pedSpeed = cAPI.getSpeed()
+
+                    if pedSpeed <= 1.0 then
+                        pedSpeed = 1.0
+                    end
+
+                    local factor = math.min(pedSpeed, 10)
+
                     vthirst = vthirst + 0.5 * factor
                     vhunger = vhunger + 0.5 * factor
                 end
