@@ -11,7 +11,7 @@ AddEventHandler(
         --   if cAPI.hasGroupOrInheritance('trooper') or cAPI.hasGroupOrInheritance('sheriff') then
         local blip = Citizen.InvokeNative(0x45F13B7E0A15C880, 408396114, targetCoords.x, targetCoords.y, targetCoords.z, 60.0)
         Citizen.InvokeNative(0x9CB1A1623062F402, blip, "Disparo de Tiro")
-        Wait(8000)
+        Wait(20000)
         RemoveBlip(blip)
         -- end
     end
@@ -24,7 +24,7 @@ AddEventHandler(
     function(targetCoords)
         local blip = Citizen.InvokeNative(0x45F13B7E0A15C880, 408396114, targetCoords.x, targetCoords.y, targetCoords.z, 60.0)
         Citizen.InvokeNative(0x9CB1A1623062F402, blip, "Denuncia")
-        Wait(8000)
+        Wait(20000)
         RemoveBlip(blip)
     end
 )
