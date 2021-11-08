@@ -567,16 +567,18 @@ function computeSlots(table, asPrimary)
 
                         if not HasPedGotWeapon(ped, weaponHash, false) then
 
-                            -- Zerar todos os tipos de munições para essa arma. Vai ser devidamente setada logo após.
-                            for _, ammoType in ipairs(WEAPON_INFO_DATABASE[weaponType]?.useable_ammo_types) do
-                                local ammoHash = GetHashKey(ammoType)
+                            if weaponInfo?.useable_ammo_types then
+                                -- Zerar todos os tipos de munições para essa arma. Vai ser devidamente setada logo após.
+                                for _, ammoType in ipairs(weaponInfo.useable_ammo_types) do
+                                    local ammoHash = GetHashKey(ammoType)
 
-                                -- GetPedAmmoByType
-                                local ammoOfType = Citizen.InvokeNative(0x39D22031557946C1, ped, ammoHash, Citizen.ResultAsInteger())
+                                    -- GetPedAmmoByType
+                                    local ammoOfType = Citizen.InvokeNative(0x39D22031557946C1, ped, ammoHash, Citizen.ResultAsInteger())
 
-                                if ammoOfType > 0 then
-                                    -- RemoveAmmoFromPedByType
-                                    Citizen.InvokeNative(0xB6CFEC32E3742779, ped, ammoHash, ammoOfType, `REMOVE_REASON_DEBUG`)
+                                    if ammoOfType > 0 then
+                                        -- RemoveAmmoFromPedByType
+                                        Citizen.InvokeNative(0xB6CFEC32E3742779, ped, ammoHash, ammoOfType, `REMOVE_REASON_DEBUG`)
+                                    end
                                 end
                             end
 
