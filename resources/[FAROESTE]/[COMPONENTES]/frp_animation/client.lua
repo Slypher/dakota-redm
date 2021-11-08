@@ -178,27 +178,44 @@ local Bandana = false
 RegisterCommand(
     "bandana",
     function(source, args, rawCommand)
-        RequestAnimDict("mech_inventory@clothing@bandana")
-        while not HasAnimDictLoaded("mech_inventory@clothing@bandana") do
-            Citizen.Wait(100)
-        end
-        if not cAPI.IsWanted() then
-            if not Bandana then
-                TaskPlayAnim(PlayerPedId(), "mech_inventory@clothing@bandana", "NECK_2_FACE_RH", 8.0, 8.0, 2300, 31, 0, true, 0, false, 0, false)
-                Wait(2000)
-                Citizen.InvokeNative(0x1902C4CFCC5BE57C, PlayerPedId(), 879715242)
-                Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, false)
-                Bandana = true
-            else
-                TaskPlayAnim(PlayerPedId(), "mech_inventory@clothing@bandana", "NECK_2_FACE", 8.0, 8.0, 2300, 31, 0, true, 0, false, 0, false)
-                Wait(2000)
-                Citizen.InvokeNative(0x1902C4CFCC5BE57C, PlayerPedId(), -972364774)
-                Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, false)
-                Bandana = false
-            end
-        else
+        if cAPI.IsWanted() then
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode retirar a bandana. ", 10000)
+            return
         end
+
+        local playerPed = PlayerPedId()
+
+        local bandanaMale   = 0xC580526C
+        local bandanaFemale = 0xE58F5BD4
+
+        local defaultBandanaComponent = IsPedMale(playerPed) == 1 and bandanaMale or bandanaFemale
+
+        if not Bandana then
+            -- Animação.
+            Citizen.InvokeNative(0xAE72E7DF013AAA61, playerPed, GetHashKey("KIT_BANDANA"), GetHashKey("BANDANA_ON_RIGHT_HAND"), 1, 0, -1082130432)
+
+            Wait(700)
+
+            -- Adicionar o componente
+            Citizen.InvokeNative(0xD3A7B003ED343FD9, playerPed, defaultBandanaComponent, true, true, true)
+
+            -- Levantar a bandana, face up.
+            Citizen.InvokeNative(0x66B957AAC2EAAEAB, playerPed, defaultBandanaComponent, -1829635046, 0, true, 1)
+
+            Bandana = true
+        else
+            -- Animação.
+            Citizen.InvokeNative(0xAE72E7DF013AAA61, playerPed, GetHashKey("KIT_BANDANA"), GetHashKey("BANDANA_OFF_RIGHT_HAND"), 1, 0, -1082130432)
+
+            Wait(700)
+
+            -- Remover o wearableState, descer a bandana.
+            Citizen.InvokeNative(0x66B957AAC2EAAEAB, playerPed, defaultBandanaComponent, `BASE`, 0, true, 1)
+
+            Bandana = false
+        end
+
+        Citizen.InvokeNative(0xCC8CA3E88256E58F, playerPed, 0, 1, 1, 1, false)
     end
 )
 ----------------------------------------------------------------------------------------------------------------------------------
