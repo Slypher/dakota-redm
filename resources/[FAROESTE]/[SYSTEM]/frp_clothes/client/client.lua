@@ -180,7 +180,7 @@ Citizen.CreateThread(
                     table.insert(offhand_m, v.Hash)
                 elseif v.category == "beltbuckle" then
                     table.insert(beltbuckle_m, v.Hash)
-                elseif v.category == "shirts" then
+                elseif v.category == "shirts_full" then
                     table.insert(shirts_m, v.Hash)
                 elseif v.category == "vests" then
                     table.insert(vests_m, v.Hash)
@@ -190,7 +190,7 @@ Citizen.CreateThread(
                     table.insert(masks_m, v.Hash)
                 elseif v.category == "coats" then
                     table.insert(coats_m, v.Hash)
-                elseif v.category == "coats2" then
+                elseif v.category == "coats_closed" then
                     table.insert(coats2_m, v.Hash)
                 elseif v.category == "boots" then
                     table.insert(boots_m, v.Hash)
@@ -326,11 +326,34 @@ end
 RegisterNUICallback(
     "rotate",
     function(data, cb)
-        local VAR = 45
+        local VAR = 15.0
 
         local playerPed = PlayerPedId()
 
-        TaskAchieveHeading(playerPed, GetEntityHeading(playerPed) + (data["key"] ~= "left" and VAR or -(VAR)), 0)
+        local addHeading = data["key"] ~= "left" and VAR or -(VAR)
+
+        print('addHeading', addHeading)
+
+        local currHeading = GetEntityHeading(playerPed)
+
+        print('currHeading', currHeading)
+
+        local desiredHeading = GetEntityHeading(playerPed) + addHeading
+
+        print('desiredHeading', desiredHeading)
+
+        if desiredHeading > 360 then
+            desiredHeading = desiredHeading - 360.0
+        end
+
+        if desiredHeading < 0 then
+            desiredHeading = desiredHeading + 360.0
+        end
+
+        desiredHeading = desiredHeading + 0.0001
+
+        TaskAchieveHeading(playerPed, desiredHeading, 1000)
+        -- SetPedDesiredHeading(playerPed, desiredHeading)
 
         cb("ok")
     end
@@ -626,10 +649,10 @@ RegisterNUICallback(
         if tonumber(data.id) == 0 then
             num = 0
             CoatsUsing = num
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- Set target category, here the hash is for hats
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `coats`, 0) -- Set target category, here the hash is for hats
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xE06D30CE, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `coats_closed`, 0) -- cloaks REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
             if sex == "mp_male" then
                 local num = tonumber(data.id)
@@ -987,7 +1010,10 @@ RegisterNUICallback(
         if tonumber(data.id) == 0 then
             num = 0
             cloaksUsing = num
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3C1A74CD, 0) -- cloaks REMOVE
+
+            print('cloack is 0')
+
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `cloaks`, 0) -- cloaks REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
             if sex == "mp_male" then
@@ -1011,10 +1037,10 @@ RegisterNUICallback(
         if tonumber(data.id) == 0 then
             num = 0
             coats2Using = num
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xE06D30CE, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `coats`, 0) -- cloaks REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x662AC34, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `coats_closed`, 0) -- cloaks REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
             if sex == "mp_male" then
                 local num = tonumber(data.id)
@@ -1655,3 +1681,123 @@ function GetRaycastHitPositionFromNUIMouse(w, h, mouseX, mouseY)
     
     return _, hit, pos, surface, entity
 end
+
+-- local CATEGORIES = {
+    -- "boot_accessories",
+    -- "pants",
+    -- "cloaks",
+    -- "hats",
+    -- "vests",
+    -- "chaps",
+    -- "shirts",
+    -- "shirts_full",
+    -- "badges",
+    -- "masks",
+    -- "spats",
+    -- "neckwear",
+    -- "boots",
+    -- "accessories",
+    -- "jewelry_rings_right",
+    -- "jewelry_rings_left",
+    -- "jewelry_bracelets",
+    -- "gauntlets",
+    -- "neckties",
+    -- "holsters_knife",
+    -- "talisman_holster",
+    -- "loadouts",
+    -- "suspenders",
+    -- "talisman_satchel",
+    -- "satchels",
+    -- "gunbelts",
+    -- "belts",
+    -- "belt_buckles",
+    -- "holsters_left",
+    -- "holsters_right",
+    -- "ammo_rifles",
+    -- "talisman_wrist",
+    -- "coats",
+    -- "coats_closed",
+    -- "ponchos",
+    -- "armor",
+    -- "eyewear",
+    -- "gloves",
+    -- "talisman_belt",
+    -- "ammo_pistols",
+    -- "holsters_crossdraw",
+    -- "aprons",
+    -- "skirts",
+    -- "MASKS_LARGE",
+    -- "heads",
+    -- "hair",
+    -- "BODIES_LOWER",
+    -- "teeth",
+    -- "BODIES_UPPER",
+    -- "eyes",
+    -- "beards_chin",
+    -- "beards_chops",
+    -- "beards_mustache",
+    -- "gunbelt_accs",
+    -- "hair_accessories",
+    -- "dresses",
+}
+
+-- local CATEGORY_HASH_TO_NAME = { }
+
+-- do
+--     for _, categoryName in ipairs(CATEGORIES) do
+--         CATEGORY_HASH_TO_NAME[GetHashKey(categoryName)] = categoryName
+--     end
+-- end
+
+-- CreateThread(function()
+
+--     local jsonComponents = json.decode(json.encode(COMPONENTS))
+
+--     local playerPed = PlayerPedId()
+
+--     -- GetMetaPedType
+--     -- local pedMetapedType = Citizen.InvokeNative(0xEC9A1261BF0CE510, playerPed, Citizen.ResultAsInteger())
+
+--     -- print('pedMetapedType', pedMetapedType)
+
+--     print('9CDC866A', Citizen.InvokeNative(0x5FF9A878C3D115B8, tonumber('0x9CDC866A'), 0, true))
+
+--     local pedMetapedTypeMale = 0 -- MPT_MALE
+--     local pedMetapedTypeFemale = 1 -- MPT_FEMALE
+
+--     local outIndex = 1
+--     local outJson = { }
+
+--     local left = 1
+
+--     for i, entry in pairs(jsonComponents) do
+
+--         if left <= 0 then
+--             break
+--         end
+
+--         local shopItemCategoryHashAssumed = entry.Hash
+
+--         local shopItemHash = tonumber('0x' .. shopItemCategoryHashAssumed)
+
+--         -- GetPedComponentCategory
+--         local shopItemCategoryHash = Citizen.InvokeNative(0x5FF9A878C3D115B8, shopItemHash, pedMetapedTypeMale, true)
+--                                     or Citizen.InvokeNative(0x5FF9A878C3D115B8, shopItemHash, pedMetapedTypeFemale, true)
+
+--         if not shopItemCategoryHash then
+--             goto continue
+--         end
+
+--         local shopItemCategoryName = CATEGORY_HASH_TO_NAME[shopItemCategoryHash]
+
+--         if not shopItemCategoryName then
+--             goto continue
+--         end
+
+--         print( ('{ Hash = \'%s\', category = \'%s\' },'):format(shopItemCategoryHashAssumed, shopItemCategoryName) )
+
+--         outIndex = outIndex + 1
+
+--         :: continue ::
+--     end
+-- end)

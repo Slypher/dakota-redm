@@ -9,7 +9,7 @@ client_scripts{
     'config/mp_male.lua',
 	'config/mp_female.lua',
     'client/client.lua',
-    'client/GetPedComponentAtIndex.js'
+    'client/GetPedComponentAtIndex.js',
 }
 
 server_scripts{
