@@ -1352,6 +1352,12 @@ Citizen.CreateThread(
                 position = vec3(-767.693, -1294.545, 43.041),
                 heading = 286.07,
             },
+
+            -- Strawberry
+            {
+                position = vec3(-1820.330,-367.655,166.506),
+                heading = -119.0,
+            },
         }
 
         while true do
@@ -1739,7 +1745,7 @@ end
     -- "gunbelt_accs",
     -- "hair_accessories",
     -- "dresses",
-}
+-- }
 
 -- local CATEGORY_HASH_TO_NAME = { }
 
