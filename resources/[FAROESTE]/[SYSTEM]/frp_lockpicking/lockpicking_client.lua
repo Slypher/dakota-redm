@@ -10,7 +10,6 @@ local gui = false
 local currentlyInGame = false
 local passed = false
 
-<<<<<<< HEAD
 RegisterCommand('lockpick', function()
   lockpick(100,50,10,5)
 end)
@@ -24,7 +23,6 @@ function lockpick(pickhealth,pickdamage,pickPadding,distance)
     Wait(400)
     if IsEntityDead(PlayerPedId()) then 
       closeGui()
-=======
 local doorHashBeingLockpicked
 
 RegisterNetEvent("FRP:LOCKPICK:StartLockpicking")
@@ -56,7 +54,6 @@ function lockpick(pickhealth, pickdamage, pickPadding, distance)
         if IsEntityDead(PlayerPedId()) then
             closeGui()
         end
->>>>>>> 1d2abd1b7bbbe0754e106a07faea9f87e272302d
     end
 
     if passed then
@@ -136,9 +133,9 @@ local currentlyInGame = false
 local passed = false
 
 
-RegisterCommand('lockpick', function()
-  lockpick(100,50,10,5)
-end)
+-- RegisterCommand('lockpick', function()
+--   lockpick(100,50,10,5)
+-- end)
 
 local doorHashBeingLockpicked
 
@@ -146,7 +143,7 @@ RegisterNetEvent("FRP:LOCKPICK:StartLockpicking")
 AddEventHandler(
     "FRP:LOCKPICK:StartLockpicking",
     function()
-        local doorHash = exports.vp_doorcontainer:GetRegisteredDoorHashInRadius(1.5, 1)
+        local doorHash = exports.frp_doorcontainer:GetRegisteredDoorHashInRadius(1.5, 1)
 
         if doorHash then
             TriggerServerEvent("OutPost:InvadeOutpostAlert")

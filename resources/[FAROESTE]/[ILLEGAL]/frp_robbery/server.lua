@@ -4,33 +4,6 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
-local data = {
-    -- [1] = {
-    --     staticName = "Banco de BlackWater",
-    --     staticReward = 35000,
-    --     staticSecondsToReward = 10 * 60,
-    --     staticMaxParticipants = 3
-    -- },
-    [2] = {
-        staticName = "Banco de Saint Dennis",
-        staticReward = 50000,
-        staticSecondsToReward = 10 * 60,
-        staticMaxParticipants = 3
-    },
-    [3] = {
-        staticName = "Banco Rhodes",
-        staticReward = 35000,
-        staticSecondsToReward = 10 * 60,
-        staticMaxParticipants = 3
-    },
-    [4] = {
-        staticName = "Banco Valentine",
-        staticReward = 50000,
-        staticSecondsToReward = 10 * 60,
-        staticMaxParticipants = 3
-    }
-}
-
 local cCooldown = 30
 local cooldownEndsAtTimeStamp = 0
 
@@ -73,16 +46,22 @@ AddEventHandler(
             return
         end
 
+        local heistInfo = HEIST_BANK_INFO[index]
+
+        if heistInfo.isDisabled then
+            return
+        end
+
         indexBeingRobbed = index
         indexBeingRobbed_playerSourceWhoStarted = _source
 
         local numParticipants = 0
-        local maxParticipants = data[index].staticMaxParticipants
+        local maxParticipants = heistInfo.staticMaxParticipants
         local numParticipantsToCheck = #participants
 
         local bankId = index
 
-        local endingTime = data[indexBeingRobbed].staticSecondsToReward
+        local endingTime = heistInfo.staticSecondsToReward
 
         if wasDynamiteUsed then
             endingTime += INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS
@@ -120,7 +99,7 @@ AddEventHandler(
             isParticipant = nil
         end
 
-        API.NotifyUsersWithGroup("trooper", "Um assalto começou no banco " .. data[index].staticName)
+        API.NotifyUsersWithGroup("trooper", "Um assalto começou no banco " .. HEIST_BANK_INFO[index].staticName)
     end
 )
 
@@ -183,7 +162,7 @@ function endRobberyGiveReward()
         local Character = User:getCharacter()
 
         if Character ~= nil then
-            local maxRewardInDollars = data[indexBeingRobbed].staticReward
+            local maxRewardInDollars = HEIST_BANK_INFO[indexBeingRobbed].staticReward
 
             if getReplicatedBankState(bankId, 'hasSafeExploded') then
                 maxRewardInDollars += 25000
@@ -250,21 +229,13 @@ RegisterNetEvent('net.ackBankRobberySafeDoorWasExploded', function()
     
     local bankId = indexBeingRobbed_participants[playerId]
 
-    -- print('ackBankRobberySafeDoorWasExploded :: 0', bankId)
-
     if not bankId then
         return
     end
 
-    -- print('ackBankRobberySafeDoorWasExploded :: 1')
-
     if not getReplicatedBankState(bankId, 'hasStarted') then
         return
     end
-
-    -- print('ackBankRobberySafeDoorWasExploded :: 2')
-
-    -- Verificar se o banco tem um cofre.
 
     local heistInfo = HEIST_BANK_INFO[bankId]
 
@@ -277,8 +248,6 @@ RegisterNetEvent('net.ackBankRobberySafeDoorWasExploded', function()
     if getReplicatedBankState(bankId, 'hasSafeExploded') then
         return
     end
-
-    -- print('ackBankRobberySafeDoorWasExploded :: 3')
 
     setReplicatedBankState(bankId, 'hasSafeExploded', true)
 
@@ -326,7 +295,7 @@ function clearBankState(bankId)
 end
 
 function clearBankStates()
-    for bankId, _ in pairs(data) do
+    for bankId, _ in pairs(HEIST_BANK_INFO) do
         clearBankState(bankId)
     end
 end

@@ -66,9 +66,8 @@ local doorStates = {
     [2089945615] = {isOpen = true, pair = 2817024187},
     [2817024187] = {isOpen = true, pair = 2089945615},
     [3886827663] = {isOpen = true, pair = 2642457609},
-    [1751238140] = {isOpen = true},
+    [1751238140] = { isOpen = false, canInteract = false },
     [531022111] = {isOpen = true},
-    [2058564250] = {isOpen = true},
     [1634115439] = {isOpen = true, pair = 3445627749},
     [3445627749] = {isOpen = true, pair = 1634115439},
     -- DP SAINT DENIS
@@ -102,7 +101,12 @@ local doorStates = {
     [3277501452] = { isOpen = true}, -- Porta da loja de roupas de BlackWater.
 
     -- Portas usados no frp_robbery.
+    -- ##
+    --  Banco de Rhodes:
+    [2058564250] = { isOpen = false }, -- Primeira porta a direita da recepção.
     [3483244267] = { isOpen = false, canInteract = false },
+    --
+    -- ##
 }
 
 -- TALVEZ MUDAR O SISTEMA PARA O CLIENT SÓ PEDIR O SYNC
@@ -249,6 +253,7 @@ Citizen.CreateThread(
                 {
                     -- Portas usados no frp_robbery.
                     3483244267,
+                    2058564250
                 }
             )
 
@@ -615,6 +620,8 @@ Citizen.CreateThread(
 
                 return closestDoorHash
             end
+
+            exports('GetRegisteredDoorHashInRadius', GetRegisteredDoorHashInRadius)
 
             AddEventHandler(
                 "onResourceStop",

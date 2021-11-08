@@ -12,21 +12,6 @@ API = Tunnel.getInterface("API")
 --     false
 -- )
 
-local interiors = {
-    --   [1] = 72962, -- BANCO BLACKWATER
-    [2] = 42754, -- BANCO SAINT DENNIS
-    [3] = 29442 -- BANCO RHODES
-    --  [4] = 12290 -- BANCO VALENTINE
-
-    --[[
-        2644.385,-1299.759,52.204 Saint dennis.
-        1293.334,-1298.951,77.600 Rhodes.
-        -817.363,-1273.928,43.605 Black Water.
-        -307.966,769.112,118.991 Valentine.
-    ]]
-}
-
--- local interiorIndexBeingRobbed = nil
 local interiorIndexPlayerIsIn = nil
 
 local isParticipantOfRobbery = false
@@ -48,9 +33,9 @@ Citizen.CreateThread(
             local interiorIdPlayerIsIn = GetInteriorFromEntity(ped)
 
             if interiorIdPlayerIsIn ~= 0 then
-                for index, interiorId in pairs(interiors) do
-                    if interiorIdPlayerIsIn == interiorId then
-                        interiorIndexPlayerIsIn = index
+                for bankId, bankInfo in ipairs(HEIST_BANK_INFO) do
+                    if interiorIdPlayerIsIn == bankInfo.interiorId then
+                        interiorIndexPlayerIsIn = bankId
                     end
                 end
             else
@@ -69,31 +54,21 @@ function isCurrentBankBeingRobbed()
 end
 
 function canUseStartPathShootUp()
-    -- print('canUseStartPathShootUp :: 0')
-
     if isCurrentBankBeingRobbed() then
         return false
     end
-
-    -- print('canUseStartPathShootUp :: 1')
 
     if shootingToStartCooldown then
         return false
     end
 
-    -- print('canUseStartPathShootUp :: 2')
-
     return true
 end
 
 function canUseStartPathPlantBomb()
-    -- print('canUseStartPathPlantBomb :: 1')
-
     if isCurrentBankBeingRobbed() and getCurrentReplicatedBankState('hasSafeExploded') then
         return false
     end
-
-    -- print('canUseStartPathPlantBomb :: 0')
 
     return true
 end
@@ -121,9 +96,6 @@ Citizen.CreateThread(
                     local isWeaponAGun      = Citizen.InvokeNative(0x705BE297EEBDB95D, weaponHash)
                     local isWeaponADynamite = weaponHash == `WEAPON_THROWN_DYNAMITE`
 
-                    -- print('isWeaponAGun', isWeaponAGun)
-                    -- print('isWeaponADynamite', isWeaponADynamite)
-
                     if isWeaponAGun and canUseStartPathShootUp() then
                         notify('Atire para começar o assalto.')
 
@@ -139,31 +111,19 @@ Citizen.CreateThread(
 
                         if IsPedPlantingBomb(ped) then
                             local bombObjectEntity = GetCurrentPedWeaponEntityIndex(ped, 0)
-                            
-                            -- print('is planting, hey', bombObjectEntity)
 
                             while IsPedPlantingBomb(ped) do
                                 Wait(0)
                             end
 
-                            -- print('waiting to fully plant')
-
                             local onFinishPlantingBomb = function()
 
-                                -- print('onFinishPlantingBomb', onFinishPlantingBomb)
-
                                 local entityExplosionHandler = function()
-                                    -- print('exploded')
-
                                     removeEntityExplosionHandler(entityExplosionHandler)
 
                                     if isCurrentBankBeingRobbed() then
-                                        -- print('ack')
-
                                         TriggerServerEvent('net.ackBankRobberySafeDoorWasExploded')
                                     else
-                                        -- print('start')
-
                                         handleStartRobberyOnCurrentBank(true)
                                     end
                                 end
@@ -186,6 +146,12 @@ Citizen.CreateThread(
                             end
                         end
                     end
+                else
+                    -- UilogClearCachedObjective
+                    -- Citizen.InvokeNative(0xDFF0D417277B41F8)
+
+                    -- UilogClearHasDisplayedCachedObjective
+                    -- Citizen.InvokeNative(0xA3108D6981A5CADB)
                 end
 
                 if isBlockedByRobbery then
@@ -257,7 +223,6 @@ function initCheckPedIsOutside()
 
                 local ped = PlayerPedId()
 
-                -- local interiorIdBeingRobbed = interiors[interiorIndexBeingRobbed]
                 local interiorIdPlayerIsIn = GetInteriorFromEntity(ped)
 
                 local bankIdPlayerIsIn = getBankIdFromInterior(interiorIdPlayerIsIn)
@@ -315,7 +280,7 @@ end
 
 function handleStartRobberyOnCurrentBank(wasDynamiteUsed)
     local playerId = PlayerId()
-    local interiorIdPlayerIsIn = interiors[interiorIndexPlayerIsIn]
+    local interiorIdPlayerIsIn = HEIST_BANK_INFO[interiorIndexPlayerIsIn].interiorId
 
     local participants = {
         GetPlayerServerId(playerId)
@@ -340,8 +305,6 @@ RegisterNetEvent("FRP:ROBBERY:StartRobbery")
 AddEventHandler(
     "FRP:ROBBERY:StartRobbery",
     function(index, asParticipant)
-        -- interiorIndexBeingRobbed = index
-
         if asParticipant then
 
             gParticipatingBankId = index
@@ -359,7 +322,6 @@ RegisterNetEvent("FRP:ROBBERY:StartRobberyAsBlocked")
 AddEventHandler(
     "FRP:ROBBERY:StartRobberyAsBlocked",
     function(index)
-        -- interiorIndexBeingRobbed = index
         isBlockedByRobbery = true
         initCheckPedIsOutside()
 
@@ -373,8 +335,6 @@ RegisterNetEvent("FRP:ROBBERY:EndRobbery")
 AddEventHandler(
     "FRP:ROBBERY:EndRobbery",
     function()
-        -- interiorIndexBeingRobbed = nil
-
         isParticipantOfRobbery = false
         isBlockedByRobbery = false
 
