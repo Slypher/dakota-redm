@@ -61,6 +61,12 @@ WEAPON_INFO_DATABASE = {
         max_ammo_in_clip = 1,
         useable_ammo_types = { 'ammo_rifle', 'ammo_rifle_express', 'ammo_rifle_express_explosive', 'ammo_rifle_high_velocity', 'ammo_rifle_split_point', 'ammo_rifle_varmint' },
     },
+    ['weapon_rifle_varmint'] = {
+        group = 'group_rifle',
+        max_ammo = 100,
+        max_ammo_in_clip = 14,
+        useable_ammo_types = { 'ammo_22', 'ammo_rifle_varmint' },
+    },
 
     ['weapon_sniperrifle_carcano'] = {
         group = 'group_sniper',
