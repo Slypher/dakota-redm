@@ -478,7 +478,7 @@ Citizen.CreateThread(
                                     end
                                 end
 
-                                if canInteract and HasEntityClearLosToEntityInFront(ped, doorEntity, 0) and not playingUnlockAnimation then
+                                if (canInteract == nil or canInteract == true) and HasEntityClearLosToEntityInFront(ped, doorEntity, 0) and not playingUnlockAnimation then
                                     if isOpen == true then
                                         PromptSetActiveGroupThisFrame(prompt_group_close, CreateVarString(10, "LITERAL_STRING", "Porta"))
 
