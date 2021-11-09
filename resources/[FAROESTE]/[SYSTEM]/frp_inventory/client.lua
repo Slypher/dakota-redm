@@ -37,9 +37,7 @@ Citizen.CreateThread(
             end
 
             for controlHash, hotbarSlot in pairs(HOTBARSLOT_FROM_CONTROLHASH) do
-                DisableControlAction(controlHash, true)
-
-                if IsDisabledControlJustPressed(0, controlHash) then
+                if IsControlJustPressed(0, controlHash) then
                     SendNUIMessage(
                         {
                             type = 'setActiveHotbarSlot',

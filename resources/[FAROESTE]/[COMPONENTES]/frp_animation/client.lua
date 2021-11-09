@@ -1299,10 +1299,10 @@ local controlsorder = {
     -- 0xCEFD9220,
     -- 0x760A9C6F,
     -- 0x760A9C6F,
-    0x05CA7C52,
-    0x6319DB71,
-    0xA65EBAB4,
-    0xDEB34313
+    `INPUT_EMOTE_TWIRL_GUN_VAR_B`,
+    `INPUT_EMOTE_TWIRL_GUN_VAR_A`,
+    `INPUT_EMOTE_TWIRL_GUN_VAR_D`,
+    `INPUT_EMOTE_TWIRL_GUN_VAR_C`
     -- 0x760A9C6F J
     ---
     -- 0x13C42BB2,
@@ -1614,12 +1614,31 @@ end
 
 function nextpreviouspromptsforgroup(groupIndex, group)
     local prompt = PromptRegisterBegin()
-    PromptSetControlAction(prompt, 0x07CE1E61)
-    if groupIndex > 1 then
-        PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", "voltar"))
-    else
-        PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", "fechar"))
+    
+    local hasPrevious = groupIndex > 1
+    local hasNext = groupIndex < #groups
+
+    local promptTextLeft = 'Voltar'
+    local promptTextRight = 'Proximo'
+
+    if not hasPrevious then
+        promptTextLeft = 'Fechar'
     end
+
+    if not hasNext then
+        promptTextRight = nil
+    end
+
+    local promptText = ('%s%s'):format(promptTextLeft or '', promptTextRight == nil and '' or ('/' .. promptTextRight) )
+
+    PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", promptText))
+
+    PromptSetControlAction(prompt, `INPUT_FRONTEND_LEFT`)
+
+    if hasNext then
+        PromptSetControlAction(prompt, `INPUT_FRONTEND_RIGHT`)
+    end
+
     PromptSetEnabled(prompt, true)
     PromptSetVisible(prompt, true)
     PromptSetStandardMode(prompt, true)
@@ -1627,19 +1646,6 @@ function nextpreviouspromptsforgroup(groupIndex, group)
 
     PromptRegisterEnd(prompt)
     table.insert(prompts, prompt)
-
-    if groupIndex < #groups then
-        local prompt = PromptRegisterBegin()
-        PromptSetControlAction(prompt, 0xF84FA74F)
-        PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", "proximo"))
-        PromptSetEnabled(prompt, true)
-        PromptSetVisible(prompt, true)
-        PromptSetStandardMode(prompt, true)
-        PromptSetGroup(prompt, group)
-        PromptRegisterEnd(prompt)
-
-        table.insert(prompts, prompt)
-    end
 end
 
 Citizen.CreateThread(
@@ -1656,7 +1662,7 @@ Citizen.CreateThread(
                     activeGroupIndex = 1
                 end
             else
-                -- PromptSetActiveGroupThisFrame(groups[activeGroupIndex].prompt_group, groups[activeGroupIndex].name)
+
                 PromptSetActiveGroupThisFrame(groups[activeGroupIndex].prompt_group, CreateVarString(10, "LITERAL_STRING", "Emotes " .. activeGroupIndex .. "/" .. #groups))
 
                 disablecontrols()
@@ -1665,8 +1671,8 @@ Citizen.CreateThread(
                     activeGroupIndex = 0
                 end
 
-                if IsControlJustPressed(0, 0x07CE1E61) then
-                    if NativeUipromptIsControlActionActive(0x07CE1E61) then
+                if IsControlJustPressed(0, `INPUT_FRONTEND_LEFT`) then
+                    if NativeUipromptIsControlActionActive(`INPUT_FRONTEND_LEFT`) then
                         if activeGroupIndex > 1 then
                             activeGroupIndex = activeGroupIndex - 1
                         else
@@ -1675,21 +1681,26 @@ Citizen.CreateThread(
                     end
                 end
 
-                if IsControlJustPressed(0, 0xF84FA74F) then
-                    if NativeUipromptIsControlActionActive(0xF84FA74F) then
-                        -- if activeGroupIndex < #groups then
-                        activeGroupIndex = activeGroupIndex + 1
-                    -- else
-                    --     activeGroupIndex = 1
-                    -- end
+                if IsControlJustPressed(0, `INPUT_FRONTEND_RIGHT`) then
+                    if NativeUipromptIsControlActionActive(`INPUT_FRONTEND_RIGHT`) then
+                        if activeGroupIndex < #groups then
+                            activeGroupIndex = activeGroupIndex + 1
+                        end
                     end
                 end
 
+                -- Desabilitar os controles para não dar conflito/não selecionar as armas
+                -- quando usar os emotes.
+                DisableControlAction(0, `INPUT_SELECT_QUICKSELECT_SIDEARMS_LEFT`, true)
+                DisableControlAction(0, `INPUT_SELECT_QUICKSELECT_DUALWIELD`, true)
+                DisableControlAction(0, `INPUT_SELECT_QUICKSELECT_SIDEARMS_RIGHT`, true)
+                DisableControlAction(0, `INPUT_SELECT_QUICKSELECT_UNARMED`, true)
+
                 for index, control in pairs(controlsorder) do
-                    if IsControlJustPressed(0, control) then
-                        if NativeUipromptIsControlActionActive(control) then
-                            -- print(groups[activeGroupIndex].actions[index][2])
-                            local emoteHash = groups[activeGroupIndex].actions[index][2]
+                    if IsControlJustPressed(0, control) and NativeUipromptIsControlActionActive(control) then
+                        local emoteHash = groups[activeGroupIndex].actions[index][2]
+
+                        if emoteHash then
                             Citizen.InvokeNative(0xB31A277C1AC7B7FF, PlayerPedId(), 0, 0, emoteHash, 1, 1, 0, 0)
                         end
                     end
