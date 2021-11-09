@@ -177,7 +177,7 @@ AddEventHandler('itemWithRessurectingPropertiesWasUsed', function(user, usedItem
 		return
 	end
 
-	Wait(10000)
+	Wait(1000)
 
 	if shouldConsumeItem and not consumeItem() then
 		TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Você não tem mais o item?', 5000)
@@ -186,7 +186,7 @@ AddEventHandler('itemWithRessurectingPropertiesWasUsed', function(user, usedItem
 
 	local revivedNetPlayerId = inRangeNetPlayers[1]
 
-	TriggerClientEvent('FRP:RESPAWN:PlayerUp', revivedNetPlayerId)
+	TriggerClientEvent('FRP:RESPAWN:revive', revivedNetPlayerId)
 
 	TriggerClientEvent('FRP:NOTIFY:Simple', playerId, 'Reanimado com sucesso.', 5000)
 
