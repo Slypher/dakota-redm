@@ -183,12 +183,12 @@ Citizen.CreateThread(
                     local endNetworkTime = getCurrentReplicatedBankState('endNetworkTime')
 
                     local timeToEnd__ms = endNetworkTime - GetNetworkTime()
-                    local timeToEnd__sec = timeToEnd__ms / 1000
+                    local timeToEnd__sec = math.max(timeToEnd__ms, 0) / 1000
 
                     local minutes = math.floor((timeToEnd__sec % 3600) / 60)
-                    local seconds = timeToEnd__sec % 60
+                    local seconds = math.floor(timeToEnd__sec % 60)
 
-                    drawText( ('%d minutos e %.0f segundos'):format(minutes, seconds), true)
+                    drawText( ('%0.02d:%.02d.%.02d'):format(minutes, seconds, 0.0), true)
                 end
             else
                 if secondsUntilAbandonRobbery ~= nil then
@@ -346,10 +346,7 @@ AddEventHandler(
 )
 
 function setSatchel(model)
-    if HasModelLoaded(model) then
-        Citizen.InvokeNative(0xFA28FE3A6246FC3, parseInt(model))
-    end
-    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), parseInt(model), true, true, true)
+    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), model, true, true, true)
 end
 
 RegisterNetEvent("FRP:ROBBERY:Bolsa")
@@ -370,13 +367,13 @@ local lastDisplayedText
 local lastVarString
 
 function drawText(str, center)
-    local x = 0.87
-    local y = 0.95
+    local x = 0.50
+    local y = 0.05
     if lastDisplayedText == nil or lastDisplayedText ~= str then
         lastDisplayedText = str
         lastVarString = CreateVarString(10, "LITERAL_STRING", str)
     end
-    SetTextScale(0.4, 0.4)
+    SetTextScale(0.5, 0.5)
     SetTextColor(255, 255, 255, 255)
     Citizen.InvokeNative(0xADA9255D, 1)
     --DisplayText(str, x, y)
