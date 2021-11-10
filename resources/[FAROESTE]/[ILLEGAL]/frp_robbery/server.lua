@@ -61,16 +61,16 @@ AddEventHandler(
 
         local bankId = index
 
-        local endingTime = heistInfo.staticSecondsToReward
+        local secondsToEnd = heistInfo.staticSecondsToReward
 
         if wasDynamiteUsed then
-            endingTime += INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS
+            secondsToEnd += INCREASED_TIME_WHEN_DYNAMITE_IS_USED_SECONDS
         end
 
         setReplicatedBankState(bankId, 'hasStarted', true)
-        setReplicatedBankState(bankId, 'endNetworkTime', GetGameTimer() + (endingTime * 1000)) -- GetNetworkTime on client.
+        setReplicatedBankState(bankId, 'endNetworkTime', GetGameTimer() + (secondsToEnd * 1000)) -- GetNetworkTime on client.
 
-        countdownRobberyTime(endingTime)
+        countdownRobberyTime(secondsToEnd)
 
         for _, playerSource in pairs(GetPlayers()) do
             playerSource = tonumber(playerSource)
@@ -103,8 +103,8 @@ AddEventHandler(
     end
 )
 
-function countdownRobberyTime(endsAt)
-    indexBeingRobbed_seconds = endsAt
+function countdownRobberyTime(secondsToEnd)
+    indexBeingRobbed_seconds = secondsToEnd
 
     Citizen.CreateThread(
         function()
@@ -132,6 +132,8 @@ function endRobberyGiveReward()
     if indexBeingRobbed == nil then
         return
     end
+
+    local bankId = indexBeingRobbed
 
     robberyBeingEnded = true
 
@@ -162,7 +164,7 @@ function endRobberyGiveReward()
         local Character = User:getCharacter()
 
         if Character ~= nil then
-            local maxRewardInDollars = HEIST_BANK_INFO[indexBeingRobbed].staticReward
+            local maxRewardInDollars = HEIST_BANK_INFO[bankId].staticReward
 
             if getReplicatedBankState(bankId, 'hasSafeExploded') then
                 maxRewardInDollars += 25000
