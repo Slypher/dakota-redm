@@ -349,8 +349,6 @@ AddEventHandler(
 
 		DestroyAllCams(true)
 
-		SetEntityHealth(PlayerPedId(), 1)
-
 		DestroyDeathRelatedInformation()
 	end
 )
