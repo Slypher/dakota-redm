@@ -639,6 +639,12 @@ end
         return false
     end
 
+    if itemId == 'garimpo' then
+        Tunnel.getInterface('HandheldMiningpanItem')._init(source)
+
+        return false
+    end
+
     return false
 end
 
