@@ -6,16 +6,18 @@ Interface = { }
 Proxy.addInterface('GenericHandheldItem', Interface)
 Tunnel.bindInterface('GenericHandheldItem', Interface)
 
+local gCurrentThreadHandle
+
 local gCurrentHandheldItemId
 local gCurrentHandheldEntity
 
-function initHandheldItem(itemId)
-    local handheldModelHash
+local gCurrentHandheldAnimationDictionary
+local gCurrentHandheldAnimationClipset
 
-    local handheldLocoArch = 'arthur_healthy'
-    local handheldLocoType = 'carry_pitchfork'
-
-    local handheldUnknown = 'PITCH_FORKS'
+function initHandheldItem(itemId, options)
+    if gCurrentHandheldEntity then
+        stopHandheldItem()
+    end
 
     -- #TODO
     -- A defiinição de qual loco, animação ou objeto que devem ser criados/iniciados
@@ -23,48 +25,24 @@ function initHandheldItem(itemId)
     -- deve ser feito por quaisquer script que derivem desse, como
     -- por exemplo o `handheld_shovel_item`
     if itemId == 'pa' then
-        handheldModelHash = `MP005_P_COLLECTORSHOVEL01`
-    end
 
-    if not handheldModelHash then
-        return false
-    end
+        options = {
+            handheldPropHash = `MP005_P_COLLECTORSHOVEL01`,
 
-    if not HasModelLoaded(handheldModelHash) then
-        RequestModel(handheldModelHash)
+            useLocomotion = true,
 
-        while not HasModelLoaded(handheldModelHash) do
-            Wait(0)
-        end
+            locomotionArch = 'arthur_healthy',
+            locomotionType = 'carry_pitchfork',
+
+            locomotionUnk = 'PITCH_FORKS',
+        }
+
+        handheldPropHash = `MP005_P_COLLECTORSHOVEL01`
     end
 
     gCurrentHandheldItemId = itemId
 
     local playerPed = PlayerPedId()
-    local playerPos = GetEntityCoords(playerPed)
-
-    local handheldEntity = CreateObject(handheldModelHash, playerPos, true, false, false)
-
-    SetModelAsNoLongerNeeded(handheldModelHash)
-
-    gCurrentHandheldEntity = handheldEntity
-
-    -- HidePedWeapons
-    Citizen.InvokeNative(0xFCCC886EDE3C63EC, playerPed, 0, true)
-
-    AttachEntityToEntity(
-        handheldEntity,
-        playerPed,
-        GetPedBoneIndex(playerPed, 7966),
-        vec3(0.0, 0.0, 0.15),
-        -1.0, 1.0, -30.0,
-        false,
-        false,
-        false,
-        true,
-        2,
-        true
-    )
 
     -- AttachEntityToEntity(
     --     handheldEntity,
@@ -76,27 +54,102 @@ function initHandheldItem(itemId)
 
     -- TaskPlayAnim(PlayerPedId(), 'amb_wander@code_human_2handshovel_wander@base', 'base', 4.0, -4.0, -1, 25, 0.0, false, 0, false, 'RightArmOnly_filter', false)
 
-	Citizen.InvokeNative(0x923583741DC87BCE, playerPed, handheldLocoArch)
-    Citizen.InvokeNative(0x89F5E7ADECCCB49C, playerPed, handheldLocoType)
+    if options.useLocomotion then
 
-    Citizen.InvokeNative(0x3A50753042B6891B, playerPed, handheldUnknown)
+        local locomotionArch = options.locomotionArch
+        local locomotionType = options.locomotionType
+        local locomotionUnk = options.locomotionUnk
 
-    ForceEntityAiAndAnimationUpdate(playerPed, true, true)
-    ForceEntityAiAndAnimationUpdate(handheldEntity, true)
+        Citizen.InvokeNative(0x923583741DC87BCE, playerPed, locomotionArch)
+        Citizen.InvokeNative(0x89F5E7ADECCCB49C, playerPed, locomotionType)
 
-    handleDetachConditions(handheldEntity)
+        Citizen.InvokeNative(0x3A50753042B6891B, playerPed, locomotionUnk)
+
+        ForceEntityAiAndAnimationUpdate(playerPed, true, true)
+        ForceEntityAiAndAnimationUpdate(handheldEntity, true)
+    end
+
+    if options.useAnimation then
+        local animationDictionary = options.animationDictionary
+        local animationClipset = options.animationClipset
+
+        local animationFlags = options.animationFlags or 0
+        local animationFilter = options.animationFilter or ''
+
+        if not animationDictionary or not animationClipset then
+            return false
+        end
+
+        RequestAnimDict(animationDictionary)
+
+        while not HasAnimDictLoaded(animationDictionary) do
+            Wait(0)
+        end
+
+        TaskPlayAnim(playerPed, animationDictionary, animationClipset, 4.0, -4.0, -1, animationFlags, 0.0, false, 0, false, animationFilter, false)
+
+        gCurrentHandheldAnimationDictionary = animationDictionary
+        gCurrentHandheldAnimationClipset = animationClipset
+    end
+
+    if options.handheldPropHash then
+        local handheldPropHash = options.handheldPropHash
+
+        local handheldPropOffset = options.handheldPropOffset or vec3(0.0, 0.0, 0.15)
+        local handheldPropRotation = options.handheldPropRotation or vec3(-1.0, 1.0, -30.0)
+
+        if not HasModelLoaded(handheldPropHash) then
+            RequestModel(handheldPropHash)
+
+            while not HasModelLoaded(handheldPropHash) do
+                Wait(0)
+            end
+        end
+
+        local playerPos = GetEntityCoords(playerPed)
+
+        local handheldEntity = CreateObject(handheldPropHash, playerPos, true, false, false)
+
+        SetModelAsNoLongerNeeded(handheldPropHash)
+
+        gCurrentHandheldEntity = handheldEntity
+
+        -- HidePedWeapons
+        Citizen.InvokeNative(0xFCCC886EDE3C63EC, playerPed, 0, true)
+
+        AttachEntityToEntity(
+            handheldEntity,
+            playerPed,
+            GetPedBoneIndex(playerPed, 7966),
+            handheldPropOffset,
+            handheldPropRotation,
+            false,
+            false,
+            false,
+            true,
+            2,
+            true
+        )
+    end
 
     TriggerEvent('onInitHandheldItem', itemId)
+
+    gCurrentThreadHandle = { }
+
+    processStuff(gCurrentThreadHandle)
 
     return true
 end
 
 function stopHandheldItem(forcefully)
-    if not gCurrentHandheldEntity then
+    if not gCurrentThreadHandle then
         return
     end
 
-    DetachEntity(gCurrentHandheldEntity)
+    gCurrentThreadHandle.finish()
+    gCurrentThreadHandle = nil
+    
+    DetachEntity(gCurrentHandheldEntity, true, true)
 
     if forcefully then
         DeleteEntity(gCurrentHandheldEntity)
@@ -105,6 +158,15 @@ function stopHandheldItem(forcefully)
     end
 
     local playerPed = PlayerPedId()
+
+    if gCurrentHandheldAnimationDictionary and gCurrentHandheldAnimationClipset then
+        ClearPedTasks(playerPed, true, true)
+
+        RemoveAnimDict(gCurrentHandheldAnimationDictionary)
+
+        gCurrentHandheldAnimationDictionary = nil
+        gCurrentHandheldAnimationClipset = nil
+    end
 
     -- Stop locomotion
     Citizen.InvokeNative(0x58F7DB5BD8FA2288, playerPed)
@@ -115,13 +177,22 @@ function stopHandheldItem(forcefully)
     gCurrentHandheldEntity = nil
 end
 
-function handleDetachConditions(handheldEntity)
+function processStuff(threadHandle)
     CreateThread(function()
-
         local playerPed = PlayerPedId()
 
-        while gCurrentHandheldEntity == handheldEntity do
+        local keepRunning = true
+
+        threadHandle.finish = function()
+            keepRunning = false
+        end
+
+        while keepRunning do
             Wait(0)
+
+            if not keepRunning then
+                break
+            end
 
             if GetFrameCount() % 30 == 0 then
                 playerPed = PlayerPedId()
@@ -147,8 +218,31 @@ function Interface.getHandheldItemId()
     return gCurrentHandheldItemId
 end
 
+
+function Interface.getHandheldEntity()
+    return gCurrentHandheldEntity
+end
+
 function Interface.setHandheldItemVisible(visible)
     SetEntityVisible(gCurrentHandheldEntity, visible)
+end
+
+function Interface.overrideHandheldItemAttachmentOffsetAndRotation(offset, rotation, boneName)
+    local playerPed = PlayerPedId()
+
+    AttachEntityToEntity(
+        gCurrentHandheldEntity,
+        playerPed,
+        boneName and GetEntityBoneIndexByName(playerPed, boneName) or GetPedBoneIndex(playerPed, 7966),
+        offset,
+        rotation,
+        false,
+        false,
+        false,
+        true,
+        2,
+        true
+    )
 end
 
 AddEventHandler('onResourceStop', function(resource)
