@@ -64,12 +64,17 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
 
     cAPI.setPlayerAppearence(playerPed)
 
-    pHealth = pStats[1] or 250
-    pStamina = pStats[2] or 34.0
-    pHealthCore = pStats[3] or 100
+    pHealth      = pStats[1] or 250
+    pStamina     = pStats[2] or 34.0
+    pHealthCore  = pStats[3] or 100
     pStaminaCore = pStats[3] or 100
 
     Wait(3000)
+
+    cAPI.VaryPlayerHealth(pHealth)
+    cAPI.VaryPlayerStamina(pStamina)
+    cAPI.VaryPlayerCore(0, pHealthCore)
+    cAPI.VaryPlayerCore(1, pStaminaCore)
 
     TriggerServerEvent("FRP:RESPAWN:CheckDeath")
     TriggerServerEvent("API:pre_OnUserCharacterInitialization")
