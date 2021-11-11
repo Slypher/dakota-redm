@@ -1,23 +1,23 @@
 local weatherPerRegion = {
     ["Heartlands"] = {
       --  ["rain"] = 0.1,
-        ["highpressure"] = 0.3,
-        ["sunny"] = 0.45,
-      --  ["clouds"] = 0.3,
-        ["sleet"] = 0.2,
+        --["highpressure"] = 0.3,
+        ["sunny"] = 0.8,
+        ["clouds"] = 0.2,
+        --["sleet"] = 0.2,
     },
     ["GuarmaD"] = {
         ["sunny"] = 1.0
     },
     ["bigvalley"] = {
-        ["rain"] = 0.1,
+        --["rain"] = 0.1,
         ["sunny"] = 0.7,
         ["hail"] = 0.1
     },
     ["BluewaterMarsh"] = {
-        ["fog"] = 0.8,
+        ["fog"] = 0.5,
         ["misty"] = 0.3,
-        ["clouds"] = 0.2
+        ["clouds"] = 0.5
     },
     ["ChollaSprings"] = {
         ["sunny"] = 0.7,
@@ -25,31 +25,31 @@ local weatherPerRegion = {
         ["clouds"] = 0.2
     },
     ["Cumberland"] = {
-        ["rain"] = 0.1,
+        --["rain"] = 0.1,
         ["sunny"] = 0.6,
         ["highpressure"] = 0.3,
-        ["shower"] = 0.2,
+        --["shower"] = 0.2,
         ["hail"] = 0.1,
         ["drizzle"] = 0.2
     },
     ["DiezCoronas"] = {
         ["sunny"] = 0.9,
-        ["shower"] = 0.1
+        --["shower"] = 0.1
     },
     ["GaptoothRidge"] = {
         ["sunny"] = 0.7,
-        ["shower"] = 0.1,
+        --["shower"] = 0.1,
         ["clouds"] = 0.2
     },
     ["greatPlains"] = {
         ["sunny"] = 0.6,
-        ["shower"] = 0.2,
+        --["shower"] = 0.2,
         ["clouds"] = 0.1,
         ["drizzle"] = 0.1
     },
     ["GrizzliesEast"] = {
         ["sunny"] = 0.5,
-        ["shower"] = 0.2,
+        --["shower"] = 0.2,
         ["drizzle"] = 0.2,
         ["clouds"] = 0.1,
         ["thunder"] = 0.3
@@ -60,19 +60,19 @@ local weatherPerRegion = {
         ["whiteout"] = 0.8
     },
     ["HennigansStead"] = {
-        ["rain"] = 0.2,
+        --["rain"] = 0.2,
         ["sunny"] = 0.7,
-        ["shower"] = 0.3,
+        --["shower"] = 0.3,
         ["drizzle"] = 0.2
     },
     ["Perdido"] = {
         ["sunny"] = 0.8,
-        ["shower"] = 0.1,
+        --["shower"] = 0.1,
         ["clouds"] = 0.2
     },
     ["PuntaOrgullo"] = {
         ["sunny"] = 0.8,
-        ["shower"] = 0.1,
+        --["shower"] = 0.1,
         ["clouds"] = 0.5
     },
     ["RioBravo"] = {
@@ -82,23 +82,24 @@ local weatherPerRegion = {
     ["roanoke"] = {
         ["misty"] = 0.8,
         ["fog"] = 0.3,
-        ["thunder"] = 0.2,
+        --["thunder"] = 0.2,
         ["sleet"] = 0.1
     },
     ["scarlettMeadows"] = {
+        ["sunny"] = 0.2,
         ["fog"] = 0.6,
         ["drizzle"] = 0.5,
-        ["sunny"] = 0.2
     },
     ["TallTrees"] = {
-        ["overcastdark"] = 0.8,
-        ["thunder"] = 0.5,
+        --["overcastdark"] = 0.8,
+        --["thunder"] = 0.5,
+        ["sunny"] = 0.4,
         ["drizzle"] = 0.4,
-        ["misty"] = 0.2
+        ["misty"] = 0.2,
     },
     ["BayouNwa"] = {
-        ["sunny"] = 0.0,
-        ["fog"] = 1.0,
+        ["sunny"] = 0.4,
+        ["fog"] = 0.6,
     }
 }
 
