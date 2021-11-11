@@ -10,7 +10,7 @@ server_scripts {
 }
 
 client_scripts {
-	-- '@_core/lib/utils.lua',
+	'@_core/lib/utils.lua',
 	-- 'config.lua',
 	'shared.lua'
 }

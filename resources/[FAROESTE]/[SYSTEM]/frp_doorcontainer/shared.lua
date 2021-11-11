@@ -104,7 +104,7 @@ local doorStates = {
     -- ##
     --  Banco de Rhodes:
     [2058564250] = { isOpen = false }, -- Primeira porta a direita da recepção.
-    [3483244267] = { isOpen = false, canInteract = false },
+    [3483244267] = { isOpen = false, canInteract = false, cannotBeLockpicked = true, }, -- Cofre.
     --
     -- ##
 }
@@ -114,9 +114,23 @@ local doorStates = {
 
 Citizen.CreateThread(
     function()
+        local Tunnel = module("_core", "lib/Tunnel")
+        local Proxy = module("_core", "lib/Proxy")
+
+        local DoorContainer = { }
+        Proxy.addInterface('DoorContainer', DoorContainer)
+
+        function DoorContainer.canSystemDoorBeLockpicked(doorHash)
+            local doorState = doorStates[doorHash]
+
+            if not doorState then
+                return false
+            end
+            
+            return doorState.cannotBeLockpicked ~= true
+        end
+
         if SERVER then
-            local Tunnel = module("_core", "lib/Tunnel")
-            local Proxy = module("_core", "lib/Proxy")
 
             API = Proxy.getInterface("API")
             cAPI = Tunnel.getInterface("API")

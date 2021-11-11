@@ -4,6 +4,8 @@ local Proxy = module("_core", "lib/Proxy")
 API = Proxy.getInterface("API")
 cAPI = Tunnel.getInterface("API")
 
+local DoorContainer = Proxy.getInterface('DoorContainer')
+
 function RemoveLockpickItem(source)
     local _source = source
 
@@ -31,6 +33,11 @@ RegisterNetEvent("FRP:LOCKPICKING:SuccededLockpicking")
 AddEventHandler(
     "FRP:LOCKPICKING:SuccededLockpicking",
     function(doorHash)
+
+        if not DoorContainer.canSystemDoorBeLockpicked(doorHash) then
+            return
+        end
+
         if RemoveLockpickItem(source) then
             TriggerClientEvent("FRP:DOORSTATECONTAINER:SetDoorState", -1, doorHash, true)
         end

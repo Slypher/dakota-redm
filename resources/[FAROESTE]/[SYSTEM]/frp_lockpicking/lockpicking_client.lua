@@ -128,6 +128,8 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local DoorContainer = Proxy.getInterface('DoorContainer')
+
 local gui = false
 local currentlyInGame = false
 local passed = false
@@ -146,6 +148,11 @@ AddEventHandler(
         local doorHash = exports.frp_doorcontainer:GetRegisteredDoorHashInRadius(1.5, 1)
 
         if doorHash then
+
+            if not DoorContainer.canSystemDoorBeLockpicked(doorHash) then
+                return
+            end
+
             TriggerServerEvent("OutPost:InvadeOutpostAlert")
 
             local doorEntity = Citizen.InvokeNative(0xF7424890E4A094C0, doorHash)
