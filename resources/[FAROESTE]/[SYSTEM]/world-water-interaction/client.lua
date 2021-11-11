@@ -13,7 +13,7 @@ CreateThread(function()
 
 		local submergedLevel = GetEntitySubmergedLevel(playerPed)
 
-		if (submergedLevel >= 0.25 and submergedLevel <= 0.40) and not IsPedSwimming(playerPed) then
+		if (submergedLevel >= 0.05 and submergedLevel <= 0.40) and not IsPedSwimming(playerPed) then
 			local playerPos = GetEntityCoords(playerPed)
 
 			local animHandPos = GetOffsetFromEntityInWorldCoords(playerPed, 0.0, 0.60, -0.90)
