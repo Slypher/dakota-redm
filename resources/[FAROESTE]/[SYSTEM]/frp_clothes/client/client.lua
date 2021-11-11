@@ -326,21 +326,15 @@ end
 RegisterNUICallback(
     "rotate",
     function(data, cb)
-        local VAR = 15.0
+        local VAR = 45.0
 
         local playerPed = PlayerPedId()
 
         local addHeading = data["key"] ~= "left" and VAR or -(VAR)
 
-        print('addHeading', addHeading)
-
         local currHeading = GetEntityHeading(playerPed)
 
-        print('currHeading', currHeading)
-
         local desiredHeading = GetEntityHeading(playerPed) + addHeading
-
-        print('desiredHeading', desiredHeading)
 
         if desiredHeading > 360 then
             desiredHeading = desiredHeading - 360.0
@@ -352,8 +346,7 @@ RegisterNUICallback(
 
         desiredHeading = desiredHeading + 0.0001
 
-        TaskAchieveHeading(playerPed, desiredHeading, 1000)
-        -- SetPedDesiredHeading(playerPed, desiredHeading)
+        TaskAchieveHeading(playerPed, desiredHeading, -1)
 
         cb("ok")
     end
@@ -447,7 +440,7 @@ function createCamera(centerPos, pedHeading)
     SetEntityCoords(playerPed, centerPos.xy, groundZ or centerPos.z)
     SetEntityHeading(playerPed, pedHeading)
 
-    FreezeEntityPosition(playerPed, true)
+    -- FreezeEntityPosition(playerPed, true)
 
     createCameraInternal()
 end
@@ -1358,6 +1351,12 @@ Citizen.CreateThread(
                 position = vec3(-1820.330,-367.655,166.506),
                 heading = -119.0,
             },
+
+            -- Tronco dos indios.
+            {
+                position = vec3(468.504, 2242.064, 248.158),
+                heading = -100.0,
+            },
         }
 
         while true do
@@ -1634,7 +1633,7 @@ RegisterNUICallback('mouseLeftClick', function(data, cb)
 
     local function interpolateToCamKeepFov(from, to)
         local pointAtXY = GetEntityCoords(PlayerPedId()).xy
-        local pointAtZ = math.min(raycastHitPos.z, 122.0)
+        local pointAtZ = raycastHitPos.z -- math.min(raycastHitPos.z, 122.0)
 
         PointCamAtCoord(to, pointAtXY, pointAtZ)
 
