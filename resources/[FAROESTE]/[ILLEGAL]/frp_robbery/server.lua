@@ -216,6 +216,8 @@ AddEventHandler(
             indexBeingRobbed_participants = {}
             robberyBeingEnded = false
 
+            local bankId = indexBeingRobbed
+
             clearBankState(bankId)
 
             TriggerClientEvent("FRP:ROBBERY:EndRobbery", -1)
@@ -285,20 +287,38 @@ function clearBankState(bankId)
     setReplicatedBankState(bankId, 'hasSafeExploded', nil)
     setReplicatedBankState(bankId, 'endNetworkTime', nil)
 
-    local bankInfo = HEIST_BANK_INFO[bankId]
-
-    if bankInfo then
-        local explodableDoorSystemHash in bankInfo
-
-        if explodableDoorSystemHash then
-            TriggerEvent('setRegisteredDoorState', explodableDoorSystemHash, false)
-        end
-    end
+    -- Vai fechar as portas depois que 75% do tempo
+    --  do cooldown tenha se passado
+    SetTimeout( (cCooldown * 60 * 1000) * 0.75, function()
+        closeBankDoors(bankId)
+    end)
 end
 
 function clearBankStates()
     for bankId, _ in pairs(HEIST_BANK_INFO) do
         clearBankState(bankId)
+    end
+end
+
+CreateThread(function()
+
+    -- Fechar todas as portas de todos os bancos quando o script iniciar.
+    for bankId, info in ipairs(HEIST_BANK_INFO) do
+        closeBankDoors(bankId)
+    end
+end)
+
+function closeBankDoors(bankId)
+    local bankInfo = HEIST_BANK_INFO[bankId]
+
+    local bankDoors = bankInfo.interiorDoors
+
+    if bankDoors then
+        for _, doorInfo in ipairs(bankDoors) do
+            local doorHash = doorInfo.hash
+
+            TriggerEvent('setRegisteredDoorState', doorHash, false)
+        end
     end
 end
 
