@@ -3,6 +3,7 @@ fx_version 'adamant'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 
 client_scripts {
+	"@_core/lib/utils.lua",
 	'common.lua',
 	'config.lua',
 	'client.lua'

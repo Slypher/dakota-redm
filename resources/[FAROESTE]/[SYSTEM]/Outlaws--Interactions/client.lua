@@ -1,3 +1,5 @@
+local Proxy = module("_core", "lib/Proxy")
+
 local PickerIsOpen = false
 local CurrentInteraction = nil
 local lastobj
@@ -151,10 +153,13 @@ function OpenMenu()
 
 end
 
+-- Cancelar animação
 function StopInteraction()
     ClearPedTasks(PlayerPedId())
     SetCurrentPedWeapon(PlayerPedId(), -1569615261, true)
     CurrentInteraction = nil
+
+    Proxy.getInterface('GenericHandheldItem').stopHandheldItem(false)
 end
 
 function ToggleInteraction()

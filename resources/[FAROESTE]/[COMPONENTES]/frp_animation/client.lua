@@ -35,11 +35,14 @@ Citizen.CreateThread(
     end
 )
 
+-- Cancelar animações pelo BACKSPACE
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         if (IsControlJustPressed(0,0x156F7119))  then
             ClearPedTasks(PlayerPedId())
+
+            Proxy.getInterface('GenericHandheldItem').stopHandheldItem(false)
         end
     end
 end)
