@@ -96,7 +96,7 @@ HEIST_BANK_INFO = {
             {
                 -- Cofre.
                 doorHash = 576950805,
-            }
+            },
             {
                 -- Primeira porta a direita.
                 doorHash = 1340831050,

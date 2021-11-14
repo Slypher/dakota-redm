@@ -315,7 +315,7 @@ function closeBankDoors(bankId)
 
     if bankDoors then
         for _, doorInfo in ipairs(bankDoors) do
-            local doorHash = doorInfo.hash
+            local doorHash = doorInfo.doorHash
 
             TriggerEvent('setRegisteredDoorState', doorHash, false)
         end
