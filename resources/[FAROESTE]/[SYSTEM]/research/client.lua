@@ -431,6 +431,26 @@ Citizen.CreateThread(
 						TriggerEvent("FRP:EVENTS:PedFinishedGatheringEntity", ped, entity, bool_unk)
 					elseif eventAtIndex == 218595333 then
 					-- print("Horse broken")
+					elseif eventAtIndex == `EVENT_ITEM_PROMPT_INFO_REQUEST` then
+
+						local data = exports["research"]:DataViewNativeGetEventData(0, i, 2)
+
+						local entityId = data['0']
+						local inventoryItem = data['2']
+
+					elseif eventAtIndex == `EVENT_CARRIABLE_PROMPT_INFO_REQUEST` then
+						local data = exports["research"]:DataViewNativeGetEventData(0, i, 6)
+
+						local carriableEntity = data['0']
+						local carryAction = data['2']
+						local unk = data['4']
+						local targetParentEntity = data['6']
+
+						TriggerEvent('gameEventCarriablePromptInfoRequest', carriableEntity, carryAction, targetParentEntity)
+					elseif eventAtIndex == `EVENT_CARRIABLE_VEHICLE_STOW_COMPLETE` then
+						onEventCarriableVehicleStowComplete(getEventData(0, i, 4))
+					elseif eventAtIndex == `EVENT_CARRIABLE_VEHICLE_STOW_START` then
+						onEventCarriableVehicleStowStart(getEventData(0, i, 5))
 					end
 
 					-- if eventAtIndex == 2099179610 then
@@ -463,6 +483,27 @@ Citizen.CreateThread(
 		end
 	end
 )
+
+function getEventData(...)
+	return exports["research"]:DataViewNativeGetEventData(...)
+end
+
+function onEventCarriableVehicleStowComplete(data)
+	local stowerEntity = data['0'] -- Ped do player que está colocando a entidade
+	local vehicle = data['2']
+	local cancelItemToAdd = data['4']
+	local unk0 = data['6']
+
+	TriggerEvent('gameEventCarriableVehicleStowComplete', stowerEntity, vehicle, cancelItemToAdd, unk0)
+end
+
+function onEventCarriableVehicleStowStart(data)
+	local stowerEntity = data['0'] -- Ped do player que está colocando a entidade
+	local carriableEntity = data['2']
+	local vehicle = data['4']
+
+	TriggerEvent('gameEventCarriableVehicleStowStart', stowerEntity, carriableEntity, vehicle)
+end
 
 function DrawText(str, x, y, w, h, enableShadow, col1, col2, col3, a, centre, font)
 	SetTextScale(w, h)
