@@ -10,10 +10,10 @@ Tunnel.bindInterface('HandheldMiningpanItem', HandheldMiningpanItem)
 local DICT = 'script_re@gold_panner@gold_success'
 local ANIM = 'panning_idle_no_water'
 
-local FAIL_CLIPSET = 'no_luck_here_n' -- 'fail'
+local FAIL_CLIPSET = 'pile_of_nothing' -- 'no_luck_here_n' -- 'fail'
 
-local CELEBRATE_DICTIONARY = 'script_mp@emotes@biting_gold_coin@male@unarmed@full'
-local CELEBRATE_CLIPSET = 'fullbody' -- 'success_front'
+local CELEBRATE_DICTIONARY = DICT -- 'script_mp@emotes@biting_gold_coin@male@unarmed@full'
+local CELEBRATE_CLIPSET = 'success_front' -- 'fullbody'
 
 local gState -- = eGoldPanningState.IDLE
 
@@ -57,7 +57,7 @@ RegisterNetEvent('net.playerGoldPanningFoundNothing', function()
     if gKeepRunning then
         gState = eGoldPanningState.FAILED
 
-        print('playerGoldPanningFoundNothing -> FAILED')
+        -- print('playerGoldPanningFoundNothing -> FAILED')
     end
 end)
 
@@ -65,7 +65,7 @@ RegisterNetEvent('net.playerGoldPanningFoundGold', function()
     if gKeepRunning then
         gState = eGoldPanningState.CELEBRATE
 
-        print('playerGoldPanningFoundGold -> CELEBRATE')
+        -- print('playerGoldPanningFoundGold -> CELEBRATE')
     end
 end)
 
@@ -91,7 +91,7 @@ function startScriptThread()
 
                     TriggerServerEvent('net.playerStartedGoldPanning')
 
-                    print('IDLE -> PANNING')
+                    -- print('IDLE -> PANNING')
 
                     ClearPedTasks(playerPed)
                 else
@@ -107,7 +107,7 @@ function startScriptThread()
 
                     TriggerServerEvent('net.playerStoppedGoldPanning')
 
-                    print('PANNING -> IDLE')
+                    -- print('PANNING -> IDLE')
 
                     GenericHandheldItem.overrideHandheldItemAttachmentOffsetAndRotation(
                         vec3(-0.05, -0.05, 0.05),
@@ -131,7 +131,7 @@ function startScriptThread()
                 if IsEntityPlayingAnim(playerPed, DICT, FAIL_CLIPSET, 3) then
                     gState = eGoldPanningState.FAILING
 
-                    print('FAILED -> FAILING')
+                    -- print('FAILED -> FAILING')
                 else
                     TaskPlayAnim(playerPed, DICT, FAIL_CLIPSET, 8.0, -2.0, -1, 28, 0.0, false, 0, false, '', false)
                 end
@@ -141,57 +141,57 @@ function startScriptThread()
                 local isPlayingFailAnim = IsEntityPlayingAnim(playerPed, DICT, FAIL_CLIPSET, 3)
 
                 -- GetEntityAnimCurrentTime
-                if not isPlayingFailAnim then
-                -- or (isPlayingFailAnim and Citizen.InvokeNative(0x627520389E288A73, playerPed, DICT, FAIL_CLIPSET, Citizen.ResultAsFloat()) >= 0.28 ) then
+                if not isPlayingFailAnim -- then
+                or (isPlayingFailAnim and Citizen.InvokeNative(0x627520389E288A73, playerPed, DICT, FAIL_CLIPSET, Citizen.ResultAsFloat()) >= 0.28 ) then
                     gState = eGoldPanningState.PANNING
 
-                    print('FAILING -> PANNING')
+                    -- print('FAILING -> PANNING')
                 end
             end
 
             if gState == eGoldPanningState.CELEBRATE then
-                -- if IsEntityPlayingAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, 3) then
+                if IsEntityPlayingAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, 3) then
                     gState = eGoldPanningState.CELEBRATING
 
-                    print('CELEBRATE -> CELEBRATING')
+                    -- print('CELEBRATE -> CELEBRATING')
 
-                --     GenericHandheldItem.overrideHandheldItemAttachmentOffsetAndRotation(
-                --         vec3(0.10, -0.00, 0.20),
-                --         vec3(-100.0, 0.0, 0.0),
-                --         'SKEL_L_HAND'
-                --     )
-                -- else
-                --     if IsEntityPlayingAnim(playerPed, DICT, 'panning_idle', 3) then
-                --         -- Precisa porque o 'panning_idle' tá com o filtro de RightArmOnly.
-                --         ClearPedTasks(playerPed)
-                --     end
+                    GenericHandheldItem.overrideHandheldItemAttachmentOffsetAndRotation(
+                        vec3(0.10, -0.00, 0.20),
+                        vec3(-100.0, 0.0, 0.0),
+                        'SKEL_L_HAND'
+                    )
+                else
+                    if IsEntityPlayingAnim(playerPed, DICT, 'panning_idle', 3) then
+                        -- Precisa porque o 'panning_idle' tá com o filtro de RightArmOnly.
+                        ClearPedTasks(playerPed)
+                    end
 
-                --     TaskPlayAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, -8.0, -8.0, -1, 0, 0.0, false, 0, false, '', false)
-                -- end
+                    TaskPlayAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, -8.0, -8.0, -1, 0, 0.0, false, 0, false, '', false)
+                end
             end
 
             if gState == eGoldPanningState.CELEBRATING then
-                -- local isPlayingCelebrateAnim = IsEntityPlayingAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, 3)
+                local isPlayingCelebrateAnim = IsEntityPlayingAnim(playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, 3)
 
-                -- if isPlayingCelebrateAnim then
+                if isPlayingCelebrateAnim then
                     
-                --     DisableAllControlActions(0)
+                    DisableAllControlActions(0)
 
-                --     EnableControlAction(0, `INPUT_LOOK_UD`, true)
-                --     EnableControlAction(0, `INPUT_LOOK_LR`, true)
+                    EnableControlAction(0, `INPUT_LOOK_UD`, true)
+                    EnableControlAction(0, `INPUT_LOOK_LR`, true)
                     
-                --     if Citizen.InvokeNative(0x627520389E288A73, playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, Citizen.ResultAsFloat()) >= 0.15 then
-                --         GenericHandheldItem.setHandheldItemVisible(false)
-                --     end
-                -- end
+                    if Citizen.InvokeNative(0x627520389E288A73, playerPed, CELEBRATE_DICTIONARY, CELEBRATE_CLIPSET, Citizen.ResultAsFloat()) >= 0.15 then
+                        GenericHandheldItem.setHandheldItemVisible(false)
+                    end
+                end
 
-                -- if not isPlayingCelebrateAnim then
+                if not isPlayingCelebrateAnim then
                     gState = eGoldPanningState.PANNING
 
-                    print('CELEBRATING -> PANNING')
+                    -- print('CELEBRATING -> PANNING')
 
-                --     GenericHandheldItem.setHandheldItemVisible(true)
-                -- end
+                    GenericHandheldItem.setHandheldItemVisible(true)
+                end
             end
 
             if IsPedSwimming(playerPed) then

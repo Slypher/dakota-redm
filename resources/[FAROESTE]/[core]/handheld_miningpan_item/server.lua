@@ -55,6 +55,8 @@ function ensureGoldPanningRewardTimer()
 
                     if rnd <= GOLD_PANNING_WIN_GOLD_CHANCE then
                         TriggerClientEvent('net.playerGoldPanningFoundGold', playerId)
+
+                        -- #TODO: Adicionar item.
                     else
                         TriggerClientEvent('net.playerGoldPanningFoundNothing', playerId)
                     end
