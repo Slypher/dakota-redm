@@ -157,6 +157,8 @@ function stopHandheldItem(forcefully)
         SetEntityAsNoLongerNeeded(gCurrentHandheldEntity)
     end
 
+    SetEntityDynamic(gCurrentHandheldEntity, true)
+
     local playerPed = PlayerPedId()
 
     if gCurrentHandheldAnimationDictionary and gCurrentHandheldAnimationClipset then
