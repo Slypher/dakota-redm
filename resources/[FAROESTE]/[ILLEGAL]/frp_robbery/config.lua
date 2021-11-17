@@ -82,7 +82,7 @@ HEIST_BANK_INFO = {
         
         staticName = 'Banco Valentine',
 
-        interiorId = 0,
+        interiorId = 12290,
 
         staticReward = 50000,
         staticSecondsToReward = 10 * 60,
