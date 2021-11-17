@@ -3,6 +3,9 @@ local HUNTING_WAGON_TARP_PROPSET = `pg_mp005_huntingWagonTarp01`
 local gShopInRangeThread = false
 local gWaitingResponse = false
 
+local gPromptOpenShop
+local gPromptGroup
+
 CreateThread(function()
     while true do
         local playerPed = PlayerPedId()
@@ -44,24 +47,40 @@ function createThreadShopInRange(shop)
 
         onStartThreadShopInRange()
 
+        local shopInteractionPos = shop.interactionPosition
+
+        local playerPed = PlayerPedId()
+
         while gShopInRangeThread do
             Wait(0)
 
-            if IsControlJustPressed(0, `INPUT_SHOP_BUY`) then
-                WarMenu.OpenMenu('wagon_shop')
-
-                print('INPUT_SHOP_BUY was pressed')
+            if GetFrameTime() % 30 == 0 then
+                playerPed = PlayerPedId()
             end
 
-            if WarMenu.IsMenuOpened('wagon_shop') then
+            local distanceToInteractionPos = #(GetEntityCoords(playerPed) - shopInteractionPos)
 
-                for shopItemIndex, shopItem in ipairs(AVAILABLE_ITEMS) do
-                    if WarMenu.Button(shopItem.displayName) and (not gWaitingResponse) then
-                        requestBuyShopItem(shopItemIndex)
-                    end
+            if distanceToInteractionPos <= 2.0 then
+                PromptSetActiveGroupThisFrame(gPromptGroup, CreateVarString(10, 'LITERAL_STRING', 'Loja de Carroças'))
+
+                if PromptHasHoldModeCompleted(gPromptOpenShop) then
+                    WarMenu.OpenMenu('wagon_shop')
+                    Wait(100)
                 end
 
-                WarMenu.Display()
+                if WarMenu.IsMenuOpened('wagon_shop') then
+                    for shopItemIndex, shopItem in ipairs(AVAILABLE_ITEMS) do
+                        if WarMenu.Button(shopItem.displayName) and (not gWaitingResponse) then
+                            requestBuyShopItem(shopItemIndex)
+                        end
+                    end
+    
+                    WarMenu.Display()
+                end
+            else
+                if WarMenu.IsMenuOpened('wagon_shop') then
+                    WarMenu.CloseMenu()
+                end
             end
         end
 
@@ -75,11 +94,15 @@ function onStartThreadShopInRange()
     WarMenu.CreateMenu('wagon_shop', 'Aluguel de Carroça')
     WarMenu.SetSubTitle('wagon_shop', 'Lista de Carroça')
 
+    gPromptOpenShop, gPromptGroup = createPrompt()
+
     requestShopItemModels()
 end
 
 function onStopThreadShopInRange()
     print('onStopThreadShopInRange :: stopped')
+
+    PromptDelete(gPromptOpenShop)
 
     releaseShopItemModels()
 end
@@ -106,7 +129,14 @@ function createShopItemInWorldSynchronous(shop, shopItem)
     -- Wagon ownership?
     Citizen.InvokeNative(0x6A4404BDFA62CE2C, playerId, entity)
 
-    -- Parece que precisa aguardar um pouco antes de aplicar o tarp.
+    -- RequestPropSet
+    Citizen.InvokeNative(0xF3DE57A46D5585E9, HUNTING_WAGON_TARP_PROPSET)
+    
+    -- HasPropSetLoaded
+    while not Citizen.InvokeNative(0x48A88FC684C55FDC, HUNTING_WAGON_TARP_PROPSET) do
+        Wait(0)
+    end
+    
     -- _ADD_VEHIC
     Citizen.InvokeNative(0x75F90E4051CC084C, entity, HUNTING_WAGON_TARP_PROPSET)
 
@@ -158,3 +188,17 @@ AddEventHandler('onResourceStop', function(resource)
 
     onStopThreadShopInRange()
 end)
+
+function createPrompt()
+    local prompt = PromptRegisterBegin()
+    local promptGroup = GetRandomIntInRange(0, 0xffffff)
+    PromptSetControlAction(prompt, `INPUT_SHOP_BUY`)
+    PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", 'Abrir'))
+    PromptSetEnabled(prompt, true)
+    PromptSetVisible(prompt, true)
+    PromptSetHoldMode(prompt, true)
+    PromptSetGroup(prompt, promptGroup)
+    PromptRegisterEnd(prompt)
+
+    return prompt, promptGroup
+end

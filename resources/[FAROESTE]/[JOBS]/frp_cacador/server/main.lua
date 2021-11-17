@@ -3,7 +3,7 @@ local Proxy = module('_core', 'lib/Proxy')
 ServerAPI = Proxy.getInterface('API')
 
 RegisterServerEvent('vorp_hunting:giveReward')
-AddEventHandler('vorp_hunting:giveReward', function(givenItem, money)
+AddEventHandler('vorp_hunting:giveReward', function(money)
     local playerId = source
     
     local user = ServerAPI.getUserFromSource(playerId)

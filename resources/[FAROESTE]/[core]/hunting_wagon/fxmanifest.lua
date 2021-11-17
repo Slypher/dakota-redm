@@ -10,11 +10,15 @@ shared_scripts {
 
 client_scripts {
     'client/provisions.lua',
+    'client/item-to-weight-stuff.lua',
     'client/skinned-carcass-to-animal-carcass.lua',
     'client/override-carry-action-prompt.js',
     'client/game-event-handler.lua',
 }
 
-server_script 'server.lua'
+server_scripts {
+    'rdr3-provision-to-dollars.lua',
+    'server.lua',
+}
 
 lua54 'yes'
