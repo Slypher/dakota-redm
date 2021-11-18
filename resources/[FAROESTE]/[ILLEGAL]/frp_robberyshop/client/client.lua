@@ -110,7 +110,7 @@ AddEventHandler(
 
 		isRobberyActive = true
 		robberyTime = atmInfo[6]
-		robberyMoney = math.ceil(math.random(Config.moneyReward.min, Config.moneyReward.max) / robberyTime)
+		robberyMoney = math.ceil( (math.random(Config.moneyReward.min, Config.moneyReward.max) * 100) / robberyTime)
 
 		robberyAmmount = 0
 
