@@ -1,6 +1,6 @@
 HEIST_BANK_INFO = {
     {
-        isDisabled = true,
+        -- isDisabled = true,
         
         staticName = 'Banco de BlackWater',
 
@@ -78,7 +78,7 @@ HEIST_BANK_INFO = {
         }
     },
     {
-        isDisabled = true,
+        -- isDisabled = true,
         
         staticName = 'Banco Valentine',
 

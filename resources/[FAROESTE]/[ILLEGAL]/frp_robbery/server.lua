@@ -211,12 +211,12 @@ AddEventHandler(
         if #indexBeingRobbed_participants <= 0 and not robberyBeingEnded then
             cooldownEndsAtTimeStamp = os.time() + (cCooldown * 60 * 1000)
 
+            local bankId = indexBeingRobbed
+
             indexBeingRobbed = nil
             indexBeingRobbed_seconds = 0
             indexBeingRobbed_participants = {}
             robberyBeingEnded = false
-
-            local bankId = indexBeingRobbed
 
             clearBankState(bankId)
 
