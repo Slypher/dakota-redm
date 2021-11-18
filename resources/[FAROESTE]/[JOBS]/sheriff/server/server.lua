@@ -300,7 +300,7 @@ RegisterCommand(
 
  
 RegisterCommand(
-	"pv",
+	"cc",
 	function(source)
 
 		local _source = source
@@ -317,7 +317,7 @@ RegisterCommand(
 )
 
 RegisterCommand(
-	"rv",
+	"rc",
 	function(source)
 		local _source = source
 		local User = API.getUserFromSource(source)
