@@ -24,16 +24,28 @@ AddEventHandler('mining:addItem', function()
 			local _source = source
 			local User = API.getUserFromSource(_source)
 			local Inventory = User:getCharacter():getInventory()
-			local count = math.random(0,1)
+
+			local count  = math.random(0,1)
             local count2 = math.random(0,1)
 			local count3 = math.random(0,1)
 
-			Inventory:addItem('pedra', (count))
-			Inventory:addItem('minerioferro', (count2))
-			Inventory:addItem('mineriocobre', (count3))
-			User:notify("item", 'pedra', count)
-			User:notify("item", 'minerioferro', count2)
-			User:notify("item", 'mineriocobre', count3)
+			if count > 0 then
+				if Inventory:addItem('pedra', (count)) then
+					User:notify("item", 'pedra', count)
+				end
+			end
+
+			if count2 > 0 then
+				if Inventory:addItem('minerioferro', (count2)) then
+					User:notify("item", 'minerioferro', count2)
+				end
+			end
+
+			if count3 > 0 then
+				if Inventory:addItem('mineriocobre', (count3)) then
+					User:notify("item", 'mineriocobre', count3)
+				end
+			end
 		end
 	)
 
