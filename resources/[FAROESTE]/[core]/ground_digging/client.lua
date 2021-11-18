@@ -11,7 +11,8 @@ GroundDiggingProxy = { }
 
 Proxy.addInterface('GroundDigging', GroundDiggingProxy)
 
-local gOnDigPromptIsPressedHandler 
+local gOnDigPromptIsPressedHandler
+local gCanDigGround = true
 
 CreateThread(function()
 	if HandheldShovelItem.isActive() then
@@ -38,6 +39,10 @@ function stop()
 end
 
 function onHandheldShovelItemDigPromptIsPressed()
+    if not gCanDigGround then
+        return
+    end
+
     local hooks = {
         onStart = function()
             HandheldShovelItem.setDigPromptEnabled(false)
@@ -149,5 +154,9 @@ function startDiggingAnimScene(type, animScenePos, animSceneHeading, hooks)
 end
 
 GroundDiggingProxy.startDiggingAnimScene = startDiggingAnimScene
+
+function GroundDiggingProxy.setEnabled(enabled)
+    gCanDigGround = enabled
+end
 
 -- startDiggingAnimScene()

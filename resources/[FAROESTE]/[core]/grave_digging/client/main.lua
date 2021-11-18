@@ -1,6 +1,7 @@
 Proxy = module('_core', 'lib/Proxy')
 
 HandheldShovelItem = Proxy.getInterface('HandheldShovelItem')
+GroundDigging = Proxy.getInterface('GroundDigging')
 
 ENABLED_DEBUG = false
 SITE_INTERACTION_MAX_DISTANCE = 1.0
@@ -62,6 +63,8 @@ function ensureMainThread()
 		local promptDig
 		local promptDigReenableAt
 
+		GroundDigging.setEnabled(false)
+
 		local onDigPromptIsPressedHandler = AddEventHandler('onHandheldShovelItemDigPromptIsPressed', function()
 			if not interactableSite then
 				return
@@ -92,7 +95,7 @@ function ensureMainThread()
 		gOnMainThreadStop = function()
 			gIsMainThreadRunning = false
 
-			HandheldShovelItem.setDigPromptEnabled(true)
+			GroundDigging.setEnabled(true)
 
 			RemoveEventHandler(onDigPromptIsPressedHandler)
 
@@ -134,39 +137,31 @@ function ensureMainThread()
 					end
 				end
 
-				if interactableSite and not gActiveSite then
-					local knownState = getClusterSiteState(interactableSite)
+				local enableDigPrompt = true
 
-					local shouldPromptBeDisabled = (knownState and (knownState > eDiggingSitePointState.INVALID and knownState < eDiggingSitePointState.EMPTY))
+				local knownState = getClusterSiteState(interactableSite)
 
-					-- A cova tem um estado, está em progresso, desabilitar o prompt
-					HandheldShovelItem.setDigPromptEnabled(not shouldPromptBeDisabled)
-					HandheldShovelItem.setCancelPromptEnabled(true)
-				else
-					-- Somente desaabilitar os prompts em um unico frame
-					if noInteractableSiteThisFrame then
-						HandheldShovelItem.setDigPromptEnabled(false)
+				if knownState and (knownState > eDiggingSitePointState.INVALID and knownState < eDiggingSitePointState.EMPTY) then
+					enableDigPrompt = false
+				end
+
+				if promptDigReenableAt then
+					enableDigPrompt = false
+
+					if GetGameTimer() >= promptDigReenableAt then
+						promptDigReenableAt = nil
 					end
 				end
 
-				HandheldShovelItem.setCancelPromptEnabled(not gActiveSite)
+				if not interactableSite then
+					enableDigPrompt = false
+				end
+
+				HandheldShovelItem.setDigPromptEnabled(enableDigPrompt)
+
+				HandheldShovelItem.setCancelPromptEnabled(gActiveSite == nil)
 
 				noInteractableSiteThisFrame = false
-			end
-
-			if interactableSite then
-
-				-- Reabilitar o prompt caso tenha sido desabilitado
-				-- na ultima vez que foi pressionado.
-				if promptDigReenableAt and GetGameTimer() >= promptDigReenableAt then
-					
-					-- Só reabilitar caso não esteja cavando :P
-					if not gActiveSite then
-						HandheldShovelItem.setDigPromptEnabled(true)
-					end
-
-					promptDigReenableAt = nil
-				end
 			end
 
 			Wait(0)
@@ -356,105 +351,6 @@ AddEventHandler('onStopHandheldShovelItem', function()
 	gEnableScript = false
 end)
 
---[[
-RegisterCommand(
-	"dig",
-	function(source, args, rawCommand)
-		local chestModelHash = GetHashKey("P_TRUNK02X")
-		chestModelHash = GetHashKey("P_STRONGBOX_MUDDY_01X")
-		local lootModelHash = GetHashKey("p_cs_ropehandssplit_sml_2")
-		local dressingModelHash = GetHashKey("MP005_P_DRESSINGLBMHAY04X")
-		local moundModelHash = GetHashKey("MP005_P_DIRTPILE_BIG01_BURIED")
-
-		RequestModel(chestModelHash)
-		RequestModel(lootModelHash)
-		RequestModel(dressingModelHash)
-		RequestModel(moundModelHash)
-
-		while not HasModelLoaded(dressingModelHash) or not HasModelLoaded(lootModelHash) or not HasModelLoaded(chestModelHash) or not HasModelLoaded(moundModelHash) do
-			Wait(0)
-		end
-
-		local ped = PlayerPedId()
-
-		local pedPosition = GetOffsetFromEntityInWorldCoords(ped, 2.0, 0.0, 0.0)
-
-		local _, groundZ, normal = GetGroundZAndNormalFor_3dCoord(pedPosition.x, pedPosition.y, pedPosition.z)
-		pedPosition = vec3(pedPosition.xy, groundZ - 0.05)
-
-		local chest = CreateObjectNoOffset(chestModelHash, pedPosition + vec3(0.0, 0.0, -1.5), true, true, false, true) -- + vec3(-10.0, 0.0, 0.0)
-		-- local loot = CreateObjectNoOffset(lootModelHash, pedPosition, false, true, false, true) -- + vec3(-15.0, 0.0, 0.0)
-		-- local dressing = CreateObjectNoOffset(dressingModelHash, pedPosition, true, true, false, true) -- + vec3(-20.0, 0.0, 0.0)
-		-- local mound = CreateObjectNoOffset(moundModelHash, pedPosition, true, true, false, true) -- + vec3(-10.0, 0.0, 0.0)
-
-		-- local animscene = CreateAnimScene("script@mech@treasure_hunting@chest", 64, "PBL_CHEST_01", true, true)
-		local animscene = CreateAnimScene("script@mech@treasure_hunting@grab", 64, "PBL_GRAB_01", true, true)
-
-		LoadAnimScene(animscene)
-
-		while not Citizen.InvokeNative(0x477122B8D05E7968, animscene) do
-			print('still loadingg')
-
-			Wait(0)
-		end
-
-		SetAnimSceneOrigin(animscene, pedPosition, 0.0, 0.0, 0.0, 2)
-
-		SetAnimSceneEntity(animscene, "player", ped, 0)
-		-- SetAnimSceneEntity(animscene, "LOOT", loot, 0)
-		-- SetAnimSceneEntity(animscene, "MOUND", mound, 0)
-
-		-- SetAnimSceneEntity(animscene, "CHEST", chest, 0)
-		-- SetAnimSceneEntity(animscene, "DRESSING", dressing, 0)
-
-		-- StartAnimScene(animscene)
-
-		-- Wait(2000)
-
-		-- Citizen.InvokeNative(0x8245C1F3262F4AC2, animscene)
-
-		-- TaskEnterAnimScene(ped, animscene, "player", "PBL_CHEST_01", 1069379748, 1, 128, 20000, -1082130432)
-		TaskEnterAnimScene(ped, animscene, "player", "PBL_GRAB_01", 1.48, 1, 128, 20000, -1.0)
-
-		Citizen.CreateThread(function()
-			while true do
-				Citizen.Wait(0)
-				-- local AnimTime = Citizen.InvokeNative(0x61BE7D6186260002, animscene, Citizen.ResultAsFloat())
-				-- local hasEnded = Citizen.InvokeNative(0xD8254CB2C586412B, animscene, 0)
-
-				-- if AnimTime >= 5 then
-				-- 	ClearPedTasks(ped)
-				-- 	ClearPedSecondaryTask(ped)
-				-- 	SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
-				--	Citizen.InvokeNative(0xD6824B7D24DC0CE0 , animscene, 1)
-				-- end
-
-				print("abc", Citizen.InvokeNative(0xE5822422197BBBA3, animscene, "player", 1))
-
-				-- if hasEnded == 1 then
-				-- 	Citizen.InvokeNative(0x188F8071F244B9B8, chest, 1) -- SET_RANSACK_AS_OPEN
-
-				-- 	SetEntityAsNoLongerNeeded(chest)
-				-- 	SetEntityAsNoLongerNeeded(dressing)
-				-- 	SetEntityAsNoLongerNeeded(mound)
-
-				-- 	DeleteEntity(loot)
-
-				-- 	cAPI.notify("item", "gold", 20)
-
-				-- 	break
-				-- end
-			end
-		end)
-	end
-)
-]]
-
--- CreateThread(function()
---     Wait(2000)
---     print('convar', GetConvar('teste', 'alo'))
--- end)A
-
 RegisterNetEvent('net.digSiteStateUpdateAck', function(digCluster, digSite, digSiteState)
 	if gCurrentCluster ~= digCluster then
 		return
@@ -474,28 +370,3 @@ AddEventHandler('onResourceStop', function(resource)
 		end
 	end
 end)
-
--- function findDict()
-
--- 	-- DatafileSelectActiveFile
--- 	Citizen.InvokeNative(0x46102A0989AD80B5, )
-
--- 	--- DatafileGetFileDict
--- 	local sVar1 = Citizen.InvokeNative(0xBBD8CF823CAE557C, 0) -- Got main dict:
-
--- 	-- DatadictGetDict
--- 	local uParam5 = Citizen.InvokeNative(0x4D7A30130F46AC9C, sVar1, 'mission')
-
--- 	-- DatadictGetDict
--- 	local sVar242 = Citizen.InvokeNative(0x4D7A30130F46AC9C, uParam5, 'sPPH')
-
--- 	-- sVar242, 'anims', ''
-
--- 	-- DatadictGetString
--- 	local s = Citizen.InvokeNative(0xE37B38C0B4E95DFA, sVar242, 'anims')
-
--- 	print('sVar1', sVar1)
--- 	print('uParam5', uParam5)
--- 	print('sVar242', sVar242)
--- 	print('s', s)
--- end
