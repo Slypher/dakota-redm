@@ -4,7 +4,7 @@ LOOTTABLE = {
         lootWeight = 70,
     },
     {
-        lootItemId = 'minhocas',
+        lootItemId = 'p_baitworm01x',
         lootWeight = 25,
     },
 }

@@ -533,9 +533,17 @@ ItemList = {
         stackSize = 1,
         worldModel = "w_melee_fishingpole02"
     },
+    ["p_baitworm01x"] = {
+        type = "generic",
+        name = "Isca de Minhoca",
+        weight = 0.1,
+        description = "Uma isca feita minhocas.",
+        stackSize = 50,
+        worldModel = "p_baitworm01x"
+    },
     ["p_baitBread01x"] = {
         type = "generic",
-        name = "isca de Pão",
+        name = "Isca de Pão",
         weight = 0.1,
         description = "Uma isca feita com sobras da padaria",
         stackSize = 50
@@ -874,7 +882,13 @@ ItemList = {
         stackSize = 1,
         worldModel = "p_cs_miningpan01x"
     },
-
+    ["terra"] = {
+        type = "generic",
+        name = "Terra",
+        weight = 0.1,
+        description = "Um punhado de terra.",
+        stackSize = 10
+    },
 
 --------------------------------------------------------------------------------------------------------
 ------------------------------------------ÁRVORES E MATO------------------------------------------------
@@ -1960,7 +1974,7 @@ ItemList = {
         weight = 2.5,
         description = "Uma Barra de Ouro, você pode comprar muitas coisas agora, ou investir!",
         stackSize = 10,
-        worldModel = "p_threadneedle01x"
+        worldModel = "P_INV_TREASUREGOLDBAR01X"
     },
     ["barraferro"] = {
         type = "generic",
@@ -2338,7 +2352,7 @@ ItemList = {
         weight = 0.001,
         description = "Uma brilhante e cara grama de ouro.",
         stackSize = -1,
-        worldModel = "p_goldnuggetgroup01x"
+        worldModel = "P_INV_TREASUREGOLDBAR02X"
     },
 
 
