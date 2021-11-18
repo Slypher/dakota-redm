@@ -18,14 +18,20 @@ RegisterNetEvent('net.wagonShopRequestCanBuyItem', function(shopItemIndex)
         return
     end
 
+    local user = ServerAPI.getUserFromSource(playerId)
+
     local hasTemporaryWagonAlready = gPlayerScriptEntities[playerId] ~= nil
 
     if hasTemporaryWagonAlready then
-
-        local user = ServerAPI.getUserFromSource(playerId)
-
         user:notify('error', 'Você já tem uma carroça temporário em algum lugar!')
+        return
+    end
 
+    local character = user:getCharacter()
+    local inventory = character:getInventory()
+
+    if inventory:getItemAmount('money') <= (shopItem.basePriceInDollars * 100) then
+        user:notify('error', 'Você não possui dinheiro suficiente!')
         return
     end
 
@@ -52,7 +58,19 @@ RegisterNetEvent('net.wagonShopRequestBuyItem', function(shopItemIndex, createdE
         Wait(0)
     end
 
+    local user = ServerAPI.getUserFromSource(playerId)
+    local character = user:getCharacter()
+    local inventory = character:getInventory()
+
     local createdEntity = NetworkGetEntityFromNetworkId(createdEntityNetworkId)
+
+    if not inventory:removeItem(-1, 'money', shopItem.basePriceInDollars * 100) then
+        DeleteEntity(createdEntity)
+
+        user:notify('error', 'Você não possui dinheiro suficiente!')
+
+        return
+    end
 
     print('net.wagonShopRequestBuyItem :: createdEntity', createdEntity)
 

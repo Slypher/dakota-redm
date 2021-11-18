@@ -1,17 +1,23 @@
+local Proxy = module('_core', 'lib/Proxy')
+
+local ClientAPI = Proxy.getInterface('API')
+
 local HUNTING_WAGON_TARP_PROPSET = `pg_mp005_huntingWagonTarp01`
 
 local gShopInRangeThread = false
 local gWaitingResponse = false
 
-local gPromptOpenShop
 local gPromptGroup
+
+local gPromptOpenShop
+local gPromptReturnWagon
 
 CreateThread(function()
     while true do
         local playerPed = PlayerPedId()
         local playerPos = GetEntityCoords(playerPed)
 
-        local closestShopDistance = 5
+        local closestShopDistance = 10.0
         local closestShop
 
         for _, shop in ipairs(SHOPS) do
@@ -60,17 +66,35 @@ function createThreadShopInRange(shop)
 
             local distanceToInteractionPos = #(GetEntityCoords(playerPed) - shopInteractionPos)
 
-            if distanceToInteractionPos <= 2.0 then
+            local playerVehicle = GetVehiclePedIsIn(playerPed)
+
+            local isPlayerDriveOfATemporarWagon = playerVehicle ~= 0
+                                            and Entity(playerVehicle).state.isTemporaryPlayerWagon
+                                            and GetPedInVehicleSeat(playerVehicle, -1) == playerPed
+
+            if distanceToInteractionPos <= (isPlayerDriveOfATemporarWagon and 5.0 or 2.0) then
                 PromptSetActiveGroupThisFrame(gPromptGroup, CreateVarString(10, 'LITERAL_STRING', 'Loja de Carroças'))
+
+                PromptSetEnabled(gPromptReturnWagon, isPlayerDriveOfATemporarWagon)
+
+                if isPlayerDriveOfATemporarWagon then
+                    if PromptHasHoldModeCompleted(gPromptReturnWagon) then
+                        
+                        DeleteEntity(playerVehicle)
+                        
+                        Wait(100)
+                    end
+                end
 
                 if PromptHasHoldModeCompleted(gPromptOpenShop) then
                     WarMenu.OpenMenu('wagon_shop')
+
                     Wait(100)
                 end
 
                 if WarMenu.IsMenuOpened('wagon_shop') then
                     for shopItemIndex, shopItem in ipairs(AVAILABLE_ITEMS) do
-                        if WarMenu.Button(shopItem.displayName) and (not gWaitingResponse) then
+                        if WarMenu.Button( ('%s $%0.02f'):format(shopItem.displayName, shopItem.basePriceInDollars) ) and (not gWaitingResponse) then
                             requestBuyShopItem(shopItemIndex)
                         end
                     end
@@ -94,7 +118,10 @@ function onStartThreadShopInRange()
     WarMenu.CreateMenu('wagon_shop', 'Aluguel de Carroça')
     WarMenu.SetSubTitle('wagon_shop', 'Lista de Carroça')
 
-    gPromptOpenShop, gPromptGroup = createPrompt()
+    gPromptGroup = GetRandomIntInRange(0, 0xffffff)
+
+    gPromptOpenShop = createPrompt(gPromptGroup, `INPUT_SHOP_BUY`, 'Abrir')
+    gPromptReturnWagon = createPrompt(gPromptGroup, `INPUT_CONTEXT_X`, 'Devolver Carroça')
 
     requestShopItemModels()
 end
@@ -103,6 +130,7 @@ function onStopThreadShopInRange()
     print('onStopThreadShopInRange :: stopped')
 
     PromptDelete(gPromptOpenShop)
+    PromptDelete(gPromptReturnWagon)
 
     releaseShopItemModels()
 end
@@ -116,10 +144,19 @@ function createShopItemInWorldSynchronous(shop, shopItem)
 
     print('createShopItemInWorldSynchronous :: model was lodaed')
 
-    -- CreateDraftVehicle
-    local entity = Citizen.InvokeNative(0x214651FB1DFEBA89, modelHash, shop.boughtSpawnPosition, 0.0, true, false, false, 1, false)
+    local spawnPos = shop.boughtSpawnPosition
 
-    print('createShopItemInWorldSynchronous :: entity was created', entity, shop.boughtSpawnPosition)
+    local isSpawnPointOccupied = Citizen.InvokeNative(0x59B57C4B06531E1E, spawnPos, 4.0, CreateItemset(true), 2, Citizen.ResultAsInteger()) > 0
+
+    if isSpawnPointOccupied then
+        ClientAPI.notify('error', 'A área de spawn das carroças está ocupada!')
+        return
+    end
+
+    -- CreateDraftVehicle
+    local entity = Citizen.InvokeNative(0x214651FB1DFEBA89, modelHash, spawnPos, 0.0, true, false, false, 1, false)
+
+    print('createShopItemInWorldSynchronous :: entity was created', entity, spawnPos)
 
     local playerId = PlayerId()
 
@@ -141,6 +178,8 @@ function createShopItemInWorldSynchronous(shop, shopItem)
     Citizen.InvokeNative(0x75F90E4051CC084C, entity, HUNTING_WAGON_TARP_PROPSET)
 
     createWagonStateBagAsync(entity)
+
+    SetGameplayEntityHint(entity, vec3(0.0, 0.0, 0.0), -1, 1000, 1000, 0, 0)
 
     return entity, NetworkGetNetworkIdFromEntity(entity)
 end
@@ -189,16 +228,15 @@ AddEventHandler('onResourceStop', function(resource)
     onStopThreadShopInRange()
 end)
 
-function createPrompt()
+function createPrompt(promptGroup, controlActionHash, promptText)
     local prompt = PromptRegisterBegin()
-    local promptGroup = GetRandomIntInRange(0, 0xffffff)
-    PromptSetControlAction(prompt, `INPUT_SHOP_BUY`)
-    PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", 'Abrir'))
+    PromptSetControlAction(prompt, controlActionHash)
+    PromptSetText(prompt, CreateVarString(10, 'LITERAL_STRING', promptText))
     PromptSetEnabled(prompt, true)
     PromptSetVisible(prompt, true)
     PromptSetHoldMode(prompt, true)
     PromptSetGroup(prompt, promptGroup)
     PromptRegisterEnd(prompt)
 
-    return prompt, promptGroup
+    return prompt
 end

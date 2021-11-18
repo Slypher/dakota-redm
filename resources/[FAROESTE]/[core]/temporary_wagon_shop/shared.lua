@@ -1,6 +1,9 @@
 AVAILABLE_ITEMS = {
     {
         modelHash = `Huntercart01`,
-        displayName = 'Carrt',
+
+        displayName = 'Carroça de Caça',
+
+        basePriceInDollars = 05.00,
     }
 }
