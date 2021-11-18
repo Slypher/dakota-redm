@@ -29,22 +29,28 @@ end
 Citizen.CreateThread(function()
     Chop()
     while true do
-        Citizen.Wait(2)
+        Citizen.Wait(0)
         local sleep = true
         local playerped = PlayerPedId()
         if not IsPedOnMount(playerped) and not IsPedInAnyVehicle(playerped) and not IsPedDeadOrDying(playerped) then
-            local x, y, z = table.unpack(GetEntityCoords(PlayerPedId()))
-            for k,v in pairs(Config.Trees) do
-            local tree = DoesObjectOfTypeExistAtCoords(x, y, z, 1.0, GetHashKey(v), true)
+            local playerPos = GetEntityCoords(playerped)
+
+            local posX, posY, posZ = playerPos.x, playerPos.y, playerPos.z
+
+            for k, v in pairs(Config.Trees) do
+                local tree = DoesObjectOfTypeExistAtCoords(posX, posY, posZ, GetHashKey(v), true)
+
                 if tree and not InArray(ChoppedTrees, tostring(v))then
                     sleep = false
+                    
                     if active == false then
                         local ChoppingGroupName  = CreateVarString(10, 'LITERAL_STRING', "Lenhador")
                         PromptSetActiveGroupThisFrame(TreeGroup, ChoppingGroupName)
                     end
+
                     if PromptHasHoldModeCompleted(CuttingPrompt) then
                         active = true
-                        SetCurrentPedWeapon(playerped, GetHashKey("WEAPON_UNARMED"), true, 0, false, false)
+                        SetCurrentPedWeapon(playerped, `WEAPON_UNARMED`, true, 0, false, false)
                         Citizen.Wait(500)
                         TriggerServerEvent("lumberjack:axecheck", tostring(v))
                     end
@@ -203,7 +209,7 @@ function GetArrayKey(array, value)
 end
 
 function InArray(array, item)
-    for k,v in pairs(array) do
+    for k,v in ipairs(array) do
         if v == item then return true end
     end
     return false

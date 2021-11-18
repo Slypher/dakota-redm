@@ -80,7 +80,7 @@ AddEventHandler(
 Citizen.CreateThread(
     function()
         while true do
-            Citizen.Wait(0)
+            Citizen.Wait(100)
             if not IsPedOnMount(PlayerPedId()) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
                 SetMinimapType(0)
 
@@ -263,7 +263,7 @@ local Town = {
 
 Citizen.CreateThread(function()
     while true do       
-        Wait(0) 
+        Wait(300) 
         local Coords = GetEntityCoords(PlayerPedId())
         if  GetDistanceBetweenCoords(Coords.x, Coords.y, Coords.z, Town["Locaties"][1]["X"], Town["Locaties"][1]["Y"], Town["Locaties"][1]["Z"], true) <= 200.0 then
         location = 'Valentine'
