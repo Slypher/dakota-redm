@@ -1,6 +1,8 @@
--- local Proxy = module('_core', 'lib/Proxy')
+local Proxy = module('_core', 'lib/Proxy')
 
-local GOLD_PANNING_REWARD_DICE_INTERVAL = 10
+local ServerAPI = Proxy.getInterface('API')
+
+local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
 local GOLD_PANNING_WIN_GOLD_CHANCE = 0.10
 
 local gPlayersGoldPanning = { }
@@ -56,6 +58,22 @@ function ensureGoldPanningRewardTimer()
                     if rnd <= GOLD_PANNING_WIN_GOLD_CHANCE then
                         TriggerClientEvent('net.playerGoldPanningFoundGold', playerId)
 
+                        -- Aguardar um pouco para adicionar o ouro por conta da animação.
+                        CreateThread(function()
+                            Wait(1000)
+
+                            local user = ServerAPI.getUserFromSource(playerId)
+
+                            if not user then
+                                return
+                            end
+                            
+                            local character = user:getCharacter()
+                            local inventory = character:getInventory()
+
+                            inventory:addItem('minerioouro', 1)
+                            user:notify('item', 'minerioouro', 1)
+                        end)
                         -- #TODO: Adicionar item.
                     else
                         TriggerClientEvent('net.playerGoldPanningFoundNothing', playerId)
