@@ -178,3 +178,7 @@ function getCarriableEntityItem(carriableEntity)
         return func_1193(carriableEntity)
     end
 end
+
+-- #TODO: Não é ideal, talvez fazer um script comum para os outros scripts que usam isso
+-- talvez colocar isso no core :/
+exports('getCarriableEntityItem', getCarriableEntityItem)

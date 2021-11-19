@@ -130,9 +130,9 @@ function RunButcherShopBrainThread()
                 goto continue
             end
 
-            PromptSetActiveGroupThisFrame(promptGroup, CreateVarString(10, 'LITERAL_STRING', 'Vender Items da Carroça'))
-
             if ProcessDropOffFromHuntingWagon() then
+                PromptSetActiveGroupThisFrame(promptGroup, CreateVarString(10, 'LITERAL_STRING', 'Vender Items da Carroça'))
+
                 PromptSetEnabled(gPromptDropOffHuntingWagon, true)
             else
                 PromptSetEnabled(gPromptDropOffHuntingWagon, false)
@@ -173,8 +173,6 @@ function ProcessDropOffCarriableEntity()
     -- GetCarriableEntityState
     local carriableState = Citizen.InvokeNative(0x61914209C36EFDDB, carryingEntity, Citizen.ResultAsInteger())
 
-    local animalSellInfo = Config.Animals[animalModel]
-
     -- if animalSellInfo then
         -- DrawCommonText('~e~Solte o animal próximo da açougueiro para vender.')
     -- end
@@ -188,6 +186,25 @@ function ProcessDropOffCarriableEntity()
         -- CARRIABLE_STATE_NONE
         onEntityCarriableStateChangesTo(carryingEntity, 0 | 3, function()
             -- print('fully on the ground')
+
+            local carriableRDR3InventoryItem = exports.hunting_wagon:getCarriableEntityItem(carryingEntity)
+
+            -- print(
+            --     GetFrameTime(),
+            --     'Issa animal or a pelt',
+            --     animalModel,
+            --     `PROVISION_DEER_HIDE_POOR`,
+            --     `PROVISION_DEER_HIDE_PRISTINE`,
+            --     `PROVISION_DEER_HIDE`,
+            --     `PROVISION_ANIMAL_CARCASS_DEER_HIGH_QUALITY`,
+            --     `PROVISION_ANIMAL_CARCASS_DEER_PERFECT`,
+            --     `PROVISION_ANIMAL_CARCASS_DEER_POOR`,
+            --     carriableRDR3InventoryItem
+            -- )
+
+            local animalSellInfo = RDR3ProvisionItemToDollars[carriableRDR3InventoryItem] or Config.Animals[animalModel]
+
+            -- print('animalSellInfo', animalSellInfo)
 
             if not animalSellInfo then
                 DisplayCommonNotification(Config.Language.NotInTheButcher)
@@ -213,7 +230,8 @@ function ProcessDropOffCarriableEntity()
 
             -- #TODO: Passar esta merda toda de enviar item para o server-side.
 
-            local toAddMoneyQnt = animalSellInfo.toAddStaticMoney
+            -- `animalSellInfo` vai ser do tipo `number` quando estiver puxando do RDR3ProvisionItemToDollars
+            local toAddMoneyQnt = type(animalSellInfo) == 'number' and (animalSellInfo * 100) or nil
 
             if not toAddMoneyQnt then
                 -- local toAddItem = animalSellInfo.givenItem

@@ -6,6 +6,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 shared_scripts {
     '@_core/lib/utils.lua',
+    'rdr3-provision-to-dollars.lua',
 }
 
 client_scripts {
@@ -17,7 +18,6 @@ client_scripts {
 }
 
 server_scripts {
-    'rdr3-provision-to-dollars.lua',
     'server.lua',
 }
 

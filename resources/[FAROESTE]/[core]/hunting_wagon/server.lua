@@ -47,7 +47,7 @@ RegisterNetEvent('net.huntingWagonRemoveAllItemsAndCollectMoney', function(wagon
     local toAddDollars = 0
 
     forAllWagonItems(function(itemId, itemAmount)
-        local provisionSellingPriceInDollars = RDR3ProvisionItemToDollars[itemId] or 10
+        local provisionSellingPriceInDollars = RDR3ProvisionItemToDollars[itemId] or 00.10
 
         toAddDollars += (provisionSellingPriceInDollars * itemAmount)
     end)
@@ -59,6 +59,9 @@ RegisterNetEvent('net.huntingWagonRemoveAllItemsAndCollectMoney', function(wagon
         user:notify('0 Doralés.')
         return
     end
+
+    -- Está vindo da config como o formato: 00.10
+    toAddDollars *= 100
 
     wagonInventoryDelete(wagonEntity)
 

@@ -104,42 +104,4 @@ Config.Animals = {
     [-300867788]   = {["name"] = "Lake Sturgeon",             ["givenItem"] = "oleodepeixe",          ["money"] = 0.30,  ["gold"] = 0,  ["rolPoints"] = 0,  ["xp"] = 1,  ["poorQualityMultiplier"] = 0.20,  ["goodQualityMultiplier"] = 2.0,  ["perfectQualityMultiplier"] = 3.0,  ["poor"] = nil,          ["good"] = nil,          ["perfect"] = nil },
     [1538187374]   = {["name"] = "Channel Catfish",           ["givenItem"] = "oleodepeixe",          ["money"] = 0.30,  ["gold"] = 0,  ["rolPoints"] = 0,  ["xp"] = 1,  ["poorQualityMultiplier"] = 0.20,  ["goodQualityMultiplier"] = 2.0,  ["perfectQualityMultiplier"] = 3.0,  ["poor"] = nil,          ["good"] = nil,          ["perfect"] = nil },
     [697075200]    = {["name"] = "Northern Pike",             ["givenItem"] = "oleodepeixe",          ["money"] = 0.30,  ["gold"] = 0,  ["rolPoints"] = 0,  ["xp"] = 1,  ["poorQualityMultiplier"] = 0.20,  ["goodQualityMultiplier"] = 2.0,  ["perfectQualityMultiplier"] = 3.0,  ["poor"] = nil,          ["good"] = nil,          ["perfect"] = nil },
-
-    -- [`PROVISION_SKINNED_CARCASS_ALLIGATOR_HIGH_QUALITY`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_ALLIGATOR_PERFECT`]      = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_ALLIGATOR_POOR`]         = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_SKINNED_CARCASS_ARMADILLO_HIGH_QUALITY`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_ARMADILLO_PERFECT`]      = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_ARMADILLO_POOR`]         = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_SKINNED_CARCASS_BADGER_HIGH_QUALITY`]    = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_BADGER_PERFECT`]         = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_BADGER_POOR`]            = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_SKINNED_CARCASS_WOLF_HIGH_QUALITY`]      = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_WOLF_PERFECT`]           = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SKINNED_CARCASS_WOLF_POOR`]              = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_FOX_FUR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_COUGAR_FUR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_FOX_FUR_PRISTINE`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_PRONGHORN_FUR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_GOAT_HAIR_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_BEAVER_FUR_PRISTINE`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_COYOTE_FUR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_BOAR_SKIN_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_SHEEP_WOOL_PRISTINE`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_PANTHER_FUR_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_BUCK_FUR_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_FOX_FUR_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_GOAT_HAIR`] = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_WOLF_FUR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_WOLF_FUR_POOR`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_WOLF_FUR_PRISTINE`] = { moneyInDollars = 0.1 },
-
-    -- [`PROVISION_WOLF_LEGENDARY_FUR_01`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_WOLF_LEGENDARY_FUR_02`] = { moneyInDollars = 0.1 },
-    -- [`PROVISION_WOLF_LEGENDARY_FUR_03`] = { moneyInDollars = 0.1 },
 }

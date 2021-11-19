@@ -5,7 +5,8 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 client_script {
     '@_core/lib/utils.lua',
     'config.lua',
-    'client/main.lua'    
+    'client/main.lua',
+    '@hunting_wagon/rdr3-provision-to-dollars.lua',
 }
 
 server_script {
