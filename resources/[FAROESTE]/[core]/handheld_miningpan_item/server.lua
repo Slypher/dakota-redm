@@ -5,11 +5,11 @@ local LootTableGen = Proxy.getInterface('LootTableGen')
 
 local LOOT_TABLE = {
     {
-        lootItemId = 'pepitadeouro',
+        lootItemId = 'cristal',
         lootWeight = 70,
     },
     {
-        lootItemId = 'cristal',
+        lootItemId = 'pepitadeouro',
         lootWeight = 30,
     },
     {
@@ -24,6 +24,14 @@ local LOOT_TABLE = {
         lootItemId = 'diamante',
         lootWeight = 5,
     },
+
+    --[[
+        cristal      : 55.12%
+        pepitadeouro : 23.62%
+        esmeralda    : 9.45%
+        rubi         : 7.87%
+        diamante     : 3.94%
+    ]]
 }
 
 local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
