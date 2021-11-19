@@ -657,19 +657,22 @@ RegisterCommand(
     end
 )
 
+RegisterNetEvent('FRP:ADMIN:DestroyTargetEntity', function(entityNetworkId)
+    local _source = source
+    local User = API.getUserFromSource(source)
+    local Character = User:getCharacter()
 
-RegisterCommand(
-    "deltarget",
-    function(source, args, rawCommand)
-        local _source = source
-        local User = API.getUserFromSource(source)
-        local Character = User:getCharacter()
+    if Character:hasGroupOrInheritance("admin") then
 
-        if Character:hasGroupOrInheritance("admin") then
-            TriggerClientEvent("FRP:ADMIN:DestroyTargetEntity", _source)
+        local entity = NetworkGetEntityFromNetworkId(entityNetworkId)
+
+        if entity == 0 then
+            return
         end
+
+        DeleteEntity(entity)
     end
-)
+end)
 
 RegisterCommand(
     "aviso",

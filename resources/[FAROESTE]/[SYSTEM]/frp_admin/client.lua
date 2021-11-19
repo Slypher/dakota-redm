@@ -280,28 +280,29 @@ AddEventHandler(
 	end
 )
 
-RegisterNetEvent("FRP:ADMIN:DestroyTargetEntity")
-AddEventHandler(
-	"FRP:ADMIN:DestroyTargetEntity",
-	function()
-		print("a")
-		local ped = PlayerPedId()
-		local pedVector = GetEntityCoords(ped)
+RegisterCommand('deltarget', function(source, args, rawCommand)
+	local ped = PlayerPedId()
+	local pedVector = GetEntityCoords(ped)
 
-		local cameraRotation = GetGameplayCamRot()
-		local cameraCoord = GetGameplayCamCoord()
-		local direction = RotationToDirection(cameraRotation)
-		local lastCoords = vec3(cameraCoord.x + direction.x * 10.0, cameraCoord.y + direction.y * 10.0, cameraCoord.z + direction.z * 10.0)
+	local cameraRotation = GetGameplayCamRot()
+	local cameraCoord = GetGameplayCamCoord()
+	local direction = RotationToDirection(cameraRotation)
+	local lastCoords = vec3(cameraCoord.x + direction.x * 10.0, cameraCoord.y + direction.y * 10.0, cameraCoord.z + direction.z * 10.0)
 
-		local rayHandle = StartShapeTestRay(cameraCoord, lastCoords, -1, ped, 0)
-		local _, hit, endCoords, _, entityHit = GetShapeTestResult(rayHandle)
+	local rayHandle = StartShapeTestRay(cameraCoord, lastCoords, -1, ped, 0)
+	local _, hit, endCoords, _, entityHit = GetShapeTestResult(rayHandle)
 
-		if hit == 1 and entityHit ~= 0 then
+	if hit == 1 and entityHit ~= 0 then
+
+		if NetworkGetEntityIsNetworked(entityHit) then
+			TriggerServerEvent('FRP:ADMIN:DestroyTargetEntity', NetworkGetNetworkIdFromEntity(entityHit))
+		else
 			SetEntityAsMissionEntity(entityHit, true, true)
+
 			DeleteEntity(entityHit)
 		end
 	end
-)
+end)
 
 AddEventHandler(
 	"onResourceStop",
