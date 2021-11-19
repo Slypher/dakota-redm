@@ -41,7 +41,7 @@ AddEventHandler(
 
         local numTroopers = #API.getUsersByGroup("trooper")
 
-        if 6 < 5 then
+        if numTroopers < 5 then
             TriggerClientEvent("FRP:NOTIFY:Simple", _source, "Este banco não pode ser roubado, polícia insuficiente.")
             return
         end
