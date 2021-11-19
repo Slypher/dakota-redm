@@ -15,6 +15,7 @@ RegisterNetEvent('net.wagonShopRequestCanBuyItem', function(shopItemIndex)
     local shopItem = AVAILABLE_ITEMS[shopItemIndex]
     
     if not shopItem then
+        print('net.wagonShopRequestCanBuyItem :: no shopping item')
         return
     end
 

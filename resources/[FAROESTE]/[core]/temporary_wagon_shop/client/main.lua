@@ -195,6 +195,8 @@ function createWagonStateBagAsync(entity)
 end
 
 function requestBuyShopItem(shopItemIndex)
+    print('requestBuyShopItem', shopItemIndex)
+    
     TriggerServerEvent('net.wagonShopRequestCanBuyItem', shopItemIndex)
 
     gWaitingResponse = true
