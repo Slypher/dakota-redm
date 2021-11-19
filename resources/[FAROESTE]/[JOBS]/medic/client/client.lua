@@ -85,9 +85,9 @@ end)
 
 RegisterNetEvent("mediconotification")
 AddEventHandler("mediconotification", function(notifierPlayerUserId, coords)
-	TriggerEvent("FRP:NOTIFY:Simple", ('Telegrama: Um civil(%d) foi avistado desmaiado neste local'):format(notifierPlayerUserId) , 5000)
-	local blip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, coords.x, coords.y, coords.z, 20.0)
-	Wait(30000)--Timer del blip per gli sceriffi
+	TriggerEvent("FRP:NOTIFY:Simple", ('Telegrama: Um civil(%d) foi avistado desmaiado neste local'):format(notifierPlayerUserId) , 10000)
+	local blip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, coords.x, coords.y, coords.z, 40.0)
+	Wait(60000)--Timer del blip per gli sceriffi
 	RemoveBlip(blip)
 end)
 
