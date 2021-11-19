@@ -48,6 +48,10 @@ AddEventHandler('gameEventCarriableVehicleStowComplete', function(stowerEntity, 
     gEntityBeingStowed = nil
     gEntityBeingStowedItem = nil
     gEntityBeingStowedItemWeight = nil
+
+    Wait(100)
+
+    print('gameEventCarriableVehicleStowComplete :: getHuntingWagonInventoryUsage', getHuntingWagonInventoryUsage(vehicle))
 end)
 
 -- Esse evento é executado duplicado...
