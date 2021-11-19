@@ -45,7 +45,7 @@ WEAPON_INFO_DATABASE = {
     ['weapon_repeater_winchester'] = {
         group = 'group_repeater',
         max_ammo = 200,
-        max_ammo_in_clip = 10,
+        max_ammo_in_clip = 14,
         useable_ammo_types = { 'ammo_repeater', 'ammo_repeater_express', 'ammo_repeater_express_explosive', 'ammo_repeater_high_velocity' },
     },
 
