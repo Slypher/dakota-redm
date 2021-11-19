@@ -369,21 +369,20 @@ local lastVarString
 function drawText(str, center)
     local x = 0.50
     local y = 0.05
-    if lastDisplayedText == nil or lastDisplayedText ~= str then
-        lastDisplayedText = str
-        lastVarString = CreateVarString(10, "LITERAL_STRING", str)
-    end
+
+    local varstr = CreateVarString(10, "LITERAL_STRING", str)
+
     SetTextScale(0.5, 0.5)
     SetTextColor(255, 255, 255, 255)
     Citizen.InvokeNative(0xADA9255D, 1)
     --DisplayText(str, x, y)
     if center then
         SetTextCentre(center)
-        DisplayText(lastVarString, x, y)
+        DisplayText(varstr, x, y)
     elseif alignRight then
-        DisplayText(lastVarString, x + 0.15, y)
+        DisplayText(varstr, x + 0.15, y)
     else
-        DisplayText(lastVarString, x, y)
+        DisplayText(varstr, x, y)
     end
 end
 
