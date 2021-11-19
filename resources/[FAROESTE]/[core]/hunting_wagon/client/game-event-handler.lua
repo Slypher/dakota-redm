@@ -78,10 +78,6 @@ AddEventHandler('gameEventCarriablePromptInfoRequest', function(carriableEntity,
 
     print('gameEventCarriablePromptInfoRequest :: carriableEntityItem', carriableEntityItem)
 
-    local carriableEntityItemWeight = getCarriableItemStowWeight(carriableEntityItem)
-
-    print('gameEventCarriablePromptInfoRequest :: carriableEntityItemWeight', carriableEntityItemWeight)
-
     if carryAction ~= 8 then
         return
     end
@@ -100,28 +96,48 @@ AddEventHandler('gameEventCarriablePromptInfoRequest', function(carriableEntity,
 
     if canStow then
         -- Desabilitar caso o item adicionado ultrapasse do peso máximo.
-        canStow = doesHuntingWagonHasSpaceForWeight(targetParentEntity, carriableEntityItemWeight)
+        canStow = canHuntingWagonInventoryFitRDR3InventoryItem(targetParentEntity, carriableEntityItem)
     end
 
     -- print('canStow', canStow)
 
+    local carriableEntityItemWeight = getCarriableItemStowWeight(carriableEntityItem)
+
+    -- print('gameEventCarriablePromptInfoRequest :: carriableEntityItemWeight', carriableEntityItemWeight)
+
     exports[GetCurrentResourceName()]:overrideCarryActionPrompt(carriableEntity, carryAction, carriableEntityItemWeight, canStow)
 end)
 
-function isHuntingWagonFull(huntingWagonEntity)
-    local currWeight = Entity(huntingWagonEntity).state.huntingWagonInventoryWeight or 0.0
+function getHuntingWagonInventoryUsage(huntingWagonEntity)
+    local statebag = Entity(huntingWagonEntity).state
 
-    return currWeight > iHuntingWagonInventory
-end
+    local usage = 0
 
-function doesHuntingWagonHasSpaceForWeight(huntingWagonEntity, addWeight)
-    local currWeight = Entity(huntingWagonEntity).state.huntingWagonInventoryWeight or 0.0
-
-    if currWeight + addWeight > iHuntingWagonInventory then
-        return false
+    for rdr3InventoryItemHash, itemAmount  in pairs(statebag.huntingWagonInventoryItems or { }) do
+        usage += calculateCarcassItemSlotUsage(rdr3InventoryItemHash) * itemAmount
     end
 
-    return true
+    -- print('getHuntingWagonInventoryUsage', usage)
+
+    return usage
+end
+
+function isHuntingWagonFull(huntingWagonEntity)
+    return getHuntingWagonInventoryUsage(huntingWagonEntity) > iHuntingWagonInventory
+end
+
+function canHuntingWagonInventoryFitRDR3InventoryItem(huntingWagonEntity, rdr3InventoryItemHash)
+    local inventoryItemUsage = calculateCarcassItemSlotUsage(rdr3InventoryItemHash)
+
+    local wagonInventoryUsage = getHuntingWagonInventoryUsage(huntingWagonEntity)
+
+    if wagonInventoryUsage + inventoryItemUsage <= iHuntingWagonInventory then
+        return true
+    end
+
+    -- print('canHuntingWagonInventoryFitRDR3InventoryItem no')
+
+    return false
 end
 
 RegisterNetEvent('net.huntingWagonResetTarpState', function(wagonNetworkId)

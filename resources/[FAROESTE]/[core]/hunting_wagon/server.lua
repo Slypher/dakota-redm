@@ -101,7 +101,7 @@ function wagonInventoryAddItem(entity, itemToAdd, amountToAdd)
     inventoryItems[itemToAdd] = currItemAmouht + amountToAdd 
 
     -- Não replicar.
-    statebag:set('huntingWagonInventoryItems', inventoryItems, false)
+    statebag:set('huntingWagonInventoryItems', inventoryItems, true)
 
     return true
 end
@@ -139,7 +139,7 @@ function wagonInventoryDelete(entity)
 
     if statebag.huntingWagonInventoryItems then
         -- Não replicar.
-        statebag:set('huntingWagonInventoryItems', nil, false)
+        statebag:set('huntingWagonInventoryItems', nil, true)
 
         if DoesEntityExist(entity) then
             local netOwner = NetworkGetEntityOwner(entity)
