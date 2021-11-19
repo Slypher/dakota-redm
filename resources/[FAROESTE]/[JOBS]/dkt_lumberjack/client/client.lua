@@ -38,7 +38,7 @@ Citizen.CreateThread(function()
             local posX, posY, posZ = playerPos.x, playerPos.y, playerPos.z
 
             for k, v in pairs(Config.Trees) do
-                local tree = DoesObjectOfTypeExistAtCoords(posX, posY, posZ, GetHashKey(v), true)
+                local tree = DoesObjectOfTypeExistAtCoords(posX, posY, posZ, 1.0, GetHashKey(v), true)
 
                 if tree and not InArray(ChoppedTrees, tostring(v))then
                     sleep = false
