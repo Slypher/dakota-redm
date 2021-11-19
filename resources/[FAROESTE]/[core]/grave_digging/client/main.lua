@@ -291,22 +291,24 @@ function init()
 
 	createDiggingSiteVolumes()
 
-	while gEnableScript do
-		Wait(1000)
-
-		local collidingSite = getSiteFromPlayerPosition()
-
-		if gCurrentCluster ~= collidingSite then
-
-			if gCurrentCluster == nil then
-				onPlayerEnterDiggingSite(collidingSite)
-			else
-				onPlayerLeaveDiggingSite(gCurrentCluster)
+	CreateThread(function()
+		while gEnableScript do
+			Wait(1000)
+	
+			local collidingSite = getSiteFromPlayerPosition()
+	
+			if gCurrentCluster ~= collidingSite then
+	
+				if gCurrentCluster == nil then
+					onPlayerEnterDiggingSite(collidingSite)
+				else
+					onPlayerLeaveDiggingSite(gCurrentCluster)
+				end
+	
+				gCurrentCluster = collidingSite
 			end
-
-			gCurrentCluster = collidingSite
 		end
-	end
+	end)
 end
 
 -- Quando o script iniciar, verificar se
@@ -314,6 +316,12 @@ end
 CreateThread(function()
 	if HandheldShovelItem.isActive() then
 		init()
+	end
+
+	local collidingSite = getSiteFromPlayerPosition()
+
+	if collidingSite then
+		onPlayerEnterDiggingSite(collidingSite)
 	end
 end)
 

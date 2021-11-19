@@ -110,7 +110,7 @@ AddEventHandler('playerDropped', function(playerId, reason)
     local activeSite = gPlayerActiveSite[playerId]
 
     gPlayerActiveSite[playerId] = nil
-    gActiveSitePlayer[activeSite] = nil
+    gActiveSitePlayer[currCluster][activeSite] = nil
 end)
 
 RegisterNetEvent('net.requestInitDigging', function(cluster, site)
@@ -152,8 +152,6 @@ RegisterNetEvent('net.requestInitDigging', function(cluster, site)
         if --[[ digSiteState == eDiggingSitePointState.INIT and ]] timeSinceLastStateChange <= SITE_KEEP_ACTIVE_TIMEOUT then
             return response(false)
         end
-
-        local lastActivePlayer = gActiveSitePlayer[site]
     end
 
     local rnd = math.random()
@@ -170,7 +168,12 @@ RegisterNetEvent('net.requestInitDigging', function(cluster, site)
     setDigSiteState(cluster, site, hasLootState)
 
     gPlayerActiveSite[playerId] = site
-    gActiveSitePlayer[site] = playerId
+
+    if not gActiveSitePlayer[cluster] then
+        gActiveSitePlayer[cluster] = { }
+    end
+
+    gActiveSitePlayer[cluster][site] = playerId
 
     response(true)
 end)
