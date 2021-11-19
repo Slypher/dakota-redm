@@ -1,9 +1,33 @@
 local Proxy = module('_core', 'lib/Proxy')
 
 local ServerAPI = Proxy.getInterface('API')
+local LootTableGen = Proxy.getInterface('LootTableGen')
+
+local LOOT_TABLE = {
+    {
+        lootItemId = 'pepitadeouro',
+        lootWeight = 70,
+    },
+    {
+        lootItemId = 'cristal',
+        lootWeight = 30,
+    },
+    {
+        lootItemId = 'esmeralda',
+        lootWeight = 12,
+    },
+    {
+        lootItemId = 'rubi',
+        lootWeight = 10,
+    },
+    {
+        lootItemId = 'diamante',
+        lootWeight = 5,
+    },
+}
 
 local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
-local GOLD_PANNING_WIN_GOLD_CHANCE = 0.10
+local GOLD_PANNING_WIN_GOLD_CHANCE = 0.10 -- 10% de chance de achar alguma coisa.
 
 local gPlayersGoldPanning = { }
 
@@ -71,8 +95,10 @@ function ensureGoldPanningRewardTimer()
                             local character = user:getCharacter()
                             local inventory = character:getInventory()
 
-                            inventory:addItem('minerioouro', 1)
-                            user:notify('item', 'minerioouro', 1)
+                            local singleItemLootTable = LootTableGen.getOneItemFromLootTable(LOOT_TABLE)
+
+                            inventory:addItem(singleItemLootTable, 1)
+                            user:notify('item', singleItemLootTable, 1)
                         end)
                         -- #TODO: Adicionar item.
                     else
