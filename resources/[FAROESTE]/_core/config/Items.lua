@@ -535,10 +535,10 @@ ItemList = {
     },
     ["p_baitworm01x"] = {
         type = "generic",
-        name = "Isca de Minhoca",
-        weight = 0.1,
-        description = "Uma isca feita minhocas.",
-        stackSize = 50,
+        name = "Minhoca",
+        weight = 0.002,
+        description = "Use com moderação, os peixes engordão também. Um palitinho de minhoca parece bom...",
+        stackSize = 10,
         worldModel = "p_baitworm01x"
     },
     ["p_baitBread01x"] = {
@@ -647,7 +647,7 @@ ItemList = {
         name = "Milho Enlatado",
         weight = 0.09,
         varOnUse = 0.4,
-        description = "Uma lata cheia de Milhos, da pra matar um pouquinho a fome...",
+        description = "Uma lata cheia de Milhos, da pra matar um pouquinho a fome e...",
         stackSize = 5
     },
     ["milhoassado"] = {
@@ -842,14 +842,6 @@ ItemList = {
         stackSize = 10,
         worldModel = "p_cs_miningpan01x"
     },
-    ["minerioouro"] = {
-        type = "generic",
-        name = "Ouro Bruto",
-        weight = 4.0,
-        description = "Ouro recém minerado, está em forma bruta, e por isso é tão pesado, não deixa ter ter um alto valor.",
-        stackSize = 10,
-        worldModel = "p_goldnuggetgroup01x"
-    },
     ["mineriocobre"] = {
         type = "generic",
         name = "Minério de Cobre",
@@ -872,7 +864,7 @@ ItemList = {
         weight = 1.0,
         description = "Pedaços de madeira queimada.",
         stackSize = 20,
-        worldModel = "p_cs_miningpan01x"
+        worldModel = "s_meteoriteshard01x"
     },
     ["garimpo"] = {
         type = "generic",
@@ -882,13 +874,63 @@ ItemList = {
         stackSize = 1,
         worldModel = "p_cs_miningpan01x"
     },
-    ["terra"] = {
+    ["cristal"] = {
         type = "generic",
-        name = "Terra",
+        name = "Cristal",
         weight = 0.1,
-        description = "Um punhado de terra.",
-        stackSize = 10
+        description = "Um pequeno cristal que servirá de luneta um dia.",
+        stackSize = 25,
+        worldModel = "s_dis_flourite01x"
     },
+    ["rubi"] = {
+        type = "generic",
+        name = "Rubi",
+        weight = 0.1,
+        description = "Valioso.",
+        stackSize = 25,
+        worldModel = "p_goldnugget04x"
+    },
+    ["esmeralda"] = {
+        type = "generic",
+        name = "Esmeralda",
+        weight = 0.1,
+        description = "Valioso",
+        stackSize = 1,
+        worldModel = "s_rc_emerald01x"
+    },
+    ["diamante"] = {
+        type = "generic",
+        name = "Diamante",
+        weight = 0.1,
+        description = "Valioso.",
+        stackSize = 25,
+        worldModel = "p_goldnugget04x"
+    },
+    ["pepitadeouro"] = {
+        type = "generic",
+        name = "Pepita de Ouro",
+        weight = 0.1,
+        description = "Uma pequena pepita de ouro, não deixa ter ter um alto valor, mesmo sendo pequena.",
+        stackSize = 25,
+        worldModel = "p_goldnugget01x"
+    },
+    ["veiodeouro"] = {
+        type = "generic",
+        name = "Veio de Ouro",
+        weight = 3.0,
+        description = "É tudo que você mais precisava neste momento... e menos esperava encontrar.",
+        stackSize = 1,
+        worldModel = "p_goldnuggetgroup01x"
+    },
+    ["minerioouro"] = {
+        type = "generic",
+        name = "Ouro Bruto",
+        weight = 4.0,
+        description = "Está em forma bruta, e por isso é tão pesado, não deixa ter ter um alto valor.",
+        stackSize = 1,
+        worldModel = "p_goldnuggetgroup01x"
+    },
+
 
 --------------------------------------------------------------------------------------------------------
 ------------------------------------------ÁRVORES E MATO------------------------------------------------
@@ -900,7 +942,7 @@ ItemList = {
         weight = 0.02,
         description = "As Fibras vegetais são coletadas de plantas, e são usadas para muitas coisas.",
         stackSize = 50,
-        worldModel = "p_woodplank04x"
+        worldModel = "p_handfulofhay"
     },
     ["madeiraruim"] = {
         type = "generic",
@@ -916,7 +958,7 @@ ItemList = {
         weight = 1.2,
         description = "Essa madeira serve pra fazer de tudo!",
         stackSize = 20,
-        worldModel = "p_woodplank04x"
+        worldModel = "p_chewooddest02x"
     },
     ["madeirarefinada"] = {
         type = "generic",
@@ -924,7 +966,7 @@ ItemList = {
         weight = 0.8,
         description = "Esta pronta para ser utilizada.",
         stackSize = 20,
-        worldModel = "p_woodplank04x"
+        worldModel = "p_woodplank01x"
     },
     ["tabua"] = {
         type = "generic",
@@ -950,7 +992,7 @@ ItemList = {
         type = "generic",
         name = "Pena de ave de rápida",
         weight = 0.015,
-        description = "A pena de uma ave de rápina, é excelente para fazer boas ferramentas",
+        description = "A pena de uma ave de rápina, é excelente para escrever.",
         stackSize = 25
     },
     ["penaarara"] = {
@@ -986,21 +1028,24 @@ ItemList = {
         name = "Osso",
         weight = 0.2,
         description = "Podem ser transformados em adubo.",
-        stackSize = 50
+        stackSize = 50,
+        worldModel = "p_dogbone01x"
     },
-    ["podeosso"] = {
+    ["adubo"] = {
         type = "generic",
-        name = "Pó de Ossos",
+        name = "Bosta",
         weight = 0.1,
-        description = "Restos de Ossos, excelentes para adubar as plantas.",
-        stackSize = 50
+        description = "Excelentes para adubar as plantas.",
+        stackSize = 10,
+        worldModel = "p_horsepoop03x"
     },
     ["gordura"] = {
         type = "generic",
         name = "Gordura Animal",
         weight = 0.8,
         description = "Gordura obtida de animais após esfolados.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_bearfat01x"
     },
     ["oleodepeixe"] = {
         type = "generic",
@@ -1014,63 +1059,72 @@ ItemList = {
         name = "Veneno de Cobra",
         weight = 0.2,
         description = "Com algumas doses a mais de veneno, e você já era!",
-        stackSize = 20
+        stackSize = 20,
+        worldModel = "s_inv_snakeoil01x"
     },
     ["carneave"] = {
         type = "generic",
         name = "Carne de Ave",
         weight = 0.4,
         description = "Carne de excelente qualidade obtida após esfolar Aves.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_trkybreastmeat01x"
     },
     ["carneruim"] = {
         type = "generic",
         name = "Carne Animal Péssima",
         weight = 0.2,
         description = "Carne de má qualidade obtida após esfolar o animal.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_duckmeat01x"
     },
     ["carneboa"] = {
         type = "generic",
         name = "Carne Animal Boa",
         weight = 0.3,
         description = "Carne de boa qualidade obtida após esfolar o animal.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_meatbit_chunck_medium01x"
     },
     ["carneperfeita"] = {
         type = "generic",
         name = "Carne Animal Perfeita",
         weight = 0.4,
         description = "Carne de excelente qualidade obtida após esfolar o animal.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_meatbit_chunck_large01x"
     },  
     ["dente"] = {
         type = "generic",
         name = "Dente",
         weight = 0.4,
         description = "Deve ser de algum carnivoro, ou da dona do saloon...",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_sharkteeth_01x"
     },    
     ["galhada"] = {
         type = "generic",
         name = "Galhada",
         weight = 0.4,
         description = "Um conjunto de chifres muito bonitos.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_elk_horn04x"
     },    
     ["chifrebisao"] = {
         type = "generic",
         name = "Chifre de Bisão",
         weight = 0.4,
         description = "Esses animais estão sumindo muito rápido.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_buffalohorn03x"
     },    
     ["chifre"] = {
         type = "generic",
         name = "Chifre",
         weight = 0.4,
         description = "Cuidado com a cabeç... Hmm... Vish!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_oxhorn01x"
     },    
     ["rabocastor"] = {
         type = "generic",
@@ -1084,42 +1138,48 @@ ItemList = {
         name = "Galhada Grande",
         weight = 0.5,
         description = "Wapitis, Alces e tudo que há de bom.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_elk_horn05x"
     },    
     ["patadefelino"] = {
         type = "generic",
         name = "Pata de Felino",
         weight = 0.2,
         description = "Se você tem isso, considere-se com sorte!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_lionspawtrinket01x"
     },    
     ["couro"] = {
         type = "generic",
         name = "Couro Pequeno",
         weight = 0.2,
         description = "Retirado de animais de pequeno porte.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_shoppeltbuffalo01x"
     },    
     ["cascatatu"] = {
         type = "generic",
         name = "Casca de Tatu",
         weight = 0.1,
         description = "De longe parece uma pedra, e de perto, uma pedra estranha.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_pelt_med_armadillo"
     },    
     ["couroreptil"] = {
         type = "generic",
         name = "Couro Reptiliano",
         weight = 0.3,
         description = "Jacarés, lagartos, iguanas, de tudo um pouco.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_cs_iguanapelt02x"
     },    
     ["patacoelho"] = {
         type = "generic",
         name = "Pata de Coelho",
         weight = 0.4,
         description = "Era para dar sorte, mas será que da mesmo?",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_giantrabbittrinket01x"
     },    
     ["glandulas"] = {
         type = "generic",
@@ -1140,21 +1200,24 @@ ItemList = {
         name = "Presa de Javali Lendário",
         weight = 0.4,
         description = "Esta presa pertenceu a um Javali enorme, maior que um cavalo!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_boartusk01x"
     },    
     ["chifrebisaolendario"] = {
         type = "generic",
         name = "Chifre de Bisão Lendário",
         weight = 0.4,
         description = "Um bisão de muita coragem!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "p_buffalohorn03x"
     },    
     ["dentelendario"] = {
         type = "generic",
         name = "Dente Lendário",
         weight = 0.4,
         description = "Um dente extremamente grande e afiado.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_sharkteeth_01x_1"
     },    
     ["asamorcego"] = {
         type = "generic",
@@ -1168,14 +1231,16 @@ ItemList = {
         name = "Escama de Jacaré Lendário",
         weight = 0.4,
         description = "Uma escama muito grande, isso não é normal.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_sharkteeth_01x_1"
     },    
     ["garrarapina"] = {
         type = "generic",
         name = "Garras de Ave de Rápina",
         weight = 0.3,
         description = "Muito afiadas, podem levantar um antilope!",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_hawktalontrinket01x_1"
     },    
     ["peledecobra"] = {
         type = "generic",
@@ -1257,7 +1322,7 @@ ItemList = {
         type = "planting",
         name = "Semente de Lupúlo",
         weight = 0.2,
-        description = "Uma pequena lasca de semente, pode ser plantada.",
+        description = "Uma semente para produzir muita cerveja.",
         stackSize = 15,
         worldModel = "s_inv_coinsack01x"
     },
@@ -1281,7 +1346,7 @@ ItemList = {
         type = "planting",
         name = "Semente de Papoula",
         weight = 0.2,
-        description = "Uma pequena lasca de uma semente, pode ser plantada.",
+        description = "Uma planta especial para produção de substânciais ilegais.",
         stackSize = 15,
         worldModel = "s_inv_coinsack01x"
     },
@@ -1293,13 +1358,6 @@ ItemList = {
         stackSize = 15,
         worldModel = "s_inv_coinsack01x"
     },
-    --[[["marijuana_seed"] = {
-        type = "planting",
-        name = "Semente de Cannabis",
-        weight = 0.2,
-        description = "Uma pequena lasca de uma semente, pode ser plantada.",
-        stackSize = 15
-    },]]
     ["cornseed"] = {
         type = "planting",
         name = "Semente de Milho",
@@ -1410,12 +1468,11 @@ ItemList = {
         description = "Algumas batatas amassadas.",
         stackSize = 30,
         worldModel = "p_mashedpotato02x"
-
     },
     ["algodao"] = {
         type = "generic",
         name = "Algodão",
-        weight = 0.1,
+        weight = 0.2,
         description = "Materia prima para confecção de tecidos.",
         stackSize = 30,
         worldModel = "p_applerotten01x"
@@ -1439,15 +1496,15 @@ ItemList = {
         type = "generic",
         name = "Garrafa de Álcool",
         weight = 0.5,
-        description = "Pode te deixar bebado em instantes.",
-        stackSize = 45,
+        description = "Pode te deixar bebado em instantes ou ser usado para fazer algo que te deixe mais bebado.",
+        stackSize = 12,
         worldModel = "p_bottle02x"
     },
     ["feijao"] = {
         type = "generic",
         name = "Punhado de Feijão",
         weight = 0.5,
-        description = "Isso aqui dá um saco",
+        description = "Isso aqui dá um saco?",
         stackSize = 45
     },
     ["repolho"] = {
@@ -1461,9 +1518,9 @@ ItemList = {
         type = "generic",
         name = "Papoula",
         weight = 0.5,
-        description = "O extrato da papoula pode servir para diversos fins, sejam medicinais ou não.",
+        description = "Que tal plantar papoula em uma fazenda, e retirar seu extrato em um celeiro?!",
         stackSize = 45,
-        worldModel = "s_inv_prariepoppy01bx"
+        worldModel = "s_inv_prariepoppy01cx"
     },
     ["lupulo"] = {
         type = "generic",
@@ -1475,7 +1532,7 @@ ItemList = {
     ["pocafe"] = {
         type = "generic",
         name = "Pó de Café",
-        weight = 0.5,
+        weight = 0.3,
         description = "Café em pó para fazer café.",
         stackSize = 45,
         worldModel = "s_coffeetin01x"
@@ -1884,7 +1941,14 @@ ItemList = {
 -----------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------ALFAIATE COMEÇA AQUI--------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------
-
+--[[
+    ["leque"] = {
+        type = "generic",
+        name = "Leque",
+        weight = 0.05,
+        description = "Ideal para se refrescar!",
+        stackSize = 1,
+    },]]
     ["agulha"] = {
         type = "kit",
         name = "Agulha",
@@ -1934,10 +1998,10 @@ ItemList = {
         name = "Lockpick",
         weight = 0.3,
         description = "Item para destravar portas, algemas e etc...",
-        stackSize = 10
+        stackSize = 5
     },
     ["prego"] = {
-        type = "generic",
+        type = "kit",
         name = "Prego",
         weight = 0.07,
         description = "Utilizado para criação e fixação de alguns itens.",
@@ -1945,12 +2009,12 @@ ItemList = {
         worldModel = "p_threadneedle01x"
     },
     ["parafuso"] = {
-        type = "generic",
+        type = "kit",
         name = "Parafuso",
         weight = 0.1,
         description = "Usado principalmente para juntar as partes de uma arma.",
         stackSize = 40,
-        worldModel = "p_threadneedle01x"
+        worldModel = "p_spike01x"
     },
     ["lata"] = {
         type = "generic",
@@ -1958,15 +2022,14 @@ ItemList = {
         weight = 0.1,
         description = "Utilizado para colocar alimentos.",
         stackSize = 10,
-        worldModel = "p_threadneedle01x"
+        worldModel = "s_canbeans01x"
     },
     ["barracobre"] = {
         type = "generic",
         name = "Barra de Cobre",
         weight = 1.0,
         description = "Uma barra de cobre, serve para alguma coisa.",
-        stackSize = 10,
-        worldModel = "p_threadneedle01x"
+        stackSize = 10
     },
     ["barraouro"] = {
         type = "generic",
@@ -1974,29 +2037,30 @@ ItemList = {
         weight = 2.5,
         description = "Uma Barra de Ouro, você pode comprar muitas coisas agora, ou investir!",
         stackSize = 10,
-        worldModel = "P_INV_TREASUREGOLDBAR01X"
+        worldModel = "p_inv_treasuregoldbar01x"
     },
     ["barraferro"] = {
         type = "generic",
         name = "Barra de Ferro",
         weight = 1.0,
         description = "É o básico necessário para fazer qualquer coisa que funcione direito",
-        stackSize = 10,
-        worldModel = "p_threadneedle01x"
+        stackSize = 10
     },
     ["picareta"] = {
-        type = "generic",
+        type = "kit",
         name = "Picareta",
         weight = 4.08,
         description = "Uma simples picareta, extremamente útil na mineração.",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "p_pickaxe01x"
     },
     ["pa"] = {
-        type = "generic",
+        type = "kit",
         name = "Pá",
         weight = 1.94,
         description = "Uma simples pá, útil nas buscas por tesouros e mortos...",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "p_shovel01x"
     },
     ["melee_hatchet"] = {
         type = "weapon",
@@ -2007,18 +2071,20 @@ ItemList = {
         worldModel = "w_melee_hatchet01"
     },
     ["enxada"] = {
-        type = "generic",
+        type = "kit",
         name = "Enxada",
         weight = 1.94,
         description = "Uma simples enxada, muito útil nas fazendas.",
-        stackSize = 1
+        stackSize = 1,
+        worldModel = "p_hoe02x"
     },
     ["lamina"] = {
         type = "kit",
         name = "Lâmina",
         weight = 0.2,
         description = "Uma lâmina muito afiada, serve para fazer facas e afins.",
-        stackSize = 10
+        stackSize = 10,
+        worldModel = "s_melee_knife05"
     },
     ["cabecapicareta"] = {
         type = "kit",
@@ -2352,7 +2418,7 @@ ItemList = {
         weight = 0.001,
         description = "Uma brilhante e cara grama de ouro.",
         stackSize = -1,
-        worldModel = "P_INV_TREASUREGOLDBAR02X"
+        worldModel = "p_goldnuggetgroup01x"
     },
 
 
@@ -2413,7 +2479,7 @@ ItemList = {
         type = "generic",
         name = "Cassis",
         weight = 0.4,
-        description = "",
+        description = "Isso parece ouro de tolo, já que o cassis dourado parece ouro...",
         stackSize = 10,
         worldModel = "s_inv_blackcurrant01x"
     },
@@ -2421,7 +2487,7 @@ ItemList = {
         type = "generic",
         name = "Cassis Dourado",
         weight = 0.4,
-        description = "",
+        description = "Parece ouro pra você?",
         stackSize = 10,
         worldModel = "s_inv_goldencurrant01x"
     },
@@ -2495,7 +2561,7 @@ ItemList = {
         type = "generic",
         name = "Menta-Silvestre",
         weight = 0.4,
-        description = "",
+        description = "Refrescante!",
         stackSize = 10,
         worldModel = "s_inv_wildmint01x"
     },
@@ -2534,7 +2600,7 @@ ItemList = {
         type = "generic",
         name = "Gotas de Violeta",
         weight = 0.4,
-        description = "",
+        description = "Cheirinho de violetas",
         stackSize = 10,
         worldModel = "s_inv_viosnwdrp01bx"
     },
@@ -2549,7 +2615,7 @@ ItemList = {
         type = "generic",
         name = "Guálteria",
         weight = 0.4,
-        description = "",
+        description = "Encontrada normalmente no inverno",
         stackSize = 10
     },
     ["asclepia"] = {
@@ -2603,7 +2669,8 @@ ItemList = {
         name = "Frasco Vazio",
         weight = 0.1,
         description = "Utilizado para colocar conteúdo líquido.",
-        stackSize = 30
+        stackSize = 10,
+        worldModel = "p_bottle03x"
     },
 
     ---------------------------- ILEGAL ----------------------------
@@ -2612,16 +2679,32 @@ ItemList = {
         type = "generic",
         name = "Quimicos",
         weight = 0.3,
-        description = "Produtos quimicos utilizados em varias coisas...",
-        stackSize = 30,
+        description = "Produtos quimicos utilizados em varias substâncias.",
+        stackSize = 10,
         worldModel = "p_bottlemedicine21x"
     },
-    ["mosto"] = {
+    ["mostofraco"] = {
         type = "generic",
-        name = "Mosto",
+        name = "Mosto Fraco",
         weight = 0.3,
-        description = "É uma mistura açucarada destinada à fermentação alcoólica.",
-        stackSize = 30,
+        description = "É uma mistura destinada à fermentação alcoólica. Mosto de baixa qualidade. ",
+        stackSize = 2,
+        worldModel = "p_re_jug01x"
+    },
+    ["mostomedio"] = {
+        type = "generic",
+        name = "Mosto Razoável",
+        weight = 0.3,
+        description = "É uma mistura destinada à fermentação alcoólica. Mosto de boa qualidade. ",
+        stackSize = 2,
+        worldModel = "p_re_jug01x"
+    },
+    ["mostoforte"] = {
+        type = "generic",
+        name = "Mosto Forte",
+        weight = 0.3,
+        description = "É uma mistura destinada à fermentação alcoólica. Mosto de ótima qualidade. ",
+        stackSize = 2,
         worldModel = "p_re_jug01x"
     },
     ["moonshinetradicional"] = {
@@ -2629,8 +2712,8 @@ ItemList = {
         name = "Moonshine Tradição Ilegal",
         weight = 0.9,
         varOnUse = 1.0,
-        description = "Bebida Ilegal de alto teor alcólico, esta variedade é uma tradição ilegal entre os fazendeiros.",
-        stackSize = 30,
+        description = "Bebida Ilegal, esta variedade é uma tradição ilegal entre os fazendeiros.",
+        stackSize = 1,
         worldModel = "p_re_jug01x"
     },
     ["moonshinedourado"] = {
@@ -2639,7 +2722,7 @@ ItemList = {
         weight = 0.9,
         varOnUse = 1.0,
         description = "Bebida Ilegal de alto teor alcólico, esta variedade é refrescante como ver ouro na sombra.",
-        stackSize = 30,
+        stackSize = 1,
         worldModel = "p_re_jug01x"
     },
     ["moonshineinverno"] = {
@@ -2648,8 +2731,8 @@ ItemList = {
         name = "Moonshine Lágrimas de Inverno",
         weight = 0.9,
         varOnUse = 1.0,
-        description = "Bebida Ilegal de alto teor alcólico, esta variedade é tem cheiro de violetas no inverno.",
-        stackSize = 30,
+        description = "Bebida Ilegal muito forte, esta variedade tem cheiro de violetas no inverno.",
+        stackSize = 1,
         worldModel = "p_re_jug01x"
     },
     ["extratodepapoula"] = {
@@ -2657,14 +2740,101 @@ ItemList = {
         name = "Extrato de Papoula",
         weight = 0.5,
         description = "O extrato da papoula pode servir para diversos fins, sejam medicinais ou não.",
-        stackSize = 45
+        stackSize = 10,
+        worldModel = "p_bottle03x"
     },
     ["opio"] = {
         type = "generic",
         name = "Ópio",
         weight = 0.5,
-        description = "Use com moderação.",
-        stackSize = 45,
+        description = "Use com moderação, feito a base de papoula.",
+        stackSize = 5,
         worldModel = "s_inv_cocainegum01x"
+    },
+
+
+---------------------------------- USO DA PÁ | ROUBO DE TUMULOS
+---------------------------------- USO DA PÁ | ROUBO DE TUMULOS
+---------------------------------- USO DA PÁ | ROUBO DE TUMULOS
+
+
+    ["terra"] = {
+        type = "generic",
+        name = "Terra",
+        weight = 0.3,
+        description = "Pode conter alguns minérios ou minhocas...",
+        stackSize = 20,
+        worldModel = "p_cs_dirtybag01x"
+    },
+    ["colar"] = {
+        type = "valuable",
+        name = "Colar",
+        weight = 0.2,
+        description = "Um lindo colar, parece até que foi roubado.",
+        stackSize = 1,
+        worldModel = "s_inv_necklace02x"
+    },
+    ["dentedeouro"] = {
+        type = "valuable",
+        name = "Dente de ouro",
+        weight = 0.01,
+        description = "Consiga 32 dentes de ouro e faça uma dentadura de ouro pra você.",
+        stackSize = 32,
+        worldModel = "p_goldnugget04x"
+    },
+    ["relogio"] = {
+        type = "valuable",
+        name = "Relógio de bolso",
+        weight = 0.1,
+        description = "Tic Tac.",
+        stackSize = 1,
+        worldModel = "s_inv_pocketwatch06x"
+    },
+    ["moedaantiga"] = {
+        type = "valuable",
+        name = "Moeda antiga",
+        weight = 0.01,
+        description = "Isso vale algo ainda?",
+        stackSize = 5,
+        worldModel = "p_coin01x"
+    },
+    ["brincos"] = {
+        type = "valuable",
+        name = "Brincos",
+        weight = 0.01,
+        description = "Enfeite de orelha.",
+        stackSize = 2,
+        worldModel = "s_inv_earring01x"
+    },
+
+
+---------------------------------- JORNAL ----------------------------------
+---------------------------------- JORNAL ----------------------------------
+---------------------------------- JORNAL ----------------------------------
+
+
+    ["jornal"] = {
+        type = "generic",
+        name = "Jornal",
+        weight = 0.01,
+        description = "Aqui você fica sabendo de tudo.",
+        stackSize = 2,
+        worldModel = "p_newspaperlivestock01x"
+    },
+    ["papel"] = {
+        type = "generic",
+        name = "Papel em branco",
+        weight = 0.01,
+        description = "Ideal para escrever.",
+        stackSize = 2,
+        worldModel = "p_cs_newspaper_02x"
+    },
+    ["tinta"] = {
+        type = "generic",
+        name = "Brincos",
+        weight = 0.01,
+        description = "Tinta para escrever.",
+        stackSize = 2,
+        worldModel = "p_inkwell01x"
     },
 }
