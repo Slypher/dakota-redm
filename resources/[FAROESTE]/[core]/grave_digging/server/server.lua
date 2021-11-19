@@ -128,7 +128,9 @@ RegisterNetEvent('net.requestInitDigging', function(cluster, site)
 
     local user = API.getUserFromSource(playerId)
 
-    if #API.getUsersByGroup('recruta') < MIN_NUM_LAW_ENFORCEMENT_ONLINE then
+    local usersAsOfficers = API.getUsersByGroup('recruta', false)
+
+    if #usersAsOfficers < MIN_NUM_LAW_ENFORCEMENT_ONLINE then
         user:notify('error', 'Não há policiais suficientes!')
 
         return response(false)

@@ -66,25 +66,28 @@ function API.getUserIdFromCharId(charid)
     return nil
 end
 
-function API.getUsersByGroup(group, checkForInheritance)
-    local ret = {}
+function API.getUsersByGroup(group, skipInheritanceCheck)
+    local users = API.getUsers()
 
-    for user_id, User in pairs(API.getUsers()) do
-        local Character = User:getCharacter()
-        if Character ~= nil then
-            if checkForInheritance == nil or checkForInheritance == true then
-                if Character:hasGroupOrInheritance(group) then
-                    table.insert(ret, User)
-                end
-            else
-                if Character:hasGroup(group) then
-                    table.insert(ret, User)
-                end
-            end
+    local usersWithGroup = { }
+
+    for userId, user in pairs(users) do
+        local character = user:getCharacter()
+
+        -- Usuario ainda não escolher um personagem.
+        if not character then
+            goto continue
         end
+
+        if (skipInheritanceCheck and character:hasGroup(group))
+        or (not skipInheritanceCheck and character:hasGroupOrInheritance(group)) then
+            table.insert(usersWithGroup, user)
+        end
+
+        :: continue ::
     end
 
-    return ret
+    return usersWithGroup
 end
 
 function API.getUsers()
