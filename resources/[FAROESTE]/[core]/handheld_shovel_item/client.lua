@@ -1,10 +1,13 @@
 local Proxy = module('_core', 'lib/Proxy')
+local Tunnel = module('_core', 'lib/Tunnel')
 
-HandheldShovelItemInterface = { }
+HandheldShovelItemProxy = { }
+HandheldShovelItemTunnel = { }
 
-Proxy.addInterface('HandheldShovelItem', HandheldShovelItemInterface)
+Proxy.addInterface('HandheldShovelItem', HandheldShovelItemProxy)
+Tunnel.bindInterface('HandheldShovelItem', HandheldShovelItemTunnel)
 
-local HandheldGenericItem = Proxy.getInterface('GenericHandheldItem')
+local GenericHandheldItem = Proxy.getInterface('GenericHandheldItem')
 
 local gGroupPrompt
 
@@ -16,7 +19,7 @@ RegisterNetEvent('onInitHandheldItem', function(handheldItemId)
         return
     end
 
-    initHandheldShovelItem()    
+    initHandheldShovelItem()
 end)
 
 RegisterNetEvent('onStopHandheldItem', function(handheldItemId)
@@ -70,7 +73,7 @@ function drawPrompts()
             end
 
             if PromptIsJustPressed(gPromptCancel) then
-                HandheldGenericItem.stopHandheldItem(false)
+                GenericHandheldItem.stopHandheldItem(false)
             end
         end
     end)
@@ -96,24 +99,38 @@ function stopHandheldShovelItem()
     TriggerEvent('onStopHandheldShovelItem')
 end
 
-function HandheldShovelItemInterface.isActive()
-    return HandheldGenericItem.getHandheldItemId() == 'pa'
+AddEventHandler('onResourceStop', function(resource)
+    if resource == GetCurrentResourceName() then
+        GenericHandheldItem.stopHandheldItem(false)
+    end
+end)
+
+function HandheldShovelItemProxy.isActive()
+    return GenericHandheldItem.getHandheldItemId() == 'pa'
 end
 
-function HandheldShovelItemInterface.setDigPromptEnabled(enabled)
+function HandheldShovelItemProxy.setDigPromptEnabled(enabled)
     if gPromptDig then
         PromptSetEnabled(gPromptDig, enabled)
     end
 end
 
-function HandheldShovelItemInterface.setCancelPromptEnabled(enabled)
+function HandheldShovelItemProxy.setCancelPromptEnabled(enabled)
     if gPromptCancel then
         PromptSetEnabled(gPromptCancel, enabled)
     end
 end
 
-AddEventHandler('onResourceStop', function(resource)
-    if resource == GetCurrentResourceName() then
-        HandheldGenericItem.stopHandheldItem(false)
-    end
-end)
+function HandheldShovelItemTunnel.init()
+    GenericHandheldItem.initHandheldItem('pa',
+    {
+        handheldPropHash = `MP005_P_COLLECTORSHOVEL01`,
+
+        useLocomotion = true,
+
+        locomotionArch = 'arthur_healthy',
+        locomotionType = 'carry_pitchfork',
+
+        locomotionUnk = 'PITCH_FORKS',
+    })
+end

@@ -631,10 +631,7 @@ end
     end
 
     if itemId == 'pa' then
-        local GenericHandheldItem = Tunnel.getInterface('GenericHandheldItem')
-
-        -- Não bloquear a thread.
-        GenericHandheldItem._initHandheldItem(source, 'pa')
+        Tunnel.getInterface('HandheldShovelItem')._init(source)
 
         return false
     end

@@ -19,27 +19,6 @@ function initHandheldItem(itemId, options)
         stopHandheldItem()
     end
 
-    -- #TODO
-    -- A defiinição de qual loco, animação ou objeto que devem ser criados/iniciados
-    -- não deveria ser feito por esse script
-    -- deve ser feito por quaisquer script que derivem desse, como
-    -- por exemplo o `handheld_shovel_item`
-    if itemId == 'pa' then
-
-        options = {
-            handheldPropHash = `MP005_P_COLLECTORSHOVEL01`,
-
-            useLocomotion = true,
-
-            locomotionArch = 'arthur_healthy',
-            locomotionType = 'carry_pitchfork',
-
-            locomotionUnk = 'PITCH_FORKS',
-        }
-
-        handheldPropHash = `MP005_P_COLLECTORSHOVEL01`
-    end
-
     gCurrentHandheldItemId = itemId
 
     local playerPed = PlayerPedId()
