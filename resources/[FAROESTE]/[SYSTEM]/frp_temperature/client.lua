@@ -9,34 +9,34 @@ Citizen.CreateThread(
         local coldThreshold = 0
 
         local categoryTempVariation = {
-            [0x9925C067] = 0.5, -- Hat
-            [0x864B03AE] = 2.0, -- Hair
-            [0x2026C46D] = 2.0, -- Shirts
-            [0x485EE834] = 2.0, -- Vests
-            [0x1D4C528A] = 2.0, -- Pants
-            [0x15D3C7F2] = 1.0, -- Goatees
-            [0x18729F39] = 0.75, -- Spurs
-            [0x3107499B] = 1.0, -- Chaps
-            [0x3C1A74CD] = 2.0, --Cloaks
-            [0xA0E3AB7F] = 0.5, -- Skirts (MP)
+            [0x9925C067] = 1.0, -- Hat
+            [0x864B03AE] = 2.7, -- Hair
+            [0x2026C46D] = 3.0, -- Shirts
+            [0x485EE834] = 3.0, -- Vests
+            [0x1D4C528A] = 2.7, -- Pants
+            [0x15D3C7F2] = 1.5, -- Goatees
+            [0x18729F39] = 1.25, -- Spurs
+            [0x3107499B] = 1.25, -- Chaps
+            [0x3C1A74CD] = 2.5, --Cloaks
+            [0xA0E3AB7F] = 1.2, -- Skirts (MP)
             [0x4A73515C] = 1.7, -- Masks
             [0x7505EF42] = 1.7, -- Masks (MP)
-            [0x514ADCEA] = 1.25, -- Spats
-            [0x5FC29285] = 2.0, -- Neckwear
-            [0x76F0E272] = 0.5, -- Aprons
+            [0x514ADCEA] = 1.5, -- Spats
+            [0x5FC29285] = 3.5, -- Neckwear
+            [0x76F0E272] = 1.0, -- Aprons
             [0x777EC6EF] = 3.0, -- Boots
             [0x91CE9B20] = 2.5, -- Gauntlets (MP)
-            [0x7A96FACA] = 1.0, -- Neckties
+            [0x7A96FACA] = 1.8, -- Neckties
             -- [0x9B2C8B89] = 0.7, -- Gunbelts
-            [0xA6D134C6] = 0.5, -- Belts
-            [0xFAE9107F] = 0.5, -- Belt Buckle
-            [0xE06D30CE] = 7.0, -- Coats
-            [0x662AC34] = 7.0, -- Coats (MP)
-            [0xAF14310B] = 3.0, -- Ponchos (MP)
-            [0x72E6EF74] = 2.0, -- Armor (MP)
-            [0xEABE0032] = 2.5, -- Gloves
-            [0xECC8B25A] = 0.25, -- Mustache
-            [0xF8016BCA] = 0.25 -- Mustache (MP)
+            [0xA6D134C6] = 0.8, -- Belts
+            [0xFAE9107F] = 0.8, -- Belt Buckle
+            [0xE06D30CE] = 10.0, -- Coats
+            [0x662AC34] = 10.0, -- Coats (MP)
+            [0xAF14310B] = 5.0, -- Ponchos (MP)
+            [0x72E6EF74] = 5.0, -- Armor (MP)
+            [0xEABE0032] = 4.0, -- Gloves
+            [0xECC8B25A] = 1.5, -- Mustache
+            [0xF8016BCA] = 1.5 -- Mustache (MP)
         }
 
         while true do
