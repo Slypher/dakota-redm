@@ -1,7 +1,7 @@
 SHOPS = {
     {
-        interactionPosition = vec3(-358.011,779.962,116.153),
+        interactionPosition = vec3(-334.912, 758.506, 116.813),
 
-        boughtSpawnPosition = vec3(-347.682,783.183,115.836),
+        boughtSpawnPosition = vec3(-354.279, 761.223, 116.380),
     },
 }
