@@ -83,34 +83,33 @@ function ensureGoldPanningRewardTimer()
 
             for playerId, nextDiceAt in pairs(gPlayersGoldPanning) do
                 if now >= nextDiceAt then
+                    local user = ServerAPI.getUserFromSource(playerId)
 
-                    math.randomseed(GetGameTimer())
-                    local rnd = math.random()
+                    local character = user:getCharacter()
+                    local inventory = character:getInventory()
 
-                    if rnd <= GOLD_PANNING_WIN_GOLD_CHANCE then
-                        TriggerClientEvent('net.playerGoldPanningFoundGold', playerId)
+                    if inventory:getItemAmount('terra') >= 1 and inventory:removeItem(-1, 'terra', 1) then
+                        math.randomseed(GetGameTimer())
+                        local rnd = math.random()
 
-                        -- Aguardar um pouco para adicionar o ouro por conta da animação.
-                        CreateThread(function()
-                            Wait(1000)
+                        if rnd <= GOLD_PANNING_WIN_GOLD_CHANCE then
+                            TriggerClientEvent('net.playerGoldPanningFoundGold', playerId)
 
-                            local user = ServerAPI.getUserFromSource(playerId)
+                            -- Aguardar um pouco para adicionar o ouro por conta da animação.
+                            CreateThread(function()
+                                Wait(1000)
 
-                            if not user then
-                                return
-                            end
-                            
-                            local character = user:getCharacter()
-                            local inventory = character:getInventory()
+                                local singleItemLootTable = LootTableGen.getOneItemFromLootTable(LOOT_TABLE)
 
-                            local singleItemLootTable = LootTableGen.getOneItemFromLootTable(LOOT_TABLE)
-
-                            inventory:addItem(singleItemLootTable, 1)
-                            user:notify('item', singleItemLootTable, 1)
-                        end)
-                        -- #TODO: Adicionar item.
+                                inventory:addItem(singleItemLootTable, 1)
+                                user:notify('item', singleItemLootTable, 1)
+                            end)
+                            -- #TODO: Adicionar item.
+                        else
+                            TriggerClientEvent('net.playerGoldPanningFoundNothing', playerId)
+                        end
                     else
-                        TriggerClientEvent('net.playerGoldPanningFoundNothing', playerId)
+                        user:notify('error', 'Você precisar ter no mínimo 1x Terra para poder garimpar.')
                     end
 
                     gPlayersGoldPanning[playerId] = now + (GOLD_PANNING_REWARD_DICE_INTERVAL * 1000)
