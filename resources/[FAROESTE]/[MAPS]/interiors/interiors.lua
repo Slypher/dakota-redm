@@ -2824,7 +2824,7 @@ RequestImap(1260721433) -- cabin fixed door frame -2369.32, 469.8, 132.26
 RequestImap(-622475043) -- cabin chimney smoke -1815.41, 657.56, 140.39
 RequestImap(1138093977) -- grave -1824.08, 656.7, 132.09
 --RequestImap(339111695) -- loose roof tiles -396.65, 1724.24, 222.9
-RequestImap(1733948592) -- barn at 207.43, 987.12, 191.11
+-- RequestImap(1733948592) -- barn at 207.43, 987.12, 191.11
 RequestImap(634831342) -- barn at 207.43, 987.12, 191.11
 RequestImap(-943891161) -- barn at -875.22, 332.55, 95.79
 RequestImap(-914406102) -- barn at -875.22, 332.55, 95.79
@@ -3072,7 +3072,7 @@ RequestImap(2107657444)
 RequestImap(-2023595928)
 RequestImap(-759698431)
 --RequestImap(-406964748) -- Closed sign on Rhodes saloon
-RequestImap(481636996)
+-- RequestImap(481636996)
 RequestImap(-1671953459)
 --RequestImap(910941329) -- Strange white block outside Rhodes saloon
 RequestImap(518127510)
@@ -3329,5 +3329,7 @@ RequestImap(1465430690)
 
 -- Trelawny's Caravan
 RemoveImap(3804149174) -- Removes blocked entrance
+RemoveImap(0xc7bd5d27)
+RemoveImap(0xf2534539)
 
 end)
