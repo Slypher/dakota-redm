@@ -139,7 +139,11 @@ local blips = {
 	-- Processos
 	{name = "Carpintaria", sprite = 1904459580, x = -1824.943, y = -422.822, z = 162.695},
 
+	{ name = 'Aluguel de Carroça', sprite = -243818172, x = -334.912, y = 758.506, z = 116.813 },
 
+	{ name = 'Cemitério', sprite = -695368421, x = -979.500, y = -1191.326, z = 60.623 },
+	{ name = 'Cemitério', sprite = -695368421, x = -234.513, y = 819.405, z = 60.623 },
+	{ name = 'Cemitério', sprite = -695368421, x = 1287.989, y = -1225.074, z = 82.759 },
 }
 
 local blipsLoaded = {}
