@@ -167,10 +167,10 @@ function endRobberyGiveReward()
             local maxRewardInDollars = HEIST_BANK_INFO[bankId].staticReward
 
             if getReplicatedBankState(bankId, 'hasSafeExploded') then
-                maxRewardInDollars += 25000
+                maxRewardInDollars += 15000
             end
 
-            local reward = math.random(20000, maxRewardInDollars)
+            local reward = math.random(maxRewardInDollars - 5000, maxRewardInDollars)
 
             Character:getInventory():addItem("money", reward)
 
