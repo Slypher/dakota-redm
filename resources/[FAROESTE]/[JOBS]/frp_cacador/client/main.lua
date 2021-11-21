@@ -221,12 +221,12 @@ function ProcessDropOffCarriableEntity()
             end
 
             -- SetEntityCarryingFlag, CARRYING_FLAG_CAN_BE_CARRIED_WHEN_DEAD
-            -- Citizen.InvokeNative(0x18FF3110CF47115D, carryingEntity, 7, false)
+            Citizen.InvokeNative(0x18FF3110CF47115D, carryingEntity, 7, false)
 
             -- SetEntityCarryingFlag, CARRYING_FLAG_CLEAN_UP_WHEN_NOT_CARRIED
-            -- Citizen.InvokeNative(0x18FF3110CF47115D, carryingEntity, 27, true)
+            Citizen.InvokeNative(0x18FF3110CF47115D, carryingEntity, 27, true)
 
-            -- SetEntityAsNoLongerNeeded(carryingEntity)
+            SetEntityAsNoLongerNeeded(carryingEntity)
 
             -- #TODO: Passar esta merda toda de enviar item para o server-side.
 
