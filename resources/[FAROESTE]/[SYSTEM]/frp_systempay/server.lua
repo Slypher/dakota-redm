@@ -13,6 +13,9 @@ local HOURLY_PAYMENT_PER_GROUP = {
 	["recruta"]  = { payment = 100 }, -- $0.75
 
 	["medic"] 	 = { payment = 100 },
+
+	["governador"] 	 = { payment = 1200 }, -- $12.00
+	["secretario"] 	 = { payment = 900 },  -- $9.00
 }
 
 -- local withHoldingPaymentToUsers = {}

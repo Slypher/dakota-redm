@@ -21,6 +21,8 @@ config_file_GROUPS = {
     ["marshall"]  = 1 << 18,
     ["delegado"]  = 1 << 19,
     ["recruta"]   = 1 << 20,
+    ["governador"] = 1 << 21,
+    ["secretario"] = 1 << 22,
 }
 
 config_file_INHERITANCE = {
@@ -31,5 +33,7 @@ config_file_INHERITANCE = {
     ["sheriff"] = "trooper",
     ["trooper"] = "recruta",
 
-    ["xama"] = "indio"
+    ["xama"] = "indio",
+
+    ["governador"] = "secretario",
 }
