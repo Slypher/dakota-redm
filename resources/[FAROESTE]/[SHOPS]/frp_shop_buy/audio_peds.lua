@@ -65,6 +65,12 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
     -- BANCO VALENTINE
     CreatePedWithAudio(`U_M_O_BHT_DOCWORMWOOD`, vec3(-308.108, 773.999, 117.703), 20.0)
 
+    -- BANCO RHODES
+    CreatePedWithAudio(`CS_ansel_atherton`, vec3(1290.702,-1302.781,76.036), -12.24)
+
+    -- BANCO SAINT DENIS
+    CreatePedWithAudio(`A_M_M_SDObesemen_01`, vec3(2645.090,-1294.786,51.242), 22.0)
+
 --------------------------------------BARBEIROS------------------------------------------------
 
     -- BARBEIRO BLACKWATER
@@ -79,10 +85,10 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
     CreatePedWithAudio(`U_M_M_SKINNYOLDGUY_01`, vec3(-1789.913,-388.400,159.350), 45.0)
 
     -- ARMAZEM VALENTINE
-    CreatePedWithAudio(`U_F_M_TumGeneralStoreOwner_01`, vec3(-323.996,803.384,116.903), 284.37)
+    CreatePedWithAudio(`U_F_M_LAGMOTHER_01`, vec3(-323.996,803.384,116.903), 284.37)
 
     -- ARMAZEM BLACKWATER
-    CreatePedWithAudio(`CS_creoleguy`, vec3(-784.224,-1322.123,42.906), 179.86)
+    CreatePedWithAudio(`CS_watson_03`, vec3(-784.224,-1322.123,42.906), 179.86)
     
 --------------------------------------AÇOUGUES------------------------------------------------
     -- AÇOUGUE STRAWBERRY
@@ -104,11 +110,15 @@ CreatePedWithAudio(`CS_adamgray`, vec3(-857.451,-1279.038,42.581), 268.83)
 
 --------------------------------------MOONSHINER------------------------------------------------
     -- MOONSHINER NEVE
-    CreatePedWithAudio(`CS_famousgunslinger_02`, vec3(-945.832,2170.719,341.085), 14.16)
+    CreatePedWithAudio(`CS_famousgunslinger_02`, vec3(-1884.865,1335.750,199.918), -160.75)
 
 -----------------------------------------CAPITÃO------------------------------------------------
     -- CAPITÃO PESCADOR
-    CreatePedWithAudio(`CS_BeatenUpCaptain`, vec3(336.538,-672.327,41.817), -75.00)
+    CreatePedWithAudio(`CS_BeatenUpCaptain`, vec3(399.243,-1269.337,40.715), 83.72)
+
+-----------------------------------------CLIVE------------------------------------------------
+    -- CLIVE
+    CreatePedWithAudio(`CS_dalemaroney`, vec3(-333.095,186.375,62.590),-67.22)
 
 -----------------------------------------COLECIONADORA------------------------------------------------
     -- TIA MAGGIE

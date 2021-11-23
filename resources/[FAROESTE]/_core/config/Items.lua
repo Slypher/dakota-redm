@@ -543,7 +543,7 @@ ItemList = {
     },
     ["p_baitBread01x"] = {
         type = "generic",
-        name = "Isca de Pão",
+        name = "isca de Pão",
         weight = 0.1,
         description = "Uma isca feita com sobras da padaria",
         stackSize = 50
@@ -777,7 +777,7 @@ ItemList = {
         name = "Uísque",
         weight = 0.8,
         varOnUse = 1.0,
-        description = "Um bom e velho Whisky para aquecer o sangue.",
+        description = "Um bom e velho Whisky para aquecer o sangue, e outras coisas.",
         stackSize = 10
     },
     ["tequila"] = { --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
@@ -887,8 +887,8 @@ ItemList = {
         name = "Rubi",
         weight = 0.1,
         description = "Valioso.",
-        stackSize = 25,
-        worldModel = "p_goldnugget04x"
+        stackSize = 25
+        --worldModel = "p_goldnugget04x"
     },
     ["esmeralda"] = {
         type = "generic",
@@ -903,8 +903,8 @@ ItemList = {
         name = "Diamante",
         weight = 0.1,
         description = "Valioso.",
-        stackSize = 25,
-        worldModel = "p_goldnugget04x"
+        stackSize = 25
+        --worldModel = "p_goldnugget04x"
     },
     ["pepitadeouro"] = {
         type = "generic",
@@ -914,21 +914,13 @@ ItemList = {
         stackSize = 25,
         worldModel = "p_goldnugget01x"
     },
-    ["veiodeouro"] = {
-        type = "generic",
-        name = "Veio de Ouro",
-        weight = 3.0,
-        description = "É tudo que você mais precisava neste momento... e menos esperava encontrar.",
-        stackSize = 1,
-        worldModel = "p_goldnuggetgroup01x"
-    },
     ["minerioouro"] = {
         type = "generic",
-        name = "Ouro Bruto",
+        name = "Veio de Ouro",
         weight = 4.0,
-        description = "Está em forma bruta, e por isso é tão pesado, não deixa ter ter um alto valor.",
+        description = "É tudo que você mais precisava neste momento... e menos esperava encontrar.",
         stackSize = 1,
-        worldModel = "p_goldnuggetgroup01x"
+        worldModel = "hea_rock_scree_sim_03"
     },
 
 
@@ -1741,6 +1733,13 @@ ItemList = {
         description = "utilizada para encher os cartuchos e fazer explosivos .",
         stackSize = 10,
         worldModel = "s_inv_coinsack01x"
+    },
+    ["bananadinamite"] = {
+        type = "kit",
+        name = "Banana de Dinamite",
+        weight = 1.0,
+        description = "Utilizada para colocar a polvora e fazer explosivos .",
+        stackSize = 10
     },
     ["ammo_22"] = {
         type = "ammo",
@@ -2837,4 +2836,37 @@ ItemList = {
         stackSize = 2,
         worldModel = "p_inkwell01x"
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

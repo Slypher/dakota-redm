@@ -46,6 +46,7 @@ local stirrups = {}
 local acsluggage = {}
 local lantern = {}
 local Mask = {}
+local Corda = {}
 
 Citizen.CreateThread(
     function()
@@ -72,6 +73,8 @@ Citizen.CreateThread(
                     table.insert(lantern, v.Hash)
                 elseif v.category == "Mask" then
                     table.insert(Mask, v.Hash)
+                elseif v.category == "Corda" then
+                    table.insert(Corda, v.Hash)
                 end
             end
             adding = false
@@ -458,6 +461,26 @@ RegisterNUICallback(
     end
 )
 
+RegisterNUICallback(
+    "Corda",
+    function(data)
+        zoom = 4.0
+        offset = 0.2
+        if tonumber(data.id) == 0 then
+            num = 0
+            CordaUsing = num
+            local playerHorse = MyHorse_entity
+            Citizen.InvokeNative(0xD710A5007C2AC539, playerHorse, 0x94B2E3AF, 0) -- HAT REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, playerHorse, 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            local num = tonumber(data.id)
+            hash = ("0x" .. Corda[num]) -- add .hash
+            setcloth(hash)
+            CordaUsing = ("0x" .. Corda[num]) -- add .hash
+        end
+    end
+)
+
 myHorses = {}
 
 function setcloth(hash)
@@ -506,6 +529,7 @@ AcsHornUsing = nil
 AcsLuggageUsing = nil
 LanternUsing = nil
 MaskUsing = nil
+CordaUsing = nil
 
 --- /// ARRASTAR CAVALO
 
@@ -673,7 +697,8 @@ function CloseStable()
             AcsHornUsing,
             AcsLuggageUsing,
             LanternUsing,
-            MaskUsing
+            MaskUsing,
+            CordaUsing
         }
         local DadosEncoded = json.encode(dados)
 

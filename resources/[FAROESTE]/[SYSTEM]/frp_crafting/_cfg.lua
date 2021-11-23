@@ -5,9 +5,11 @@ Config = {
     -----------------------------------------------------------------------------------------------------------------------------------------------------
 
     {
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Madeira e algo para bom para quimar.',
                 time = 5,
                 input = {
                     {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}}, 
@@ -18,6 +20,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Madeira e pedras',
                 time = 20,
                 input = {
                     {item = "pedra", amount = 6},
@@ -29,6 +32,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Madeira e pedras',
                 time = 20,
                 input = {
                     {item = "pedra", amount = 6},
@@ -40,6 +44,7 @@ Config = {
                 }
             },  
             {
+                descriptionTextOverride = 'Couro e algo afiado?!.',
                 time = 10,
                 input = {
                     {item = "couro", amount = 1},
@@ -58,11 +63,13 @@ Config = {
 
     {
         campfire = true,
+        useTextDescriptionAll = true,
         craftings = 
         {
             -------------------------------------- PEIXES 
             
             {
+                descriptionTextOverride = 'Peixe pequeno e alguma erva de tempero.',
                 time = 30,
                 input = {
                     {item = "smallfish", amount = 1},
@@ -73,6 +80,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Peixe médio e alguma erva de tempero.',
                 time = 35,
                 input = {
                     {item = "mediumfish", amount = 1},
@@ -83,6 +91,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Peixe grande e alguma erva de tempero.',
                 time = 40,
                 input = {
                     {item = "largefish", amount = 1}, 
@@ -95,6 +104,7 @@ Config = {
 
             -------------------------------------- PLANTAS 
             {
+                descriptionTextOverride = 'Ehhh, Milho?!',
                 time = 15,
                 input = {
                     {item = "milho", amount = 1}, 
@@ -104,6 +114,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Batatas?!',
                 time = 15,
                 input = {
                     {item = "batata", amount = 1}, 
@@ -115,6 +126,7 @@ Config = {
 
             -------------------------------------- CARNES 
             {
+                descriptionTextOverride = 'Carne ruim e gordura.',
                 time = 40,
                 input = {
                     {item = "carneruim", amount = 1, alias = {"carneboa", "carneperfeita"}},
@@ -125,6 +137,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Carne ruim.',
                 time = 40,
                 input = {
                     {item = "carneruim", amount = 1},
@@ -134,6 +147,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Carne boa e tomilho.',
                 time = 50,
                 input = {
                     {item = "carneboa", amount = 1}, 
@@ -144,6 +158,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Carne perfeita, oregano e tomilho.',
                 time = 60,
                 input = {
                     {item = "carneperfeita", amount = 1},
@@ -155,6 +170,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Carne e gordura.',
                 time = 20,
                 input = {
                     {item = "carneave", amount = 1},
@@ -167,6 +183,7 @@ Config = {
 
             -------------------------------------- BEBIDA 
             {
+                descriptionTextOverride = 'Café em pó e água.',
                 time = 15,
                 input = {
                     {item = "pocafe", amount = 1},
@@ -179,6 +196,7 @@ Config = {
 
             -------------------------------------- ITENS 
             {
+                descriptionTextOverride = 'Madeira ruim é boa para virar carvão, na verdade é pra isso que ela serve...',
                 time = 15,
                 input = {
                     {item = "madeiraruim", amount = 3},
@@ -195,11 +213,13 @@ Config = {
     --------------------------------------------- CARDERON --------------------------------------------
     ---------------------------------------------------------------------------------------------------
     {
+        useTextDescriptionAll = true,
         Calderon = true,
         craftings = 
         {
             -------------------------------------- SOPAS
             {
+                descriptionTextOverride = 'Materiais: Cenoura, batatas, água, milho e carne de ave.',
                 time = 40,
                 input = {
                     {item = "cenoura", amount = 4},
@@ -213,6 +233,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Materiais: Molho de tomate, carne perfeita, água, batata e cenoura.',
                 time = 40,
                 input = {
                     {item = "molhotomate", amount = 2},
@@ -239,6 +260,7 @@ Config = {
             },]]
             -------------------------------------- COMIDAS 
             {
+                descriptionTextOverride = 'Materiais: Madeira boa e algo afiado.',
                 time = 30,
                 input = {
                     {item = "batata", amount = 10},
@@ -317,10 +339,12 @@ Config = {
 
     {
         group = "indio",
+        useTextDescriptionAll = true,
         craftings = 
         {
             -------------------------------------------- MADEIRA REFINADA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira boa e algo afiado.',
                 time = 15,
                 input = {
                     {item = "madeiraboa", amount = 1}, 
@@ -345,6 +369,7 @@ Config = {
             },]]
             -------------------------------------------- FACA DE CAÇADOR ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira refinada e algo afiado.',
                 time = 20,
                 input = {
                     {item = "madeirarefinada", amount = 1}, 
@@ -356,6 +381,7 @@ Config = {
             },
             -------------------------------------------- MACHADINHA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira refinada, fibras vegetais ou tiras de couro, e algo afiado.',
                 time = 30,
                 input = {
                     {item = "madeirarefinada", amount = 2}, 
@@ -369,6 +395,7 @@ Config = {
             },
             -------------------------------------------- ARCO SIMPLES ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Fibras vegetais e uma estrutura simples.',
                 time = 30,
                 input = {
                     {item = "fibra", amount = 10}, 
@@ -380,6 +407,7 @@ Config = {
             },
             -------------------------------------------- ARCO CURVADO ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Corda, tiras de couro, e uma estrutura curvada.',
                 time = 30,
                 input = {
                     {item = "corda", amount = 1},
@@ -392,6 +420,7 @@ Config = {
             },
             -------------------------------------------- ESTRUTURA DE ARCO ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira boa e algo afiado.',
                 time = 30,
                 input = {
                     {item = "madeiraboa", amount = 3}, 
@@ -404,6 +433,7 @@ Config = {
             },
             -------------------------------------------- ESTRUTURA DE ARCO CURVADA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira refinada e algo afiado.',
                 time = 30,
                 input = {
                     {item = "madeirarefinada", amount = 4}, 
@@ -416,6 +446,7 @@ Config = {
             },
             -------------------------------------------- LASSO ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Algumas cordas.',
                 time = 30,
                 input = { 
                     {item = "corda", amount = 3,}
@@ -426,6 +457,7 @@ Config = {
             },
             -------------------------------------------- CORDA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Fibras e algo afiado.',
                 time = 20,
                 input = {
                     {item = "fibra", amount = 10}, 
@@ -437,6 +469,7 @@ Config = {
             },
             -------------------------------------------- LINHA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Alguns algodões.',
                 time = 15,
                 input = {
                     {item = "algodao", amount = 10, alias = {"fibra"}},
@@ -447,6 +480,7 @@ Config = {
             },
             -------------------------------------------- PONTA DE FLECHA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Algumas pedras.',
                 time = 20,
                 input = {
                     {item = "pedra", amount = 10}, 
@@ -457,6 +491,7 @@ Config = {
             },
             -------------------------------------------- PEDRA AFIADA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Duas pedras quando se batem ficam...',
                 time = 15,
                 input = {
                     {item = "pedra", amount = 2},                     
@@ -467,6 +502,7 @@ Config = {
             },
             -------------------------------------------- FLECHA NORMAL ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Algumas fibras ou tiras de couro, madeira refinada, penas e posntas de flecha.',
                 time = 10,
                 input = {
                     {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
@@ -494,6 +530,7 @@ Config = {
             },]]
             -------------------------------------------- FLECHA PEQUENA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Madeira refinada.',
                 time = 10,
                 input = {
                     {item = "madeirarefinada", amount = 4},
@@ -504,6 +541,7 @@ Config = {
             },
             -------------------------------------------- FLECHA ENVENENADA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Flechas e ervas de veneno.',
                 time = 20,
                 input = {
                     {item = "ammo_arrow", amount = 2}, 
@@ -515,6 +553,7 @@ Config = {
             },
             -------------------------------------------- FLECHA INCENDIÁRIA ------------------------------------------
             {
+                descriptionTextOverride = 'Materiais: Flechas e gorduras.',
                 time = 20,
                 input = {
                     {item = "ammo_arrow", amount = 1}, 
@@ -536,14 +575,16 @@ Config = {
         group = "ferreiro",
         position = vec3(-369.409,796.127,116.192),  -- No position, its global
         --Ferreiro = true,
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
                                 -- BARRA DE FERRO
+                descriptionTextOverride = 'Materiais: Minério de ferro, carvão e ferramentas.',
                 time = 30,
                 input = {
                     {item = "minerioferro", amount = 3},
-                    --{item = "carvao", amount = 2},
+                    {item = "carvao", amount = 2},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
                 output = {
@@ -552,10 +593,11 @@ Config = {
             },
             {
                                 -- BARRA DE COBRE
+                descriptionTextOverride = 'Materiais: Minério de cobre, carvão e ferramentas.',
                 time = 30,
                 input = {
                     {item = "mineriocobre", amount = 3},
-                    --{item = "carvao", amount = 2},
+                    {item = "carvao", amount = 2},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
                 output = {
@@ -563,7 +605,21 @@ Config = {
                 }
             },
             {
+                                -- PEPITA DE OURO
+                descriptionTextOverride = 'Materiais: Minério de ouro, carvão e ferramentas.',
+                time = 40,
+                input = {
+                    {item = "minerioouro", amount = 1},
+                    {item = "carvao", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pepitadeouro", amount = 4, name = "Pepita de ouro"}
+                }
+            },
+            {
                                 -- BARRA DE OURO
+                descriptionTextOverride = 'Materiais: Pepita de ouro, carvão e ferramentas.',
                 time = 40,
                 input = {
                     {item = "pepitadeouro", amount = 25},
@@ -583,10 +639,12 @@ Config = {
         group = "ferreiro",
         --position = vec3(-369.484,796.221,116.196),  -- No position, its global
         Ferreiro2 = true,
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
                                 -- FERRAMENTAS
+                descriptionTextOverride = 'Materiais: Barra de ferro, madeira refinada e ferramentas.',
                 time = 20,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -599,6 +657,7 @@ Config = {
             },
             {
                                 -- LAMPIÃO
+                descriptionTextOverride = 'Materiais: Barra de cobre, gordura, tecido e ferramentas.',
                 time = 20,
                 input = {
                     {item = "barracobre", amount = 1},
@@ -612,6 +671,7 @@ Config = {
             },
             {
                                 -- LATA
+                descriptionTextOverride = 'Materiais: Barra de cobre e ferramentas.',
                 time = 20,
                 input = {
                     {item = "barracobre", amount = 1},
@@ -623,6 +683,7 @@ Config = {
             },
             {
                                 -- BALDE
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 20,
                 input = {
                     {item = "barraferro", amount = 2},
@@ -633,7 +694,20 @@ Config = {
                 }
             },
             {
+                                -- GARIMPO
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "barraferro", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "garimpo", amount = 1, name = "Bateia de garimpo"},
+                }
+            },
+            {
                                 -- CABEÇA DE PICARETA
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -645,6 +719,7 @@ Config = {
             },
             {
                                 -- CABEÇA DE MACHADO
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -656,6 +731,7 @@ Config = {
             },
             {
                                 -- CABEÇA DE PÁ
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -665,7 +741,7 @@ Config = {
                     {item = "cabecapa", amount = 1, name = "Cabeça de Pá"}
                 }
             },
-            {
+            --[[{
                                 -- CABEÇA DE ENXADA
                 time = 25,
                 input = {
@@ -675,9 +751,10 @@ Config = {
                 output = {
                     {item = "cabecaenxada", amount = 1, name = "Cabeça de Enxada"}
                 }
-            },
+            },]]
             {
                                 -- LÂMINA
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -689,6 +766,7 @@ Config = {
             },
             {
                                 -- CANO DE ARMA
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -700,6 +778,7 @@ Config = {
             },
             {
                                 -- CÃO DE ARMA
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -711,6 +790,7 @@ Config = {
             },
             {
                                 -- GATILHO DE ARMA
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 25,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -722,6 +802,7 @@ Config = {
             },
             {
                                 -- PREGOS
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 10,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -733,6 +814,7 @@ Config = {
             },
             {
                                 -- PARAFUSOS
+                descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
                 time = 10,
                 input = {
                     {item = "barraferro", amount = 1},
@@ -753,10 +835,12 @@ Config = {
         group = "ferreiro",
         --position = vec3(-277.220,779.328,119.504),  -- No position, its global
         Ferreiro3 = true,
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
                                 -- PICARETA
+                descriptionTextOverride = 'Materiais: Uma cabeça de picareta, madeira refinada, pregos e ferramentas.',
                 time = 20,
                 input = {
                     {item = "cabecapicareta", amount = 1},
@@ -770,6 +854,7 @@ Config = {
             },
             {
                                 -- MACHADO
+                descriptionTextOverride = 'Materiais: Uma cabeça de machado, madeira refinada, pregos e ferramentas.',
                 time = 20,
                 input = {
                     {item = "cabecamachado", amount = 1},
@@ -783,6 +868,7 @@ Config = {
             },
             {
                                 -- PÁ
+                descriptionTextOverride = 'Materiais: Uma cabeça de pá, madeira refinada, pregos e ferramentas.',
                 time = 20,
                 input = {
                     {item = "cabecapa", amount = 1},
@@ -794,7 +880,7 @@ Config = {
                     {item = "pa", amount = 1, name = "Pá"}
                 }
             },
-            {
+            --[[{
                                 -- ENXADA
                 time = 20,
                 input = {
@@ -806,9 +892,10 @@ Config = {
                 output = {
                     {item = "enxada", amount = 1, name = "Enxada"}
                 }
-            },
+            },]]
             {
                                 -- FACÃO
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',
                 time = 20,
                 input = {
                     {item = "lamina", amount = 1},
@@ -822,6 +909,7 @@ Config = {
             },
             {
                                 -- FACA
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',                                
                 time = 20,
                 input = {
                     {item = "lamina", amount = 1},
@@ -833,19 +921,19 @@ Config = {
                     {item = "melee_knife", amount = 1, name = "Faca de Caça"},
                 }
             },
-            --[[
             {
                                 -- GAZUA
+                descriptionTextOverride = 'Materiais: Parafusos, ferramentas e uma barra de cobre.',
                 time = 20,
                 input = {
-                    {item = "parafuso", amount = 5},
+                    {item = "parafuso", amount = 10},
                     {item = "barracobre", amount = 1},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
                 output = {
-                    {item = "lockpick", amount = 1, name = "Gazua"},
+                    {item = "lockpick", amount = 5, name = "Gazua"},
                 }
-            },]]
+            },
         }
     },
 
@@ -853,14 +941,17 @@ Config = {
     -----------------------------------------------------------------ARMEIRO | CRIAÇÃO------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
 
+
     {
         group = "armeiro",
         position = vec3(-277.121,779.223,119.504),  -- No position, its global
         --Armeiro = true,
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
                                 -- REVOLVER DE AÇÃO-DUPLA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Ação-Dupla',
                 time = 25,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -876,6 +967,7 @@ Config = {
             },
             {
                                 -- REVOLVER DE VAQUEIRO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Vaqueiro',
                 time = 25,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -891,6 +983,7 @@ Config = {
             },
             {
                                 -- REVOLVER SCHOTFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Schotfield',
                 time = 25,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -906,6 +999,7 @@ Config = {
             },
             {
                                 -- REVOLVER LEMAT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Lemat',
                 time = 25,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -921,6 +1015,7 @@ Config = {
             },
             {
                                 -- REVOLVER DA MARINHA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver da Marinha',
                 time = 25,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -936,6 +1031,7 @@ Config = {
             },
             {
                                 -- PISTOLA VOLCANIC
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Volcanic',
                 time = 30,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -951,6 +1047,7 @@ Config = {
             },
             {
                                 -- PISTOLA MAUSER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Mauser',
                 time = 30,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -966,6 +1063,7 @@ Config = {
             },
             {
                                 -- PISTOLA SEMI-AUTO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Semi-Automatica',
                 time = 30,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -981,6 +1079,7 @@ Config = {
             },
             {
                                 -- CARABINA DE REPETIÇÃO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Carabina de Repetição',
                 time = 40,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -996,6 +1095,7 @@ Config = {
             },
             {
                                 -- CARABINA LANCASTER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Lancaster de Repetição',
                 time = 40,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1011,6 +1111,7 @@ Config = {
             },
             {
                                 -- CARABINA HENRY
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Henry de Repetição',
                 time = 40,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1026,6 +1127,7 @@ Config = {
             },
             {
                                 -- CARABINA VARMINT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Anti-Pragas',
                 time = 40,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1041,6 +1143,7 @@ Config = {
             },
             {
                                 -- CARABINA EVANS
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Evans de Repetição',
                 time = 40,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1056,6 +1159,7 @@ Config = {
             },
             {
                                 -- RIFLE SPRINGFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Springfield',
                 time = 50,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1071,6 +1175,7 @@ Config = {
             },
             {
                                 -- RIFLE DE FERROLHO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle de Ferrolho',
                 time = 50,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1086,6 +1191,7 @@ Config = {
             },
             {
                                 -- RIFLE ROLLING BLOCK
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Rolling Block',
                 time = 60,
                 input = {
                     {item = "canodearma", amount = 1},
@@ -1101,6 +1207,7 @@ Config = {
             },
             {
                                 -- ESCOPETA SERRADA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Serrado',
                 time = 60,
                 input = {
                     {item = "canodearma", amount = 2},
@@ -1116,6 +1223,7 @@ Config = {
             },
             {
                                 -- ESCOPETA CANO-DUPLO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Duplo',
                 time = 60,
                 input = {
                     {item = "canodearma", amount = 2},
@@ -1131,6 +1239,7 @@ Config = {
             },
             --{
                                 -- ESCOPETA DE ELEFANTE
+            --    descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Elefante',
             --    time = 60,
             --    input = {
             --        {item = "canodearma", amount = 2},
@@ -1146,6 +1255,7 @@ Config = {
             --},
             {
                                 -- MUNIÇÕES REVOLVER
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1157,6 +1267,7 @@ Config = {
             },
             {
                                 -- MUNIÇÕES PISTOLA
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1168,6 +1279,7 @@ Config = {
             },
             {
                                 -- MUNIÇÕES ANTI-PRAGAS
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1179,6 +1291,7 @@ Config = {
             },
             {
                                 -- MUNIÇÕES CARABINA
+                descriptionTextOverride = 'Materiais: Dois saquinhos de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1190,6 +1303,7 @@ Config = {
             },
             {
                                 -- MUNIÇÕES RIFLE
+                descriptionTextOverride = 'Materiais: Três saquinhos de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1201,6 +1315,7 @@ Config = {
             },
             {
                                 -- MUNIÇÕES ESCOPETA
+                descriptionTextOverride = 'Materiais: Quatro saquinhos de pólvora e uma caixa de cartuchos',
                 time = 5,
                 input = {
                     {item = "caixacartuchos", amount = 1},
@@ -1213,17 +1328,60 @@ Config = {
         }
     },
 
+
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------- EXPLOSIVOS -----------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------------------------------------------------
+
+    {
+        position = vec3(-1416.017,1131.219,225.540), -- No position, its global
+        useTextDescriptionAll = true,
+
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Uma banana, pólvora e algo para servir de pávio.',
+                time = 20,
+                input = {
+                    {item = "bananadinamite", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                    {item = "linha", amount = 1}
+                },
+                output = {
+                    {item = "thrown_dynamite", amount = 1, name = "Banana de dinamite"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Um uísque, gordura e tecido.',
+                time = 20,
+                input = {
+                    {item = "whisky", amount = 1},
+                    {item = "gordura", amount = 1},
+                    {item = "tecidobranco", amount = 1}
+                },
+                output = {
+                    {item = "thrown_molotov", amount = 1, name = "Garrafa Incendiária"}
+                }
+            },
+            
+        }
+    },
+
     ----------------------------------------------------------------------------------------------------------------------------------------------------
     ----------------------------------------------------------------- PADARIA | MESA -------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
-    
+
     {
         -- position = vec3(0, 0, 0) -- No position, its global
         group = "padeiro",
         Padaria = true,
+
+        useTextDescriptionAll = true,
+
         craftings = 
         {
             {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar e um pouco de gordura.',
                 time = 20,
                 input = {
                     {item = "farinha", amount = 1},
@@ -1235,6 +1393,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar.',
                 time = 20,
                 input = {
                     {item = "farinha", amount = 1},
@@ -1245,6 +1404,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar.',
                 time = 20,
                 input = {
                     {item = "farinha", amount = 1},
@@ -1267,9 +1427,13 @@ Config = {
         -- position = vec3(0, 0, 0) -- No position, its global
         group = "padeiro",
         Padaria2 = true,
+
+        useTextDescriptionAll = true,
+
         craftings = 
         {
             {
+                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa das bolachas.',
                 time = 30,
                 input = {
                     {item = "carvao", amount = 1},
@@ -1280,6 +1444,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos biscoitos.',
                 time = 30,
                 input = {
                     {item = "carvao", amount = 1},
@@ -1290,13 +1455,14 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos pães.',
                 time = 30,
                 input = {
                     {item = "carvao", amount = 1},
                     {item = "massadepao", amount = 1},
                 },
                 output = {
-                    {item = "pao", amount = 4, name = "Pão"}
+                    {item = "pao", amount = 6, name = "Pão"}
                 }
             },
         }
@@ -1309,9 +1475,11 @@ Config = {
 
     {
         position = vec3(1357.599,-1248.308,79.951), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Alguns tomates e uma lata.',
                 time = 15,
                 input = {
                     {item = "lata", amount = 1},
@@ -1323,6 +1491,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Alguns grãos de milho e uma lata.',
                 time = 15,
                 input = {
                     {item = "milho", amount = 4},
@@ -1333,6 +1502,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Alguns punhados de feijão e uma lata.',
                 time = 15,
                 input = {
                     {item = "feijao", amount = 4},
@@ -1347,23 +1517,27 @@ Config = {
     ---------------------------------------------ADUBO---------------------------------
     {
         position = vec3(-873.196,318.333,96.283), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Fazer a decomposição de ossos usando uma pá e alguns ossos pode ser muito útil.',
                 time = 15,
                 input = {
                     {item = "pa", amount = 1, remove = false},
                     {item = "osso", amount = 10},
+                    {item = "terra", amount = 3},
                 },
                 output = {
-                    {item = "podeosso", amount = 5, name = "Pó de Osso"}
+                    {item = "adubo", amount = 5, name = "Adubo"}
                 }
             },
             {
+                descriptionTextOverride = 'Agora é só pegar umas 5 pazadas de pó de osso e colocar em um saco vázio.',
                 time = 15,
                 input = {
                     {item = "pa", amount = 1, remove = false},
-                    {item = "podeosso", amount = 5},
+                    {item = "Adubo", amount = 5},
                     {item = "saco", amount = 1},
                 },
                 output = {
@@ -1373,11 +1547,15 @@ Config = {
         }
     },
 -------------------------------------------------MOINHO--------------------------------------------
+-- useTextDescriptionAll = true,
+    -- descriptionTextOverride = 'Tradição de corno',
     {
         position = vec3(1053.885,-1123.756,67.891), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Pague 1c e entregue 4 maços de Trigo para receber um saco de farinha.',
                 time = 15,
                 input = {
                     {item = "money", amount = 1},
@@ -1389,6 +1567,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Pague 1c e entregue 4 canas-de-açúcar para receber um saco de Açúcar.',
                 time = 15,
                 input = {
                     {item = "money", amount = 1},
@@ -1399,6 +1578,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Pague 10c e entregue 4 canas-de-açúcar para receber um pouco de álcool.',
                 time = 15,
                 input = {
                     {item = "money", amount = 10},
@@ -1414,23 +1594,26 @@ Config = {
 -------------------------------------------------LENHADOR--------------------------------------------
     {
         position = vec3(-1821.705,-423.195,160.052), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Madeira boa, um bom machado ou um facão bem afiado.',
                 time = 15,
                 input = {
                     {item = "madeiraboa", amount = 1},
-                    {item = "melee_hatchet", amount = 1, remove = false},
+                    {item = "melee_hatchet", amount = 1, alias = {"melee_machete"}, remove = false},
                 },
                 output = {
                     {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
                 }
             },
             {
+                descriptionTextOverride = 'Madeira Refinada e todas as ferramentas necessárias.',
                 time = 15,
                 input = {
                     {item = "madeirarefinada", amount = 2},
-                    {item = "melee_hatchet", amount = 1, remove = false},
+                    {item = "ferramentas", amount = 1, remove = false},
                 },
                 output = {
                     {item = "tabua", amount = 1, name = "Tábua"}
@@ -1442,12 +1625,14 @@ Config = {
 --------------------------------------ALFAIATE-------------------------------
     {
         position = vec3(1410.200,-1283.656,81.594), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Material: Algodão',
                 time = 20,
                 input = {
-                    {item = "algodao", amount = 10, alias = {"fibra"}},
+                    {item = "algodao", amount = 10},
                 },
                 output = {
                     {item = "linha", amount = 5, name = "Rolo de Linha"}
@@ -1459,9 +1644,22 @@ Config = {
     {
         group = "alfaiate",
         position = vec3(-766.793,-1291.068,43.839), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Material: Fibras de Plantas',
+                time = 20,
+                input = {
+                    {item = "fibra", amount = 10},
+                    {item = "melee_knife", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "linha", amount = 5, name = "Rolo de Linha"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Material: Algodão, Linha e Agulha',
                 time = 20,
                 input = {
                     {item = "algodao", amount = 10},
@@ -1473,6 +1671,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Material: Algodão, Linha e Agulha',
                 time = 30,
                 input = {
                     {item = "tecidobranco", amount = 5},
@@ -1484,6 +1683,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Material: Tecido, Linha e Agulha',
                 time = 30,
                 input = {
                     {item = "tecidobranco", amount = 5},
@@ -1495,6 +1695,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Material: Tecido, Linha e Agulha',
                 time = 15,
                 input = {
                     {item = "tecidobranco", amount = 2},
@@ -1512,23 +1713,23 @@ Config = {
     ----------------------------------------------------------------------------------------------------------------------------------------------------
     --------------------------------------------------------------- MOONSHINE --------------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
-    --[[
+    
     {
-        position = vec3(1450.939,371.232,89.884), -- No position, its global
+        position = vec3(-25.380,1225.333,173.119), -- No position, its global
 
         useTextDescriptionAll = true,
 
         craftings =
         {
             {
-                descriptionTextOverride = 'Tradição de corno',
+                descriptionTextOverride = 'Comum entre fazendeiros e enlatadores, fácil de fazer, mas demorado devido a fermentação.',
                 
-                time = 50,
+                time = 60,
 
                 input = {
                     {item = "milholata", amount = 3},
                     {item = "alcool", amount = 1},
-                    {item = "mosto", amount = 1},
+                    {item = "mostofraco", amount = 1},
                 },
 
                 output = {
@@ -1536,15 +1737,15 @@ Config = {
                 },
             },
             {
-                descriptionTextOverride = 'Tradição de Refresco',
+                descriptionTextOverride = 'Refrescante, cheiro de álcool e um mosto razoável.',
 
-                time = 50,
+                time = 40,
 
                 input = {
                     {item = "cassisdourado", amount = 6},
                     {item = "mentasilvestre", amount = 6},
                     {item = "alcool", amount = 3},
-                    {item = "mosto", amount = 1},
+                    {item = "mostomedio", amount = 1},
                 },
 
                 output = {
@@ -1552,7 +1753,7 @@ Config = {
                 }
             },
             {
-                descriptionTextOverride = 'Tradição de inverno',
+                descriptionTextOverride = 'Cor de violetas, e cheiro de inverno, muito álcool, e um mosto muito forte.',
 
                 time = 50,
 
@@ -1560,7 +1761,7 @@ Config = {
                     {item = "gualteria", amount = 8},
                     {item = "violeta", amount = 8},
                     {item = "alcool", amount = 3},
-                    {item = "mosto", amount = 1},
+                    {item = "mostoforte", amount = 1},
                 },
 
                 output = {
@@ -1569,17 +1770,19 @@ Config = {
             },
         }
     },
-    ]]
+    
 
-----------------------------------------------------------------------------------------------------------------------------------------------------
-    --------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------- BEBIDAS --------------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
 
     {
         position = vec3(-828.745,-1319.372,43.587), -- No position, its global
+        useTextDescriptionAll = true,
         craftings = 
         {
             {
+                descriptionTextOverride = 'Lúpulos, álcool e água.',
                 time = 22,
                 input = {
                     {item = "lupulo", amount = 4},
@@ -1591,6 +1794,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Grãos de milho, trigo, álcool e água.',
                 time = 22,
                 input = {
                     {item = "milho", amount = 6},
@@ -1603,6 +1807,7 @@ Config = {
                 }
             },
             {
+                descriptionTextOverride = 'Agaves, álcool e água.',
                 time = 22,
                 input = {
                     {item = "agave", amount = 10},
@@ -1621,13 +1826,19 @@ Config = {
     ------------------------------------------------------------------ OPIO ----------------------------------------------------------------------------
     ----------------------------------------------------------------------------------------------------------------------------------------------------
 
---[[
+
     {
-        position = vec3(-329.753,-150.822,51.074), -- No position, its global
+        position = vec3(192.172,992.452,190.028), -- No position, its global
+        
+        useTextDescriptionAll = true,
+
         craftings = 
         {
             {
-                time = 40,
+                descriptionTextOverride = 'A materia prima, quimicos e um frasco.',
+
+                time = 15,
+                
                 input = {
                     {item = "papola", amount = 4},
                     {item = "quimicos", amount = 2},
@@ -1638,7 +1849,10 @@ Config = {
                 }
             },
             {
-                time = 40,
+                descriptionTextOverride = 'O extrato, algo para filtrar e mais quimicos.',
+                
+                time = 20,
+
                 input = {
                     {item = "extratodepapoula", amount = 1},
                     {item = "quimicos", amount = 1},
@@ -1650,7 +1864,50 @@ Config = {
             },
         }
     },
-]]
+
+
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------ JORNAL ----------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+--[[
+    {
+        group = "jornalista",
+        position = vec3(1178.750,427.240,96.215), -- No position, its global
+        
+        useTextDescriptionAll = true,
+
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Pedaços de papel, pena de rápina e tinta.',
+
+                time = 10,
+                
+                input = {
+                    {item = "papel", amount = 5},
+                    {item = "penarapina", amount = 1, remove = false},
+                    {item = "tinta", amount = 1}
+                },
+                output = {
+                    {item = "jornal", amount = 1, name = "Jornal"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Recicle seu jornal',
+                
+                time = 10,
+
+                input = {
+                    {item = "jornal", amount = 1},
+                },
+                output = {
+                    {item = "jornal", amount = 1, name = "Jornal Reciclado"}
+                }
+            },
+        }
+    },]]
 
 
 

@@ -12,7 +12,7 @@ local HOURLY_PAYMENT_PER_GROUP = {
 	["trooper"]  = { payment = 450 }, -- $2.50
 	["recruta"]  = { payment = 100 }, -- $0.75
 
-	["medic"] 	 = { payment = 100 },
+	["medic"] 	 = { payment = 300 },
 
 	["governador"] 	 = { payment = 1200 }, -- $12.00
 	["secretario"] 	 = { payment = 900 },  -- $9.00

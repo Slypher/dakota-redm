@@ -27,12 +27,13 @@ config_file_STATICCHESTS = {
     -- ///////// RHODES
     {"static:public:4", 1351.093, -1380.077, 84.287 - 0.89, 259.999, 1, 100},
     
-    {"static:trooper:1", 2506.955, -1301.881, 48.954 - 0.89, 49.59, 0, 100, "trooper"}, -- saint dennis
-    {"static:trooper:2", 1361.919, -1305.239, 77.761 - 0.89, 246.999, 0, 100, "trooper"}, --- rhodes
-    {"static:trooper:3", -279.592, 808.447, 119.380 - 0.89, 93.51, 0, 100, "trooper"}, -- VALENTINE
+    {"static:oficiais:1", -279.592, 808.447, 119.380 - 0.89, 93.51, 0, 100, "trooper"}, -- VALENTINE
+    {"static:oficiais:2", 1361.919, -1305.239, 77.761 - 0.89, 246.999, 0, 100, "trooper"}, --- rhodes
+    --{"static:oficiais:3", 2506.955, -1301.881, 48.954 - 0.89, 49.59, 0, 100, "trooper"}, -- saint dennis
+
 
     -- #    INDIOS
-    {"static:indio:1", 467.791,2228.419,247.358 - 0.89, 100.00, 1, 100, "indio"}, -- RESERVA
+    {"static:indio:1", 467.791,2228.419,247.358 - 0.89, 100.00, 1, 150, "indio"}, -- RESERVA
 
     -- #    FERREIRO
     {"static:ferreiro:1", -363.782,795.574,116.135 - 0.89, -170.00, 1, 100, "ferreiro"}, -- VALENTINE

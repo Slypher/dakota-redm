@@ -715,12 +715,12 @@ AddEventHandler('poke_planting:giveitem', function(tipo)
 			Inventory:addItem('trigo', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `CRP_SUGARCANE_AC_sim` then
-			Inventory:addItem('acucar', (count))
+			Inventory:addItem('canaacucar', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `CRP_LETTUCE_AA_SIM` then
 			Inventory:addItem('alface', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
-        elseif tipo == `s_inv_alaskanginseng01x` then
+        elseif tipo == `crp_artichoke_aa_sim` then
 			Inventory:addItem('lupulo', (count))
 			TriggerClientEvent("FRP:NOTIFY:Simple", _source, 'Você colheu : '..count, 5)
         elseif tipo == `CRP_TOMATOES_AA_SIM` then

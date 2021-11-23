@@ -284,7 +284,7 @@ function triggerUse(User, itemData, Slot)
 
     if itemId == "tobaccoseed" then
         local _source = source
-        TriggerClientEvent('poke_planting:planto1', _source, 'tobaccoseed',`CRP_TOBACCOPLANT_AA_SIM`, `CRP_TOBACCOPLANT_AB_SIM`, `CRP_TOBACCOPLANT_AC_SIM`)
+        TriggerClientEvent('poke_planting:planto1', _source, 'tobaccoseed',`CRP_TOBACCOPLANT_AA_SIM`, `CRP_TOBACCOPLANT_AB_SIM`, `CRP_TOBACCOPLANT_AC_sim`)
         User:closeInventory()
         return true
     end
@@ -406,7 +406,7 @@ function triggerUse(User, itemData, Slot)
         -- cAPI.VaryPlayerStamina(source, 15)
         --cAPI.VaryPlayerCore(source, 1, 20)
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -35)
+        API.varyHunger2(source, -25)
         --cAPI.VarySickness(source, 10)
         User:closeInventory()
         return true
@@ -414,25 +414,25 @@ function triggerUse(User, itemData, Slot)
 
     if itemId == "feijaolata" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -25) 
+        API.varyHunger2(source, -20) 
         User:closeInventory()
         return true
     end
     if itemId == "milholata" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -25) 
+        API.varyHunger2(source, -20) 
         User:closeInventory()
         return true
     end
     if itemId == "bolacha" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -35) 
+        API.varyHunger2(source, -25) 
         User:closeInventory()
         return true
     end
     if itemId == "biscoito" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -35) 
+        API.varyHunger2(source, -25) 
         User:closeInventory()
         return true
     end
@@ -504,13 +504,15 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "sopa" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -70) 
+        API.varyHunger2(source, -80)
+        API.varyThirst2(source, -20) 
         User:closeInventory()
         return true
     end
     if itemId == "sopadecarne" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -80) 
+        API.varyHunger2(source, -100) 
+        API.varyThirst2(source, -20)
         User:closeInventory()
         return true
     end
@@ -559,7 +561,19 @@ function triggerUse(User, itemData, Slot)
         User:closeInventory()
         return true
     end
-    if itemId == "moonshine" then --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
+    if itemId == "moonshinetradicional" then --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
+        cAPI.TaskInteraction(source, "drink_tonic")
+        API.varyThirst2(source, -20)
+        User:closeInventory()
+        return true
+    end
+    if itemId == "moonshinedourado" then --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
+        cAPI.TaskInteraction(source, "drink_tonic")
+        API.varyThirst2(source, -20)
+        User:closeInventory()
+        return true
+    end
+    if itemId == "moonshineinverno" then --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
         cAPI.TaskInteraction(source, "drink_tonic")
         API.varyThirst2(source, -20)
         User:closeInventory()

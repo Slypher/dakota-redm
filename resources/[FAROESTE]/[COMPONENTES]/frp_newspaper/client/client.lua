@@ -1,4 +1,4 @@
-RegisterCommand('jornal',function()
+RegisterCommand('lerjornal',function()
    
     Citizen.InvokeNative(0x524B54361229154F, PlayerPedId(), GetHashKey("WORLD_HUMAN_LEAN_BARREL"), 100000,true,false, false, false)
 
