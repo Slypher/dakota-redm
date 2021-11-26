@@ -63,9 +63,17 @@ AddEventHandler('gameEventCarriableVehicleStowStart', function(stowerEntity, car
         return
     end
 
+    local entityItem = getCarriableEntityItem(gEntityBeingStowed)
+    local entityItemWeight = getCarriableItemStowWeight(gEntityBeingStowedItem)
+
+    -- Evento duplicado, ignorar...
+    if gEntityBeingStowed == carriableEntity and entityItemWeight == nil then
+        return
+    end
+
     gEntityBeingStowed = carriableEntity
-    gEntityBeingStowedItem = getCarriableEntityItem(gEntityBeingStowed)
-    gEntityBeingStowedItemWeight = getCarriableItemStowWeight(gEntityBeingStowedItem)
+    gEntityBeingStowedItem = entityItem
+    gEntityBeingStowedItemWeight = entityItemWeight
 
     -- print('gameEventCarriableVehicleStowStart :: isItemAPelt', gEntityBeingStowedModel, isItemAPelt(gEntityBeingStowedModel))
 end)

@@ -1,4 +1,4 @@
-iHuntingWagonInventory = 20
+iHuntingWagonInventory = 32
 iMaxHorseCargoPelts = 50
 
 function itemHasPropertyTag(inventoryItemHash, propertyTagHash)
