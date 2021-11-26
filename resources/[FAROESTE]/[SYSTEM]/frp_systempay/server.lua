@@ -31,7 +31,7 @@ Citizen.CreateThread(
 				local payment = d.payment
 				local exp = d.exp
 
-				for _, User in pairs(API.getUsersByGroup(group, false)) do
+				for _, User in pairs(API.getUsersByGroup(group, true)) do
 					local user_id = User:getId()
 
 					local Character = User:getCharacter()
