@@ -33,7 +33,7 @@ AddEventHandler(
             playerGender = "mulher"
         end
 
-        local PoliceON = API.getUsersByGroup("trooper")
+        local PoliceON = API.getUsersByGroup("recruta")
 
         for i = 1, #PoliceON do
             TriggerClientEvent("FRP:WANTED:gunshotInProgress", PoliceON[i].getSource(), targetCoords)
@@ -60,7 +60,7 @@ AddEventHandler(
         local charid = Character:getId()
         local wan = Character:getData(charid, "wanted", city)
 
-        local PoliceON = API.getUsersByGroup("trooper")
+        local PoliceON = API.getUsersByGroup("recruta")
 
         for i = 1, #PoliceON do
             if wan ~= nil then
@@ -133,7 +133,7 @@ AddEventHandler(
         if User then
             wantedUserIds[User:getId()] = v
 
-            for _, User in pairs(API.getUsersByGroup("trooper")) do
+            for _, User in pairs(API.getUsersByGroup("recruta")) do
                 local uSource = User:getSource()
 
                 TriggerClientEvent("FRP:WANTED:SyncWantedOrNotPlayer", uSource, v)
@@ -147,7 +147,7 @@ AddEventHandler(
     function(User, character_id)
         local Character = User:getCharacter()
 
-        if Character:hasGroupOrInheritance("trooper") then
+        if Character:hasGroupOrInheritance("recruta") then
             local r = {}
 
             for _, uid in pairs(wantedUserIds) do
@@ -165,7 +165,7 @@ local User = API.getUserFromSource(source)
 local Character = User:getCharacter()
     local users = API.getUsers()
     local players = PoliceON
-    local PoliceON = API.getUsersByGroup("trooper")
+    local PoliceON = API.getUsersByGroup("recruta")
     local quantidade = 0
     for k,v in pairs(PoliceON) do
         quantidade = quantidade + 1
