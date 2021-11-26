@@ -96,6 +96,9 @@ function ensureMainThread()
 			gIsMainThreadRunning = false
 
 			GroundDigging.setEnabled(true)
+
+			gCurrentCluster = nil
+
 			HandheldShovelItem.setDigPromptEnabled(true)
 
 			RemoveEventHandler(onDigPromptIsPressedHandler)

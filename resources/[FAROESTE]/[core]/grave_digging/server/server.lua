@@ -207,7 +207,7 @@ RegisterNetEvent('net.requestStateUpdate', function(newState)
         if math.random() <= (NOTIFY_LAW_ENFORCEMENT_CHANCE / 100) then
             local clusterDisplayName = DIGGING_CLUSTERS[currCluster].displayName
 
-            API.NotifyUsersWithGroup('recruta', ('Moradores avistaram pessoas roubando covas em %s'):format(clusterDisplayName))
+            API.NotifyUsersWithGroup('recruta', ('Moradores avistaram pessoas roubando covas em %s'):format(clusterDisplayName), true)
         end
 
         if not gSitesShouldGiveLoot[currCluster]?[activeSite] then
