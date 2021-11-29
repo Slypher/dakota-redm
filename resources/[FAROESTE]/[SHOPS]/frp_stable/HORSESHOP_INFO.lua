@@ -5,29 +5,29 @@ HORSESHOP_INFO = {
         ["A_C_Horse_Turkoman_Gold"] = {"Dourado", 0.70, 130},
         ["A_C_Horse_Turkoman_Silver"] = {"Prateado", 0.70, 130},
         ["a_c_horse_turkoman_black"] = {"Preto", 0.70, 130},   
-        ["A_C_horse_turkoman_chestnut"] = {"Castanho - LEILÃO", 1.50, 1000},  -- LEILÃO
+        ["A_C_horse_turkoman_chestnut"] = {"Castanho - LEILÃO", 30, 10000},  -- LEILÃO
         ["a_c_horse_turkoman_grey"] = {"Cinza", 0.70, 130},           
-        ["A_C_horse_turkoman_perlino"] = {"Perlino - LEILÃO", 1.50, 1000},    -- LEILÃO
+        ["A_C_horse_turkoman_perlino"] = {"Perlino - LEILÃO", 30, 10000},    -- LEILÃO
     },
     {
         name = "Appaloosa", -----------------------------------------------------------------------
-        ["A_C_Horse_Appaloosa_BlackSnowflake"] = {"Floco Negro - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_Appaloosa_BlackSnowflake"] = {"Floco Negro - LEILÃO", 30, 10000}, -- LEILÃO
         ["A_C_Horse_Appaloosa_Blanket"] = {"Cobertor", 0.40, 90},
         ["A_C_Horse_Appaloosa_BrownLeopard"] = {"Leopardo", 0.40, 90},            
         ["A_C_Horse_Appaloosa_LeopardBlanket"] = {"Manta Leopardo", 0.40, 90},
         ["A_C_Horse_Appaloosa_FewSpotted_PC"] = {"Poucos Manchados", 0.40, 90},
         ["A_C_Horse_Gang_Charles"] = {"Charles", 0.40, 90},
-        ["A_C_Horse_Appaloosa_Leopard"] = {"Leopardo - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_Appaloosa_Leopard"] = {"Leopardo - LEILÃO", 30, 10000}, -- LEILÃO
         ["A_C_Horse_Gang_Uncle_EndlessSummer"] = {"Verão interminável", 0.40, 90},
     },
     {
         name = "Árabe", ----------------------------------------------------------------------------------------
-        ["A_C_Horse_Arabian_RedChestnut"] = {"Vermelho - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_Arabian_RedChestnut"] = {"Vermelho - LEILÃO", 30, 10000}, -- LEILÃO
         ["A_C_Horse_Arabian_RoseGreyBay"] = {"Rosa Cinzento", 1.50, 300},
         ["A_C_Horse_Arabian_WarpedBrindle_PC"] = {"Tigrado", 1.50, 300},
-        ["A_C_Horse_Arabian_White"] = {"Branco - LEILÃO", 1.50, 1000}, -- LEILÃO
-        ["A_C_Horse_Arabian_Black"] = {"Preto - LEILÃO", 1.50, 1000}, -- LEILÃO
-        ["A_C_Horse_Arabian_Grey"] = {"Cinza - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_Arabian_White"] = {"Branco - LEILÃO", 30, 10000}, -- LEILÃO
+        ["A_C_Horse_Arabian_Black"] = {"Preto - LEILÃO", 30, 10000}, -- LEILÃO
+        ["A_C_Horse_Arabian_Grey"] = {"Cinza - LEILÃO", 30, 10000}, -- LEILÃO
     },
     {
         name = "American Paint", -----------------------------------------------------------------------
@@ -40,10 +40,10 @@ HORSESHOP_INFO = {
         name = "Gypsy Cob", -----------------------------------------------------------------------------
         ["a_c_horse_gypsycob_whiteblagdon"] = {"Branco", 1.0, 170},			   -- 26 melhor
         ["a_c_horse_gypsycob_piebald"] = {"Piebald", 1.0, 170}, 				   -- 26 melhor
-        ["A_C_horse_gypsycob_skewbald"] = {"Skewbald - LEILÃO", 1.50, 1000},                -- 13 Melhor      LEILÃO
+        ["A_C_horse_gypsycob_skewbald"] = {"Skewbald - LEILÃO", 30, 10000},                -- 13 Melhor      LEILÃO
         ["a_c_horse_gypsycob_palominoblagdon"] = {"Palomino", 1.0, 170},         -- 13 Melhor
-        ["A_C_horse_gypsycob_splashedpiebald"] = {"Pintado - LEILÃO", 1.50, 1000},          -- 3 melhor       LEILÃO
-        ["A_C_horse_gypsycob_splashedbay"] = {"Marrom - LEILÃO", 1.50, 1000},               -- 3 melhor       LEILÃO
+        ["A_C_horse_gypsycob_splashedpiebald"] = {"Pintado - LEILÃO", 30, 10000},          -- 3 melhor       LEILÃO
+        ["A_C_horse_gypsycob_splashedbay"] = {"Marrom - LEILÃO", 30, 10000},               -- 3 melhor       LEILÃO
     },
     {
         name = "Trotador Americano", ------------------------------------------------------------------
@@ -63,7 +63,7 @@ HORSESHOP_INFO = {
         ["A_C_Horse_Ardennes_BayRoan"] = {"Bege", 0.42, 84},  			   -- 39 melhor
         ["A_C_Horse_Ardennes_IronGreyRoan"] = {"Prateado", 0.42, 84},        -- 23 melhor
         ["A_C_Horse_Gang_Bill"] = {"Marrom", 0.42, 84},
-        ["A_C_Horse_Ardennes_StrawberryRoan"] = {"Morango - LEILÃO", 1.50, 1000},  -- 20 melhor     LEILÃO
+        ["A_C_Horse_Ardennes_StrawberryRoan"] = {"Morango - LEILÃO", 30, 10000},  -- 20 melhor     LEILÃO
     },
     {
         name = "Belga", --------------------------------------------------------------------------------------
@@ -75,12 +75,12 @@ HORSESHOP_INFO = {
         name = "Warmblood Holandês", -------------------------------------------------------------------------
         ["A_C_Horse_DutchWarmblood_SealBrown"] = {"Marrom", 0.38, 76},		         -- 37 melhor
         ["A_C_Horse_DutchWarmblood_ChocolateRoan"] = {"Chocolate", 0.38, 76},          -- 22 melhor
-        ["A_C_Horse_DutchWarmblood_SootyBuckskin"] = {"Marrom Pintado - LEILÃO", 1.50, 1000},     -- 40 melhor      LEILÃO
+        ["A_C_Horse_DutchWarmblood_SootyBuckskin"] = {"Marrom Pintado - LEILÃO", 30, 10000},     -- 40 melhor      LEILÃO
     },
     {
         name = "Mestiço Húngaro", ---------------------------------------------------------------------------
         ["A_C_Horse_HungarianHalfbred_FlaxenChestnut"] = {"Castanho", 0.39, 70},   			-- 44 melhor 
-        ["A_C_Horse_HungarianHalfbred_LiverChestnut"] = {"Vermelho - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_HungarianHalfbred_LiverChestnut"] = {"Vermelho - LEILÃO", 30, 10000}, -- LEILÃO
         ["A_C_Horse_HungarianHalfbred_PiebaldTobiano"] = {"Piebald Tobiano", 0.39, 70},  		-- 46 melhor
         ["A_C_Horse_HungarianHalfbred_DarkDappleGrey"] = {"Cinza Manchado Escuro", 0.39, 70}, -- 41 melhor
         ["A_C_Horse_Gang_John"] = {"Marrom", 0.39, 70},
@@ -100,13 +100,13 @@ HORSESHOP_INFO = {
         ["A_C_Horse_Kladruber_Cremello"] = {"Cremelo", 0.30, 55},    	  -- 15 Melhor
         ["A_C_Horse_Kladruber_Grey"] = {"Prata", 0.30, 55},         	  -- 15 Melhor
         ["A_C_Horse_Kladruber_DappleRoseGrey"] = {"Malhado", 0.30, 55}, -- 5 melhor
-        ["A_C_Horse_Kladruber_Silver"] = {"Prateado - LEILÃO", 1.50, 1000},        -- 5 melhor  LEILÃO
+        ["A_C_Horse_Kladruber_Silver"] = {"Prateado - LEILÃO", 30, 10000},        -- 5 melhor  LEILÃO
     },
     {
         name = "Missouri Fox Trotter", -------------------------------------------------------------------------------
         ["A_C_Horse_MissouriFoxTrotter_AmberChampagne"] = {"Champanhe", 0.44, 88},
         ["A_C_Horse_MissouriFoxTrotter_SableChampagne"] = {"Champa", 0.44, 88},
-        ["A_C_Horse_MissouriFoxTrotter_SilverDapplePinto"] = {"Fantasma - LEILÃO", 1.50, 1000},
+        ["A_C_Horse_MissouriFoxTrotter_SilverDapplePinto"] = {"Fantasma - LEILÃO", 30, 10000},
         ["a_c_horse_missourifoxtrotter_blacktovero"] = {"Tovero Preto", 0.44, 88},
         ["a_c_horse_missourifoxtrotter_blueroan"] = {"Azulado", 0.44, 40},
         ["a_c_horse_missourifoxtrotter_buckskinbrindle"] = {"Camurça", 0.44, 88},
@@ -130,10 +130,10 @@ HORSESHOP_INFO = {
         ["A_C_Horse_Mustang_GrulloDun"] = {"Sol Dourado", 0.90, 180},
         ["A_C_Horse_Mustang_TigerStripedBay"] = {"Tigre Listrado", 0.90, 180},
         ["A_C_Horse_Mustang_WildBay"] = {"Selvagem", 0.90, 180},
-        ["A_C_horse_mustang_blackovero"] = {"Preto - LEILÃO", 1.50, 1000},    
+        ["A_C_horse_mustang_blackovero"] = {"Preto - LEILÃO", 30, 10000},    
         ["a_c_horse_mustang_buckskin"] = {"Buck Skin", 1.20, 180},  
         ["a_c_horse_mustang_chestnuttovero"] = {"Honesto", 0.90, 180}, 
-        ["A_C_horse_mustang_reddunovero"] = {"Vermelho - LEILÃO", 1.50, 1000},   
+        ["A_C_horse_mustang_reddunovero"] = {"Vermelho - LEILÃO", 30, 10000},   
     },
     {
         name = "Nokota", --------------------------------------------------------------------------------------
@@ -164,8 +164,8 @@ HORSESHOP_INFO = {
     },
     {
         name = "Puro-Sangue Inglês", ---------------------------------------------------------------
-        ["A_C_Horse_Thoroughbred_BlackChestnut"] = {"Roxo - LEILÃO", 1.50, 1000},  -- 12 Melhor
-        ["A_C_Horse_Thoroughbred_BloodBay"] = {"Vermelho - LEILÃO", 1.50, 1000},   -- 33 melhor
+        ["A_C_Horse_Thoroughbred_BlackChestnut"] = {"Roxo - LEILÃO", 30, 10000},  -- 12 Melhor
+        ["A_C_Horse_Thoroughbred_BloodBay"] = {"Vermelho - LEILÃO", 30, 10000},   -- 33 melhor
         ["A_C_Horse_Thoroughbred_DappleGrey"] = {"Cinza Invertido", 0.40, 80}, -- 31 melhor
         ["A_C_Horse_Thoroughbred_Brindle"] = {"Listrado", 0.40, 80},           -- 10 Melhor
         ["A_C_Horse_Thoroughbred_ReverseDappleBlack"] = {"Preto Invertido", 0.40, 80},
@@ -174,19 +174,19 @@ HORSESHOP_INFO = {
         name = "Crioulo", ------------------------------------------------------------------------------ 
         ["A_C_Horse_Criollo_Dun"] = {"Bege", 0.39, 78},				 -- 29 melhor
         ["A_C_Horse_Criollo_BlueRoanOvero"] = {"Azulado", 0.39, 78},   -- 29 melhor
-        ["A_C_Horse_Criollo_BayBrindle"] = {"Tigrado - LEILÃO", 1.50, 1000},      -- 16 melhor LEILÃO
+        ["A_C_Horse_Criollo_BayBrindle"] = {"Tigrado - LEILÃO", 30, 10000},      -- 16 melhor LEILÃO
         ["A_C_Horse_Criollo_SorrelOvero"] = {"Malhado", 0.40, 78},     -- 16 melhor
         ["A_C_Horse_Criollo_MarbleSabino"] = {"Pintado", 0.43, 78},    -- 6 melhor
         ["A_C_Horse_Criollo_BayFrameOvero"] = {"Baia", 0.43, 78},      -- 6 melhor
     },
     {
         name = "Bretão", -------------------------------------------------------------------------------------
-        ["A_C_Horse_Breton_MealyDappleBay"] = {"MealyDapple - LEILÃO", 1.50, 1000}, -- LEILÃO
+        ["A_C_Horse_Breton_MealyDappleBay"] = {"MealyDapple - LEILÃO", 30, 10000}, -- LEILÃO
         ["A_C_Horse_Breton_Sorrel"] = {"Sorrel", 0.75, 160},					  -- 30 melhor
         ["A_C_Horse_Breton_RedRoan"] = {"Rosado", 0.75, 160},				      -- 30 melhor
         ["A_C_Horse_Breton_GrulloDun"] = {"Bege", 0.75, 160},					  -- 17 melhor
         ["A_C_Horse_Breton_SealBrown"] = {"Vermelho", 0.75, 160},				  -- 17 melhor
-        ["A_C_Horse_Breton_SteelGrey"] = {"Aço cinza - LEILÃO", 1.50, 1000},               -- 7 melhor LEILÃO
+        ["A_C_Horse_Breton_SteelGrey"] = {"Aço cinza - LEILÃO", 30, 10000},               -- 7 melhor LEILÃO
     },
     { 
         name = "Norfolk Roadster", ----------------------------------------------------------------------------------
@@ -194,7 +194,7 @@ HORSESHOP_INFO = {
         ["A_C_HORSE_NORFOLKROADSTER_BLACK"] = {"Preto", 0.50, 100},              -- 27 melhor
         ["A_C_HORSE_NORFOLKROADSTER_PIEBALDROAN"] = {"Piebaldroan", 0.50, 100},  -- 14 melhor
         ["A_C_HORSE_NORFOLKROADSTER_ROSEGREY"] = {"Cinza Malhado", 0.50, 100},   -- 14 melhor
-        ["A_C_HORSE_NORFOLKROADSTER_DAPPLEDBUCKSKIN"] = {"Onça - LEILÃO", 1.50, 1000},     -- 4 melhor LEILÃO
+        ["A_C_HORSE_NORFOLKROADSTER_DAPPLEDBUCKSKIN"] = {"Onça - LEILÃO", 30, 10000},     -- 4 melhor LEILÃO
         ["A_C_HORSE_NORFOLKROADSTER_SPOTTEDTRICOLOR"] = {"Tricolor", 0.65, 100}, -- 4 melhor
     },
     {
