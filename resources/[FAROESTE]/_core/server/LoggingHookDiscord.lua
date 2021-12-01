@@ -127,20 +127,22 @@ Qntd: %d.
 'https://discord.com/api/webhooks/898282685242417222/arijhRRcRTi_GrP1At9KeRs0533vKV-dbdDG0OI7pkhlh_7qrysK-EBJVDNfnPZMo3iS'
 )
 
-registerDiscordLog('BANK_DOLLAR_WITHDRAW',
-[[
-User: %s(%d).
-Char: %s(%d).
-Doláres: $%d.
-]],
-CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
-)
+local CHANNEL_WEBHOOK__BANCO = 'https://discordapp.com/api/webhooks/915705211396427837/cYdduh1tovWm4qaK5dJLaU5dXWzoVUImlnpwCiudc1Q83K9TOZo--QufpmyZpuA19-dJ'
 
-registerDiscordLog('BANK_DOLLAR_DEPOSIT',
-[[
+registerDiscordLog('BANK_DOLLAR_WITHDRAW', [[
 User: %s(%d).
 Char: %s(%d).
 Doláres: $%d.
-]],
-CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
-)
+]], {
+    CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM,
+    CHANNEL_WEBHOOK__BANCO
+})
+
+registerDiscordLog('BANK_DOLLAR_DEPOSIT', [[
+User: %s(%d).
+Char: %s(%d).
+Doláres: $%d.
+]], {
+    CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM,
+    CHANNEL_WEBHOOK__BANCO
+})
