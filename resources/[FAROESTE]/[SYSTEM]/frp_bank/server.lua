@@ -32,7 +32,7 @@ AddEventHandler(
                     TriggerEvent("FRP:BANKING:balance", _source)
 
                     API.addGameLogEntryWithCharacter(Character:getId(), 'BANK_DOLLAR_WITHDRAW',
-                        _amount
+                        _amount / 100
                     )
                 else
                     User:notify("error", "Ocorreu uma falha ao concluir a transação!")
@@ -68,7 +68,7 @@ AddEventHandler(
                     TriggerEvent("FRP:BANKING:balance", _source)
 
                     API.addGameLogEntryWithCharacter(Character:getId(), 'BANK_DOLLAR_DEPOSIT',
-                        _amount
+                        _amount / 100
                     )
                 else
                     User:notify("error", "Ocorreu uma falha ao concluir a transação!")
