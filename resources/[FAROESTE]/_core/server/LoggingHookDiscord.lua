@@ -36,9 +36,19 @@ local gLogListener = Logging.registerListener(function(formatId, formattedLog)
 end)
 
 function registerDiscordLog(formatId, format, discordChannelWebhook)
+
     gLogListener.registerFormat(formatId, format)
 
-    gFormatIdToDiscordChannelWebhook[formatId] = discordChannelWebhook
+    if type(discordChannelWebhook) == 'table' then
+
+        for i = 1, #discordChannelWebhook do
+            gFormatIdToDiscordChannelWebhook[formatId] = discordChannelWebhook[i]
+        end
+
+    else
+        gFormatIdToDiscordChannelWebhook[formatId] = discordChannelWebhook
+    end
+
 end
 
 local CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM = 'https://discord.com/api/webhooks/898264157466525757/AiK3xbreQY9NFUnv7EaarwSkBrZ5xmSiAmOVTwe5C6o_wxX6CT-M569Og-e4lJ7pPIes'
