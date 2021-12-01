@@ -73,18 +73,18 @@ RegisterCommand(
     end
 )
 
-RegisterCommand(
-    "nc",
-    function(source, args, rawCommand)
-        local User = API.getUserFromSource(source)
-        local Character = User:getCharacter()
-        if Character:hasGroupOrInheritance("admin") then
-            cAPI.toggleNoclip(source)
-        else
-            User:notify("error", "Você não tem permissão!")
-        end
+RegisterCommand('nc', function(source, args, rawCommand)
+
+    local user = API.getUserFromSource(source)
+
+    local character = user:getCharacter()
+
+    if character:hasGroupOrInheritance('admin') then
+        return TriggerClientEvent('core:toggleNoclip', source)
     end
-)
+
+    user:notify("error", "Você não tem permissão!")
+end)
 
 RegisterCommand(
     "tpose",

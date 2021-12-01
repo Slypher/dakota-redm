@@ -4,6 +4,95 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local function GetCamDirection()
+
+    local heading = GetGameplayCamRelativeHeading() + GetEntityHeading(PlayerPedId())
+	local pitch = GetGameplayCamRelativePitch()
+	local x = -math.sin(heading * math.pi / 180.0)
+	local y = math.cos(heading * math.pi / 180.0)
+	local z = math.sin(pitch * math.pi / 180.0)
+	local len = math.sqrt(x * x + y * y + z *z)
+
+    if len ~= 0 then
+		x = x / len
+		y = y / len
+		z = z / len
+	end
+
+    return x, y, z
+end
+
+local function GetPlayerEntity()
+
+    local playerEntity = PlayerPedId()
+
+    if IsPedOnMount(playerEntity) then
+		playerEntity = GetMount(playerEntity)
+    else
+        if IsPedInAnyVehicle(playerEntity) then
+            playerEntity = GetVehiclePedIsUsing(playerEntity)
+        end
+    end
+
+    return playerEntity
+end
+
+local noclip = false
+
+RegisterNetEvent('core:toggleNoclip', function()
+
+    local playerEntity = GetPlayerEntity()
+
+    noclip = not noclip
+
+    SetEntityInvincible(playerEntity, noclip)
+
+    SetEntityVisible(playerEntity, not noclip)
+
+    SetEntityCollision(playerEntity, not noclip, not noclip)
+
+	while noclip do
+
+        local playerPosition = GetEntityCoords(playerEntity)
+
+        local x, y, z = playerPosition.x, playerPosition.y, playerPosition.z
+
+        local dx, dy, dz = GetCamDirection()
+
+        local speed = 1.0
+
+        SetEntityVelocity(playerEntity, 0.0001, 0.0001, 0.0001)
+
+        if IsControlPressed(0, 0xD9D0E1C0) then
+            speed = speed + 10.0
+        end
+
+        if IsControlPressed(0, 0xDB096B85) then
+            speed = speed - 0.9
+        end
+
+        if IsControlPressed(0, 0x8FFC75D6) then
+            speed = speed + 3.0
+        end
+
+        if IsControlPressed(0, 0x8FD015D8) then
+            x = x + speed * dx
+            y = y + speed * dy
+            z = z + speed * dz
+        end
+
+        if IsControlPressed(0, 0xD27782E3) then
+            x = x - speed * dx
+			y = y - speed * dy
+			z = z - speed * dz
+        end
+
+        SetEntityCoordsNoOffset(playerEntity, x, y, z, true, true, true)
+
+        Wait(0)
+    end
+end)
+
 RegisterNetEvent("FRP:ADMIN:Model")
 AddEventHandler(
 	"FRP:ADMIN:Model",
