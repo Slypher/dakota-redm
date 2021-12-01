@@ -103,17 +103,18 @@ Motivo: Desconhecido.
 CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM
 )
 
--- registerDiscordLog('SHOP_TRANSACTION',
--- [[
--- User: %s(%d).
--- Char: %s(%d).
--- Item: %s(%s).
--- Qntd: %d.
--- Valor: %.2f(%s).
--- Motivo: %s.
--- ]],
--- 'https://discord.com/api/webhooks/898264157466525757/AiK3xbreQY9NFUnv7EaarwSkBrZ5xmSiAmOVTwe5C6o_wxX6CT-M569Og-e4lJ7pPIes'
--- )
+registerDiscordLog('SHOP_TRANSACTION',
+[[
+User: %s(%d).
+Char: %s(%d).
+Loja: %s.
+Item: %s(%s).
+Qntd: %d.
+Valor: %.2f(%s).
+Ação: %s.
+]],
+'https://discordapp.com/api/webhooks/915714930097917962/km7VhE0O4hGAGlzDQEu6n_gM8HGz-SNjgMtLziayK0s7ZGwr_1CSQCn8RMRQnoMifQG3'
+)
 
 registerDiscordLog('ADMIN_ADD_ITEM',
 [[

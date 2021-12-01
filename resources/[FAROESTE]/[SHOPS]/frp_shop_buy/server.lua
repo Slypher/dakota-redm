@@ -179,12 +179,13 @@ AddEventHandler(
 
                 local addItemName = API.getItemDataFromId(addItemId):getName()
 
-                -- API.addGameLogEntryWithCharacter(character:getId(), 'SHOP_TRANSACTION',
-                --     addItemName        ,       addItemId,
-                --     addItemQuantity    ,
-                --     transactionPriceBuy, currencyItemId,
-                --     'Compra'
-                -- )
+                API.addGameLogEntryWithCharacter(character:getId(), 'SHOP_TRANSACTION',
+                    shopInfo.name,
+                    addItemName, addItemId,
+                    addItemQuantity,
+                    transactionPriceBuy / 100, currencyItemId,
+                    'Compra'
+                )
             else
                 user:notify('error', 'Falha ao concluir a transição :/')
 
