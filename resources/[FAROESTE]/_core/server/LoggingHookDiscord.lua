@@ -132,7 +132,7 @@ local CHANNEL_WEBHOOK__BANCO = 'https://discordapp.com/api/webhooks/915705211396
 registerDiscordLog('BANK_DOLLAR_WITHDRAW', [[
 User: %s(%d).
 Char: %s(%d).
-Doláres: $%d.
+Doláres: $%.2f.
 ]], {
     CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM,
     CHANNEL_WEBHOOK__BANCO
@@ -141,7 +141,7 @@ Doláres: $%d.
 registerDiscordLog('BANK_DOLLAR_DEPOSIT', [[
 User: %s(%d).
 Char: %s(%d).
-Doláres: $%d.
+Doláres: $%.2f.
 ]], {
     CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM,
     CHANNEL_WEBHOOK__BANCO
