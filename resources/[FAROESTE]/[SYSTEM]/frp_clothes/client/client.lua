@@ -52,6 +52,9 @@ local eyewear_f = {}
 local access_m = {}
 local access_f = {}
 
+local armor_m = {}
+local armor_f = {}
+
 local neckties_m = {}
 local neckties_f = {}
 
@@ -116,6 +119,21 @@ local neckwear_f = {}
 local gunbelts_m = {}
 local gunbelts_f = {}
 
+local ringsr_m = {}
+local ringsr_f = {}
+
+local ringsl_m = {}
+local ringsl_f = {}
+
+local dresses_m = {}
+local dresses_f = {}
+
+local gunbeltaccs_m = {}
+local gunbeltaccs_f = {}
+
+local satchels_m = {}
+local satchels_f = {}
+
 local mustache_m = {}
 
 local skirts_f = {}
@@ -162,6 +180,8 @@ Citizen.CreateThread(
                     table.insert(eyewear_m, v.Hash)
                 elseif v.category == "access" then
                     table.insert(access_m, v.Hash)
+                elseif v.category == "armor" then
+                    table.insert(armor_m, v.Hash)
                 elseif v.category == "neckties" then
                     table.insert(neckties_m, v.Hash)
                 elseif v.category == "bracelets" then
@@ -178,9 +198,9 @@ Citizen.CreateThread(
                     table.insert(ponchos_m, v.Hash)
                 elseif v.category == "offhand" then
                     table.insert(offhand_m, v.Hash)
-                elseif v.category == "beltbuckle" then
+                elseif v.category == "belt_buckles" then
                     table.insert(beltbuckle_m, v.Hash)
-                elseif v.category == "shirts_full" then
+                elseif v.category == "shirts" then
                     table.insert(shirts_m, v.Hash)
                 elseif v.category == "vests" then
                     table.insert(vests_m, v.Hash)
@@ -204,6 +224,16 @@ Citizen.CreateThread(
                     table.insert(neckwear_m, v.Hash)
                 elseif v.category == "gunbelts" then
                     table.insert(gunbelts_m, v.Hash)
+                elseif v.category == "ringsr" then
+                    table.insert(ringsr_m, v.Hash)
+                elseif v.category == "ringsl" then
+                    table.insert(ringsl_m, v.Hash)
+                elseif v.category == "dresses" then
+                    table.insert(dresses_m, v.Hash)
+                elseif v.category == "gunbeltaccs" then
+                    table.insert(gunbeltaccs_m, v.Hash)
+                elseif v.category == "satchels" then
+                    table.insert(satchels_m, v.Hash)
                 elseif v.category == "mustache" then
                     table.insert(mustache_m, v.Hash)
                 end
@@ -220,63 +250,75 @@ Citizen.CreateThread(
             --print("Dzieje sie 2")
             for i, v in ipairs(FemaleComp) do
                 if v.category == "hats" then
-                    table.insert(hats_f, v.hash)
+                    table.insert(hats_f, v.Hash)
                 elseif v.category == "spurs" then
-                    table.insert(spurs_f, v.hash)
+                    table.insert(spurs_f, v.Hash)
                 elseif v.category == "chaps" then
-                    table.insert(chaps_f, v.hash)
+                    table.insert(chaps_f, v.Hash)
                 elseif v.category == "cloaks" then
-                    table.insert(cloaks_f, v.hash)
+                    table.insert(cloaks_f, v.Hash)
                 elseif v.category == "spats" then
-                    table.insert(spats_f, v.hash)
+                    table.insert(spats_f, v.Hash)
                 elseif v.category == "eyewear" then
-                    table.insert(eyewear_f, v.hash)
+                    table.insert(eyewear_f, v.Hash)
                 elseif v.category == "access" then
-                    table.insert(access_f, v.hash)
+                    table.insert(access_f, v.Hash)
+                elseif v.category == "armor" then
+                    table.insert(armor_f, v.Hash)
                 elseif v.category == "neckties" then
-                    table.insert(neckties_f, v.hash)
+                    table.insert(neckties_f, v.Hash)
                 elseif v.category == "bracelets" then
-                    table.insert(bracelets_f, v.hash)
+                    table.insert(bracelets_f, v.Hash)
                 elseif v.category == "loadouts" then
-                    table.insert(loadouts_f, v.hash)
+                    table.insert(loadouts_f, v.Hash)
                 elseif v.category == "suspenders" then
-                    table.insert(suspenders_f, v.hash)
+                    table.insert(suspenders_f, v.Hash)
                 elseif v.category == "gauntlets" then
-                    table.insert(gauntlets_f, v.hash)
+                    table.insert(gauntlets_f, v.Hash)
                 elseif v.category == "belts" then
-                    table.insert(belts_f, v.hash)
+                    table.insert(belts_f, v.Hash)
                 elseif v.category == "ponchos" then
-                    table.insert(ponchos_f, v.hash)
+                    table.insert(ponchos_f, v.Hash)
                 elseif v.category == "offhand" then
-                    table.insert(offhand_f, v.hash)
-                elseif v.category == "beltbuckle" then
-                    table.insert(beltbuckle_f, v.hash)
+                    table.insert(offhand_f, v.Hash)
+                elseif v.category == "belt_buckles" then
+                    table.insert(beltbuckle_f, v.Hash)
                 elseif v.category == "shirts" then
-                    table.insert(shirts_f, v.hash)
+                    table.insert(shirts_f, v.Hash)
                 elseif v.category == "vests" then
-                    table.insert(vests_f, v.hash)
+                    table.insert(vests_f, v.Hash)
                 elseif v.category == "pants" then
-                    table.insert(pants_f, v.hash)
+                    table.insert(pants_f, v.Hash)
                 elseif v.category == "boots" then
-                    table.insert(boots_f, v.hash)
+                    table.insert(boots_f, v.Hash)
                 elseif v.category == "masks" then
-                    table.insert(masks_f, v.hash)
+                    table.insert(masks_f, v.Hash)
                 elseif v.category == "coats" then
-                    table.insert(coats_f, v.hash)
-                elseif v.category == "coats2" then
-                    table.insert(coats2_f, v.hash)
+                    table.insert(coats_f, v.Hash)
+                elseif v.category == "coats_closed" then
+                    table.insert(coats2_f, v.Hash)
                 elseif v.category == "skirts" then
-                    table.insert(skirts_f, v.hash)
+                    table.insert(skirts_f, v.Hash)
                 elseif v.category == "torsos" then
-                    table.insert(torsos_f, v.hash)
+                    table.insert(torsos_f, v.Hash)
                 elseif v.category == "legs" then
-                    table.insert(legs_f, v.hash)
+                    table.insert(legs_f, v.Hash)
                 elseif v.category == "gloves" then
-                    table.insert(gloves_f, v.hash)
+                    table.insert(gloves_f, v.Hash)
                 elseif v.category == "neckwear" then
-                    table.insert(neckwear_f, v.hash)
+                    table.insert(neckwear_f, v.Hash)
                 elseif v.category == "gunbelts" then
-                    table.insert(gunbelts_f, v.hash)
+                    table.insert(gunbelts_f, v.Hash)
+                elseif v.category == "ringsr" then
+                    table.insert(ringsr_f, v.Hash)
+                elseif v.category == "ringsl" then
+                    table.insert(ringsl_f, v.Hash)
+                elseif v.category == "dresses" then
+                    table.insert(dresses_f, v.Hash)
+                elseif v.category == "gunbeltaccs" then
+                    table.insert(gunbeltaccs_f, v.Hash)
+                elseif v.category == "satchels" then
+                    table.insert(satchels_f, v.Hash)
                 else
                 end
             end
@@ -285,7 +327,7 @@ Citizen.CreateThread(
     end
 )
 
-RegisterCommand(
+--[[RegisterCommand(
     "openClothingShopMenu",
     function(source, args)
         inCustomization = true
@@ -295,7 +337,7 @@ RegisterCommand(
 
         SetEveryoneAsInvisible()
     end
-)
+)]]
 
 RegisterNetEvent("FRP:STORECLOTHES:OpenClothingMenu")
 AddEventHandler(
@@ -464,7 +506,7 @@ function createCameraInternal()
 end
 
 HatUsing = nil
-ShirtsUsing = nil
+shirtsUsing = nil
 VestsUsing = nil
 PantsUsing = nil
 BootsUsing = nil
@@ -483,6 +525,7 @@ chapsUsing = nil
 spatsUsing = nil
 eyewearUsing = nil
 accessUsing = nil
+armorUsing = nil
 necktiesUsing = nil
 braceletsUsing = nil
 suspendersUsing = nil
@@ -491,6 +534,12 @@ beltsUsing = nil
 ponchosUsing = nil
 offhandUsing = nil
 beltbuckleUsing = nil
+
+ringsrUsing = nil
+ringslUsing = nil
+
+dressesUsing = nil
+satchelsUsing = nil
 
 RegisterNUICallback(
     "Chapeu",
@@ -508,6 +557,7 @@ RegisterNUICallback(
                 HatUsing = ("0x" .. hats_m[num])
             else
                 local num = tonumber(data.id)
+                print(json.encode(data))
                 hash = ("0x" .. hats_f[num])
                 setcloth(hash)
                 HatUsing = ("0x" .. hats_f[num])
@@ -521,7 +571,7 @@ RegisterNUICallback(
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
-            ShirtsUsing = num
+            shirtsUsing = num
             Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x2026C46D, 0) -- Set target category, here the hash is for hats
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
@@ -529,12 +579,12 @@ RegisterNUICallback(
                 local num = tonumber(data.id)
                 hash = ("0x" .. shirts_m[num])
                 setcloth(hash)
-                ShirtsUsing = ("0x" .. shirts_m[num])
+                shirtsUsing = ("0x" .. shirts_m[num])
             else
                 local num = tonumber(data.id)
                 hash = ("0x" .. shirts_f[num])
                 setcloth(hash)
-                ShirtsUsing = ("0x" .. shirts_f[num])
+                shirtsUsing = ("0x" .. shirts_f[num])
             end
         end
     end
@@ -665,6 +715,83 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
+    "dresses",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            dressesUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA2926F9B, 0) -- Set target category, here the hash is for hats
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xA2926F9B, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. dresses_m[num])
+                setcloth(hash)
+                dressesUsing = ("0x" .. dresses_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. dresses_f[num])
+                setcloth(hash)
+                dressesUsing = ("0x" .. dresses_f[num])
+            end
+        end
+    end
+)
+
+RegisterNUICallback(
+    "gunbeltaccs",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            gunbeltaccsUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF1542D11, 0) -- Set target category, here the hash is for hats
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF1542D11, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. gunbeltaccs_m[num])
+                setcloth(hash)
+                gunbeltaccsUsing = ("0x" .. gunbeltaccs_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. gunbeltaccs_f[num])
+                setcloth(hash)
+                gunbeltaccsUsing = ("0x" .. gunbeltaccs_f[num])
+            end
+        end
+    end
+)
+RegisterNUICallback(
+    "satchels",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            satchelsUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x94504D26, 0) -- Set target category, here the hash is for hats
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x94504D26, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. satchels_m[num])
+                setcloth(hash)
+                satchelsUsing = ("0x" .. satchels_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. satchels_f[num])
+                setcloth(hash)
+                satchelsUsing = ("0x" .. satchels_f[num])
+            end
+        end
+    end
+)
+
+RegisterNUICallback(
     "Saia",
     function(data)
         if tonumber(data.id) == 0 then
@@ -734,6 +861,30 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
+    "spats",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            SpatsUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x514ADCEA, 0) -- Set target category, here the hash is for hats
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. spats_m[num])
+                setcloth(hash)
+                SpatsUsing = ("0x" .. spats_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. spats_f[num])
+                setcloth(hash)
+                SpatsUsing = ("0x" .. spats_f[num])
+            end
+        end
+    end
+)
+
+RegisterNUICallback(
     "Bandana",
     function(data)
         if tonumber(data.id) == 0 then
@@ -782,7 +933,7 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "Beltbuckle",
+    "belt_buckles",
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
@@ -854,7 +1005,7 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "Belts",
+    "belts",
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
@@ -926,6 +1077,52 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
+    "ringsr",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            ringsrUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7A6BBD0B, 0) -- Bracelets REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. ringsr_m[num])
+                setcloth(hash)
+                ringsrUsing = ("0x" .. ringsr_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. ringsr_f[num])
+                setcloth(hash)
+                ringsrUsing = ("0x" .. ringsr_f[num])
+            end
+        end
+    end
+)
+RegisterNUICallback(
+    "ringsl",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            ringslUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF16A1D23, 0) -- Bracelets REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. ringsl_m[num])
+                setcloth(hash)
+                ringslUsing = ("0x" .. ringsl_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. ringsl_f[num])
+                setcloth(hash)
+                ringslUsing = ("0x" .. ringsl_f[num])
+            end
+        end
+    end
+)
+RegisterNUICallback(
     "Bracelets",
     function(data)
         if tonumber(data.id) == 0 then
@@ -974,7 +1171,7 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "Access",
+    "access",
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
@@ -998,6 +1195,30 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
+    "armor",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            armorUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x72E6EF74, 0) -- Access REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. armor_m[num])
+                setcloth(hash)
+                armorUsing = ("0x" .. armor_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. armor_f[num])
+                setcloth(hash)
+                armorUsing = ("0x" .. armor_f[num])
+            end
+        end
+    end
+)
+
+RegisterNUICallback(
     "Cloaks",
     function(data)
         if tonumber(data.id) == 0 then
@@ -1006,7 +1227,8 @@ RegisterNUICallback(
 
             print('cloack is 0')
 
-            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `cloaks`, 0) -- cloaks REMOVE
+            --Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), `cloaks`, 0) -- cloaks REMOVE
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x3C1A74CD, 0) -- cloaks REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
             if sex == "mp_male" then
@@ -1125,6 +1347,30 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
+    "loadouts",
+    function(data)
+        if tonumber(data.id) == 0 then
+            num = 0
+            loadoutsUsing = num
+            Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x83887E88, 0) -- SPURS REMOVE
+            Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
+        else
+            if sex == "mp_male" then
+                local num = tonumber(data.id)
+                hash = ("0x" .. loadouts_m[num])
+                setcloth(hash)
+                loadoutsUsing = ("0x" .. loadouts_m[num])
+            else
+                local num = tonumber(data.id)
+                hash = ("0x" .. loadouts_f[num])
+                setcloth(hash)
+                loadoutsUsing = ("0x" .. loadouts_f[num])
+            end
+        end
+    end
+)
+
+RegisterNUICallback(
     "Outfit",
     function(data)
         if tonumber(data.id) == 0 then
@@ -1142,7 +1388,7 @@ local Badge = false
 RegisterCommand(
     "badge",
     function(source, args, rawCommand)
-        if cAPI.hasGroupOrInheritance("recruta") then
+        if cAPI.hasGroupOrInheritance("recruta") or ("sheriff") or ("delegado") then
             if not Badge then
                 setcloth2(IsPedMale(PlayerPedId()) and 0x1FC12C9C or `CLOTHING_ITEM_F_BADGE_000_TINT_001`)
                 --  SetPedAsCop(PlayerPedId(),true)
@@ -1176,7 +1422,7 @@ RegisterNUICallback(
     function()
         local dados = {
             ["hats"] = HatUsing,
-            ["shirts"] = ShirtsUsing,
+            ["shirts"] = shirtsUsing,
             ["vests"] = VestsUsing,
             ["pants"] = PantsUsing,
             ["boots"] = BootsUsing,
@@ -1191,7 +1437,7 @@ RegisterNUICallback(
             ["chaps"] = chapsUsing,
             ["spats"] = spatsUsing,
             ["eyewear"] = eyewearUsing,
-            ["accessories"] = accessUsing,
+            ["access"] = accessUsing,
             ["neckties"] = necktiesUsing,
             ["jewelry_bracelets"] = braceletsUsing,
             ["suspenders"] = suspendersUsing,
@@ -1258,7 +1504,7 @@ AddEventHandler(
     function()
         local dados = {
             ["hat"] = HatUsing,
-            ["shirts"] = ShirtsUsing,
+            ["shirts"] = shirtsUsing,
             ["vests"] = VestsUsing,
             ["pants"] = PantsUsing,
             ["boots"] = BootsUsing,
@@ -1284,7 +1530,6 @@ AddEventHandler(
             ["beltbuckle"] = beltbuckleUsing,
             ["cloaks"] = cloaksUsing,
             ["coats2"] = coats2Using,
-            ["beltbuckle"] = beltbuckleUsing,
             ["Outfit"] = OutfitUsing
         }
 
@@ -1352,10 +1597,22 @@ Citizen.CreateThread(
                 heading = -119.0,
             },
 
-            -- Tronco dos indios.
+            -- Indios Wallace.
             {
                 position = vec3(468.504, 2242.064, 248.158),
                 heading = -100.0,
+            },
+
+            -- Indios Manzanita.
+            {
+                position = vec3(-2680.817,-1460.656,146.288),
+                heading = -40.27,
+            },
+
+            -- Indios Neve.
+            {
+                position = vec3(-1630.792,1251.754,347.326),
+                heading = -74.32,
             },
         }
 
@@ -1451,7 +1708,7 @@ local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`SPATS`] = 'spats',
     [`NECKWEAR`] = 'neckwear',
     [`BOOTS`] = 'boots',
-    [`ACCESSORIES`] = 'accessories',
+    [`ACCESSORIES`] = 'access',
     [`JEWELRY_RINGS_RIGHT`] = 'jewelry_rings_right',
     [`JEWELRY_RINGS_LEFT`] = 'jewelry_rings_left',
     [`JEWELRY_BRACELETS`] = 'jewelry_bracelets',
@@ -1471,7 +1728,7 @@ local ACTUAL_CLOTHING_PIECE_SHOPITEM_CATEGORIES = {
     [`AMMO_RIFLES`] = 'ammo_rifles',
     [`TALISMAN_WRIST`] = 'talisman_wrist',
     [`COATS`] = 'coats',
-    [`COATS_CLOSED`] = 'coats_closed',
+    [`COATS_CLOSED`] = 'coats2',
     [`PONCHOS`] = 'ponchos',
     [`ARMOR`] = 'armor',
     [`GLOVES`] = 'gloves',

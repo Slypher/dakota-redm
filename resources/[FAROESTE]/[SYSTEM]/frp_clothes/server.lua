@@ -91,7 +91,7 @@ AddEventHandler(
     end
 )
 
-RegisterCommand('calca',function(source,args,rawCommand)
+--[[RegisterCommand('calca',function(source,args,rawCommand)
 	local user_id = API.getUserId(source)
 	if cAPI.getHealth(source) > 101 then
 		if not cAPI.isHandcuffed(source) then
@@ -102,7 +102,7 @@ RegisterCommand('calca',function(source,args,rawCommand)
 			end
 		end
 	end
-end)
+end)]]
 
 local CLOTHING_STORAGE_ITEM = 'roupas'
 
