@@ -34,6 +34,7 @@ config_file_STATICCHESTS = {
 
     -- #    INDIOS
     {"static:indio:1", 467.791,2228.419,247.358 - 0.89, 100.00, 1, 150, "indio"}, -- RESERVA
+    {"static:indio:2", -1644.620, 1227.394, 351.869 - 0.89, 100.00, 1, 150, "indio"}, -- COLTER
 
     -- #    FERREIRO
     {"static:ferreiro:1", -363.782,795.574,116.135 - 0.89, -170.00, 1, 100, "ferreiro"}, -- VALENTINE
