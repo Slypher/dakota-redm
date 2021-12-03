@@ -1458,8 +1458,6 @@ RegisterNUICallback(
             ['gunbeltAccs'] = gunbeltAccsUsing,
         }
 
-        print(json.encode(dados, {indent = true}))
-
         TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
         
         DestroyClothingMenu()
