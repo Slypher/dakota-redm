@@ -23,6 +23,7 @@ config_file_GROUPS = {
     ["recruta"]   = 1 << 20,
     ["governador"] = 1 << 21,
     ["secretario"] = 1 << 22,
+    ["jornalista"] = 1 << 23
 }
 
 config_file_INHERITANCE = {
