@@ -541,6 +541,10 @@ ringslUsing = nil
 dressesUsing = nil
 satchelsUsing = nil
 
+jewelryRingsRightUsing = nil
+jewelryRingsLeftUsing = nil
+gunbeltAccsUsing = nil
+
 RegisterNUICallback(
     "Chapeu",
     function(data)
@@ -745,7 +749,7 @@ RegisterNUICallback(
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
-            gunbeltaccsUsing = num
+            gunbeltAccsUsing = num
             Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF1542D11, 0) -- Set target category, here the hash is for hats
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
@@ -755,12 +759,12 @@ RegisterNUICallback(
                 local num = tonumber(data.id)
                 hash = ("0x" .. gunbeltaccs_m[num])
                 setcloth(hash)
-                gunbeltaccsUsing = ("0x" .. gunbeltaccs_m[num])
+                gunbeltAccsUsing = ("0x" .. gunbeltaccs_m[num])
             else
                 local num = tonumber(data.id)
                 hash = ("0x" .. gunbeltaccs_f[num])
                 setcloth(hash)
-                gunbeltaccsUsing = ("0x" .. gunbeltaccs_f[num])
+                gunbeltAccsUsing = ("0x" .. gunbeltaccs_f[num])
             end
         end
     end
@@ -1081,7 +1085,7 @@ RegisterNUICallback(
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
-            ringsrUsing = num
+            jewelryRingsRightUsing = num
             Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0x7A6BBD0B, 0) -- Bracelets REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
@@ -1089,12 +1093,12 @@ RegisterNUICallback(
                 local num = tonumber(data.id)
                 hash = ("0x" .. ringsr_m[num])
                 setcloth(hash)
-                ringsrUsing = ("0x" .. ringsr_m[num])
+                jewelryRingsRightUsing = ("0x" .. ringsr_m[num])
             else
                 local num = tonumber(data.id)
                 hash = ("0x" .. ringsr_f[num])
                 setcloth(hash)
-                ringsrUsing = ("0x" .. ringsr_f[num])
+                jewelryRingsRightUsing = ("0x" .. ringsr_f[num])
             end
         end
     end
@@ -1104,7 +1108,7 @@ RegisterNUICallback(
     function(data)
         if tonumber(data.id) == 0 then
             num = 0
-            ringslUsing = num
+            jewelryRingsLeftUsing = num
             Citizen.InvokeNative(0xD710A5007C2AC539, PlayerPedId(), 0xF16A1D23, 0) -- Bracelets REMOVE
             Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
         else
@@ -1112,12 +1116,12 @@ RegisterNUICallback(
                 local num = tonumber(data.id)
                 hash = ("0x" .. ringsl_m[num])
                 setcloth(hash)
-                ringslUsing = ("0x" .. ringsl_m[num])
+                jewelryRingsLeftUsing = ("0x" .. ringsl_m[num])
             else
                 local num = tonumber(data.id)
                 hash = ("0x" .. ringsl_f[num])
                 setcloth(hash)
-                ringslUsing = ("0x" .. ringsl_f[num])
+                jewelryRingsLeftUsing = ("0x" .. ringsl_f[num])
             end
         end
     end
@@ -1448,8 +1452,13 @@ RegisterNUICallback(
             ["belt_buckles"] = beltbuckleUsing,
             ["cloaks"] = cloaksUsing,
             ["coats_closed"] = coats2Using,
-            ["Outfit"] = OutfitUsing
+            ["Outfit"] = OutfitUsing,
+            ['jewelryRingsRight'] = jewelryRingsRightUsing,
+            ['jewelryRingsLeft'] = jewelryRingsLeftUsing,
+            ['gunbeltAccs'] = gunbeltAccsUsing,
         }
+
+        print(json.encode(dados, {indent = true}))
 
         TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
         
