@@ -88,7 +88,7 @@ SHOPINFO_DATABASE = {
     --########################  PEÇAS DE ARMAS ########################--
 
     {
-        name = 'Porto de BlackWater',
+        name = 'Peças de Armas',
 
         items = {
             {
@@ -237,14 +237,6 @@ SHOPINFO_DATABASE = {
                 
             },
             {
-                itemId = 'bananadinamite',
-            
-                transactionPriceBuyDollar = 500,
-                transactionPriceBuyGold = 1,
-            
-                
-            },
-            {
                 itemId = 'sacopolvora',
             
                 transactionPriceBuyDollar = 20,
@@ -263,7 +255,7 @@ SHOPINFO_DATABASE = {
         },
 
         positions = {
-            vec3(-732.580,-1227.355,44.739), -- BlackWater
+            vec3(2713.706,-1282.550,49.630), -- Saint Denis
         }
     },
 
@@ -276,24 +268,24 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'lasso',
             
-                transactionPriceBuyDollar = 300,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 500,
+                transactionPriceBuyGold = 2,
             
                 transactionPriceSellDollar = 20,
             },
             {
                 itemId = 'melee_knife',
             
-                transactionPriceBuyDollar = 500,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyDollar = 800,
+                transactionPriceBuyGold = 2,
             
                 transactionPriceSellDollar = 25,
             },
             {
                 itemId = 'kit_binoculars',
             
-                transactionPriceBuyDollar = 1000,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyDollar = 2000,
+                transactionPriceBuyGold = 5,
             
                 transactionPriceSellDollar = 250,
             },
@@ -301,110 +293,110 @@ SHOPINFO_DATABASE = {
                 itemId = 'melee_davy_lantern',
             
                 transactionPriceBuyDollar = 800,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyGold = 5,
             
                 transactionPriceSellDollar = 100,
             },
             {
                 itemId = 'revolver_doubleaction',
             
-                transactionPriceBuyDollar = 1600,
-                transactionPriceBuyGold = 10,
+                transactionPriceBuyDollar = 3600,
+                transactionPriceBuyGold = 20,
             
                 transactionPriceSellDollar = 160,
             },
             {
                 itemId = 'revolver_cattleman',
             
-                transactionPriceBuyDollar = 2500,
-                transactionPriceBuyGold = 10,
+                transactionPriceBuyDollar = 5625,
+                transactionPriceBuyGold = 20,
             
                 transactionPriceSellDollar = 250,
             },
             {
                 itemId = 'revolver_lemat',
             
-                transactionPriceBuyDollar = 6000,
-                transactionPriceBuyGold = 25,
+                transactionPriceBuyDollar = 13500,
+                transactionPriceBuyGold = 50,
             
                 transactionPriceSellDollar = 600,
             },
             {
                 itemId = 'revolver_schofield',
             
-                transactionPriceBuyDollar = 4300,
-                transactionPriceBuyGold = 30,
+                transactionPriceBuyDollar = 9675,
+                transactionPriceBuyGold = 50,
             
                 transactionPriceSellDollar = 430,
             },
             {
                 itemId = 'revolver_navy',
             
-                transactionPriceBuyDollar = 5500,
-                transactionPriceBuyGold = 35,
+                transactionPriceBuyDollar = 12375,
+                transactionPriceBuyGold = 110,
             
                 transactionPriceSellDollar = 550,
             },
             {
                 itemId = 'pistol_volcanic',
             
-                transactionPriceBuyDollar = 4300,
-                transactionPriceBuyGold = 30,
+                transactionPriceBuyDollar = 9675,
+                transactionPriceBuyGold = 60,
             
                 transactionPriceSellDollar = 430,
             },
             {
                 itemId = 'pistol_mauser',
             
-                transactionPriceBuyDollar = 4100,
-                transactionPriceBuyGold = 28,
+                transactionPriceBuyDollar = 9225,
+                transactionPriceBuyGold = 60,
             
                 transactionPriceSellDollar = 410,
             },
             {
                 itemId = 'pistol_semiauto',
             
-                transactionPriceBuyDollar = 3550,
-                transactionPriceBuyGold = 20,
+                transactionPriceBuyDollar = 7988,
+                transactionPriceBuyGold = 60,
             
                 transactionPriceSellDollar = 380,
             },
             {
                 itemId = 'repeater_carbine',
             
-                transactionPriceBuyDollar = 3200,
-                transactionPriceBuyGold = 15,
+                transactionPriceBuyDollar = 7200,
+                transactionPriceBuyGold = 25,
             
                 transactionPriceSellDollar = 320,
             },
             {
                 itemId = 'repeater_evans',
             
-                transactionPriceBuyDollar = 3500,
-                transactionPriceBuyGold = 35,
+                transactionPriceBuyDollar = 7875,
+                transactionPriceBuyGold = 60,
             
                 transactionPriceSellDollar = 350,
             },
             {
                 itemId = 'repeater_winchester',
             
-                transactionPriceBuyDollar = 3900,
-                transactionPriceBuyGold = 30,
+                transactionPriceBuyDollar = 8775,
+                transactionPriceBuyGold = 70,
             
                 transactionPriceSellDollar = 390,
             },
             {
                 itemId = 'repeater_henry',
             
-                transactionPriceBuyDollar = 4000,
-                transactionPriceBuyGold = 45,
+                transactionPriceBuyDollar = 9000,
+                transactionPriceBuyGold = 75,
             
                 transactionPriceSellDollar = 400,
             },
             {
                 itemId = 'rifle_varmint',
             
-                transactionPriceBuyDollar = 2000,
+                transactionPriceBuyDollar = 6000,
                 transactionPriceBuyGold = 35,
             
                 transactionPriceSellDollar = 200,
@@ -412,40 +404,40 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'rifle_boltaction',
             
-                transactionPriceBuyDollar = 4500,
-                transactionPriceBuyGold = 60,
+                transactionPriceBuyDollar = 10125,
+                transactionPriceBuyGold = 90,
             
                 transactionPriceSellDollar = 450,
             },
             {
                 itemId = 'rifle_springfield',
             
-                transactionPriceBuyDollar = 3500,
-                transactionPriceBuyGold = 40,
+                transactionPriceBuyDollar = 7875,
+                transactionPriceBuyGold = 75,
             
                 transactionPriceSellDollar = 450,
             },
             {
                 itemId = 'shotgun_doublebarrel',
             
-                transactionPriceBuyDollar = 14000,
-                transactionPriceBuyGold = 80,
+                transactionPriceBuyDollar = 31500,
+                transactionPriceBuyGold = 150,
             
                 transactionPriceSellDollar = 1000,
             },
             {
                 itemId = 'shotgun_sawedoff',
             
-                transactionPriceBuyDollar = 12000,
-                transactionPriceBuyGold = 65,
+                transactionPriceBuyDollar = 27000,
+                transactionPriceBuyGold = 95,
             
                 transactionPriceSellDollar = 800,
             },
             {
                 itemId = 'sniperrifle_rollingblock',
             
-                transactionPriceBuyDollar = 14000,
-                transactionPriceBuyGold = 70,
+                transactionPriceBuyDollar = 31500,
+                transactionPriceBuyGold = 150,
             
                 transactionPriceSellDollar = 1000,
             },
@@ -474,42 +466,42 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'ammo_revolver',
             
-                transactionPriceBuyDollar = 15,
+                transactionPriceBuyDollar = 14,
                 transactionPriceBuyGold = 1,
             
             },
             {
                 itemId = 'ammo_pistol',
             
-                transactionPriceBuyDollar = 15,
+                transactionPriceBuyDollar = 21,
                 transactionPriceBuyGold = 1,
              
             },
             {
                 itemId = 'ammo_repeater',
             
-                transactionPriceBuyDollar = 20,
+                transactionPriceBuyDollar = 28,
                 transactionPriceBuyGold = 1,
              
             },
             {
                 itemId = 'ammo_rifle',
             
-                transactionPriceBuyDollar = 25,
+                transactionPriceBuyDollar = 35,
                 transactionPriceBuyGold = 10,
             
             },
             {
                 itemId = 'ammo_22',
             
-                transactionPriceBuyDollar = 12,
+                transactionPriceBuyDollar = 10,
                 transactionPriceBuyGold = 1,
             
             },
             {
                 itemId = 'ammo_shotgun',
             
-                transactionPriceBuyDollar = 40,
+                transactionPriceBuyDollar = 42,
                 transactionPriceBuyGold = 1,
             
             },
@@ -658,6 +650,14 @@ SHOPINFO_DATABASE = {
                 transactionPriceSellDollar = 8,
             },
             {
+                itemId = 'bananadinamite',
+            
+                transactionPriceBuyDollar = 500,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 100,
+            },
+            {
                 itemId = 'mostofraco',
 
                 transactionPriceBuyDollar = 100,
@@ -687,7 +687,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 35,
             },
             {
                 itemId = 'moedaantiga',
@@ -695,31 +695,31 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 100,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 25,
             },
             {
                 itemId = 'relogio',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 50,
+                transactionPriceSellDollar = 300,
             },
             {
                 itemId = 'colar',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 25,
+                transactionPriceSellDollar = 100,
             },
             {
                 itemId = 'dentedeouro',
 
-                transactionPriceBuyDollar = 100,
+                transactionPriceBuyDollar = 1000,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 25,
+                transactionPriceSellDollar = 250,
             },
         },
 
@@ -1385,7 +1385,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 80,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 7,
             },
             {
                 itemId = 'minerioferro',
@@ -1393,7 +1393,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 80,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 12,
+                transactionPriceSellDollar = 9,
             },
             {
                 itemId = 'carvao',
@@ -1401,7 +1401,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 20,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 8,
+                transactionPriceSellDollar = 5,
             },
             {
                 itemId = 'pedra',
@@ -1409,7 +1409,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 7,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 6,
+                transactionPriceSellDollar = 3,
             },
         },
 
@@ -1492,6 +1492,7 @@ SHOPINFO_DATABASE = {
         positions = {
             vec3(-1752.830,-393.605,157.051), -- STRAWBERRY
             vec3(-752.301,-1285.044,43.918), -- BW
+            vec3(-1980.89, -1648.11, 115.60), -- Manzanita         
             vec3(-340.277,767.397,117.156), -- Valentine
             vec3(1299.221,-1279.940,75.872), -- Rhodes
             vec3(-5508.962,-2947.185,-1.314), -- Tumbleweed
@@ -1659,6 +1660,14 @@ SHOPINFO_DATABASE = {
 
                 transactionPriceSellDollar = 8,
                 --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'quimicos',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
             },
         },
 

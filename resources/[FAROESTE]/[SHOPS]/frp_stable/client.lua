@@ -529,7 +529,7 @@ AcsHornUsing = nil
 AcsLuggageUsing = nil
 LanternUsing = nil
 MaskUsing = nil
-CordaUsing = nil
+MaskUsing = nil
 
 --- /// ARRASTAR CAVALO
 

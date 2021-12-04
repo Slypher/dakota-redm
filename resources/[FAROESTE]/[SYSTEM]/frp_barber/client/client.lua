@@ -46,7 +46,7 @@ cameraUsing = {
 }
 
 
-RegisterCommand(
+--[[RegisterCommand(
     "openClothingShopMenu",
     function(source, args)
         inCustomization = true
@@ -56,7 +56,7 @@ RegisterCommand(
         Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
       --||  SetEveryoneAsInvisible()
     end
-)
+)]]
 
 RegisterNetEvent("FRP:STORECLOTHES:OpenbarberMenu")
 AddEventHandler(

@@ -6,7 +6,7 @@ HEIST_BANK_INFO = {
 
         interiorId = 72962,
 
-        staticReward = 10000,
+        staticReward = 20000,
         staticSecondsToReward = 10 * 60,
         staticMaxParticipants = 3,
 
@@ -34,7 +34,7 @@ HEIST_BANK_INFO = {
 
         interiorId = 42754,
 
-        staticReward = 10000,
+        staticReward = 20000,
         staticSecondsToReward = 10 * 60,
         staticMaxParticipants = 3,
 
@@ -54,7 +54,7 @@ HEIST_BANK_INFO = {
 
         interiorId = 29442,
 
-        staticReward = 10000,
+        staticReward = 17500,
         staticSecondsToReward = 10 * 60,
         staticMaxParticipants = 3,
 
@@ -84,7 +84,7 @@ HEIST_BANK_INFO = {
 
         interiorId = 12290,
 
-        staticReward = 10000,
+        staticReward = 17500,
         staticSecondsToReward = 10 * 60,
         staticMaxParticipants = 3,
 

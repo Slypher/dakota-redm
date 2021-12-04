@@ -221,6 +221,51 @@ RegisterCommand(
         Citizen.InvokeNative(0xCC8CA3E88256E58F, playerPed, 0, 1, 1, 1, false)
     end
 )
+
+local Bandana2 = false
+RegisterCommand(
+    "bandana2",
+    function(source, args, rawCommand)
+        if cAPI.IsWanted() then
+            TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode retirar a bandana. ", 10000)
+            return
+        end
+
+        local playerPed = PlayerPedId()
+
+        local bandanaMale   = 0x8C6659D0
+        local bandanaFemale = 0xF6AFCF61
+
+        local defaultBandanaComponent = IsPedMale(playerPed) == 1 and bandanaMale or bandanaFemale
+
+        if not Bandana then
+            -- Animação.
+            Citizen.InvokeNative(0xAE72E7DF013AAA61, playerPed, GetHashKey("KIT_BANDANA"), GetHashKey("BANDANA_ON_RIGHT_HAND"), 1, 0, -1082130432)
+
+            Wait(700)
+
+            -- Adicionar o componente
+            Citizen.InvokeNative(0xD3A7B003ED343FD9, playerPed, defaultBandanaComponent, true, true, true)
+
+            -- Levantar a bandana, face up.
+            Citizen.InvokeNative(0x66B957AAC2EAAEAB, playerPed, defaultBandanaComponent, -1829635046, 0, true, 1)
+
+            Bandana = true
+        else
+            -- Animação.
+            Citizen.InvokeNative(0xAE72E7DF013AAA61, playerPed, GetHashKey("KIT_BANDANA"), GetHashKey("BANDANA_OFF_RIGHT_HAND"), 1, 0, -1082130432)
+
+            Wait(700)
+
+            -- Remover o wearableState, descer a bandana.
+            Citizen.InvokeNative(0x66B957AAC2EAAEAB, playerPed, defaultBandanaComponent, `BASE`, 0, true, 1)
+
+            Bandana = false
+        end
+
+        Citizen.InvokeNative(0xCC8CA3E88256E58F, playerPed, 0, 1, 1, 1, false)
+    end
+)
 ----------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('sentar', function(source, arg)

@@ -13,12 +13,14 @@ Config.ItemQuantity = {
 }
 
 Config.Butchers = {
-    {["butchername"] = "Açougueiro", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "S_M_M_UNIBUTCHERS_01",["coords"] = vector3(-1980.89, -1648.11, 115.60),["heading"] = 339.97,   ["radius"] = 3.0},
-    {["butchername"] = "Açougueiro", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "S_M_M_UNIBUTCHERS_01",["coords"] = vector3(-339.084,767.199,115.581),["heading"] = 89.97,   ["radius"] = 3.0},
-    {["butchername"] = "Açougueiro", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "U_M_M_VALBUTCHER_01",["coords"] = vector3(-3691.438, -2623.152, -14.75121),["heading"] = 0.46632757782936,["radius"] = 3.0},
-    {["butchername"] = "Açougueiro", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "U_M_M_TumButcher_01",["coords"] = vector3(-5509.88, -2947.44, -2.88),["heading"] = 251.54911804199,["radius"] = 3.0},
+    {["butchername"] = "Açougueiro de Manzanita", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "S_M_M_UNIBUTCHERS_01",["coords"] = vector3(-1980.89, -1648.11, 115.60),["heading"] = 339.97,   ["radius"] = 3.0},
+    {["butchername"] = "Açougueiro de Blackwater", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "S_M_M_UNIBUTCHERS_01",["coords"] = vector3(-752.301,-1285.044,43.918),["heading"] = 89.97,   ["radius"] = 3.0},
+    {["butchername"] = "Açougueiro de Valentine", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "S_M_M_UNIBUTCHERS_01",["coords"] = vector3(-339.084,767.199,115.581),["heading"] = 89.97,   ["radius"] = 3.0},
+    {["butchername"] = "Açougueiro de Armadillo", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "U_M_M_VALBUTCHER_01",["coords"] = vector3(-3691.438, -2623.152, -14.75121),["heading"] = 0.46632757782936,["radius"] = 3.0},
+    {["butchername"] = "Açougueiro de Tumbleweed", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = -1665418949,  ["npcmodel"] = "U_M_M_TumButcher_01",["coords"] = vector3(-5509.88, -2947.44, -2.88),["heading"] = 251.54911804199,["radius"] = 3.0},
 	{["butchername"] = "Tribo Indígena", ["pressToSell"] = "~e~ESPAÇO~q~ \nVender",  ["blip"] = 327180499,["npcmodel"] = "MSP_NATIVE1_MALES_01",["coords"] = vector3(-2642.72, -1474.75, 144.84),["heading"] = 187.02,["radius"] = 3.0},
 }
+
 
 Config.Animals = {
     -- Animals

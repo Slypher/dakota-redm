@@ -195,7 +195,7 @@ ItemList = {
         type = "weapon",
         name = "Litchfield de Repetição",
         weight = 4.26,
-        description = "Rifle longo de repetição, precisamente letal e lépida.",
+        description = "Carabina de repetição, precisamente letal e lépida.",
         stackSize = 1,
         worldModel = "w_repeater_henry01"
     },
@@ -203,15 +203,15 @@ ItemList = {
         type = "weapon",
         name = "Evans de Repetição",
         weight = 4.2,
-        description = "Rifle longo de repetição, precisamente letal e lépido.",
+        description = "Carabina de repetição, utiliza uma grande quantidade de munição para ser completamente carregada.",
         stackSize = 1,
         worldModel = "w_repeater_evans01"
     },
     ["repeater_winchester"] = {
         type = "weapon",
-        name = "Winchester de Repetição",
+        name = "Lancaster de Repetição",
         weight = 3.46,
-        description = "Rifle longo de repetição, precisamente letal.",
+        description = "Carabina de repetição, uma das mais adoradas entre aqueles que pretendem se defender.",
         stackSize = 1,
         worldModel = "w_repeater_winchester01"
     },
@@ -337,7 +337,7 @@ ItemList = {
         type = "weapon",
         name = "Rifle Rolling Block",
         weight = 4.22,
-        description = "Um rifle capaz de executar disparos a longa distância. Uma bala já é o bastante para matar qualquer inimigo.",
+        description = "Um rifle capaz de executar disparos a longa distância. Uma bala já é o bastante para matar qualquer coisa.",
         stackSize = 1,
         worldModel = "w_rifle_rollingblock01"
     },
@@ -352,7 +352,7 @@ ItemList = {
         type = "weapon",
         name = "Rifle Springfield",
         weight = 4.2,
-        description = "Um rifle capaz de executar disparos a longa distância.",
+        description = "Um rifle capaz de executar disparos a longa distância, comum entre oficiais da lei.",
         stackSize = 1,
         worldModel = "w_rifle_springfield01"
     },
@@ -419,7 +419,7 @@ ItemList = {
         type = "weapon",
         name = "Arco Curvado",
         weight = 2.5,
-        description = "Simplesmente melhor",
+        description = "Simplesmente melhor que um arco normal.",
         stackSize = 1,
         worldModel = "w_sp_bowarrow"
     },
@@ -442,14 +442,14 @@ ItemList = {
         type = "weapon",
         name = "Laço reforçado",
         weight = 0.6,
-        description = "Laço Reforçado",
+        description = "Segura qualquer coisa por mais tempo.",
         stackSize = 2
     },
     ["thrown_molotov"] = {
         type = "weapon",
         name = "Molotov",
         weight = 1.3,
-        description = "Frasco enrijecido com moonshine, altamente inflamável quando aceso.",
+        description = "Isso pode esquentar um pouco as coisas por aqui...",
         stackSize = 6,
         worldModel = "w_throw_molotov01"
     },
@@ -1962,7 +1962,7 @@ ItemList = {
         weight = 0.01,
         description = "Feita a partir do algodão ou de fibras.",
         stackSize = 10,
-        worldModel = "p_sewingkit01bx"
+        worldModel = "p_string_bundle_001"-- "p_sewingkit01bx"
     },
     ["tecidobranco"] = {
         type = "kit",
@@ -2659,7 +2659,7 @@ ItemList = {
         type = "generic",
         name = "Sálvia Oleandro",
         weight = 0.6,
-        description = "Pequena flor de flocos, é medicinal.",
+        description = "Comuns em regiões umidas.",
         stackSize = 10,
         worldModel = "s_inv_orleander01cx"
     },

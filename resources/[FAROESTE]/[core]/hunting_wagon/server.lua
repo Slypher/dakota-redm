@@ -56,7 +56,7 @@ RegisterNetEvent('net.huntingWagonRemoveAllItemsAndCollectMoney', function(wagon
 
     -- Não tem nenhum item para vender...
     if toAddDollars <= 0 then
-        user:notify('0 Doralés.')
+        user:notify('0 Dolores.')
         return
     end
 

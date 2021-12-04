@@ -287,7 +287,7 @@ Config = {
                 input = {
                     {item = "milfolhas", amount = 5}, 
                     {item = "ginsengalaska", amount = 2}, 
-                    {item = "gualteria", amount = 1}, 
+                    {item = "tabacoindiano", amount = 1}, 
                     {item = "melee_knife_jawbone", amount = 1, remove = false}
                 },
                 output = {
@@ -502,7 +502,7 @@ Config = {
             },
             -------------------------------------------- FLECHA NORMAL ------------------------------------------
             {
-                descriptionTextOverride = 'Materiais: Algumas fibras ou tiras de couro, madeira refinada, penas e posntas de flecha.',
+                descriptionTextOverride = 'Materiais: Algumas fibras ou tiras de couro, madeira refinada, penas e pontas de flecha.',
                 time = 10,
                 input = {
                     {item = "fibra", amount = 10, alias = {"tirascouro"}}, 
@@ -1181,7 +1181,6 @@ Config = {
                     {item = "canodearma", amount = 1},
                     {item = "caodearma", amount = 1},
                     {item = "corpodeferrolho", amount = 1},
-                    {item = "corpoderifle", amount = 1},
                     {item = "parafuso", amount = 10},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
@@ -1213,7 +1212,7 @@ Config = {
                     {item = "canodearma", amount = 2},
                     {item = "caodearma", amount = 2},
                     {item = "gatilhodearma", amount = 2},
-                    {item = "corpodeserrada", amount = 2},
+                    {item = "corpodeserrada", amount = 1},
                     {item = "parafuso", amount = 8},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
@@ -1229,7 +1228,7 @@ Config = {
                     {item = "canodearma", amount = 2},
                     {item = "caodearma", amount = 2},
                     {item = "gatilhodearma", amount = 2},
-                    {item = "corpodeescopeta", amount = 2},
+                    {item = "corpodeescopeta", amount = 1},
                     {item = "parafuso", amount = 8},
                     {item = "ferramentas", amount = 1, remove = false}
                 },
@@ -1828,7 +1827,7 @@ Config = {
 
 
     {
-        position = vec3(192.172,992.452,190.028), -- No position, its global
+        position = vec3(192.208,992.101,189.931), -- No position, its global
         
         useTextDescriptionAll = true,
 

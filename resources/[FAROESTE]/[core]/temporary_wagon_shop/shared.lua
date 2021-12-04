@@ -4,6 +4,6 @@ AVAILABLE_ITEMS = {
 
         displayName = 'Carroça de Caça',
 
-        basePriceInDollars = 05.00,
+        basePriceInDollars = 01.00,
     }
 }

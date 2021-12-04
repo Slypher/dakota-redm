@@ -167,7 +167,7 @@ function endRobberyGiveReward()
             local maxRewardInDollars = HEIST_BANK_INFO[bankId].staticReward
 
             if getReplicatedBankState(bankId, 'hasSafeExploded') then
-                maxRewardInDollars += 15000
+                maxRewardInDollars += 35000
             end
 
             local reward = math.random(maxRewardInDollars - 5000, maxRewardInDollars)

@@ -28,16 +28,19 @@ config_file_STATICCHESTS = {
     {"static:public:4", 1351.093, -1380.077, 84.287 - 0.89, 259.999, 1, 100},
     
     {"static:oficiais:1", -279.592, 808.447, 119.380 - 0.89, 93.51, 0, 100, "trooper"}, -- VALENTINE
-    {"static:oficiais:2", 1361.919, -1305.239, 77.761 - 0.89, 246.999, 0, 100, "trooper"}, --- rhodes
+    {"static:oficiais:2", 1357.664,-1304.471,77.755 - 0.89, 159.77, 0, 100, "trooper"}, --- RHODES
+    {"static:oficiais:3", -757.858,-1267.042,44.041 - 0.89, -88.58, 0, 100, "trooper"}, --- BLACKWATER
     --{"static:oficiais:3", 2506.955, -1301.881, 48.954 - 0.89, 49.59, 0, 100, "trooper"}, -- saint dennis
 
 
     -- #    INDIOS
     {"static:indio:1", 467.791,2228.419,247.358 - 0.89, 100.00, 1, 150, "indio"}, -- RESERVA
-    {"static:indio:2", -1644.620, 1227.394, 351.869 - 0.89, 100.00, 1, 150, "indio"}, -- COLTER
+    {"static:indio:2", -2674.001,-1456.023,146.542 - 0.89, 18.04, 1, 150, "indio"}, -- MANZANITA
+    {"static:indio:3", -1644.297,1228.035,351.888 - 0.89, -23.23, 1, 150, "indio"}, -- NEVE
 
     -- #    FERREIRO
     {"static:ferreiro:1", -363.782,795.574,116.135 - 0.89, -170.00, 1, 100, "ferreiro"}, -- VALENTINE
+    {"static:ferreiro:2", -865.864,-1395.180,43.534 - 0.89, -95.17, 1, 100, "ferreiro"}, -- BW
 
     -- #    ARMEIRO
     {"static:armeiro:1", -283.657,778.408,119.443 - 0.89, 90.0, 1, 100, "armeiro"}, -- VALENTINE
