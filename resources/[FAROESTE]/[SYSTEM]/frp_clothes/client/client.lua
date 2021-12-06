@@ -353,7 +353,7 @@ AddEventHandler(
 
             TriggerServerEvent('FRP:RequestShouldStoreIntoClothingItemButtonBeEnabled')
 
-            TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
+            --TriggerServerEvent('PersonaCreatorHandler.setPlayerRoutingBucket')
         else
             TriggerEvent("FRP:NOTIFY:Simple", "Você ainda está como procurado, não pode trocar de roupa. ", 10000)
         end
@@ -1577,7 +1577,7 @@ function DestroyClothingMenu()
         }
     )
 
-    TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
+    --TriggerServerEvent('PersonaCreatorHandler.setPlayerToGlobalRoutingBucket')
 end
 
 Citizen.CreateThread(
