@@ -53,6 +53,7 @@ Citizen.CreateThread(
 
 		while true do
 			Citizen.Wait(0)
+			SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
 			Citizen.InvokeNative(0xF808475FA571D823, true) --enable friendly fire
 			NetworkSetFriendlyFireOption(true)
 
@@ -90,29 +91,37 @@ Citizen.CreateThread(
 	end
 )
 
-Citizen.CreateThread(
-	function()
-		while true do
-			Citizen.Wait(30000)
-			if cAPI.IsPlayerInitialized() then
-				local playerPed = PlayerPedId()
-				if playerPed and playerPed ~= -1 then
-					local x, y, z = table.unpack(GetEntityCoords(playerPed))
-					x = tonumber(string.format("%.3f", x))
-					y = tonumber(string.format("%.3f", y))
-					z = tonumber(string.format("%.3f", z))
+local function SaveCharacterData()
 
-					local pHealth = GetEntityHealth(playerPed)
-					local pStamina = tonumber(string.format("%.2f", Citizen.InvokeNative(0x775A1CA7893AA8B5, playerPed, Citizen.ResultAsFloat())))
-					local pHealthCore = Citizen.InvokeNative(0x36731AC041289BB1 , playerPed, 0, Citizen.ResultAsInteger())
-					local pStaminaCore = Citizen.InvokeNative(0x36731AC041289BB1 , playerPed, 1, Citizen.ResultAsInteger())
-
-					TriggerServerEvent("FRP:CacheCharacterStats", {x, y, z}, pHealth, pStamina, pHealthCore, pStaminaCore)
-				end
-			end
-		end
+	if not cAPI.IsPlayerInitialized() then
+		return
 	end
-)
+
+	local playerPed = PlayerPedId()
+
+	if playerPed and playerPed ~= -1 then
+		local x, y, z = table.unpack(GetEntityCoords(playerPed))
+		x = tonumber(string.format("%.3f", x))
+		y = tonumber(string.format("%.3f", y))
+		z = tonumber(string.format("%.3f", z))
+
+		local pHealth = GetEntityHealth(playerPed)
+		local pStamina = tonumber(string.format("%.2f", Citizen.InvokeNative(0x775A1CA7893AA8B5, playerPed, Citizen.ResultAsFloat())))
+		local pHealthCore = Citizen.InvokeNative(0x36731AC041289BB1 , playerPed, 0, Citizen.ResultAsInteger())
+		local pStaminaCore = Citizen.InvokeNative(0x36731AC041289BB1 , playerPed, 1, Citizen.ResultAsInteger())
+
+		TriggerServerEvent('FRP:CacheCharacterStats', {x, y, z}, pHealth, pStamina, pHealthCore, pStaminaCore)
+	end
+end
+
+CreateThread(function()
+	while true do
+		Wait(1000 * 30) -- Segundos
+		SaveCharacterData()
+	end
+end)
+
+AddEventHandler('playerDropped', SaveCharacterData)
 
 function cAPI.getPosition()
 	local x, y, z = table.unpack(GetEntityCoords(PlayerPedId(), true))
