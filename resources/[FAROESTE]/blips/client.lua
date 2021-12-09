@@ -84,7 +84,7 @@ local blips = {
 	{name = "Jornal Dakota", sprite = 587827268, x = -266.096, y = 778.333, z = 122.404}, 
 
 	-- ALFAIATE
-	{name = "Alfaiataria da Dona Rell", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
+	{name = "Alfaiataria Cunegundes", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
 	{name = "Alfaiataria", sprite = 1195729388, x = 2552.441, y = -1166.584, z = 53.684},
 
 	-- ACOUGUE
