@@ -64,14 +64,17 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
 
     cAPI.setPlayerAppearence(playerPed)
 
-    SetEntityMaxHealth(playerPed, 150)
-
     pHealth      = pStats[1] or 150
     pStamina     = pStats[2] or 34.0
     pHealthCore  = pStats[3] or 100
     pStaminaCore = pStats[3] or 100
 
     Wait(3000)
+
+    while GetEntityMaxHealth(playerPed) < 150 do
+        SetEntityMaxHealth(playerPed, 150)
+        Wait(250)
+    end
 
     SetEntityHealth(playerPed, pHealth)
     cAPI.VaryPlayerStamina(pStamina)
