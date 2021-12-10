@@ -1591,11 +1591,21 @@ Citizen.CreateThread(
                 position = vec3(-329.393, 774.892, 120.834),
                 heading = 286.07,
             },
+            {
+                position = vec3(-325.872,759.647,120.655),
+                heading = -45.34,
+            },
 
             -- BlackWater.
             {
                 position = vec3(-767.693, -1294.545, 43.041),
                 heading = 286.07,
+            },
+
+            -- Saint Denis
+            {
+                position = vec3(2556.891, -1160.544, 52.723),
+                heading = 89.69,
             },
 
             -- Strawberry
