@@ -1901,7 +1901,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 715,
                 transactionPriceBuyGold = 3,
 
-                transactionPriceSellDollar = 275,
+                transactionPriceSellDollar = 750,
             },
             {
                 itemId = 'moonshinedourado',
@@ -1909,7 +1909,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 975,
                 transactionPriceBuyGold = 6,
 
-                transactionPriceSellDollar = 375,
+                transactionPriceSellDollar = 850,
             },
             {
                 itemId = 'moonshineinverno',
@@ -1917,8 +1917,8 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 1378,
                 transactionPriceBuyGold = 9,
 
-                transactionPriceSellDollar = 530,
-            },
+                transactionPriceSellDollar = 950,
+            }
         },
 
         positions = {
