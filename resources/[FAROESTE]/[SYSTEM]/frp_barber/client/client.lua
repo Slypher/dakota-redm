@@ -5,9 +5,7 @@ API = Tunnel.getInterface("API")
 cAPI = Proxy.getInterface("API")
 
 adding = true
-inCustomization = false
 cam = nil
-hided = false
 spawnedCamera = nil
 choosePed = {}
 pedSelected = PlayerPedId()
@@ -15,7 +13,6 @@ sex = nil
 positionBack = nil
 
 InterP = false
-CamActive = false
 zoom = 1.0
 offset = 0.5
 fixedCam = nil
@@ -45,36 +42,6 @@ cameraUsing = {
     }
 }
 
-
---[[RegisterCommand(
-    "openClothingShopMenu",
-    function(source, args)
-        inCustomization = true
-        hided = false
-        CamActive = false
-        cAPI.InFade(500)
-        Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
-      --||  SetEveryoneAsInvisible()
-    end
-)]]
-
-RegisterNetEvent("FRP:STORECLOTHES:OpenbarberMenu")
-AddEventHandler(
-    "FRP:STORECLOTHES:OpenbarberMenu",
-    function()
-        if not cAPI.GetWanted() then
-            inCustomization = true
-            hided = false
-            CamActive = false
-            cAPI.InFade(500)
-            Citizen.InvokeNative(0xF1CA12B18AEF5298, PlayerPedId(), true)
-        -- SetEveryoneAsInvisible()        
-        else
-            TriggerEvent('FRP:NOTIFY:Simple', 'Você ainda está como procurado, não pode trocar de roupa. ', 10000)
-        end
-    end
-)
-
 function rotation(dir)
     local pedRot = GetEntityHeading(PlayerPedId()) + dir
     SetEntityHeading(PlayerPedId(), pedRot % 360)
@@ -89,44 +56,6 @@ RegisterNUICallback(
             rotation(-20)
         end
         cb("ok")
-    end
-)
-
-Citizen.CreateThread(
-    function()
-        while true do
-            Citizen.Wait(0)
-            if inCustomization and not hided then
-                SetNuiFocus(true, true)
-                local hashm = GetEntityModel(PlayerPedId())
-
-                local female = -1481695040
-                local male = -171876066
-
-                if hashm == female then
-                    sex = "mp_female"
-                elseif hashm == male then
-                    sex = "mp_male"
-                else
-                    sex = "other"
-                end
-
-
-
-
-
-                if not CamActive then
-                    createCamera()
-                    CamActive = true
-                end
-                SendNUIMessage(
-                    {
-                        action = "show",
-                        gender = sex
-                    }
-                )           
-            end
-        end
     end
 )
 
@@ -145,50 +74,48 @@ AddEventHandler(
     end
 )
 
--- function SetEveryoneAsInvisible()
---    NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)
---   while inCustomization do
---   	Citizen.Wait(0)
--- 	    for _, pid in pairs(GetActivePlayers()) do
--- 	    	print('1 '.. pid)
--- 	       SetEntityVisible(GetPlayerPed(pid), false)
--- 	    end
---    end
+function createCamera(playerPed, shopPosition)
 
---  	for _, pid in pairs(GetActivePlayers()) do
---  		print('2 '.. pid)
---       SetEntityVisible(GetPlayerPed(pid), true)
---    	end
---    	NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
--- end
+    SetEntityCoords(playerPed, shopPosition.position)
 
-function createCamera()
-    SetEntityCoords(PlayerPedId(),-307.871,813.393,118.990)
-    local coords = GetEntityCoords(PlayerPedId())
-    groundCam = CreateCam("DEFAULT_SCRIPTED_CAMERA",-307.871,813.393,118.990)
-  	SetEntityHeading(PlayerPedId(), 286.07)
+    local offsetCamera = shopPosition.camera
 
+    local cameraPosition = GetOffsetFromEntityInWorldCoords(playerPed, offsetCamera.x, offsetCamera.y, offsetCamera.z)
 
-  --	SetEntityVisible(PlayerPedId(), false)
-    SetCamCoord(groundCam,-306.505,812.904,119.418)
- --  SetCamFov(groundCam, 100)
+    SetFocusPosAndVel(shopPosition.position, vec3(0.0, 0.0, 0.0))
+
+    groundCam = CreateCam('DEFAULT_SCRIPTED_CAMERA', cameraPosition)
+
+    SetCamCoord(groundCam, cameraPosition)
+
     SetCamRot(groundCam, -10.0, 0.0, 152.09)
+
     SetCamActive(groundCam, true)
+
     RenderScriptCams(true, false, 1, true, true)
-    --Wait(3000)
-    -- last camera, create interpolate
-    fixedCam = CreateCam("DEFAULT_SCRIPTED_CAMERA")
-    SetCamCoord(fixedCam,-306.505,812.904,119.418)
+
+    fixedCam = CreateCam('DEFAULT_SCRIPTED_CAMERA')
+
+    SetCamCoord(fixedCam, cameraPosition)
+
     SetCamRot(fixedCam, 90, 500, 80.09)
+
     Wait(3000)
+
     cAPI.OutFade(500)
-    TriggerEvent("FRP:NOTIFY:Simple", "Utilize as teclas A e D para rotacionar o personagem, e as setas do teclado para selecionar as opções.", 10000)
-    --SetCamFov(fixedCam, 100)
+
+    SetEntityHeading(playerPed, shopPosition.heading)
+
+    TriggerEvent('FRP:NOTIFY:Simple', 'Utilize as teclas A e D para rotacionar o personagem, e as setas do teclado para selecionar as opções.', 10000)
+
     SetCamActive(fixedCam, true)
+
     SetCamActiveWithInterp(fixedCam, groundCam, 3900, true, true)
+
     Wait(3900)
+
     DestroyCam(groundCam)
-    -- InterP = true
+
 end
 
 function createPeds()
@@ -1033,6 +960,7 @@ RegisterNUICallback(
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         --SetEntityVisible(PlayerPedId(), true)
         cAPI.OutFade(500)
+        ClearFocus()
     end
 )
 
@@ -1042,9 +970,6 @@ function DestroyClothingMenu()
     SetNuiFocus(false, false)
     DisplayHud(true)
 
-    inCustomization = false
-    hided = false
-
     SendNUIMessage(
         {
             action = "hide"
@@ -1052,31 +977,78 @@ function DestroyClothingMenu()
     )
 end
 
-Citizen.CreateThread(
-    function()
-        local shops = {
+CreateThread(function()
+
+    cAPI.OutFade(500)
+
+    local shops = {
+        -- Valentine
+        {
+            position = vec3(-307.851, 813.354, 118.012),
+            heading = -101.76,
+            camera = {
+                x = 0.4,
+                y = 0.8,
+                z = 0.5
+            }
+        },
             vector3(-307.562,811.659,118.990), -- Valentine
         --    vector3(2549.83, -1160.05, 53.73), -- SAINT DENIS
         --    vector3(-322.25, 803.97, 116.95)
-        }
+    }
 
-        while true do
-            Citizen.Wait(0)
-            local pPosition = GetEntityCoords(PlayerPedId())
+    while true do
 
-            for _, shopPosition in pairs(shops) do
-                if #(pPosition - shopPosition) <= 1.5 then
-                    positionBack = shopPosition
-                    DrawTxt("Pressione ALT para abrir a Barbearia.", 0.85, 0.95, 0.35, 0.35, true, 255, 255, 255, 200, true, 10000)
-                    if IsControlJustReleased(0, 0xE8342FF2) then -- LEFT ALT
-                        print('presses')
-                        TriggerEvent("FRP:STORECLOTHES:OpenbarberMenu")
+        Wait(0)
+
+        local playerPed = PlayerPedId()
+
+        local playerPosition = GetEntityCoords(PlayerPedId())
+
+        for i = 1, #shops do
+
+            if #(playerPosition - shops[i].position) <= 1.5 then
+
+                positionBack = shops[i].position
+
+                DrawTxt("Pressione ALT para abrir a Barbearia.", 0.85, 0.95, 0.35, 0.35, true, 255, 255, 255, 200, true, 10000)
+
+                if IsControlJustReleased(0, 0xE8342FF2) and not cAPI.GetWanted() then -- LEFT ALT
+
+                    cAPI.InFade(500)
+
+                    Wait(500)
+
+                    Citizen.InvokeNative(0xF1CA12B18AEF5298, playerPed, true)
+
+                    SetNuiFocus(true, true)
+
+                    local pedHash = GetEntityModel(playerPed)
+
+                    local female = -1481695040
+
+                    local male = -171876066
+
+                    if pedHash == female then
+                        sex = 'mp_female'
+                    elseif pedHash == male then
+                        sex = 'mp_male'
+                    else
+                        sex = 'other'
                     end
+
+                    createCamera(playerPed, shops[i])
+
+                    SendNUIMessage({
+                        action = 'show',
+                        gender = sex
+                    })
+
                 end
             end
         end
     end
-)
+end)
 
 
 
