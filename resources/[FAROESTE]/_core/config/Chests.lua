@@ -26,6 +26,8 @@ config_file_STATICCHESTS = {
     {"static:public:8", 1287.052, -1311.952, 76.979 - 0.89, -36.00, 0, 100}, -- BANQUEIRO RHODES
     -- ///////// RHODES
     {"static:public:4", 1351.093, -1380.077, 84.287 - 0.89, 259.999, 1, 100},
+    -- ///////// BW
+    {"static:public:9", -822.931,-1325.336,47.888 - 0.89, 0.11, 1, 100}, -- SALOON
     
     {"static:oficiais:1", -279.592, 808.447, 119.380 - 0.89, 93.51, 0, 100, "trooper"}, -- VALENTINE
     {"static:oficiais:2", 1357.664,-1304.471,77.755 - 0.89, 159.77, 0, 100, "trooper"}, --- RHODES

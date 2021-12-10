@@ -2,7 +2,7 @@
 menuConfigs = {
     ['menu'] = {
         enableMenu = function()
-            return true
+            return false
         end,
         data = {
             keybind = "F6",
