@@ -14,7 +14,7 @@ local HOURLY_PAYMENT_PER_GROUP = {
 
 	["medic"] 	 = { payment = 400 },
 
-	["governador"] 	 = { payment = 1200 }, -- $12.00
+	["governador"] 	 = { payment = 2500 }, -- $25.00
 	["secretario"] 	 = { payment = 900 },  -- $9.00
 
 	["jornalista"] 	 = { payment = 200 },  -- $2.00

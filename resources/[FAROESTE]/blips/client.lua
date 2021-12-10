@@ -78,13 +78,9 @@ local blips = {
 	-- Doctor
 	{name = "Será Leiloado", sprite = 249721687, x = 2721.739, y = -1229.691, z = 51.130}, -- Saint Denis
 	{name = "Será Leiloado", sprite = 249721687, x = 2946.527, y = 1319.625, z = 44.816}, -- Saint Denis
-	
-	
-	-- JORNAL
-	{name = "Jornal Dakota", sprite = 587827268, x = -266.096, y = 778.333, z = 122.404}, 
 
 	-- ALFAIATE
-	{name = "Alfaiataria da Dona Rell", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
+	{name = "Alfaiataria Cunegundes", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
 	{name = "Alfaiataria", sprite = 1195729388, x = 2552.441, y = -1166.584, z = 53.684},
 
 	-- ACOUGUE
@@ -110,9 +106,6 @@ local blips = {
 
 	--HOTEIS
 	{name = "Hotel", sprite = -211556852, x = -325.225, y = 764.678, z = 124.506},
-
-	--EMPREITERA
-	{name = "Empreiteira", sprite = -426139257, x = -355.94, y = 810.54, z = 116.22},
 
 	-- Armazens
 	{name = "Terry", sprite = -1954662204, x = -785.338, y = -1323.850, z = 43.884}, -- Blackwater
