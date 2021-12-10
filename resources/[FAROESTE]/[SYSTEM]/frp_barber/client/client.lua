@@ -992,9 +992,25 @@ CreateThread(function()
                 z = 0.5
             }
         },
-            vector3(-307.562,811.659,118.990), -- Valentine
-        --    vector3(2549.83, -1160.05, 53.73), -- SAINT DENIS
-        --    vector3(-322.25, 803.97, 116.95)
+        -- Blackwater
+        {
+            position = vec3(-816.572, -1368.756, 42.773),
+            heading = -105.00,
+            camera = {
+                x = 0.7,
+                y = -0.4,
+                z = 0.5
+            }
+        },
+        {
+            position = vec3(-816.724, -1367.107, 42.773),
+            heading = -105.00,
+            camera = {
+                x = 0.7,
+                y = -0.4,
+                z = 0.5
+            }
+        }
     }
 
     while true do
