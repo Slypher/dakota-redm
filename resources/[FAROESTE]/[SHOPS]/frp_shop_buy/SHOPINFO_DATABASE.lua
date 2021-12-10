@@ -1898,26 +1898,26 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'moonshinetradicional',
 
-                transactionPriceBuyDollar = 715,
+                transactionPriceBuyDollar =670,
                 transactionPriceBuyGold = 3,
 
-                transactionPriceSellDollar = 750,
+                transactionPriceSellDollar = 540,
             },
             {
                 itemId = 'moonshinedourado',
 
-                transactionPriceBuyDollar = 975,
+                transactionPriceBuyDollar = 770,
                 transactionPriceBuyGold = 6,
 
-                transactionPriceSellDollar = 850,
+                transactionPriceSellDollar = 670,
             },
             {
                 itemId = 'moonshineinverno',
 
-                transactionPriceBuyDollar = 1378,
+                transactionPriceBuyDollar = 870,
                 transactionPriceBuyGold = 9,
 
-                transactionPriceSellDollar = 950,
+                transactionPriceSellDollar = 770,
             }
         },
 
