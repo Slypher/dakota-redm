@@ -194,10 +194,10 @@ RegisterNUICallback('BarbaMenu', function(data)
         Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
     else
         if gSex == 'mp_male' then
-            for i = 1, #MaleMustache do
-                if i == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleMustache[i].hash, true, true, true)
-                    gMustacheUsing = MaleMustache[i].hash
+            for k, v in pairs(MaleMustache) do
+                if MaleMustache[k].id == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleMustache[k].hash, true, true, true)
+                    gMustacheUsing = MaleMustache[k].hash
                 end
             end
         end
@@ -212,17 +212,17 @@ RegisterNUICallback('Cabelos', function(data)
         Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
     else
         if gSex == 'mp_male' then
-            for i = 1, #MaleHairs do
-                if i == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleHairs[i].hash, true, true, true)
-                    gHairUsing = MaleHairs[i].hash
+            for k, v in pairs(MaleHairs) do
+                if MaleHairs[k].id == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleHairs[k].hash, true, true, true)
+                    gHairUsing = MaleHairs[k].hash
                 end
             end
         else
-            for i = 1, #FemaleHairs do
-                if i == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), FemaleHairs[i].hash, true, true, true)
-                    gHairUsing = FemaleHairs[i].hash
+            for k, v in pairs(FemaleHairs) do
+                if FemaleHairs[k].id == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), FemaleHairs[k].hash, true, true, true)
+                    gHairUsing = FemaleHairs[k].hash
                 end
             end
         end
