@@ -8,6 +8,12 @@ local gCam = nil
 
 local gSex = nil
 
+local MaleMustache = json.decode(LoadResourceFile(GetCurrentResourceName(), 'data/MaleMustache.json'))
+
+local MaleHairs = json.decode(LoadResourceFile(GetCurrentResourceName(), 'data/MaleHairs.json'))
+
+local FemaleHairs = json.decode(LoadResourceFile(GetCurrentResourceName(), 'data/FemaleHairs.json'))
+
 RegisterNUICallback('rotate', function(data, cb)
 
     local VAR = 45.0
@@ -194,10 +200,11 @@ RegisterNUICallback('BarbaMenu', function(data)
         Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
     else
         if gSex == 'mp_male' then
-            for k, v in pairs(MaleMustache) do
-                if MaleMustache[k].id == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleMustache[k].hash, true, true, true)
-                    gMustacheUsing = MaleMustache[k].hash
+            for i = 1, #MaleMustache do
+                print(MaleMustache[i].componentHash)
+                if i == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleMustache[i].componentHash, true, true, true)
+                    gMustacheUsing = MaleMustache[i].componentHash
                 end
             end
         end
@@ -212,17 +219,17 @@ RegisterNUICallback('Cabelos', function(data)
         Citizen.InvokeNative(0xCC8CA3E88256E58F, PlayerPedId(), 0, 1, 1, 1, 0) -- Actually remove the component
     else
         if gSex == 'mp_male' then
-            for k, v in pairs(MaleHairs) do
-                if MaleHairs[k].id == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleHairs[k].hash, true, true, true)
-                    gHairUsing = MaleHairs[k].hash
+            for i = 1, #MaleHairs do
+                if i == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleHairs[i].componentHash, true, true, true)
+                    gHairUsing = MaleHairs[i]
                 end
             end
         else
-            for k, v in pairs(FemaleHairs) do
-                if FemaleHairs[k].id == tonumber(data.id) then
-                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), FemaleHairs[k].hash, true, true, true)
-                    gHairUsing = FemaleHairs[k].hash
+            for i = 1, #FemaleHairs do
+                if i == tonumber(data.id) then
+                    Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), FemaleHairs[i].componentHash, true, true, true)
+                    gHairUsing = FemaleHairs[i].componentHash
                 end
             end
         end

@@ -4,6 +4,8 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local gRespawnAfterLogout = false
+
 local respawned = false
 local firstjoin = true
 local pressed = false
@@ -350,6 +352,8 @@ AddEventHandler(
 		DestroyAllCams(true)
 
 		DestroyDeathRelatedInformation()
+
+		gRespawnAfterLogout = false
 	end
 )
 
@@ -387,12 +391,10 @@ AddEventHandler(
 )
 
 RegisterNetEvent("FRP:RESPAWN:PlayerDead")
-AddEventHandler(
-	"FRP:RESPAWN:PlayerDead",
-	function()
-		Citizen.InvokeNative(0x697157CED63F18D4, PlayerPedId(), 500000, false, true, true)
-	end
-)
+AddEventHandler("FRP:RESPAWN:PlayerDead", function()
+	gRespawnAfterLogout = true
+	Citizen.InvokeNative(0x697157CED63F18D4, PlayerPedId(), 500000, false, true, true)
+end)
 
 local Locations = {
 	[1] = vector3(-282.606,815.140,119.386), -- VALENTINE
@@ -574,6 +576,8 @@ function HandleAsInjured(fatal)
 
 					SetAsDrunk(true)
 
+					gRespawnAfterLogout = false
+
 					addedToReviveTime = false
 
 					timesLeftPlayerCanGetUp = timesLeftPlayerCanGetUp - 1
@@ -594,7 +598,9 @@ function HandleAsInjured(fatal)
 
 						if PromptIsEnabled(prompt_getup) == 0 then
 							if timeTillfirstReviveDiff <= 0 then
-								PromptSetEnabled(prompt_getup, true)
+								if not gRespawnAfterLogout then
+									PromptSetEnabled(prompt_getup, true)
+								end
 								PromptSetVisible(prompt_getup, true)
 
 								PromptSetMashWithResistanceMode(prompt_getup, 10, 7.0 - (timesLeftPlayerCanGetUp * 0.75), 0)
@@ -644,7 +650,10 @@ function HandleAsInjured(fatal)
 					if timesLeftPlayerCanGetUp > 0 then
 						-- Player tem mais chances de reviver, reativa os prompts
 
-						PromptSetEnabled(prompt_getup, true)
+						if not gRespawnAfterLogout then
+							PromptSetEnabled(prompt_getup, true)
+						end
+
 						PromptSetVisible(prompt_getup, true)
 
 						PromptSetMashWithResistanceMode(prompt_getup, 10, 7.0 - (timesLeftPlayerCanGetUp * 0.75), 0)
