@@ -6,11 +6,11 @@ cAPI = Tunnel.getInterface("API")
 
 local HOURLY_PAYMENT_PER_GROUP = {
 
-	["marshall"] = { payment = 800 },
-	["delegado"] = { payment = 500 },
-	["sheriff"]  = { payment = 600 },
-	["trooper"]  = { payment = 450 }, -- $2.50
-	["recruta"]  = { payment = 100 }, -- $0.75
+	["marshall"] = { payment = 1600 },
+	["delegado"] = { payment = 1400 },
+	["sheriff"]  = { payment = 1200 },
+	["trooper"]  = { payment = 800 }, -- $2.50
+	["recruta"]  = { payment = 400 }, -- $0.75
 
 	["medic"] 	 = { payment = 400 },
 
