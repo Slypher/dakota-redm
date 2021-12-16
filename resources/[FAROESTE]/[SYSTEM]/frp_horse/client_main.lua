@@ -4,12 +4,16 @@ local Proxy = module("_core", "lib/Proxy")
 cAPI = Proxy.getInterface("API")
 API = Tunnel.getInterface("API")
 
+local horseServer = Tunnel.getInterface(GetCurrentResourceName())
+
+local horseId
 local horseModel
 local horseName
 local horseComponents = {}
 
 local initializing = false
 
+local prompt_transfer_horse
 local prompt_inventory
 local prompt_eat
 local prompt_brush
@@ -29,7 +33,8 @@ function NativeSetPedComponentEnabled(ped, component)
     Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, component, true, true, true)
 end
 
-function SetHorseInfo(horse_model, horse_name, horse_components)
+function SetHorseInfo(horse_id, horse_model, horse_name, horse_components)
+    horseId = horse_id
     horseModel = horse_model
     horseName = horse_name
     horseComponents = horse_components
@@ -378,7 +383,11 @@ function CreatePrompts(prompt_group)
     if prompt_brush ~= nil then
         PromptDelete(prompt_brush)
     end
-    
+
+    if prompt_transfer_horse ~= nil then
+        PromptDelete(prompt_transfer_horse)
+    end
+
     prompt_inventory = PromptRegisterBegin()
     PromptSetControlAction(prompt_inventory, 0x5966D52A)
     PromptSetText(prompt_inventory, CreateVarString(10, "LITERAL_STRING", "Abrir Aforje"))
@@ -420,143 +429,274 @@ function CreatePrompts(prompt_group)
     PromptSetGroup(prompt_brush, prompt_group)
     -- Citizen.InvokeNative(0x0C718001B77CA468, prompt_brush, 1.5)
     PromptRegisterEnd(prompt_brush)
+
+    prompt_transfer_horse = PromptRegisterBegin()
+    PromptSetControlAction(prompt_transfer_horse, 0x8CF90A9D)
+    PromptSetText(prompt_transfer_horse, CreateVarString(10, 'LITERAL_STRING', 'Transferir cavalo'))
+    PromptSetEnabled(prompt_transfer_horse, 1)
+    PromptSetVisible(prompt_transfer_horse, 1)
+    PromptSetStandardMode(prompt_transfer_horse, 1)
+    PromptSetGroup(prompt_transfer_horse, prompt_group)
+    PromptRegisterEnd(prompt_transfer_horse)
+
 end
 
 local _tempplayerhorse
 
-Citizen.CreateThread(
-    function()
-        while true do
-            Citizen.Wait(0)
+local function GetUserInput(windowTitle, defaultText, maxInputLength)
+    -- Create the window title string.
+    local resourceName = string.upper(GetCurrentResourceName())
+    local textEntry = resourceName .. "_WINDOW_TITLE"
 
-            if PromptIsJustPressed(prompt_inventory) then
-                TriggerServerEvent("FRP:HORSE:OpenInventory")
-            end
+    if windowTitle == nil then
+        windowTitle = "Enter:"
+    end
 
-            if PromptIsJustPressed(prompt_brush) then
-                local playerHorse = cAPI.GetPlayerHorse()
-                TaskAnimalInteraction(PlayerPedId(), playerHorse, GetHashKey("INTERACTION_BRUSH"), 0, 0)
-                Citizen.CreateThread(
-                    function()
-                        Citizen.Wait(10000)
-                        Citizen.InvokeNative(0x314C5465195F3B30, playerHorse, 0.0) -- SetMetapedWeariness
-                        ClearPedEnvDirt(playerHorse)
-                    end
-                )
-            end
+    AddTextEntry(textEntry, windowTitle)
 
-            if PromptIsJustPressed(prompt_eat) then
-                ActionEat()
-            end
+    -- Display the input box.
+    DisplayOnscreenKeyboard(1, textEntry, "", defaultText or "", "", "", "", maxInputLength or 30)
+    Wait(0)
 
-            if PromptIsJustPressed(prompt_drink) then
-                ActionDrink()
-            end
+    -- Wait for a result.
+    while true do
+        local keyboardStatus = UpdateOnscreenKeyboard();
 
-            -- if IsControlJustPressed(0, 0xE7EB9185) or IsControlJustPressed(1, 0x24978A28) then -- H, HistleHorseBack - H, Histle
-            -- if GetScriptTaskStatus(PlayerPedId(), 0x1DE2A7BD, 0) ~= 1 then
-            --     local mount = GetMount(PlayerPedId())
+        if keyboardStatus == 3 then -- not displaying input field anymore somehow
+            return nil
+        elseif keyboardStatus == 2 then -- cancelled
+            return nil
+        elseif keyboardStatus == 1 then -- finished editing
+            return GetOnscreenKeyboardResult()
+        else
+            Wait(0)
+        end
+    end
+end
 
-            --     if CanHorseDrink() then
-            --         HandleDrink()
-            --     elseif CanHorseEat() then
-            --         HandleEat()
-            --     else
-            -- if IsControlJustPressed(0, 0x24978A28) then -- H, Histle
+function GetPlayers()
+    local players = {}
 
-            -- -- end
-            --     end
-            -- end
-            -- end
+    for _,player in ipairs(GetActivePlayers()) do
+        local ped = GetPlayerPed(player)
 
-            -- TaskHorseAction 2 | Derrubar
-            -- TaskHorseAction 5 | Empinar
-            -- TaskHorseAction 3 | Freiada Brusca
+        if DoesEntityExist(ped) then
+            table.insert(players, player)
+        end
+    end
 
-            if IsControlJustPressed(0, 0x7D5B3717) then
-                local mount = GetMount(PlayerPedId())
-                if mount ~= 0 then
-                    TaskHorseAction(mount, 5, 0, 0)
-                end
-            end
+    return players
+end
 
-            -- if _tempplayerhorse then
-            --     if IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_REAR")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_LEFT")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_RIGHT")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_FRONT")) then
-            --         if GetMeleeTargetForPed(_tempplayerhorse) == PlayerPedId() then
-            --             ClearPedTasks(_tempplayerhorse)
-            --         end
-            --     end
-            -- end
+local function GetClosestPlayer()
 
-            --- bugado o cavalo não volta a correr
-            --[[ if IsControlJustPressed(0, 0xE16B9AAD) then
-                local mount = GetMount(PlayerPedId())
-                if mount ~= 0 then
-                    TaskHorseAction(mount, 3, 0, 0)
-                end
-            end ]]
-            -- drawBoundingBox()
+    local players, closestDistance, closestPlayer = GetPlayers(), -1, -1
 
-            if IsControlJustPressed(0, 0x60C81CDE) then -- Horse attack F
-                local ped = PlayerPedId()
-                local mount = GetMount(ped)
-                if mount ~= 0 then
-                    -- local lassoedPlayerPed
+    local coords, usePlayerPed = coords, false
 
-                    -- local itemSet = CreateItemset(true)
-                    -- FindAllAttachedCarriableEntities(GetMount(ped), itemSet)
-                    -- local size = GetItemsetSize(itemSet)
+    local playerPed, playerId = PlayerPedId(), PlayerId()
 
-                    -- if size > 0 then
-                    --     for index = 0, size - 1 do
-                    --         local entity = GetIndexedItemInItemset(index, itemSet)
+    if coords then
+        coords = vector3(coords.x, coords.y, coords.z)
+    else
+        usePlayerPed = true
+        coords = GetEntityCoords(playerPed)
+    end
 
-                    --         if IsEntityAPed(entity) and IsPedHuman(entity) and Citizen.InvokeNative(0x9682F850056C9ADE, entity) then
-                    --             lassoedPlayerPed = entity
-                    --         end
-                    --     end
-                    -- end
+    for i = 1, #players, 1 do
+        local target = GetPlayerPed(players[i])
 
-                    -- if IsItemsetValid(itemSet) then
-                    --     DestroyItemset(itemSet)
-                    -- end
+        if not usePlayerPed or (usePlayerPed and players[i] ~= playerId) then
+            local targetCoords = GetEntityCoords(target)
 
-                    -- local carriedPed = Citizen.InvokeNative(0xB676EFDA03DADA52, mount, true)
+            local distance = #(coords - targetCoords)
 
-                    -- if carriedPed ~= nil and IsPedAPlayer(carriedPed) then
-
-                    local carriedPlayer
-
-                    for _, pid in pairs(GetActivePlayers()) do
-                        local pped = GetPlayerPed(pid)
-                        local carrier = Citizen.InvokeNative(0xA033D7E4BBF9844D, pped)
-
-                        if carrier == mount then
-                            carriedPlayer = pid
-                            break
-                        end
-                    end
-
-                    if carriedPlayer then
-                        local carriedPlayerServerId = GetPlayerServerId(carriedPlayer)
-
-                        TriggerServerEvent("FRP:HORSE:HitCarriedPlayer", carriedPlayerServerId)
-
-                        local animDict = "script_proc@bounty@riding_punch"
-                        RequestAnimDict(animDict)
-
-                        while not HasAnimDictLoaded(animDict) do
-                            Citizen.Wait(0)
-                        end
-
-                        TaskPlayAnim(ped, "script_proc@bounty@riding_punch", "punch_player", 4.0, -4.0, -1, 24, 0.0, false, 0, false, 0, false)
-                    end
-                -- end
-                end
+            if closestDistance == -1 or closestDistance > distance then
+                closestPlayer = players[i]
+                closestDistance = distance
             end
         end
     end
-)
+
+    return GetPlayerServerId(closestPlayer), closestDistance
+end
+
+CreateThread(function()
+    while true do
+        Wait(0)
+
+        DisableControlAction(0, 0x31219490, false) -- Show Informations
+
+        if PromptIsJustPressed(prompt_transfer_horse) then
+
+            DisableControlAction(0, 0x5415BE48, false) -- Pat
+            DisableControlAction(0, 0x4216AF06, false) -- Flee
+            DisableControlAction(0, 0x17d3bff5, false) -- Lead
+            DisableControlAction(0, 0x9959A6F0, false) -- Escovar
+            DisableControlAction(0, 0x5966D52A, false) -- Aforje
+
+            local targetPlayerServerId, distance = GetClosestPlayer()
+
+            local currentHorseOwnerServerId = GetPlayerServerId(PlayerId())
+
+            if targetPlayerServerId ~= 0 then
+
+                local targetCharacterName = horseServer.GetCharacterNameByServerId(targetPlayerServerId)
+
+                if targetCharacterName then
+
+                    local inputValue = GetUserInput('Transferir cavalo para ' .. targetCharacterName .. ' (Digite SIM)')
+
+                    if inputValue == 'SIM' or inputValue == 'sim' then
+                        -- Imposivel se localizar nesse código aqui, portanto estou enviando todo o data do cavalo pra setar no client do novo dono
+                        TriggerServerEvent('frp_horse:transferHorse', currentHorseOwnerServerId, targetPlayerServerId, {
+                            id = horseId,
+                            model = horseModel,
+                            name = horseName,
+                            components = horseComponents,
+                            entity = cAPI.GetPlayerHorse()
+                        })
+                    else
+                        cAPI.notify('error', 'Operação cancelada')
+                    end
+
+                else
+                    cAPI.notify('error', 'Ninguém por perto')
+                end
+
+            else
+                cAPI.notify('error', 'Ninguém por perto')
+            end
+
+        end
+
+        if PromptIsJustPressed(prompt_inventory) then
+            TriggerServerEvent("FRP:HORSE:OpenInventory")
+        end
+
+        if PromptIsJustPressed(prompt_brush) then
+            local playerHorse = cAPI.GetPlayerHorse()
+            TaskAnimalInteraction(PlayerPedId(), playerHorse, GetHashKey("INTERACTION_BRUSH"), 0, 0)
+            Citizen.CreateThread(
+                function()
+                    Citizen.Wait(10000)
+                    Citizen.InvokeNative(0x314C5465195F3B30, playerHorse, 0.0) -- SetMetapedWeariness
+                    ClearPedEnvDirt(playerHorse)
+                end
+            )
+        end
+
+        if PromptIsJustPressed(prompt_eat) then
+            ActionEat()
+        end
+
+        if PromptIsJustPressed(prompt_drink) then
+            ActionDrink()
+        end
+
+        -- if IsControlJustPressed(0, 0xE7EB9185) or IsControlJustPressed(1, 0x24978A28) then -- H, HistleHorseBack - H, Histle
+        -- if GetScriptTaskStatus(PlayerPedId(), 0x1DE2A7BD, 0) ~= 1 then
+        --     local mount = GetMount(PlayerPedId())
+
+        --     if CanHorseDrink() then
+        --         HandleDrink()
+        --     elseif CanHorseEat() then
+        --         HandleEat()
+        --     else
+        -- if IsControlJustPressed(0, 0x24978A28) then -- H, Histle
+
+        -- -- end
+        --     end
+        -- end
+        -- end
+
+        -- TaskHorseAction 2 | Derrubar
+        -- TaskHorseAction 5 | Empinar
+        -- TaskHorseAction 3 | Freiada Brusca
+
+        if IsControlJustPressed(0, 0x7D5B3717) then
+            local mount = GetMount(PlayerPedId())
+            if mount ~= 0 then
+                TaskHorseAction(mount, 5, 0, 0)
+            end
+        end
+
+        -- if _tempplayerhorse then
+        --     if IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_REAR")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_LEFT")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_RIGHT")) or IsPedPerformingMeleeAction(_tempplayerhorse, 32768, GetHashKey("AR_HORSE_KICK_FRONT")) then
+        --         if GetMeleeTargetForPed(_tempplayerhorse) == PlayerPedId() then
+        --             ClearPedTasks(_tempplayerhorse)
+        --         end
+        --     end
+        -- end
+
+        --- bugado o cavalo não volta a correr
+        --[[ if IsControlJustPressed(0, 0xE16B9AAD) then
+            local mount = GetMount(PlayerPedId())
+            if mount ~= 0 then
+                TaskHorseAction(mount, 3, 0, 0)
+            end
+        end ]]
+        -- drawBoundingBox()
+
+        if IsControlJustPressed(0, 0x60C81CDE) then -- Horse attack F
+            local ped = PlayerPedId()
+            local mount = GetMount(ped)
+            if mount ~= 0 then
+                -- local lassoedPlayerPed
+
+                -- local itemSet = CreateItemset(true)
+                -- FindAllAttachedCarriableEntities(GetMount(ped), itemSet)
+                -- local size = GetItemsetSize(itemSet)
+
+                -- if size > 0 then
+                --     for index = 0, size - 1 do
+                --         local entity = GetIndexedItemInItemset(index, itemSet)
+
+                --         if IsEntityAPed(entity) and IsPedHuman(entity) and Citizen.InvokeNative(0x9682F850056C9ADE, entity) then
+                --             lassoedPlayerPed = entity
+                --         end
+                --     end
+                -- end
+
+                -- if IsItemsetValid(itemSet) then
+                --     DestroyItemset(itemSet)
+                -- end
+
+                -- local carriedPed = Citizen.InvokeNative(0xB676EFDA03DADA52, mount, true)
+
+                -- if carriedPed ~= nil and IsPedAPlayer(carriedPed) then
+
+                local carriedPlayer
+
+                for _, pid in pairs(GetActivePlayers()) do
+                    local pped = GetPlayerPed(pid)
+                    local carrier = Citizen.InvokeNative(0xA033D7E4BBF9844D, pped)
+
+                    if carrier == mount then
+                        carriedPlayer = pid
+                        break
+                    end
+                end
+
+                if carriedPlayer then
+                    local carriedPlayerServerId = GetPlayerServerId(carriedPlayer)
+
+                    TriggerServerEvent("FRP:HORSE:HitCarriedPlayer", carriedPlayerServerId)
+
+                    local animDict = "script_proc@bounty@riding_punch"
+                    RequestAnimDict(animDict)
+
+                    while not HasAnimDictLoaded(animDict) do
+                        Citizen.Wait(0)
+                    end
+
+                    TaskPlayAnim(ped, "script_proc@bounty@riding_punch", "punch_player", 4.0, -4.0, -1, 24, 0.0, false, 0, false, 0, false)
+                end
+            -- end
+            end
+        end
+    end
+end)
 
 Citizen.CreateThread(
     function()
