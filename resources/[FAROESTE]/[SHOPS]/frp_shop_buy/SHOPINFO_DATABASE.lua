@@ -1934,10 +1934,10 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'opio',
 
-                transactionPriceBuyDollar = 700,
+                transactionPriceBuyDollar = 1000,
                 transactionPriceBuyGold = 2,
 
-                transactionPriceSellDollar = 350,
+                transactionPriceSellDollar = 700,
             },
         },
 
