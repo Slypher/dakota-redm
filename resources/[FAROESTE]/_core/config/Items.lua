@@ -521,86 +521,6 @@ ItemList = {
     },]]
     ------------------------------------------------------------------------------------------
     ------------------------------------------------------------------------------------------
-    
-    ------------------------------------------------------------------------------------------
-    ---------------------------------------PESCA COMEÇA AQUI----------------------------------
-    ------------------------------------------------------------------------------------------
-    ["fishingrod"] = {
-        type = "weapon",
-        name = "Vara de Pescar",
-        weight = 1.5,
-        description = "Um pequeno cabo engatado por um grosso cipó e um gancho pequeno em sua ponta. Útil para pescas.",
-        stackSize = 1,
-        worldModel = "w_melee_fishingpole02"
-    },
-    ["p_baitworm01x"] = {
-        type = "generic",
-        name = "Minhoca",
-        weight = 0.002,
-        description = "Use com moderação, os peixes engordão também. Um palitinho de minhoca parece bom...",
-        stackSize = 10,
-        worldModel = "p_baitworm01x"
-    },
-    ["p_baitBread01x"] = {
-        type = "generic",
-        name = "isca de Pão",
-        weight = 0.1,
-        description = "Uma isca feita com sobras da padaria",
-        stackSize = 50
-    },
-    ["p_baitCheese01x"] = {
-        type = "generic",
-        name = "Isca de Queijo",
-        weight = 0.1,
-        description = "Isca de Queijo, será que eu consigo pegar rat... ",
-        stackSize = 50
-    },    
-    ["p_baitCricket01x"] = {
-        type = "generic",
-        name = "Isca de Grilo",
-        weight = 0.1,
-        description = "Cri Cri, talvez consiga fiscar um sap... ",
-        stackSize = 50
-    },    
-    ["p_FinisdFishlure01x"] = {
-        type = "generic",
-        name = "Isca de Lago",
-        weight = 0.5,
-        description = "Uma isca feita especialmente para pegar peixes de lago",
-        stackSize = 50
-    },
-    ["p_finishdcrawd01x"] = {
-        type = "generic",
-        name = "Isca de Pantâno",
-        weight = 0.5,
-        description = "Uma isca feita especialmente para pegar peixes de pantâno",
-        stackSize = 50
-    },  
-    ["smallfish"] = {
-        type = "generic",
-        name = "Peixinho",
-        weight = 0.3,
-        description = "Um peixinho, quase não vale a pena...",
-        stackSize = 10
-    },
-    ["mediumfish"] = {
-        type = "generic",
-        name = "Peixe Médio",
-        weight = 2.3,
-        description = "Um peixe de tamanho médio, muito comum.",
-        stackSize = 10
-    },
-    ["largefish"] = {
-        type = "generic",
-        name = "Peixe Grande",
-        weight = 4.5,
-        description = "Um peixe grande, muito dificil de ser fisgado. ",
-        stackSize = 10
-    },
-
-    ---------------------------------------------------------------------------------------
-    -----------------------------------PESCA TERMINA AQUI----------------------------------
-    ---------------------------------------------------------------------------------------
 
 
 -- COMIDA
@@ -2837,36 +2757,132 @@ ItemList = {
         worldModel = "p_inkwell01x"
     },
 
+    -- Fishing
 
+    ['p_baitbread01x'] = {
+        type = 'generic',
+        name = 'Pedaço de pão',
+        weight = 0.01,
+        description = 'Excelente isca para capturar de peixes menores.',
+        stackSize = 4,
+        worldModel = 'p_baitbread01x'
+    },
 
+    ['p_baitcorn01x'] = {
+        type = 'generic',
+        name = 'Grão de milho',
+        weight = 0.01,
+        description = 'Boa isca para capturar peixes menores.',
+        stackSize = 4,
+        worldModel = 'p_baitcorn01x'
+    },
 
+    ['p_baitcheese01x'] = {
+        type = 'generic',
+        name = 'Pedaço de Queijo',
+        weight = 0.01,
+        description = 'Melhor isca para capturar peixes menores.',
+        stackSize = 4,
+        worldModel = 'p_baitcheese01x'
+    },
 
+    ['p_baitworm01x'] = {
+        type = 'generic',
+        name = 'Minhoca',
+        weight = 0.01,
+        description = 'Boa isca para capturar peixes menores.',
+        stackSize = 4,
+        worldModel = 'p_baitworm01x'
+    },
 
+    ['p_baitcricket01x'] = {
+        type = 'generic',
+        name = 'Críquete',
+        weight = 0.01,
+        description = 'Boa isca para capturar peixes menores e médios.',
+        stackSize = 4,
+        worldModel = 'p_baitcricket01x'
+    },
 
+    ['p_crawdad01x'] = {
+        type = 'generic',
+        name = 'Lagostim',
+        weight = 0.02,
+        description = 'Excelente isca para capturar peixes médios',
+        stackSize = 4,
+        worldModel = 'p_crawdad01x'
+    },
 
+    ['p_finishedragonfly01x_hf'] = {
+        type = 'generic',
+        name = 'Libélula',
+        weight = 0.04,
+        description = 'Excelente isca para capturar peixes maiores.',
+        stackSize = 4,
+        worldModel = 'p_finishedragonfly01x_hf'
+    },
 
+    ['p_finisdfishlure01x'] = {
+        type = 'generic',
+        name = 'Isca de Peixe',
+        weight = 0.02,
+        description = 'Excelente isca para capturar peixes médios.',
+        stackSize = 4,
+        worldModel = 'p_finisdfishlure01x'
+    },
 
+    ['p_finishdcrawd01x'] = {
+        type = 'generic',
+        name = 'Isca de Lagosta',
+        weight = 0.01,
+        description = 'Excelente isca para capturar peixes médios.',
+        stackSize = 4,
+        worldModel = 'p_finishdcrawd01x'
+    },
 
+    ['p_finishedragonflylegendary01x'] = {
+        type = 'generic',
+        name = 'Isca de Libélula Lendária',
+        weight = 0.03,
+        description = 'Excelente isca para capturar peixes grandes.',
+        stackSize = 4,
+        worldModel = 'p_finishedragonflylegendary01x'
+    },
 
+    ['p_finisdfishlurelegendary01x'] = {
+        type = 'generic',
+        name = 'Isca de Peixe Lendário',
+        weight = 0.01,
+        description = 'Excelente isca para capturar peixes grandes.',
+        stackSize = 4,
+        worldModel = 'p_finisdfishlurelegendary01x'
+    },
 
+    ['p_finishdcrawdlegendary01x'] = {
+        type = 'generic',
+        name = 'Isca de Lagostim Lendário',
+        weight = 0.03,
+        description = 'Excelente isca para capturar peixes grandes.',
+        stackSize = 4,
+        worldModel = 'p_finishdcrawdlegendary01x'
+    },
 
+    ['p_lgoc_spinner_v4'] = {
+        type = 'generic',
+        name = 'Spinner V4',
+        weight = 0.01,
+        description = 'Boa isca para capturar peixes menores e médios.',
+        stackSize = 4,
+        worldModel = 'p_lgoc_spinner_v4'
+    },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    ['p_lgoc_spinner_v6'] = {
+        type = 'generic',
+        name = 'Spinner V6',
+        weight = 0.025,
+        description = 'Boa isca para capturar peixes menores e médios.',
+        stackSize = 4,
+        worldModel = 'p_lgoc_spinner_v6'
+    }
 
 }
