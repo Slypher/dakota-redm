@@ -2876,13 +2876,247 @@ ItemList = {
         worldModel = 'p_lgoc_spinner_v4'
     },
 
-    ['p_lgoc_spinner_v6'] = {
+    ['a_c_fishbluegil_01_ms'] = {
         type = 'generic',
-        name = 'Spinner V6',
+        name = 'Blue Gill (Médio)',
         weight = 0.025,
-        description = 'Boa isca para capturar peixes menores e médios.',
-        stackSize = 4,
-        worldModel = 'p_lgoc_spinner_v6'
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishbluegil_01_ms'
+    },
+
+    ['a_c_fishbluegil_01_sm'] = {
+        type = 'generic',
+        name = 'Blue Gill (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishbluegil_01_sm'
+    },
+
+    ['a_c_fishbullheadcat_01_ms'] = {
+        type = 'generic',
+        name = 'Ameiurus (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishbullheadcat_01_ms'
+    },
+
+    ['a_c_fishbullheadcat_01_sm'] = {
+        type = 'generic',
+        name = 'Ameiurus (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishbullheadcat_01_sm'
+    },
+
+    ['a_c_fishchainpickerel_01_ms'] = {
+        type = 'generic',
+        name = 'Pickerel Americano (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishchainpickerel_01_ms'
+    },
+
+    ['a_c_fishchainpickerel_01_sm'] = {
+        type = 'generic',
+        name = 'Pickerel Americano (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishchainpickerel_01_sm'
+    },
+
+    ['a_c_fishchannelcatfish_01_lg'] = {
+        type = 'generic',
+        name = 'Bagre Americano (Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishchannelcatfish_01_lg'
+    },
+
+    ['a_c_fishchannelcatfish_01_xl'] = {
+        type = 'generic',
+        name = 'Bagre Americano (Muito Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishchannelcatfish_01_xl'
+    },
+
+    ['a_c_fishlakesturgeon_01_lg'] = {
+        type = 'generic',
+        name = 'Esturjão de Lago (Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishlakesturgeon_01_lg'
+    },
+
+    ['a_c_fishlargemouthbass_01_lg'] = {
+        type = 'generic',
+        name = 'Achigã (Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishlargemouthbass_01_lg'
+    },
+
+    ['a_c_fishlargemouthbass_01_ms'] = {
+        type = 'generic',
+        name = 'Achigã (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishlargemouthbass_01_ms'
+    },
+
+    ['a_c_fishlongnosegar_01_lg'] = {
+        type = 'generic',
+        name = 'Peixe Jacaré',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishlongnosegar_01_lg'
+    },
+
+    ['a_c_fishmuskie_01_lg'] = {
+        type = 'generic',
+        name = 'Lúcio Almiscarado',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishmuskie_01_lg'
+    },
+
+    ['a_c_fishnorthernpike_01_lg'] = {
+        type = 'generic',
+        name = 'Esox Lucius',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishnorthernpike_01_lg'
+    },
+
+    ['a_c_fishperch_01_ms'] = {
+        type = 'generic',
+        name = 'Perca (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishperch_01_ms'
+    },
+
+    ['a_c_fishperch_01_sm'] = {
+        type = 'generic',
+        name = 'Perca (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishperch_01_sm'
+    },
+
+    ['a_c_fishrainbowtrout_01_lg'] = {
+        type = 'generic',
+        name = 'Truta Arco Íris (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishrainbowtrout_01_lg'
+    },
+
+    ['a_c_fishrainbowtrout_01_ms'] = {
+        type = 'generic',
+        name = 'Truta Arco Íris (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishrainbowtrout_01_ms'
+    },
+
+    ['a_c_fishredfinpickerel_01_ms'] = {
+        type = 'generic',
+        name = 'Redfin Pickerel (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishredfinpickerel_01_ms'
+    },
+
+    ['a_c_fishredfinpickerel_01_sm'] = {
+        type = 'generic',
+        name = 'Redfin Pickerel (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishredfinpickerel_01_sm'
+    },
+
+    ['a_c_fishrockbass_01_ms'] = {
+        type = 'generic',
+        name = 'Robalo (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishrockbass_01_ms'
+    },
+
+    ['a_c_fishrockbass_01_sm'] = {
+        type = 'generic',
+        name = 'Robalo (Pequeno)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishrockbass_01_sm'
+    },
+
+    ['a_c_fishsalmonsockeye_01_lg'] = {
+        type = 'generic',
+        name = 'Salmão Vermelho (Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishsalmonsockeye_01_lg'
+    },
+
+    ['a_c_fishsalmonsockeye_01_ml'] = {
+        type = 'generic',
+        name = 'Salmão Vermelho (Médio Grande)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishsalmonsockeye_01_ml'
+    },
+
+    ['a_c_fishsalmonsockeye_01_ms'] = {
+        type = 'generic',
+        name = 'Salmão Vermelho (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishsalmonsockeye_01_ms'
+    },
+
+    ['a_c_fishsmallmouthbass_01_lg'] = {
+        type = 'generic',
+        name = 'Achigã Boca (Pequena)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishsmallmouthbass_01_lg'
+    },
+
+    ['a_c_fishsmallmouthbass_01_ms'] = {
+        type = 'generic',
+        name = 'Achigã Boca (Médio)',
+        weight = 0.025,
+        description = '',
+        stackSize = 1,
+        worldModel = 'a_c_fishsmallmouthbass_01_ms'
     }
 
 }
