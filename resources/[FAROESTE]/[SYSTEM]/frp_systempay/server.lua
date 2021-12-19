@@ -1,99 +1,85 @@
-local Tunnel = module("_core", "lib/Tunnel")
-local Proxy = module("_core", "lib/Proxy")
+local Tunnel = module('_core', 'lib/Tunnel')
 
-API = Proxy.getInterface("API")
-cAPI = Tunnel.getInterface("API")
+local Proxy = module('_core', 'lib/Proxy')
+
+local API = Proxy.getInterface('API')
 
 local HOURLY_PAYMENT_PER_GROUP = {
 
-	["marshall"] = { payment = 1600 },
-	["delegado"] = { payment = 1400 },
-	["sheriff"]  = { payment = 1200 },
-	["trooper"]  = { payment = 800 }, -- $2.50
-	["recruta"]  = { payment = 400 }, -- $0.75
+	['marshall'] = 1600,
+	['delegado'] = 1400,
+	['sheriff'] = 1200,
+	['trooper'] = 800, -- $2.50
+	['recruta'] = 400, -- $0.75
 
-	["medic"] 	 = { payment = 400 },
+	['medic'] = 400,
 
-	["governador"] 	 = { payment = 2500 }, -- $25.00
-	["secretario"] 	 = { payment = 900 },  -- $9.00
+	['governador'] = 2500, -- $25.00
+	['secretario'] = 900,  -- $9.00
 
-	["jornalista"] 	 = { payment = 200 },  -- $2.00
+	['jornalista'] = 200  -- $2.00
 }
 
--- local withHoldingPaymentToUsers = {}
+CreateThread(function()
 
-Citizen.CreateThread(
-	function()
-		while true do
-			Citizen.Wait(1000 * 60 * 60)
+	while true do
 
-			local userIdWithExpMultiplier = {}
+		Wait(1000 * 60 * 60) -- Minutos
 
-			for group, d in pairs(HOURLY_PAYMENT_PER_GROUP) do
-				local payment = d.payment
-				local exp = d.exp
+		local players = GetPlayers()
 
-				for _, User in pairs(API.getUsersByGroup(group, true)) do
-					local user_id = User:getId()
+		for i = 1, #players do
 
-					local Character = User:getCharacter()
+			local user = API.getUserFromSource(tonumber(players[i]))
 
-					if Character then
-						local Inventory = Character:getInventory()
+			local character = user:getCharacter()
 
-						if Inventory:addItem("money", payment) then
-							User:notify("alert", "Você acabou de receber o seu salário. Aproveite!")
-						else
-							-- if withHoldingPaymentToUsers[user_id] then
-							-- 	payment = payment + withHoldingPaymentToUsers[user_id]
-							-- end
-							-- withHoldingPaymentToUsers[user_id] = payment
-						end
+			local characterGroups = character:getGroupNames()
 
-						if exp ~= nil then
-							userIdWithExpMultiplier[user_id] = exp
+			local payment
+
+			if table.type(characterGroups) ~= 'empty' then
+
+				if #characterGroups > 1 then
+
+					local salaries = {}
+
+					for i = 1, #characterGroups do
+
+						payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[i]]
+
+						if payment then
+							table.insert(salaries, payment)
 						end
 					end
+
+					table.sort(salaries)
+
+					payment = salaries[#salaries]
+				else
+					payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[1]]
 				end
-			end
 
-			local baseExp = 10.0
+				local inventory = character:getInventory()
 
-			for _, User in pairs(API.getUsers()) do
-				local user_id = User:getId()
+				if inventory:addItem('money', payment) then
 
-				local Character = User:getCharacter()
+					user:notify('alert', 'Você acabou de receber o seu salário. Aproveite!')
 
-				if Character then
-					local exp = baseExp * (userIdWithExpMultiplier[user_id] or 1.0)
+					character:varyExp(10.0)
 
-					Character:varyExp(exp)
 				end
 			end
 		end
 	end
-)
+end)
 
--- Citizen.CreateThread(
--- 	function()
--- 		while true do
--- 			Citizen.Wait(1000 * 60 * 1)
+-- RegisterCommand('emprego', function(source, args, rawCommand)
 
--- 			for user_id, totalpayment in pairs(withHoldingPaymentToUsers) do
--- 				local User = API.getUserFromId(user_id)
--- 				if User ~= nil then
--- 					local Character = User:getCharacter()
--- 					if Character ~= nil then
--- 						local Inventory = Character:getInventory()
--- 						if Inventory:addItem("money", totalpayment) then
--- 							User:notify("alert", "Você acabou de receber o seu salário. Aproveite!")
--- 							withHoldingPaymentToUsers[user_id] = nil
--- 						else
--- 							User:notify("error", "Sem espaço na Bolsa para receber salário!")
--- 						end
--- 					end
--- 				end
--- 			end
--- 		end
--- 	end
--- )
+-- 	local user = API.getUserFromSource(source)
+
+--     local character = user:getCharacter()
+
+-- 	print(character:getGroupNames())
+
+-- end, false)
