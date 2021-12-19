@@ -34,11 +34,26 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
         return self.Inventory
     end
 
-    self.hasGroup = function(this, group)
-        local bit = config_file_GROUPS[group:lower()]
+    self.getGroupNames = function()
 
-        if bit ~= nil then
-            return (self.role & bit) ~= 0
+        local names = { }
+
+        local playerGroupFlags = self.role
+
+        for groupName, groupFlag in pairs(config_file_GROUPS) do
+            if playerGroupFlags & groupFlag == groupFlag then
+                table.insert(names, groupName)
+            end
+        end
+
+        return names
+    end
+
+    self.hasGroup = function(this, group)
+        local flag = config_file_GROUPS[group:lower()]
+
+        if flag ~= nil then
+            return (self.role & flag) == flag
         end
 
         return false
@@ -46,10 +61,10 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
 
     self.addGroup = function(this, group)
         if not self:hasGroup(group) then
-            local bit = config_file_GROUPS[group:lower()]
+            local flag = config_file_GROUPS[group:lower()]
 
-            if bit ~= nil then
-                self.role = self.role + bit
+            if flag ~= nil then
+                self.role = self.role | flag
 
                 TriggerClientEvent("FRP:EVENTS:CharacterJoinedGroup", self:getSource(), group)
 
@@ -60,10 +75,10 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
 
     self.removeGroup = function(this, group)
         if self:hasGroup(group) then
-            local bit = config_file_GROUPS[group:lower()]
+            local flag = config_file_GROUPS[group:lower()]
 
-            if bit ~= nil then
-                self.role = self.role - bit
+            if flag ~= nil then
+                self.role = self.role & ~flag
 
                 TriggerClientEvent("FRP:EVENTS:CharacterLeftGroup", self:getSource(), group)
 
