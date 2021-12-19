@@ -30,6 +30,12 @@ WEAPON_INFO_DATABASE = {
         useable_ammo_types = { 'ammo_pistol', 'ammo_pistol_express', 'ammo_pistol_express_explosive', 'ammo_pistol_high_velocity', 'ammo_pistol_split_point' },
     },
 
+    ['weapon_repeater'] = {
+        group = 'group_repeater',
+        max_ammo = 200,
+        max_ammo_in_clip = 12,
+        useable_ammo_types = { 'ammo_repeater', 'ammo_repeater_express', 'ammo_repeater_express_explosive', 'ammo_repeater_high_velocity' },
+    },
     ['weapon_repeater_evans'] = {
         group = 'group_repeater',
         max_ammo = 200,

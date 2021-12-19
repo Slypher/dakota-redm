@@ -9,7 +9,7 @@ Config = {
         craftings = 
         {
             {
-                descriptionTextOverride = 'Madeira e algo para bom para quimar.',
+                descriptionTextOverride = 'Madeira e algo para bom para queimar.',
                 time = 5,
                 input = {
                     {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}}, 
@@ -44,7 +44,7 @@ Config = {
                 }
             },  
             {
-                descriptionTextOverride = 'Couro e algo afiado?!.',
+                descriptionTextOverride = 'Couro e algo afiado',
                 time = 10,
                 input = {
                     {item = "couro", amount = 1},
@@ -104,7 +104,7 @@ Config = {
 
             -------------------------------------- PLANTAS 
             {
-                descriptionTextOverride = 'Ehhh, Milho?!',
+                descriptionTextOverride = 'Ehhh... Milho?!',
                 time = 15,
                 input = {
                     {item = "milho", amount = 1}, 
@@ -114,7 +114,7 @@ Config = {
                 }
             },
             {
-                descriptionTextOverride = 'Batatas?!',
+                descriptionTextOverride = 'Batatas?',
                 time = 15,
                 input = {
                     {item = "batata", amount = 1}, 
@@ -126,7 +126,7 @@ Config = {
 
             -------------------------------------- CARNES 
             {
-                descriptionTextOverride = 'Carne ruim e gordura.',
+                descriptionTextOverride = 'Carne e gordura.',
                 time = 40,
                 input = {
                     {item = "carneruim", amount = 1, alias = {"carneboa", "carneperfeita"}},
@@ -137,10 +137,10 @@ Config = {
                 }
             },
             {
-                descriptionTextOverride = 'Carne ruim.',
+                descriptionTextOverride = 'Carne...',
                 time = 40,
                 input = {
-                    {item = "carneruim", amount = 1},
+                    {item = "carneruim", amount = 1, alias = {"carneboa", "carneperfeita"}},
                 },
                 output = {
                     {item = "carneruimassada", amount = 1, name = "Carne Assada"}
@@ -170,7 +170,7 @@ Config = {
                 }
             },
             {
-                descriptionTextOverride = 'Carne e gordura.',
+                descriptionTextOverride = 'Carne de ave e gordura.',
                 time = 20,
                 input = {
                     {item = "carneave", amount = 1},
@@ -226,10 +226,10 @@ Config = {
                     {item = "batata", amount = 4},
                     {item = "agua", amount = 2},
                     {item = "milho", amount = 4},
-                    {item = "carneave", amount = 4},
+                    {item = "carneave", amount = 2},
                 },
                 output = {
-                    {item = "sopa", amount = 1, name = "Sopa"}
+                    {item = "sopa", amount = 2, name = "Sopa"}
                 }
             },
             {
@@ -237,13 +237,13 @@ Config = {
                 time = 40,
                 input = {
                     {item = "molhotomate", amount = 2},
-                    {item = "carneperfeita", amount = 6},
+                    {item = "carneperfeita", amount = 4},
                     {item = "agua", amount = 2},
                     {item = "batata", amount = 6},
                     {item = "cenoura", amount = 6},
                 },
                 output = {
-                    {item = "sopadecarne", amount = 1, name = "Ensopado de Carne"}
+                    {item = "sopadecarne", amount = 2, name = "Ensopado de Carne"}
                 }
             },
             --[[{
@@ -260,10 +260,10 @@ Config = {
             },]]
             -------------------------------------- COMIDAS 
             {
-                descriptionTextOverride = 'Materiais: Madeira boa e algo afiado.',
+                descriptionTextOverride = 'Materiais: Umas 5 batatas deve encher uma tigela',
                 time = 30,
                 input = {
-                    {item = "batata", amount = 10},
+                    {item = "batata", amount = 5},
                 },
                 output = {
                     {item = "puredebatata", amount = 1, name = "Pure de Batata"}
@@ -277,12 +277,14 @@ Config = {
     ---------------------------------------------------------------------------------------------------
 
     {
+        useTextDescriptionAll = true,
         group = "xama",
         craftings = 
         {
             
             -------------------------------------------- ERVAS MEDICINAL ------------------------------------------
             {
+                descriptionTextOverride = 'Flores vermelhas, Ginseng do Alaska, Tabaco indigena e algo para picar tudo.',
                 time = 15,
                 input = {
                     {item = "milfolhas", amount = 5}, 
@@ -578,6 +580,17 @@ Config = {
         useTextDescriptionAll = true,
         craftings = 
         {
+            {
+                                -- CARVÃO
+                descriptionTextOverride = 'Materiais: Madeira de boa ou má qualidade.',
+                time = 10,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}},
+                },
+                output = {
+                    {item = "carvao", amount = 1, name = "Carvão"},
+                }
+            },
             {
                                 -- BARRA DE FERRO
                 descriptionTextOverride = 'Materiais: Minério de ferro, carvão e ferramentas.',
@@ -1432,6 +1445,17 @@ Config = {
         craftings = 
         {
             {
+                                -- CARVÃO
+                descriptionTextOverride = 'Materiais: Madeira de boa ou má qualidade.',
+                time = 10,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}},
+                },
+                output = {
+                    {item = "carvao", amount = 1, name = "Carvão"},
+                }
+            },
+            {
                 descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa das bolachas.',
                 time = 30,
                 input = {
@@ -1482,7 +1506,7 @@ Config = {
                 time = 15,
                 input = {
                     {item = "lata", amount = 1},
-                    {item = "tomate", amount = 4},
+                    {item = "tomate", amount = 3},
                     --{item = "melee_knife", amount = 1, remove = false}
                 },
                 output = {
@@ -1493,7 +1517,7 @@ Config = {
                 descriptionTextOverride = 'Alguns grãos de milho e uma lata.',
                 time = 15,
                 input = {
-                    {item = "milho", amount = 4},
+                    {item = "milho", amount = 3},
                     {item = "lata", amount = 1},
                 },
                 output = {
@@ -1504,7 +1528,7 @@ Config = {
                 descriptionTextOverride = 'Alguns punhados de feijão e uma lata.',
                 time = 15,
                 input = {
-                    {item = "feijao", amount = 4},
+                    {item = "feijao", amount = 3},
                     {item = "lata", amount = 1},
                 },
                 output = {
@@ -1631,7 +1655,7 @@ Config = {
                 descriptionTextOverride = 'Material: Algodão',
                 time = 20,
                 input = {
-                    {item = "algodao", amount = 10},
+                    {item = "algodao", amount = 5},
                 },
                 output = {
                     {item = "linha", amount = 5, name = "Rolo de Linha"}
@@ -1661,7 +1685,7 @@ Config = {
                 descriptionTextOverride = 'Material: Algodão, Linha e Agulha',
                 time = 20,
                 input = {
-                    {item = "algodao", amount = 10},
+                    {item = "algodao", amount = 5},
                     {item = "linha", amount = 3},
                     {item = "agulha", amount = 1, remove = false}
                 },

@@ -917,7 +917,8 @@ RemoveImap(267578156) -- Coffin in right grave, Valentine
 RequestImap(-555917871) -- something relating to valentine cemetary
 RequestImap(-1801047945) -- thomas downes gravestone in valentine cemetary
 RequestImap(325677491) -- Grave in valentine -229.31, 826.96, 124.45
-RequestImap(-689352221)
+RemoveImap(-689352221)
+RemoveImap(0xaf8eaa01)
 RequestImap(-451832572)
 RequestImap(-1349539327)
 RequestImap(-1640200357)
@@ -925,6 +926,7 @@ RequestImap(-2127665186)
 RequestImap(1854980771)
 RequestImap(1513363974)
 RequestImap(-1280884206)
+
 --------------------------------                                   ############# -- Valentine ---                  -- ###############                                       ----------------------
 
 ------------------------------------- Railroad Stuff
@@ -946,7 +948,7 @@ RequestImap(-142900294) --Section 9 2229.82
 
 ------------------------------------- Heartland Oil Station
 RemoveImap(-84516711)  --Run Down Closed Station
-RequestImap(-657241692)  --Oil Pipe
+RemoveImap(-657241692)  --Oil Pipet
 RequestImap(-1112373128)  --Oil Tower
 RequestImap(1597665303) -- station interior
 RequestImap(1460466036) -- something to do with a bridge at oil station 570.3, 596.73, 110.75
@@ -1273,7 +1275,7 @@ RequestImap(-2144587490) -- Covers small plot hole with mound of dirt
 ------------------------------------- Braithwaite Mansion
 --Mansion Interior
 RequestImap(1149195254)  --Brathwaite House Shell
--- RequestImap(-1643869063) -- House Burnt Down
+RemoveImap(-1643869063) -- House Burnt Down
 RequestImap(58066174)  -- Interior
 -- RequestImap(1601599776)  -- House on fire Smoke (Smoke and Burning Sounds Only)
 -- RequestImap(-437251660)  -- House of Fire Flames
@@ -1281,8 +1283,8 @@ RequestImap(-1108618313)
 
 -- Mansion Exterior 
 -- RequestImap(-1220264217)  -- Shurbs and Bushes
--- RequestImap(-1508467572) -- Ferns Bushes Weeds Overgrown (Use with Burned Down Version of House)
--- RequestImap(-990258606) -- Small Trees
+RemoveImap(-1508467572) -- Ferns Bushes Weeds Overgrown (Use with Burned Down Version of House)
+RemoveImap(-990258606) -- Small Trees
 RequestImap(1944013855) -- Add Open Shudders Upstairs Bed Room and Downstairs Library
 -- RequestImap(-2137633069)  -- Shudders Close Upstairs Bedroom and Downstairs Library
 RequestImap(-880373663)  -- Front Balcony Lantern Added
@@ -1305,7 +1307,7 @@ RequestImap(-70021332)  -- Adds Working tools and supplies to upper balcony
 -- RequestImap(-1296418825) -- overgrown grass in crops
 -- RequestImap((1576931820) -- overgrown grass in crops
 -- RequestImap(1891284833) -- overgrown grass in crops
--- RequestImap(-744260705)
+RemoveImap(-744260705)
 -- RequestImap(1424293412)
 RequestImap(366542865)
 RequestImap(241205019)
@@ -1313,14 +1315,14 @@ RequestImap(1060557512)
 -- RequestImap(-362403544)
 RequestImap(-592147003)
 RequestImap(352816221)
-RequestImap(1128622296)
-RequestImap(979982112)
+RemoveImap(1128622296)
+RemoveImap(979982112)
 RequestImap(1756640181)
 RequestImap(1557076971)
 RequestImap(1913538153)
 RequestImap(1650694835)
 RequestImap(1965736001)
-RequestImap(1266707689)
+RemoveImap(1266707689)
 RequestImap(-1603329230)
 RequestImap(2056145270)
 RequestImap(748826019)
@@ -1607,7 +1609,7 @@ RequestImap(-928367655)
 RequestImap(890107948)
 RequestImap(1153046408)
 RequestImap(1634621556)
-RequestImap(-243627670)
+RemoveImap(-243627670) -- MATO TRIBO WAPITI
 RequestImap(38567760)
 RequestImap(-1954278106)
 RequestImap(-947200121)
@@ -1615,9 +1617,9 @@ RequestImap(629362551)
 RequestImap(-786579336)
 RequestImap(-1305545118)
 RequestImap(-825836321) -- ground
-RequestImap(446554495) -- ground
-RequestImap(-262959893) -- ground
-RequestImap(-735136865) -- ground
+RemoveImap(446554495) -- ground     Errado
+--RequestImap(-262959893) -- ground
+RequestImap(-735136865) -- ground --
 RequestImap(-868830916)
 RequestImap(764025611)
 -- RequestImap(1802934313) --trees
@@ -1630,10 +1632,11 @@ RequestImap(764025611)
 -- RequestImap(-1142569437) -- plants
 -- RequestImap(474113610) -- plants
 -- RequestImap(1298607560)
--- RequestImap(-297340751) -- small pines
+RemoveImap(-297340751) -- small pines
 RequestImap(1271713904)
 RequestImap(1423681694)
-RequestImap(1293624693)
+RemoveImap(1293624693) -- Portão Fechado Celeiro Rancho Big Valley ? 
+RemoveImap(-1414607924) -- Portão Fechado Celeiro Rancho Big Valley ? 
 RequestImap(-1305406402)
 RequestImap(1983816160)
 RequestImap(-602816690)
@@ -1653,7 +1656,7 @@ RequestImap(57105576)
 RequestImap(238757788)
 RequestImap(927020127)
 RequestImap(1388161943)
-RequestImap(-7594117)
+RemoveImap(-7594117) -- Arvore caida rio Dakota
 RequestImap(-1680050035)
 RequestImap(41398635)
 RequestImap(462263849)
@@ -2202,7 +2205,7 @@ RequestImap(1833824812)
 ------------------------Wapiti & Native Stuff
 RequestImap(1003623269) -- Tent in Wapiti
 RequestImap(1638937672) -- tent 441.39, 2228.66, 248.03
-RequestImap(739805687) -- something to do with tent in wapiti 441.39, 2228.66, 248.03
+RemoveImap(739805687) -- something to do with tent in wapiti 441.39, 2228.66, 248.03
 RequestImap(795060201) -- tent flap open
 --RequestImap(661576070) -- tent flap closed
 RequestImap(-395621323) -- something
@@ -2624,7 +2627,7 @@ RequestImap(-276247702) -- something related to 2630.8, 587.43, 86.57
 RequestImap(2116125345) -- something related to 2998.19, 2198.0, 166.2
 RequestImap(883579956) -- something related to 2998.19, 2198.0, 166.2
 RequestImap(-1436313374)
-RequestImap(334010167)
+RemoveImap(334010167) -- Lua Bugada Rancho Sadie Adler
 RequestImap(-676881895)
 RequestImap(1331438832)
 RequestImap(376665102) -- rhodes
@@ -2666,9 +2669,9 @@ RequestImap(-64729392)
 RequestImap(-523896426)
 RequestImap(483041556)
 RequestImap(-797033116)
-RequestImap(-455342387)
-RequestImap(-1407773372)
-RequestImap(2020752077)
+RemoveImap(-455342387)   -- Coisas no trilho do trem
+RemoveImap(-1407773372) -- Coisas no trilho do trem
+RemoveImap(2020752077) -- Coisas no trilho do trem
 RequestImap(593772301)
 RequestImap(207032563)
 RequestImap(-1984361543)
@@ -3039,7 +3042,7 @@ end)
 ]]
 ------------------------------------------------------------------------------------
 RequestImap(-642132908) -- fallen tree
-RequestImap(-848315456) -- fallen tree
+RemoveImap(-848315456) -- fallen tree
 RequestImap(105426297) -- fallen tree
 RequestImap(-926795318) -- random tree
 RequestImap(-1276109918)
@@ -3262,7 +3265,7 @@ RequestImap(711016796)
 RequestImap(690962168)
 RequestImap(384146021)
 RequestImap(2082890965)
-RequestImap(-1192199739)
+RemoveImap(-1192199739) --Porta Tortura Arthur
 RequestImap(-65072454)
 RequestImap(-770240157)
 RequestImap(71064384)
@@ -3282,7 +3285,7 @@ RequestImap(1822607116) -- Thieves Landing gate doors open
 RequestImap(216214729)
 RequestImap(-87826930)
 RequestImap(286801141)
-RequestImap(622597018)
+RemoveImap(622597018)
 RequestImap(2016081133)
 RequestImap(-21876618)
 RequestImap(1048790253)
@@ -3290,7 +3293,7 @@ RequestImap(363257921)
 RequestImap(1649275138)
 RequestImap(-1872939092)
 RequestImap(-1484530238)
-RequestImap(-964156415)
+RemoveImap(-964156415)
 RequestImap(188985281)
 RequestImap(2097480406)
 RequestImap(-1390612743)
@@ -3331,5 +3334,6 @@ RequestImap(1465430690)
 RemoveImap(3804149174) -- Removes blocked entrance
 RemoveImap(0xc7bd5d27)
 RemoveImap(0xf2534539)
+RemoveImap(0xc3b540d) -- PASSAGEM PELAS MONTANHAS DA NEVE
 
 end)

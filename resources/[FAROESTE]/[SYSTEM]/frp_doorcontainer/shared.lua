@@ -16,8 +16,8 @@ local doorStates = {
     -- HOUSE:2
     [3929468747] = {isOpen = false},
     -- HOUSE:3
-    [2847752952] = {isOpen = false},
-    [1963415953] = {isOpen = false},
+    [2847752952] = {isOpen = true},
+    [1963415953] = {isOpen = true},
     -- HOUSE:4
     [52014802] = {isOpen = false},
     -- HOUSE:5
@@ -58,6 +58,18 @@ local doorStates = {
     -----------------------------------
     -- SHERIFF
     [349074475] = {isOpen = false},
+
+
+    -- VALENTINE ARMAZÉM
+    [3554893730] = {isOpen = true}, -- Vestiario
+
+    -- RHODES ARMAZÉM
+    [2432590327] = {isOpen = true}, -- Vestiario
+
+    -- TUMBLEWEED ARMAZÉM
+    [3208189941] = {isOpen = true}, -- Vestiario
+
+
     -- BANKS DOORS
     [3317756151] = {isOpen = true, pair = 3088209306},
     [3088209306] = {isOpen = true, pair = 3317756151},
@@ -110,6 +122,7 @@ local doorStates = {
     [2058564250] = { isOpen = false }, -- Primeira porta a direita da recepção.
     [3483244267] = { isOpen = false, canInteract = false, cannotBeLockpicked = true }, -- Cofre.
     [3142122679] = { isOpen = false },
+    [1634148892] = { isOpen = false },
     --
     -- Banco de BlackWater
     [1462330364] = { isOpen = false, canInteract = false, cannotBeLockpicked = true },

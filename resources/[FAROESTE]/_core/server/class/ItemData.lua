@@ -213,7 +213,7 @@ function triggerUse(User, itemData, Slot)
         if itemId == 'cenoura' or itemId == 'alface' then
             cAPI.TaskScriptedAnim(source, "eat")
 
-            API.varyHunger2(source, -15)
+            API.varyHunger2(source, -5)
 
             User:closeInventory()
 
@@ -438,13 +438,13 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "milhoassado" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -18) 
+        API.varyHunger2(source, -15) 
         User:closeInventory()
         return true
     end
     if itemId == "batataassada" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -18) 
+        API.varyHunger2(source, -15) 
         User:closeInventory()
         return true
     end

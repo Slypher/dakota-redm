@@ -138,7 +138,14 @@ local blips = {
 	{ name = 'Cemitério', sprite = -695368421, x = -234.513, y = 819.405, z = 60.623 },
 	{ name = 'Cemitério', sprite = -695368421, x = 1287.989, y = -1225.074, z = 82.759 },
 
-	{name = 'Jornal Dakota', sprite = 587827268, x = -875.297, y = -1332.475, z = 43.884}
+	{name = 'Jornal Dakota', sprite = 587827268, x = -875.297, y = -1332.475, z = 43.884},
+
+
+	-- COLECIONADORA MAGGIE
+	{name = 'Tia Maggie', sprite = -1633216922, x = -1676.487,y = -340.019, z = 170.788},
+
+	-- TRIBO
+	{name = 'Pagé da tribo', sprite = -592068833, x = 438.099,y = 2229.454, z = 248.145},
 }
 
 local blipsLoaded = {}
