@@ -34,6 +34,21 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
         return self.Inventory
     end
 
+    self.getGroupNames = function()
+
+        local names = { }
+
+        local playerGroupFlags = self.role
+
+        for groupName, groupFlag in pairs(config_file_GROUPS) do
+            if playerGroupFlags & groupFlag == groupFlag then
+                table.insert(names, groupName)
+            end
+        end
+
+        return names
+    end
+
     self.hasGroup = function(this, group)
         local bit = config_file_GROUPS[group:lower()]
 
