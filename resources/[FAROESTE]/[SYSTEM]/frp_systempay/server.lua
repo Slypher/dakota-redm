@@ -9,15 +9,15 @@ local HOURLY_PAYMENT_PER_GROUP = {
 	['marshall'] = 1600,
 	['delegado'] = 1400,
 	['sheriff'] = 1200,
-	['trooper'] = 800, -- $2.50
-	['recruta'] = 400, -- $0.75
+	['trooper'] = 800,
+	['recruta'] = 400,
 
 	['medic'] = 400,
 
-	['governador'] = 2500, -- $25.00
-	['secretario'] = 900,  -- $9.00
+	['governador'] = 2500,
+	['secretario'] = 900,
 
-	['jornalista'] = 200  -- $2.00
+	['jornalista'] = 200
 }
 
 CreateThread(function()
@@ -60,14 +60,17 @@ CreateThread(function()
 					payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[1]]
 				end
 
-				local inventory = character:getInventory()
+				if payment then
 
-				if inventory:addItem('money', payment) then
+					local inventory = character:getInventory()
 
-					user:notify('alert', 'Você acabou de receber o seu salário. Aproveite!')
+					if inventory:addItem('money', payment) then
 
-					character:varyExp(10.0)
+						user:notify('alert', 'Você acabou de receber o seu salário. Aproveite!')
 
+						character:varyExp(10.0)
+
+					end
 				end
 			end
 		end
