@@ -24,56 +24,62 @@ CreateThread(function()
 
 	while true do
 
-		Wait(1000 * 60 * 60) -- Minutos
-
 		local players = GetPlayers()
 
 		for i = 1, #players do
 
 			local user = API.getUserFromSource(tonumber(players[i]))
 
-			local character = user:getCharacter()
+			if user then
 
-			local characterGroups = character:getGroupNames()
+				local character = user:getCharacter()
 
-			local payment
+				if character then
 
-			if table.type(characterGroups) ~= 'empty' then
+					local characterGroups = character:getGroupNames()
 
-				if #characterGroups > 1 then
+					local payment
 
-					local salaries = {}
+					if table.type(characterGroups) ~= 'empty' then
 
-					for i = 1, #characterGroups do
+						if #characterGroups > 1 then
 
-						payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[i]]
+							local salaries = {}
+
+							for i = 1, #characterGroups do
+
+								payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[i]]
+
+								if payment then
+									table.insert(salaries, payment)
+								end
+							end
+
+							table.sort(salaries)
+
+							payment = salaries[#salaries]
+						else
+							payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[1]]
+						end
 
 						if payment then
-							table.insert(salaries, payment)
+
+							local inventory = character:getInventory()
+
+							if inventory:addItem('money', payment) then
+
+								user:notify('alert', 'Você acabou de receber o seu salário. Aproveite!')
+
+								character:varyExp(10.0)
+
+							end
 						end
-					end
-
-					table.sort(salaries)
-
-					payment = salaries[#salaries]
-				else
-					payment = HOURLY_PAYMENT_PER_GROUP[characterGroups[1]]
-				end
-
-				if payment then
-
-					local inventory = character:getInventory()
-
-					if inventory:addItem('money', payment) then
-
-						user:notify('alert', 'Você acabou de receber o seu salário. Aproveite!')
-
-						character:varyExp(10.0)
-
 					end
 				end
 			end
 		end
+
+		Wait(1000 * 60 * 60) -- Minutos
 	end
 end)
 
