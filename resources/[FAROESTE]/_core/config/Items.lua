@@ -982,7 +982,7 @@ ItemList = {
     },
     ["penarapina"] = {
         type = "generic",
-        name = "Pena de ave de rápida",
+        name = "Pena de ave de rápina",
         weight = 0.015,
         description = "A pena de uma ave de rápina, é excelente para escrever.",
         stackSize = 25

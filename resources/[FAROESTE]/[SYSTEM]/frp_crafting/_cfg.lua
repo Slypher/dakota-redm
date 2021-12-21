@@ -1459,33 +1459,33 @@ Config = {
                 descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa das bolachas.',
                 time = 30,
                 input = {
-                    {item = "carvao", amount = 1},
+                    --{item = "carvao", amount = 1},
                     {item = "massadebolacha", amount = 1}
                 },
                 output = {
-                    {item = "bolacha", amount = 6, name = "Bolacha"}
+                    {item = "bolacha", amount = 10, name = "Bolacha"}
                 }
             },
             {
                 descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos biscoitos.',
                 time = 30,
                 input = {
-                    {item = "carvao", amount = 1},
+                    --{item = "carvao", amount = 1},
                     {item = "massadebiscoito", amount = 1}
                 },
                 output = {
-                    {item = "biscoito", amount = 6, name = "Biscoito"}
+                    {item = "biscoito", amount = 10, name = "Biscoito"}
                 }
             },
             {
                 descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos pães.',
-                time = 30,
+                --time = 30,
                 input = {
                     {item = "carvao", amount = 1},
                     {item = "massadepao", amount = 1},
                 },
                 output = {
-                    {item = "pao", amount = 6, name = "Pão"}
+                    {item = "pao", amount = 10, name = "Pão"}
                 }
             },
         }
@@ -1548,7 +1548,7 @@ Config = {
                 time = 15,
                 input = {
                     {item = "pa", amount = 1, remove = false},
-                    {item = "osso", amount = 10},
+                    {item = "osso", amount = 5},
                     {item = "terra", amount = 3},
                 },
                 output = {
