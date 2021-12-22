@@ -16,14 +16,8 @@ config_file_GROUPS = {
     ["recruta"]   = 1 << 13,
     ["governador"] = 1 << 14,
     ["secretario"] = 1 << 15,
-    ["jornalista"] = 1 << 16
-    --[[["house:1"]   = 1 <<  5, -- 32
-    ["house:2"]   = 1 <<  6, -- 64
-    ["house:3"]   = 1 <<  7, -- 128
-    ["house:4"]   = 1 <<  8, -- 256
-    ["house:5"]   = 1 <<  9, -- 
-    ["house:6"]   = 1 << 10,
-    ["house:7"]   = 1 << 11,]]
+    ["jornalista"] = 1 << 16,
+    ['allowlister'] = 1 << 17
 }
 
 config_file_INHERITANCE = {
