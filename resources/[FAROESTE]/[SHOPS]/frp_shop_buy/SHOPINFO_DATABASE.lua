@@ -2072,7 +2072,7 @@ SHOPINFO_DATABASE = {
         {
             itemId = 'tecidobranco',
             
-            transactionPriceBuyDollar = 800,
+            transactionPriceBuyDollar = 200,
             transactionPriceBuyGold = 1,
             
             transactionPriceSellDollar = 22,
