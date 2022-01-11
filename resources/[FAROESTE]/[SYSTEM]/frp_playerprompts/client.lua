@@ -347,7 +347,7 @@ function CreatePrompts()
 
    prompt_patdown = newPrompt(0x5966D52A, "Revistar", true, 0) 
 
-   prompt_enviar = newPrompt(0x80F28E95, "Enviar", true, 0) 
+   prompt_enviar = newPrompt(0x2CD5343E, "Enviar", true, 0) 
 
     prompt_dead_pickup = newPrompt(0xEB2AC491, "Pegar", true, 0)
 

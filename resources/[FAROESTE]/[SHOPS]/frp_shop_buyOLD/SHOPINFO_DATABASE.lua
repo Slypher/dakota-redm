@@ -685,206 +685,9 @@ SHOPINFO_DATABASE = {
         },
 
         positions = {
+            vec3(-281.693,780.745,119.523), -- VALENTINE
             vec3(1323.041,-1321.520,77.885), -- RHODES
             vec3(2716.015,-1285.621,49.626), -- SAINT DENIS
-        },
-
-        audios = {
-            'ArmeiroValentine_01',
-            'ArmeiroValentine_02',
-            'ArmeiroValentine_03',
-            'ArmeiroValentine_04',
-            'ArmeiroValentine_05',
-            'ArmeiroValentine_06',
-        }
-    },
-
-    --########################  ARMEIRO ########################--
-
-    {
-        name = 'Armeiro de Valentine',
-
-        items = {
-            {
-                itemId = 'lasso',
-            
-                transactionPriceBuyDollar = 1000,
-                transactionPriceBuyGold = 2,
-            
-                transactionPriceSellDollar = 20,
-            },
-            {
-                itemId = 'melee_knife',
-            
-                transactionPriceBuyDollar = 1400,
-                transactionPriceBuyGold = 2,
-            
-                transactionPriceSellDollar = 25,
-            },
-            {
-                itemId = 'kit_binoculars',
-            
-                transactionPriceBuyDollar = 3500,
-                transactionPriceBuyGold = 5,
-            
-                transactionPriceSellDollar = 250,
-            },
-            {
-                itemId = 'melee_davy_lantern',
-            
-                transactionPriceBuyDollar = 1400,
-                transactionPriceBuyGold = 5,
-            
-                transactionPriceSellDollar = 100,
-            },
-            {
-                itemId = 'revolver_doubleaction',
-            
-                transactionPriceBuyDollar = 6300,
-                transactionPriceBuyGold = 20,
-            
-                transactionPriceSellDollar = 160,
-            },
-            {
-                itemId = 'revolver_cattleman',
-            
-                transactionPriceBuyDollar = 9843,
-                transactionPriceBuyGold = 20,
-            
-                transactionPriceSellDollar = 250,
-            },
-            {
-                itemId = 'revolver_lemat',
-            
-                transactionPriceBuyDollar = 23625,
-                transactionPriceBuyGold = 50,
-            
-                transactionPriceSellDollar = 600,
-            },
-            {
-                itemId = 'revolver_schofield',
-            
-                transactionPriceBuyDollar = 16931,
-                transactionPriceBuyGold = 50,
-            
-                transactionPriceSellDollar = 430,
-            },
-            {
-                itemId = 'revolver_navy',
-            
-                transactionPriceBuyDollar = 21656,
-                transactionPriceBuyGold = 110,
-            
-                transactionPriceSellDollar = 550,
-            },
-            {
-                itemId = 'pistol_volcanic',
-            
-                transactionPriceBuyDollar = 16931,
-                transactionPriceBuyGold = 60,
-            
-                transactionPriceSellDollar = 430,
-            },
-            {
-                itemId = 'pistol_mauser',
-            
-                transactionPriceBuyDollar = 16143,
-                transactionPriceBuyGold = 60,
-            
-                transactionPriceSellDollar = 410,
-            },
-            {
-                itemId = 'pistol_semiauto',
-            
-                transactionPriceBuyDollar = 13979,
-                transactionPriceBuyGold = 60,
-            
-                transactionPriceSellDollar = 380,
-            },
-            {
-                itemId = 'repeater_carbine',
-            
-                transactionPriceBuyDollar = 12600,
-                transactionPriceBuyGold = 25,
-            
-                transactionPriceSellDollar = 320,
-            },
-            {
-                itemId = 'repeater_evans',
-            
-                transactionPriceBuyDollar = 13781,
-                transactionPriceBuyGold = 60,
-            
-                transactionPriceSellDollar = 350,
-            },
-            {
-                itemId = 'repeater_winchester',
-            
-                transactionPriceBuyDollar = 15356,
-                transactionPriceBuyGold = 70,
-            
-                transactionPriceSellDollar = 390,
-            },
-            {
-                itemId = 'repeater_henry',
-            
-                transactionPriceBuyDollar = 15750,
-                transactionPriceBuyGold = 75,
-            
-                transactionPriceSellDollar = 400,
-            },
-            {
-                itemId = 'rifle_varmint',
-            
-                transactionPriceBuyDollar = 10500,
-                transactionPriceBuyGold = 35,
-            
-                transactionPriceSellDollar = 200,
-            },
-            {
-                itemId = 'rifle_boltaction',
-            
-                transactionPriceBuyDollar = 17718,
-                transactionPriceBuyGold = 90,
-            
-                transactionPriceSellDollar = 450,
-            },
-            {
-                itemId = 'rifle_springfield',
-            
-                transactionPriceBuyDollar = 13781,
-                transactionPriceBuyGold = 75,
-            
-                transactionPriceSellDollar = 450,
-            },
-            {
-                itemId = 'shotgun_doublebarrel',
-            
-                transactionPriceBuyDollar = 55125,
-                transactionPriceBuyGold = 150,
-            
-                transactionPriceSellDollar = 1000,
-            },
-            {
-                itemId = 'shotgun_sawedoff',
-            
-                transactionPriceBuyDollar = 47250,
-                transactionPriceBuyGold = 95,
-            
-                transactionPriceSellDollar = 800,
-            },
-            {
-                itemId = 'sniperrifle_rollingblock',
-            
-                transactionPriceBuyDollar = 55123,
-                transactionPriceBuyGold = 150,
-            
-                transactionPriceSellDollar = 1000,
-            },
-        },
-
-        positions = {
-            vec3(-281.693,780.745,119.523), -- VALENTINE
         },
 
         audios = {
@@ -1222,143 +1025,143 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 52.5,
+                transactionPriceBuyDollar = 30,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 3,
+                transactionPriceSellDollar = 5,
             },
             {
                 itemId = 'pocafe',
             
-                transactionPriceBuyDollar = 26.25,
+                transactionPriceBuyDollar = 15,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 3,
+                transactionPriceSellDollar = 5,
             },
             {
                 itemId = 'pao',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 15,
             },
             {
                 itemId = 'bolacha',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 15,
             },
             {
                 itemId = 'biscoito',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 10,
+                transactionPriceSellDollar = 15,
             },
             {
                 itemId = 'molhotomate',
             
-                transactionPriceBuyDollar = 525,
+                transactionPriceBuyDollar = 300,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 30,
+                transactionPriceSellDollar = 40,
             },
             {
                 itemId = 'milholata',
 
-                transactionPriceBuyDollar = 525,
+                transactionPriceBuyDollar = 300,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 30,
+                transactionPriceSellDollar = 40,
             },
             {
                 itemId = 'feijaolata',
 
-                transactionPriceBuyDollar = 525,
+                transactionPriceBuyDollar = 300,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 30,
+                transactionPriceSellDollar = 40,
             },
             {
                 itemId = 'milho',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'cenoura',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'trigo',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'batata',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'repolho',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'tomate',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'feijao',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'alface',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'canaacucar',
 
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 200,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 2,
+                transactionPriceSellDollar = 4,
             },
             {
                 itemId = 'p_baitworm01x',
 
-                transactionPriceBuyDollar = 17.5,
+                transactionPriceBuyDollar = 10,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 1,
@@ -1677,59 +1480,13 @@ SHOPINFO_DATABASE = {
     },
     ------------------------------------------------------------------
     {
-        name = 'Joshua',
-
-        items = {
-            {
-                itemId = 'cerveja',
-            
-                transactionPriceBuyDollar = 332.5,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 95,
-            },
-            {
-                itemId = 'whisky',
-            
-                transactionPriceBuyDollar = 700,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 200,
-            },
-            {
-                itemId = 'tequila',
-            
-                transactionPriceBuyDollar = 875,
-                transactionPriceBuyGold = 2,
-            
-                transactionPriceSellDollar = 250,
-            },
-            {
-                itemId = 'agua',
-            
-                transactionPriceBuyDollar = 52.5,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 5,
-            },
-        },
-
-        positions = {
-            vec3(-311.569, 805.882, 118.980), -- Saloon de Valentine
-        },
-
-        -- audios = {
-        --     'Charles',
-        -- }
-    },
-    {
         name = 'Charles',
 
         items = {
             {
                 itemId = 'cerveja',
             
-                transactionPriceBuyDollar = 150,
+                transactionPriceBuyDollar = 190,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 95,
@@ -1737,7 +1494,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'whisky',
             
-                transactionPriceBuyDollar = 350,
+                transactionPriceBuyDollar = 400,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 200,
@@ -1745,7 +1502,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'tequila',
             
-                transactionPriceBuyDollar = 450,
+                transactionPriceBuyDollar = 500,
                 transactionPriceBuyGold = 2,
             
                 transactionPriceSellDollar = 250,
@@ -1761,7 +1518,7 @@ SHOPINFO_DATABASE = {
         },
 
         positions = {
-            vec3(-815.768,-1318.873,43.679), -- Saloon de Black
+            vec3(-311.569, 805.882, 118.980), -- Saloon de Valentine
         },
 
         audios = {
@@ -1915,120 +1672,6 @@ SHOPINFO_DATABASE = {
                 itemId = 'pedra',
 
                 transactionPriceBuyDollar = 10,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 3,
-            },
-        },
-
-        positions = {
-            vec3(-865.743,-1390.978,42.569),
-        },
-
-    },
-    {
-        name = 'Carl',
-        items = {
-            {
-                itemId = 'lata',
-
-                transactionPriceBuyDollar = 25,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 3,
-            },
-            {
-                itemId = 'ferramentas',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 10,
-            },
-            {
-                itemId = 'agulha',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 25,
-            },
-            {
-                itemId = 'melee_knife',
-            
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 20,
-            },
-            {
-                itemId = 'garimpo',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 75,
-            },
-            {
-                itemId = 'pa',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 75,
-            },
-            {
-                itemId = 'picareta',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 75,
-            },
-            {
-                itemId = 'melee_hatchet',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 75,
-            },
-            {
-                itemId = 'wateringcan',
-
-                transactionPriceBuyDollar = 1300,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 75,
-            },
-            {
-                itemId = 'mineriocobre',
-
-                transactionPriceBuyDollar = 200,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 5,
-            },
-            {
-                itemId = 'minerioferro',
-
-                transactionPriceBuyDollar = 200,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 7,
-            },
-            {
-                itemId = 'carvao',
-
-                transactionPriceBuyDollar = 200,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 3,
-            },
-            {
-                itemId = 'pedra',
-
-                transactionPriceBuyDollar = 20,
                 transactionPriceBuyGold = 1,
 
                 transactionPriceSellDollar = 3,

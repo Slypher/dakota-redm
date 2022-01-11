@@ -23,6 +23,7 @@ function doesPlayerHaveAdminPermissions(playerId)
 end
 
 
+
 RegisterCommand('keep_drunk', function(source, args, rawCommand)
     if doesPlayerHaveAdminPermissions(source) then
         GlobalState.keepDrunk = not GlobalState.keepDrunk

@@ -169,7 +169,7 @@ Citizen.CreateThread(
             Citizen.InvokeNative(0x9CB1A1623062F402, blip, "Estábulo")
             local prompt = PromptRegisterBegin()
             PromptSetActiveGroupThisFrame(promptGroup, varStringCasa)
-            PromptSetControlAction(prompt, 0xE8342FF2)
+            PromptSetControlAction(prompt, 0xE8342FF2) -- L = 0x80F28E95 | ALT = 0xE8342FF2
             PromptSetText(prompt, CreateVarString(10, "LITERAL_STRING", "Acessar Estábulo"))
             PromptSetStandardMode(prompt, true)
             PromptSetEnabled(prompt, 1)

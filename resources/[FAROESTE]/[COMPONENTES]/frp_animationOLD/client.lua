@@ -13,7 +13,7 @@ Citizen.CreateThread(
                 if not IsEntityDead(playerPed) and not Citizen.InvokeNative(0x9682F850056C9ADE, playerPed) then
                     local animDict = "script_proc@robberies@homestead@lonnies_shack@deception"
 
-                    if not IsEntityPlayingAnim(playerPed, animDict, "hands_up_loop", 1) then
+                    if not IsEntityPlayingAnim(playerPed, animDict, "hands_up_loop", 3) then
                         if not HasAnimDictLoaded(animDict) then
                             RequestAnimDict(animDict)
 
@@ -22,7 +22,7 @@ Citizen.CreateThread(
                             end
                         end
 
-                        TaskPlayAnim(playerPed, animDict, "hands_up_loop", 1.0, -1.0, -1, 67109393, 0.0, false, 1245184, false, "UpperbodyFixup_filter", false)
+                        TaskPlayAnim(playerPed, animDict, "hands_up_loop", 2.0, -2.0, -1, 67109393, 0.0, false, 1245184, false, "UpperbodyFixup_filter", false)
 
                         RequestAnimDict(animDict)
                     else
@@ -34,7 +34,6 @@ Citizen.CreateThread(
         end
     end
 )
-
 
 -- Cancelar animações pelo BACKSPACE
 Citizen.CreateThread(function()
@@ -122,30 +121,6 @@ end)
     end
 )]]
 
-local pointing = false 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-
-        if IsControlPressed(0, 0x760A9C6F) then -- G = 0x760A9C6F       ALT segurar = 0xE8342FF2
-            if pointing then 
-                pointing = false 
-                ClearPedSecondaryTask(PlayerPedId())
-            elseif not pointing then 
-                pointing = true 
-                RequestAnimDict('script_common@other@unapproved')
-                while not HasAnimDictLoaded('script_common@other@unapproved') do
-                    Citizen.Wait(100)
-                end
-                TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'loop_0', 1.0, -1.0, 9999999999, 30, 0, true, 0, false, 0, false)
-            end
-            Wait(500)
-        end
-
-    end
-
-end)
-
 RegisterCommand(
     "clipset",
     function(source, args, rawCommand)
@@ -167,6 +142,40 @@ RegisterCommand(
         end
     end
 )
+
+-- Citizen.CreateThread(
+--     function()
+--         local ply = PlayerPedId()
+--         local plyped = GetPlayerPed(ply)
+
+--         while true do
+--             Citizen.Wait(0)
+--             if IsControlJustPressed(0, 0xD8F73058) then --[U]
+--                 ClearPedTasks(ply)
+--             end
+--         end
+--     end
+-- )
+
+RegisterCommand(
+    "anotar",
+    function(source, args, rawCommand)
+        local ped = Citizen.InvokeNative(0x275F255ED201B937, 0)
+        Citizen.InvokeNative(0x524B54361229154F, PlayerPedId(), GetHashKey("WORLD_HUMAN_WRITE_NOTEBOOK"), 200000, false, false, false, false)
+    end
+)
+
+-- RegisterCommand(
+--     "bandana",
+--     function(source, args, rawCommand)
+--         RequestAnimDict("mech_inventory@equip_facemask@fallbacks")
+--         while not HasAnimDictLoaded("mech_inventory@equip_facemask@fallbacks") do
+--             Citizen.Wait(100)
+--         end
+
+--         TaskPlayAnim(PlayerPedId(), "mech_inventory@equip_facemask@fallbacks", "bandana_enter_r", 8.0, 8.0, 3000, 31, 0, true, 0, false, 0, false)
+--     end
+-- )
 
 local Bandana = false
 RegisterCommand(
@@ -293,7 +302,7 @@ RegisterCommand('sentarcafe', function(source, arg)
 end)
 
 RegisterCommand("cafe", function(source, args, rawCommand)
-    TaskStartScenarioInPlace(PlayerPedId(), `WORLD_HUMAN_COFFEE_DRINK`, -1, true, false, false, false)
+    TaskStartScenarioInPlace(PlayerPedId(), `WORLD_HUMAN_COFFEE_DRINK`, 360000, true, false, false, false)
 end)
 
 RegisterCommand('sentarlivro', function(source, arg)
@@ -458,14 +467,6 @@ RegisterCommand('esperar2', function(source, arg)
     TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_STAND_WAITING'), -1, true, false, false, false)
 end)
 
-RegisterCommand('esperar3', function(source, args, rawCommand)
-    RequestAnimDict('amb_misc@world_human_waiting_impatient@male_d@idle_b')
-    while not HasAnimDictLoaded('amb_misc@world_human_waiting_impatient@male_d@idle_b') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'amb_misc@world_human_waiting_impatient@male_d@idle_b', 'idle_d', 1.0, 1.0, 999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
 RegisterCommand('observar2', function(source, arg)
     local playerPed, targetPed = PlayerPedId(), GetPlayerPed(target)
     TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_STERNGUY_IDLES'), -1, true, false, false, false)
@@ -492,7 +493,7 @@ RegisterCommand('gesticular', function(source, arg)
     while not HasAnimDictLoaded('script_shows@sworddance@shw_swrd_int') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@sworddance@shw_swrd_int', 'mc_intro', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@sworddance@shw_swrd_int', 'mc_intro', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('martelo', function(source, arg)
@@ -588,12 +589,6 @@ RegisterCommand('lenha2', function(source, arg)
     local playerPed, targetPed = PlayerPedId(), GetPlayerPed(target)
     TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_SLING_PUT_DOWN_EMPTY'), -1, true, false, false, false)
 end)
-
-RegisterCommand("leque", function(source, args, rawCommand)
-        local ped = Citizen.InvokeNative(0x275F255ED201B937, 0)
-        Citizen.InvokeNative(0x524B54361229154F, PlayerPedId(), GetHashKey("WORLD_HUMAN_FAN"), -1, true, false, false, false)
-    end
-)
 ----------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -848,7 +843,7 @@ RegisterCommand('dancar56', function(source, arg)
     while not HasAnimDictLoaded('script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance', 'dance_bounty_02', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance', 'dance_bounty_02', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar55', function(source, arg)
@@ -857,7 +852,7 @@ RegisterCommand('dancar55', function(source, arg)
     while not HasAnimDictLoaded('script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance', 'dance_bounty_01', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@bounty@legendary@lbowl@ig@lbowl_ig3_dance', 'dance_bounty_01', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar54', function(source, arg)
@@ -866,7 +861,7 @@ RegisterCommand('dancar54', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_male', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_male', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar53', function(source, arg)
@@ -875,7 +870,7 @@ RegisterCommand('dancar53', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem3', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem3', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar52', function(source, arg)
@@ -884,7 +879,7 @@ RegisterCommand('dancar52', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem2', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem2', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 
@@ -894,7 +889,7 @@ RegisterCommand('dancar51', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem0', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p1', 'cancandance_fem0', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar50', function(source, arg)
@@ -903,7 +898,7 @@ RegisterCommand('dancar50', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@wild@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar49', function(source, arg)
@@ -912,7 +907,7 @@ RegisterCommand('dancar49', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@wild@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar48', function(source, arg)
@@ -921,7 +916,7 @@ RegisterCommand('dancar48', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@awkward@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@awkward@a@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@awkward@a@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar47', function(source, arg)
@@ -930,7 +925,7 @@ RegisterCommand('dancar47', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@carefree@b@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar46', function(source, arg)
@@ -939,7 +934,7 @@ RegisterCommand('dancar46', function(source, arg)
     while not HasAnimDictLoaded('ai_react@audience_dance_overlays@stand_lean_left') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'ai_react@audience_dance_overlays@stand_lean_left', 'high_01', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'ai_react@audience_dance_overlays@stand_lean_left', 'high_01', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar45', function(source, arg)
@@ -948,7 +943,7 @@ RegisterCommand('dancar45', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@awkward@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@awkward@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@awkward@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar44', function(source, arg)
@@ -957,7 +952,7 @@ RegisterCommand('dancar44', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@old@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@old@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@old@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar43', function(source, arg)
@@ -966,7 +961,7 @@ RegisterCommand('dancar43', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@graceful@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar42', function(source, arg)
@@ -975,7 +970,7 @@ RegisterCommand('dancar42', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@graceful@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar41', function(source, arg)
@@ -984,7 +979,7 @@ RegisterCommand('dancar41', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@graceful@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@graceful@a@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar40', function(source, arg)
@@ -993,7 +988,7 @@ RegisterCommand('dancar40', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@carefree@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar39', function(source, arg)
@@ -1002,7 +997,7 @@ RegisterCommand('dancar39', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@carefree@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar38', function(source, arg)
@@ -1011,7 +1006,7 @@ RegisterCommand('dancar38', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@carefree@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'action_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'action_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar37', function(source, arg)
@@ -1020,7 +1015,7 @@ RegisterCommand('dancar37', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@carefree@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@carefree@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar36', function(source, arg)
@@ -1029,7 +1024,7 @@ RegisterCommand('dancar36', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@wild@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar35', function(source, arg)
@@ -1038,7 +1033,7 @@ RegisterCommand('dancar35', function(source, arg)
     while not HasAnimDictLoaded('ai_react@audience_dance_overlays@stand_lean_right') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'ai_react@audience_dance_overlays@stand_lean_right', 'med_01', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'ai_react@audience_dance_overlays@stand_lean_right', 'med_01', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar34', function(source, arg)
@@ -1047,7 +1042,7 @@ RegisterCommand('dancar34', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@wild@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@wild@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar33', function(source, arg)
@@ -1056,7 +1051,7 @@ RegisterCommand('dancar33', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar32', function(source, arg)
@@ -1065,7 +1060,7 @@ RegisterCommand('dancar32', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar31', function(source, arg)
@@ -1074,7 +1069,7 @@ RegisterCommand('dancar31', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_lf_front', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_lf_front', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar30', function(source, arg)
@@ -1083,7 +1078,7 @@ RegisterCommand('dancar30', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_alt2_lf_front', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_alt2_lf_front', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar29', function(source, arg)
@@ -1092,7 +1087,7 @@ RegisterCommand('dancar29', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_alt1_lf_front', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full_looped', 'action_alt1_lf_front', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar28', function(source, arg)
@@ -1101,7 +1096,7 @@ RegisterCommand('dancar28', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@formal@a@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@formal@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@formal@a@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar27', function(source, arg)
@@ -1110,7 +1105,7 @@ RegisterCommand('dancar27', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full', 'fullbody_alt1', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full', 'fullbody_alt1', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar26', function(source, arg)
@@ -1119,7 +1114,7 @@ RegisterCommand('dancar26', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@a@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@a@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar25', function(source, arg)
@@ -1128,7 +1123,7 @@ RegisterCommand('dancar25', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@b@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@b@male@unarmed@full', 'fullbody_alt1', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@b@male@unarmed@full', 'fullbody_alt1', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar24', function(source, arg)
@@ -1137,7 +1132,7 @@ RegisterCommand('dancar24', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@confident@b@male@unarmed@full') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@b@male@unarmed@full', 'fullbody', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@confident@b@male@unarmed@full', 'fullbody', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar23', function(source, arg)
@@ -1146,7 +1141,7 @@ RegisterCommand('dancar23', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'loop', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar22', function(source, arg)
@@ -1155,7 +1150,7 @@ RegisterCommand('dancar22', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 
@@ -1165,7 +1160,7 @@ RegisterCommand('dancar21', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt2_fl', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt2_fl', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar20', function(source, arg)
@@ -1174,7 +1169,7 @@ RegisterCommand('dancar20', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt1_rf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt1_rf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar19', function(source, arg)
@@ -1183,7 +1178,7 @@ RegisterCommand('dancar19', function(source, arg)
     while not HasAnimDictLoaded('script_mp@emotes@dance@drunk@b@male@unarmed@full_looped') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_mp@emotes@dance@drunk@b@male@unarmed@full_looped', 'action_alt1_lf', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar18', function(source, arg)
@@ -1192,7 +1187,7 @@ RegisterCommand('dancar18', function(source, arg)
     while not HasAnimDictLoaded('script_shows@sworddance@act3_p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@sworddance@act3_p1', 'dancer_sworddance', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@sworddance@act3_p1', 'dancer_sworddance', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar17', function(source, arg)
@@ -1201,7 +1196,7 @@ RegisterCommand('dancar17', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p2') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p2', 'cancandance_p2_male', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p2', 'cancandance_p2_male', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar16', function(source, arg)
@@ -1210,7 +1205,7 @@ RegisterCommand('dancar16', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@p2') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p2', 'cancandance_p2_fem2', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@p2', 'cancandance_p2_fem2', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar15', function(source, arg)
@@ -1219,7 +1214,7 @@ RegisterCommand('dancar15', function(source, arg)
     while not HasAnimDictLoaded('script_shows@snakedancer@act1_p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@snakedancer@act1_p1', 'kiss_win_dancer', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@snakedancer@act1_p1', 'kiss_win_dancer', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar14', function(source, arg)
@@ -1228,7 +1223,7 @@ RegisterCommand('dancar14', function(source, arg)
     while not HasAnimDictLoaded('script_shows@snakedancer@act1_p1') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@snakedancer@act1_p1', 'dance_dancer', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@snakedancer@act1_p1', 'dance_dancer', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar13', function(source, arg)
@@ -1237,7 +1232,7 @@ RegisterCommand('dancar13', function(source, arg)
     while not HasAnimDictLoaded('script_shows@cancandance@reacts') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@reacts', 'dancer_react_01', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'script_shows@cancandance@reacts', 'dancer_react_01', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar12', function(source, arg)
@@ -1246,7 +1241,7 @@ RegisterCommand('dancar12', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_dancing@female_aidle_c') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_dancing@female_aidle_c', 'idle_g', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_dancing@female_aidle_c', 'idle_g', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar11', function(source, arg)
@@ -1255,7 +1250,7 @@ RegisterCommand('dancar11', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@base') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@base', 'base', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@base', 'base', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar10', function(source, arg)
@@ -1264,7 +1259,7 @@ RegisterCommand('dancar10', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@female@base') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@female@base', 'base', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@female@base', 'base', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar9', function(source, arg)
@@ -1273,7 +1268,7 @@ RegisterCommand('dancar9', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_a') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_c', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_c', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar8', function(source, arg)
@@ -1282,7 +1277,7 @@ RegisterCommand('dancar8', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_a') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_a', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_a', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar7', function(source, arg)
@@ -1291,7 +1286,7 @@ RegisterCommand('dancar7', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_a') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_b', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_a', 'idle_b', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar6', function(source, arg)
@@ -1300,7 +1295,7 @@ RegisterCommand('dancar6', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_b') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_f', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_f', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar5', function(source, arg)
@@ -1309,7 +1304,7 @@ RegisterCommand('dancar5', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_b') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_e', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_e', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar4', function(source, arg)
@@ -1318,7 +1313,7 @@ RegisterCommand('dancar4', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_a@idle_b') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_d', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_a@idle_b', 'idle_d', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar3', function(source, arg)
@@ -1327,7 +1322,7 @@ RegisterCommand('dancar3', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_b@idle_b') do
         Citizen.Wait(100)
     end
-    TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_b', 'idle_e', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+    TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_b', 'idle_e', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar2', function(source, arg)
@@ -1336,7 +1331,7 @@ RegisterCommand('dancar2', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_b@idle_b') do
         Citizen.Wait(100)
     end
-    TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_b', 'idle_d', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+    TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_b', 'idle_d', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 RegisterCommand('dancar', function(source, arg)
@@ -1345,7 +1340,7 @@ RegisterCommand('dancar', function(source, arg)
     while not HasAnimDictLoaded('amb_misc@world_human_drunk_dancing@male@male_b@idle_a') do
         Citizen.Wait(100)
     end
-	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_a', 'idle_b', 8.0, -8.0, -1, 1, 0, true, 0, false, 0, false)
+	TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_drunk_dancing@male@male_b@idle_a', 'idle_b', 8.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
 end, false)
 
 local prompts = {}
@@ -1713,9 +1708,9 @@ Citizen.CreateThread(
 
         while true do
             Citizen.Wait(0)
-            
+
             if activeGroupIndex == 0 then
-                if IsControlJustPressed(0, 0x80F28E95) then -- G 0xE8342FF2       -- G = 0x760A9C6F       ALT segurar = 0xE8342FF2   L = 0x80F28E95
+                if IsControlJustPressed(0, 0x760A9C6F) then -- G
                     activeGroupIndex = 1
                 end
             else
@@ -1724,7 +1719,7 @@ Citizen.CreateThread(
 
                 disablecontrols()
 
-                if IsControlJustPressed(0, 0xE8342FF2) then -- G
+                if IsControlJustPressed(0, 0x760A9C6F) then -- G
                     activeGroupIndex = 0
                 end
 
@@ -1916,6 +1911,14 @@ RegisterCommand(
     end
 )
 
+RegisterCommand(
+    "leque",
+    function(source, args, rawCommand)
+        local ped = Citizen.InvokeNative(0x275F255ED201B937, 0)
+        Citizen.InvokeNative(0x524B54361229154F, PlayerPedId(), GetHashKey("WORLD_HUMAN_FAN"), 100, true, false, false, false)
+    end
+)
+
 AddEventHandler(
     "onResourceStop",
     function(resourceName)
@@ -1929,831 +1932,3 @@ AddEventHandler(
         end
     end
 )
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- MODOS DE ANDAR --
-----------------------------------------------------------------------------------------------------
-local animation 
-
-RegisterCommand('acasual', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Casual"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('alouco', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Crazy"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('abebado', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "mp_style_drunk"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('aempolgado', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_EasyRider"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('aextravagante', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Flamboyant"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('anovato', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Greenhorn"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('apistoleiro', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Gunslinger"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('acurioso', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "mp_style_inquisitive"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('arefinado', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Refined"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('afurtivo', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_SilentType"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('avelho', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "MP_Style_Veteran"
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,1,-1)
-    
-end, false)
-
-RegisterCommand('aremover', function(source, args, rawCommand)
-    Citizen.InvokeNative(0xCB9401F918CB0F75, PlayerPedId(), animation,0,-1) 
-    Wait(500)
-    animation = "noanim"
-    
-end, false)
-
-----------------------------------------------------------------------------------------------------
-                                    -- CUMPRIMENTOS --
-----------------------------------------------------------------------------------------------------
-
-RegisterCommand('aoba', function(source, args, rawCommand)
-    RequestAnimDict('mech_loco_m@character@dutch@fancy@unarmed@idle@_variations')
-    while not HasAnimDictLoaded('mech_loco_m@character@dutch@fancy@unarmed@idle@_variations') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@character@dutch@fancy@unarmed@idle@_variations', 'idle_b', 1.0, -1.0, 2500, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('aoba2', function(source, args, rawCommand)
-    RequestAnimDict('mech_loco_m@character@nicholas_timmins@normal@unarmed@idle@variations@big_wave')
-    while not HasAnimDictLoaded('mech_loco_m@character@nicholas_timmins@normal@unarmed@idle@variations@big_wave') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@character@nicholas_timmins@normal@unarmed@idle@variations@big_wave', 'idle', 1.0, -1.0, 3000, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('aoba3', function(source, args, rawCommand)
-    RequestAnimDict('mech_loco_m@character@arthur@fidgets@hat@normal@unarmed@normal@left_hand')
-    while not HasAnimDictLoaded('mech_loco_m@character@arthur@fidgets@hat@normal@unarmed@normal@left_hand') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@character@arthur@fidgets@hat@normal@unarmed@normal@left_hand', 'hat_lhand_b', 1.0, -1.0, 1500, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('aoba4', function(source, args, rawCommand)
-    RequestAnimDict('ai_gestures@gen_female@standing@silent')
-    while not HasAnimDictLoaded('ai_gestures@gen_female@standing@silent') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'ai_gestures@gen_female@standing@silent', 'silent_flirty_greet_r_001', 1.0, -1.0, 1500, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('ola', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_GENTLEWAVE_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 1, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('ola2', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_GENTLEWAVE_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    Wait(10000)
-end, false)
-
-RegisterCommand('ola3', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_WAVENEAR_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('namaste', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_RESPECTFUL_BOW_1'
-    local emoteclass = Action
-    --ExecuteCommand("howdy")
-    TaskEmote(PlayerPedId(), emoteClass, 1, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-RegisterCommand('namaste2', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_RESPECTFUL_BOW_1'
-    local emoteclass = Action
-    --ExecuteCommand("howdy")
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('reverencia', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_FANCY_BOW_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 1, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-RegisterCommand('reverencia2', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_FANCY_BOW_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-
-RegisterCommand('adeus', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_SUBTLE_WAVE_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-
-RegisterCommand('tchau', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_HAT_FLICK_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- CHAMAR --
-----------------------------------------------------------------------------------------------------
-
-
-RegisterCommand('campainha', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@service_bell@unapproved')
-    while not HasAnimDictLoaded('script_common@service_bell@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'script_common@service_bell@unapproved', 'enter', 1.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(800)
-    RequestAnimDict('script_common@service_bell@unapproved')
-    TaskPlayAnim(PlayerPedId(), 'script_common@service_bell@unapproved', 'base', 8.0, 1.0, 2000, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('porta', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    if not IsPedMale(PlayerPedId()) then
-        print('female')
-        RequestAnimDict('amb_misc@world_human_door_knock@male_a@idle_c')
-        while not HasAnimDictLoaded('amb_misc@world_human_door_knock@male_a@idle_c') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(),'amb_misc@world_human_door_knock@male_a@idle_c', 'idle_h', 1.0, 1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-
-    else
-
-        print ('male')
-        RequestAnimDict('amb_misc@world_human_door_knock@male_a@idle_c')
-        while not HasAnimDictLoaded('amb_misc@world_human_door_knock@male_a@idle_c') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(), 'amb_misc@world_human_door_knock@male_a@idle_c', 'idle_g', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    end
-end, false)
-
-RegisterCommand('aqui', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    if not IsPedMale(PlayerPedId()) then
-        print('female')
-        RequestAnimDict('script_common@wave@female@unapproved')
-        while not HasAnimDictLoaded('script_common@wave@female@unapproved') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(),'script_common@wave@female@unapproved', 'wave_b', 1.0, 1.0, 5500, 1, 0, true, 0, false, 0, false)
-    else
-        print('male')
-        RequestAnimDict('script_common@wave@male@unapproved')
-        while not HasAnimDictLoaded('script_common@wave@male@unapproved') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(), 'script_common@wave@male@unapproved', 'wave_idle_c', 1.0, 1.0, 6000, 1, 0, true, 0, false, 0, false)
-    end
-end, false)
-
-RegisterCommand('aqui2', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    if not IsPedMale(PlayerPedId()) then
-        print('female')
-        RequestAnimDict('script_common@wave@female@unapproved')
-        while not HasAnimDictLoaded('script_common@wave@female@unapproved') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(),'script_common@wave@female@unapproved', 'wave_a', 1.0, 1.0, 4000, 1, 0, true, 0, false, 0, false)
-    else
-        print('male')
-        RequestAnimDict('script_common@wave@male@unapproved')
-        while not HasAnimDictLoaded('script_common@wave@male@unapproved') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(), 'script_common@wave@male@unapproved', 'wave_idle_d', 1.0, 1.0, 3000, 1, 0, true, 0, false, 0, false)
-    end
-end, false)
-
-----------------------------------------------------------------------------------------------------
-                                    -- RENDIDO --
-----------------------------------------------------------------------------------------------------
-
-
-RegisterCommand('amarrado', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('mini_hostage')
-    while not HasAnimDictLoaded('mini_hostage') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mini_hostage', 'gped_host_knl_pre', 1.0, -8.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(3500)
-    RequestAnimDict('mini_hostage')
-    while not HasAnimDictLoaded('mini_hostage') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mini_hostage', 'gped_host_knl_idl', 8.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('preso', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_proc@robberies@unapproved')
-    TaskPlayAnim(PlayerPedId(), 'script_proc@robberies@unapproved', 'stand_prisoner_cell_idle_a', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('rendido', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('mech_busted@unapproved')
-    while not HasAnimDictLoaded('mech_busted@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_busted@unapproved', 'idle_2_hands_up', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(4000)
-    RequestAnimDict('script_proc@robberies@unapproved')
-    while not HasAnimDictLoaded('script_proc@robberies@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_busted@unapproved', 'idle_b', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('renderse', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    if not IsPedMale(PlayerPedId()) then
-        print('female')
-        RequestAnimDict('mech_loco_f@generic@reaction@handsup@unarmed@normal')
-        while not HasAnimDictLoaded('mech_loco_f@generic@reaction@handsup@unarmed@normal') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(),'mech_loco_f@generic@reaction@handsup@unarmed@normal', 'loop', 1.0, 1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-    else
-        print('male')
-        RequestAnimDict('mech_loco_m@generic@reaction@handsup@unarmed@tough')
-        while not HasAnimDictLoaded('mech_loco_m@generic@reaction@handsup@unarmed@tough') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@reaction@handsup@unarmed@tough', 'loop', 1.0, 1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-    end
-end, false)
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- HUMOR --
-----------------------------------------------------------------------------------------------------
-
-RegisterCommand('chorar', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'hostage_fallstoknees', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(1400)
-    RequestAnimDict('script_proc@robberies@shop@rhodes@gunsmith@inside_basement_reshoot')
-    while not HasAnimDictLoaded('script_proc@robberies@shop@rhodes@gunsmith@inside_basement_reshoot') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_proc@robberies@shop@rhodes@gunsmith@inside_basement_reshoot', 'cry_loop_captor', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('medo', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'cry_loop', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('triste', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    RequestAnimDict('mech_loco_m@generic@emotion@unarmed@sad@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@emotion@unarmed@sad@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@emotion@unarmed@sad@idle', 'idle', 1.0, -1.0, 999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- DOR E MACHUCADO --
-----------------------------------------------------------------------------------------------------
-
-RegisterCommand('dorbraco', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@right_arm@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@right_arm@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@right_arm@idle', 'idle', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('dorcoracao', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@character@arthur@injured@left_shoulder@unarmed@idle')
-    while not HasAnimDictLoaded('mech_loco_m@character@arthur@injured@left_shoulder@unarmed@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@character@arthur@injured@left_shoulder@unarmed@idle', 'idle', 1.0, -1.0, 9999999, 31, 0, true, 0, false, 0, false)
- end, false)
-
-RegisterCommand('dorcoxa', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@left_leg@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@left_leg@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@left_leg@idle', 'idle', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('faltaar', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@chest@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@chest@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@chest@idle', 'idle', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('dorcabeca', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@head@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@head@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@head@idle', 'idle', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('estrangularse', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@critical_neck_right@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@critical_neck_right@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@critical_neck_right@idle', 'idle', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('dorcostas', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@critical_back@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@critical_back@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@critical_back@idle', 'idle', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('doente', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('amb_wander@upperbody_idles@sick@both_arms@male_a@idle_a')
-    while not HasAnimDictLoaded('amb_wander@upperbody_idles@sick@both_arms@male_a@idle_a') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'amb_wander@upperbody_idles@sick@both_arms@male_a@idle_a', 'idle_c', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('passandomal', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('script_story@fin2@ig@ig2_chase_cleet')
-    while not HasAnimDictLoaded('script_story@fin2@ig@ig2_chase_cleet') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_story@fin2@ig@ig2_chase_cleet', 'civilian_injured_loop_a_civilian', 1.0, -1.0, 9999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('coceira', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@special@unarmed@itchy@idle')
-    while not HasAnimDictLoaded('mech_loco_m@generic@special@unarmed@itchy@idle') do 
-    Citizen.Wait(100)
-end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@special@unarmed@itchy@idle', 'idle_intro', 1.0, -1.0, 9999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('dor', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@d')
-    while not ('mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@d') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@d', 'idle', 9.0, 9.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('dor2', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@e')
-    while not HasAnimDictLoaded('mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@e') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@injured@unarmed@critical_ground@idle@_variations@e', 'idle', 9.0, 9.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('morrendo', function(source, args, rawCommand)
-    --ExecuteCommand("skadet")
-    RequestAnimDict('amb_misc@world_human_indian_sick_dying@male@male_b@enter')
-    while not HasAnimDictLoaded('amb_misc@world_human_indian_sick_dying@male@male_b@enter') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'amb_misc@world_human_indian_sick_dying@male@male_b@enter', 'enter', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(7000)
-    RequestAnimDict('amb_misc@world_human_indian_sick_dying@male@male_a@idle_a')
-    while not HasAnimDictLoaded('amb_misc@world_human_indian_sick_dying@male@male_a@idle_a') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'amb_misc@world_human_indian_sick_dying@male@male_a@idle_a', 'idle_c', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- TEMPERATURA --
-----------------------------------------------------------------------------------------------------
-
-RegisterCommand('calor', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('mech_loco_m@generic@fidgets@hot')
-    while not HasAnimDictLoaded('mech_loco_m@generic@fidgets@hot') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@generic@fidgets@hot', 'both_hands_fanning_02', 1.0, -1.0, 999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('frio', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_re@lost_man')
-    while not HasAnimDictLoaded('script_re@lost_man') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'script_re@lost_man', 'idle', 1.0, 1.0, 999999999, 31, 0, true, 0, false, 0, false)
-end, false)
-
-
-----------------------------------------------------------------------------------------------------
-                                    -- AÇÕES --
-----------------------------------------------------------------------------------------------------
-
-RegisterCommand('podedeixar', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_HAT_TIP_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-
-RegisterCommand('agradecer', function(source, args, rawCommand)
-    RequestAnimDict('ai_gestures@gen_female@standing@silent')
-    while not HasAnimDictLoaded('ai_gestures@gen_female@standing@silent') do
-        Citizen.Wait(100)
-    end
-    --ExecuteCommand("howdy")
-    TaskPlayAnim(PlayerPedId(), 'ai_gestures@gen_female@standing@silent', 'silent_neutral_greet_f_002', 1.0, -1.0, 1500, 31, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('repete', function(source, args, rawCommand)
-    local emoteType = 'KIT_EMOTE_GREET_TOUGH_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-    --ExecuteCommand("howdy")
-end, false)
-
-
-RegisterCommand('cade', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'security_look_around@idle_c', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
- 
-RegisterCommand('disfarcar', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    if not IsPedMale(PlayerPedId()) then
-        print('female')
-        RequestAnimDict('mech_loco_f@character@abigail@normal@unarmed@idle@_variations@a')
-        while not HasAnimDictLoaded('mech_loco_f@character@abigail@normal@unarmed@idle@_variations@a') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(),'mech_loco_f@character@abigail@normal@unarmed@idle@_variations@a', 'idle', 1.0, 1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    else
-
-        print ('male')
-        RequestAnimDict('script_common@other@unapproved')
-        while not HasAnimDictLoaded('script_common@other@unapproved') do
-            Citizen.Wait(100)
-        end
-        TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'drug_dealer_idle_d', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-    end
-end, false)
-
-RegisterCommand('desistir', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'idle_d', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('cuidado', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'windowwasher_shot_reaction', 1.0, -1.0, 9999999999, 2, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('examinar', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@other@unapproved')
-    while not HasAnimDictLoaded('script_common@other@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@other@unapproved', 'guard_patrol@idle_e', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('bebado', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_re@crashed_wagon')
-    while not HasAnimDictLoaded('script_re@crashed_wagon') do 
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_re@crashed_wagon', 'male_drunk_action', 1.0, 1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('bebado2', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    RequestAnimDict('mech_loco_m@generic@drunk@unarmed@idle_moderate_drunk')
-    while not HasAnimDictLoaded('mech_loco_m@generic@drunk@unarmed@idle_moderate_drunk') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'mech_loco_m@generic@drunk@unarmed@idle_moderate_drunk', 'idle', 1.0, 1.0, 999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('nojo', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_YOUSTINK_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('explicar', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    RequestAnimDict('script_common@thank@female@unapproved')
-    while not HasAnimDictLoaded('script_common@thank@female@unapproved') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'script_common@thank@female@unapproved', 'thank_c', 1.0, 1.0, 6000, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('porfavor', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    RequestAnimDict('script_re@lost_man')
-    while not HasAnimDictLoaded('script_re@lost_man') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_re@lost_man', 'i_made_it_thanks_again', 1.0, -1.0, 2800, 1, 0, true, 0, false, 0, false)
- end, false)
-
- RegisterCommand('calma', function(source, args, rawCommand)
-    --ExecuteCommand("handlinger")
-    RequestAnimDict('script_common@crowd_control@unapproved@a@intro')
-    while not HasAnimDictLoaded('script_common@crowd_control@unapproved@a@intro') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(),'script_common@crowd_control@unapproved@a@intro', 'intro_ped_d', 1.0, 1.0, 3000, 1, 0, true, 0, false, 0, false)
-    Citizen.Wait(3000)
-    RequestAnimDict('script_common@crowd_control@unapproved@a@ped_d@cower')
-    while not HasAnimDictLoaded('script_common@crowd_control@unapproved@a@ped_d@cower') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'script_common@crowd_control@unapproved@a@ped_d@cower', 'cower', 1.0, -1.0, 9999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('calma2', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    RequestAnimDict('mech_loco_m@character@arthur@calming@unarmed@idle')
-    while not HasAnimDictLoaded('mech_loco_m@character@arthur@calming@unarmed@idle') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'mech_loco_m@character@arthur@calming@unarmed@idle', 'idle', 1.0, -1.0, 999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('ameacar', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_THROAT_SLIT_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('aquiagora', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_VERSUS_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('negativo', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_REACTION_THUMBSDOWN_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('positivo', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_GREET_THUMBSUP_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-
-RegisterCommand('rir', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_REACTION_POINTLAUGH_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('rir2', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_REACTION_JOVIAL_LAUGH_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('xiu', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_REACTION_HUSH_YOUR_MOUTH_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('yeeha', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_REACTION_YEEHAW_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('musculoso', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_FLEX_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('dedo', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_FLIP_OFF_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('beijo', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_BLOW_KISS_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('vamos', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_FOLLOW_ME_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('irritado', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_HISSYFIT_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('briga', function(source, args, rawCommand)
-    --ExecuteCommand("stående")
-    RequestAnimDict('ai_react@react_look_layers@base_emotions@angry')
-    while not HasAnimDictLoaded('ai_react@react_look_layers@base_emotions@angry') do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(PlayerPedId(), 'ai_react@react_look_layers@base_emotions@angry', 'direct', 1.0, -1.0, 999999999, 1, 0, true, 0, false, 0, false)
-end, false)
-
-RegisterCommand('briga2', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_PROVOKE_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('deolho', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_IM_WATCHING_YOU_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('frango', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_CHICKEN_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('gorila', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_TAUNT_GORILLA_CHEST_1'
-    local emoteclass = Taunt
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('espelho', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local ped = PlayerPedId()
-    local scenario = "WORLD_HUMAN_POCKET_MIRROR"
-    ClearPedTasksImmediately(ped)
-    TaskStartScenarioInPlace(ped, GetHashKey(scenario), -1)
-end)
-
-RegisterCommand('plano', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_SCHEME_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-RegisterCommand('hora', function(source, args, rawCommand)
-    --ExecuteCommand("blandet")
-    local emoteType = 'KIT_EMOTE_ACTION_CHECK_POCKET_WATCH_1'
-    local emoteclass = Action
-    TaskEmote(PlayerPedId(), emoteClass, 2, GetHashKey(emoteType), true, true, true, true, true)
-end, false)
-
-

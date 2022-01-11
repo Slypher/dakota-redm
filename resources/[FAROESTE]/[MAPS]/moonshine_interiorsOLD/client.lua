@@ -22,9 +22,9 @@ local PromptGorup = GetRandomIntInRange(0, 0xffffff)
 
 function SetupUseDoorPrompt()
     Citizen.CreateThread(function()
-        local str = 'Porta'
+        local str = 'ENTRAR'
         UseDoorPrompt = PromptRegisterBegin()
-        PromptSetControlAction(UseDoorPrompt, 0xE8342FF2)
+        PromptSetControlAction(UseDoorPrompt, 0x760A9C6F)
         str = CreateVarString(10, 'LITERAL_STRING', str)
         PromptSetText(UseDoorPrompt, str)
         PromptSetEnabled(UseDoorPrompt, true)
@@ -78,7 +78,7 @@ function ZoneLoop(zone)
                 if k ~= 'interior' and k ~= 'interior_sets' then
                     local dist = #(coords - v)
                     if dist < 1.8 then
-                        local label  = CreateVarString(10, 'LITERAL_STRING', "Entrar | Sair")
+                        local label  = CreateVarString(10, 'LITERAL_STRING', "Porta")
                         PromptSetActiveGroupThisFrame(PromptGorup, label)
                         if PromptHasHoldModeCompleted(UseDoorPrompt) then
                             if k == 'outside' then

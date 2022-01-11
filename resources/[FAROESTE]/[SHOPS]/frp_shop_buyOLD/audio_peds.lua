@@ -32,9 +32,8 @@ Citizen.CreateThread(function()
 
 --------------------------------------MINERADOR------------------------------------------------
 
--- FRANCIS          G_M_M_UniGrays_01
-CreatePedWithAudio(`G_M_M_UniGrays_01`, vec3(-363.320,799.896,115.280), 183.95)
-CreatePedWithAudio(`CS_SCOTTGRAY`, vec3(-865.743,-1390.978,42.569), 103.29)
+-- FRANCIS
+CreatePedWithAudio(`CS_SCOTTGRAY`, vec3(-363.320,799.896,115.280), 183.95)
 
 --------------------------------------LENHADOR------------------------------------------------
 
@@ -61,8 +60,7 @@ CreatePedWithAudio(`CS_rainsfall`, vec3(437.505,2229.940,247.199), -88.16)
 --------------------------------------SALOON------------------------------------------------
 
     -- SALOON VALENTINE
-    CreatePedWithAudio(`U_M_M_ValBarber_01`, vec3(-313.366, 805.996, 117.955), 267.0)
-    CreatePedWithAudio(`U_M_M_TumBartender_01`, vec3(-817.864,-1318.892,42.679), -96.26)
+    CreatePedWithAudio(`U_M_M_TumBartender_01`, vec3(-313.366, 805.996, 117.955), 267.0)
 
 --------------------------------------BANCOS------------------------------------------------
 

@@ -1456,32 +1456,32 @@ Config = {
                 }
             },
             {
-                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa das bolachas.',
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa das bolachas.',
                 time = 30,
                 input = {
                     --{item = "carvao", amount = 1},
-                    {item = "massadebolacha", amount = 1}
+                    {item = "massadebolacha", amount = 1},
                 },
                 output = {
                     {item = "bolacha", amount = 10, name = "Bolacha"}
                 }
             },
             {
-                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos biscoitos.',
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos biscoitos.',
                 time = 30,
                 input = {
                     --{item = "carvao", amount = 1},
-                    {item = "massadebiscoito", amount = 1}
+                    {item = "massadebiscoito", amount = 1},
                 },
                 output = {
                     {item = "biscoito", amount = 10, name = "Biscoito"}
                 }
             },
             {
-                descriptionTextOverride = 'Agora é só acender o fogo com carvão e assar a massa dos pães.',
-                --time = 30,
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos pães.',
+                time = 30,
                 input = {
-                    {item = "carvao", amount = 1},
+                    --{item = "carvao", amount = 1},
                     {item = "massadepao", amount = 1},
                 },
                 output = {

@@ -178,7 +178,7 @@ RegisterNUICallback('Confirm', function()
         ['hair'] = gMustacheUsing
     }
 
-    TriggerServerEvent('FRP:CLOTHES:payClothing', 150, data, true)
+    TriggerServerEvent('FRP:CLOTHES:payClothing', 0, data, true)
 
     TriggerServerEvent('FRP:CLOTHES:SavePlayerClothing', data, true)
 

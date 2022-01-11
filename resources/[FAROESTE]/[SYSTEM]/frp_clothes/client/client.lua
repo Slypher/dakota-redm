@@ -1458,7 +1458,7 @@ RegisterNUICallback(
             ['gunbeltAccs'] = gunbeltAccsUsing,
         }
 
-        TriggerServerEvent("FRP:CLOTHES:payClothing", 150, dados, true)
+        TriggerServerEvent("FRP:CLOTHES:payClothing", 0, dados, true)
         
         DestroyClothingMenu()
 

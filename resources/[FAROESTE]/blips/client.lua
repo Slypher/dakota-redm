@@ -56,7 +56,7 @@ local blips = {
 	{name = "Estábulo de Annesburg", sprite = 1938782895, x = 2970.73, y = 1427.97, z = 44.71}, -- annesburg
 
 	-- SALOON
-	{name = "Saloon das Cunegundes", sprite = 1242464081, x = -308.532, y = 804.939, z = 119.804},
+	{name = "Saloon de Valentine", sprite = 1242464081, x = -308.532, y = 804.939, z = 119.804},
 	{name = "Saloon dos Baxter", sprite = 595820042, x = -240.800, y = 770.333, z = 118.330},
 
 	-- LEILÃO
@@ -80,7 +80,7 @@ local blips = {
 	{name = "Será Leiloado", sprite = 249721687, x = 2946.527, y = 1319.625, z = 44.816}, -- Saint Denis
 
 	-- ALFAIATE
-	{name = "Alfaiataria Cunegundes", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
+	{name = "Alfaiataria de Blackwater", sprite = 1195729388, x = -765.022, y = -1292.413, z = 45.067}, 
 	{name = "Alfaiataria", sprite = 1195729388, x = 2552.441, y = -1166.584, z = 53.684},
 
 	-- ACOUGUE
