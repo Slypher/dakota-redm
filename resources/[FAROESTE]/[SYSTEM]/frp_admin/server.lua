@@ -28,29 +28,37 @@ RegisterCommand('pon',function(source,args,rawCommand)
     end
 end)
 
-RegisterCommand('wl',function(source,args,rawCommand)
-    local User = API.getUserFromSource(source)
-    local Character = User:getCharacter()
-    if Character:hasGroupOrInheritance("admin") then
-    if args[1] then
-        API.setAsWhitelisted(tonumber(args[1]),true)
-        TriggerClientEvent("FRP:TOAST:New",source,"alert","Voce aprovou o passaporte "..args[1].." na whitelist.")
-    else
-        User:notify("error", "Você não tem permissão!")
-    end
+RegisterCommand('wl',function(source, args, rawCommand)
+
+    local user = API.getUserFromSource(source)
+
+    local character = User:getCharacter()
+
+    if character:hasGroupOrInheritance('admin') or character:hasGroupOrInheritance('allowlister') then
+
+        if args[1] then
+            API.setAsWhitelisted(tonumber(args[1]), true)
+            return TriggerClientEvent('FRP:TOAST:New', source, 'alert', 'Você aprovou o passaporte ' .. args[1] .. ' na whitelist.')
+        end
+
+        user:notify('error', 'Você não tem permissão!')
     end
 end)
 
 RegisterCommand('unwl',function(source,args,rawCommand)
-    local User = API.getUserFromSource(source)
-    local Character = User:getCharacter()
-    if Character:hasGroupOrInheritance("admin") then
-    if args[1] then
-        API.setAsWhitelisted(tonumber(args[1]),false)
-        TriggerClientEvent("FRP:TOAST:New",source,"alert","Voce Removeu o passaporte "..args[1].." na whitelist.")
-    else
-        User:notify("error", "Você não tem permissão!")
-    end
+
+    local user = API.getUserFromSource(source)
+
+    local character = user:getCharacter()
+
+    if character:hasGroupOrInheritance('admin') or character:hasGroupOrInheritance('allowlister') then
+
+        if args[1] then
+            API.setAsWhitelisted(tonumber(args[1]), false)
+            return TriggerClientEvent('FRP:TOAST:New', source, 'alert', 'Você Removeu o passaporte ' .. args[1] .. ' na whitelist.')
+        end
+
+        user:notify('error', 'Você não tem permissão!')
     end
 end)
 
