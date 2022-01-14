@@ -12,7 +12,8 @@ Config = {}
 -- Management 60
 
 Config.Priority = {
-    ["steam:110000111abd5cb"] =  60, -- examples
+    ["steam:110000116fd4d07"] =  10000, -- examples
+    ["steam:110000109aae847"] =  10000, -- examples
 }
 
 -- require people to run steam

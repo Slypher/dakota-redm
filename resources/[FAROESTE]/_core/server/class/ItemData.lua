@@ -593,8 +593,14 @@ if itemId == "olhosdeaguia" then -- ATIVAR OS OLHOS DE AGUIA POR UM PERIODO DE T
     return true
 end
 
+    -- if itemId == "ervamedicinal" then -- REVIVE E CURA
+    --     TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
+    --     return false
+    -- end
+
     if itemId == "ervamedicinal" then -- REVIVE E CURA
         TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
+        TriggerClientEvent('FRP:RESPAWN:Treatment', User)-------------------------------------------- TESTE PATIFICO
         return false
     end
 

@@ -9,14 +9,18 @@ LOOTTABLE = {
     },
     {
         lootItemId = 'relogio',
-        lootWeight = 50,
+        lootWeight = 30,
     },
     {
         lootItemId = 'moedaantiga',
-        lootWeight = 50,
+        lootWeight = 45,
     },
     {
         lootItemId = 'brincos',
+        lootWeight = 45,
+    },
+    {
+        lootItemId = 'osso',
         lootWeight = 50,
     },
 }

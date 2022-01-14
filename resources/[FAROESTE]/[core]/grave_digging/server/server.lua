@@ -17,10 +17,10 @@ local SITE_COOLDOWN_TIME = 30 * 60 * 1000
 
 local SITE_KEEP_ACTIVE_TIMEOUT = 5000
 
-local BE_REWARD_LOOT_CHANCE = 10
+local BE_REWARD_LOOT_CHANCE = 80
 
 local NOTIFY_LAW_ENFORCEMENT_CHANCE = 5
-local MIN_NUM_LAW_ENFORCEMENT_ONLINE = 2
+local MIN_NUM_LAW_ENFORCEMENT_ONLINE = 0
 
 --[[
     Cluster -> N Site.
@@ -221,7 +221,7 @@ RegisterNetEvent('net.requestStateUpdate', function(newState)
         local lootItemId = getLootFromLoottable()
 
         inventory:addItem(lootItemId, 1)
-        user:notify('item', lootItemId, 1)
+        --user:notify('item', lootItemId, 1)
     end
 end)
 

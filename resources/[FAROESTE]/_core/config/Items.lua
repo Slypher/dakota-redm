@@ -610,21 +610,21 @@ ItemList = {
         name = "Massa de pão",
         weight = 0.1,
         description = "A massa de pão que o Quinteiro amassou.",
-        stackSize = 5
+        stackSize = 20
     },
     ["massadebiscoito"] = {
         type = "generic",
         name = "Massa de Biscoito",
         weight = 0.1,
         description = "Será que vai no forno ou já da para comer?",
-        stackSize = 5
+        stackSize = 20
     },
     ["massadebolacha"] = {
         type = "generic",
         name = "Massa de Bolacha",
         weight = 0.1,
         description = "Será que vai no forno ou já da para comer?",
-        stackSize = 5
+        stackSize = 20
     },
     ['pao'] = {
         type = 'edible',

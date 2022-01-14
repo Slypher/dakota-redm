@@ -222,7 +222,7 @@ RegisterNUICallback('Cabelos', function(data)
             for i = 1, #MaleHairs do
                 if i == tonumber(data.id) then
                     Citizen.InvokeNative(0xD3A7B003ED343FD9, PlayerPedId(), MaleHairs[i].componentHash, true, true, true)
-                    gHairUsing = MaleHairs[i]
+                    gHairUsing = MaleHairs[i].componentHash
                 end
             end
         else

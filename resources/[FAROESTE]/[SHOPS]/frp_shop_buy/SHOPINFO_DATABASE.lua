@@ -2050,7 +2050,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 72,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 6,
+                transactionPriceSellDollar = 18,
             },
             {
                 itemId = 'carneboa',
@@ -2058,7 +2058,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 104,
                 transactionPriceBuyGold = 1,
             
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 33,
             },
             {
                 itemId = 'carneperfeita',
@@ -2066,7 +2066,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 160,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 20,
+                transactionPriceSellDollar = 60,
             },
             {
                 itemId = 'carneave',
@@ -2074,7 +2074,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 96,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 8,
+                transactionPriceSellDollar = 24,
             },
             {
                 itemId = 'smallfish',
@@ -2082,7 +2082,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 96,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 6,
+                transactionPriceSellDollar = 18,
             },
             {
                 itemId = 'mediumfish',
@@ -2090,7 +2090,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 140,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 11,
+                transactionPriceSellDollar = 33,
             },
             {
                 itemId = 'largefish',
@@ -2098,7 +2098,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 180,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 20,
+                transactionPriceSellDollar = 60,
             },
             {
                 itemId = 'gordura',
@@ -2106,7 +2106,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 50,
                 transactionPriceBuyGold = 1,
 
-                transactionPriceSellDollar = 6,
+                transactionPriceSellDollar = 18,
             },
 
         },
@@ -2523,7 +2523,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 924,
                 transactionPriceBuyGold = 3,
 
-                transactionPriceSellDollar = 462,
+                transactionPriceSellDollar = 500,
             },
             {
                 itemId = 'moonshinedourado',
@@ -2531,7 +2531,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 1100,
                 transactionPriceBuyGold = 6,
 
-                transactionPriceSellDollar = 550,
+                transactionPriceSellDollar = 650,
             },
             {
                 itemId = 'moonshineinverno',
@@ -2539,7 +2539,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceBuyDollar = 1574,
                 transactionPriceBuyGold = 9,
 
-                transactionPriceSellDollar = 787,
+                transactionPriceSellDollar = 900,
             },
         },
 
