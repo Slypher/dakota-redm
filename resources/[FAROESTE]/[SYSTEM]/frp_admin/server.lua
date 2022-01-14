@@ -32,7 +32,7 @@ RegisterCommand('wl',function(source, args, rawCommand)
 
     local user = API.getUserFromSource(source)
 
-    local character = User:getCharacter()
+    local character = user:getCharacter()
 
     if character:hasGroupOrInheritance('admin') or character:hasGroupOrInheritance('allowlister') then
 
