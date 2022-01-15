@@ -8,6 +8,3 @@ client_scripts {
 	'config.lua',
 	'client.lua'
 }
-dependencies {
-	'ak_menubase'
-}
