@@ -1,15 +1,7 @@
 API_Database = {}
-local API = exports["GHMattiMySQL"]
 
----------------------------------------------
----------------DATABASE SYSTEM---------------
----------------------------------------------
 DBConnect = {
-	driver = "ghmattimysql",
-	host = "localhost",
-	database = "dakota",
-	user = "root",
-	password = ""
+	driver = 'oxmysql'
 }
 
 local db_drivers = {}
@@ -89,9 +81,17 @@ function API_Database.execute(name, params)
 	return API_Database.query(name, params, "execute")
 end
 
----------------------------------------------
----------------EXECUTE  SYSTEM---------------
----------------------------------------------
+local function blob2string(blob)
+
+	for i,c in pairs(blob) do
+	 	blob[i] = string.char(c)
+	end
+
+	return table.concat(blob)
+end
+
+local API = exports['oxmysql']
+
 local queries = {}
 
 local function on_init(cfg)
@@ -103,50 +103,47 @@ local function on_prepare(name, query)
 end
 
 local function on_query(name, params, mode)
+
 	local query = queries[name]
-	local _params = {}
-	_params._ = true
+
+	query = query:gsub('%,',', ')
+
+	local _params = {
+		_ = true
+	}
 
 	for k, v in pairs(params) do
-		_params["@" .. k] = v
+		_params[k] = v
 	end
 
 	local r = async()
 
-	if mode == "execute" then
-		API:QueryAsync(
-			query,
-			_params,
-			function(affected)
-				r(affected or 0)
-			end
-		)
-	elseif mode == "scalar" then
-		API:QueryScalarAsync(
-			query,
-			_params,
-			function(scalar)
-				r(scalar)
-			end
-		)
+	if mode == 'execute' then
+
+		API:execute(query, _params, function(data)
+			r(data or 0)
+		end)
+
+	elseif mode == 'scalar' then
+
+		API:scalar(query, _params, function(scalar)
+			r(scalar)
+		end)
+
 	else
-		API:QueryResultAsync(
-			query,
-			_params,
-			function(rows)
-				r(rows, #rows)
-			end
-		)
+
+		API:execute(query,_params, function(rows)    
+			r(rows, #rows)
+		end)
+
 	end
+
 	return r:wait()
 end
 
-Citizen.CreateThread(
-	function()
-		API:Query("SELECT 1")
-		API_Database.registerDBDriver("ghmattimysql", on_init, on_prepare, on_query)
-	end
-)
+CreateThread(function()
+	API_Database.registerDBDriver('oxmysql', on_init, on_prepare, on_query)
+end)
 
 ----------	USER QUERIES -------------
 API_Database.prepare("FCRP/CreateUser", "INSERT INTO users(identifier, name, createdAt, banned) VALUES(@identifier, @name, @createdAt, 0); SELECT LAST_INSERT_ID() AS id")
