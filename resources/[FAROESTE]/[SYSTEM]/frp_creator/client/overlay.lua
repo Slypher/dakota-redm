@@ -339,7 +339,7 @@ local function toggleOverlayChange(name,visibility,tx_id,tx_normal,tx_material,t
                 end
                 if name == "shadows" or name == "eyeliners" or name == "lipsticks" then
                     v.var = var
-                    v.tx_id = overlaysInfo[name][1].id
+                    v.tx_id = overlaysInfo[name][1].insertId
                 else
                     v.var = 0
                     v.tx_id = overlaysInfo[name][tx_id].id
