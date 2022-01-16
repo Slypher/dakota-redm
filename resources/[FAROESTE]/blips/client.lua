@@ -57,7 +57,7 @@ local blips = {
 
 	-- SALOON
 	{name = "Saloon de Valentine", sprite = 1242464081, x = -308.532, y = 804.939, z = 119.804},
-	{name = "Saloon dos Baxter", sprite = 595820042, x = -240.800, y = 770.333, z = 118.330},
+	{name = "Saloon dos River's", sprite = 595820042, x = -240.800, y = 770.333, z = 118.330},
 
 	-- LEILÃO
 	-- Saloons
