@@ -6,8 +6,8 @@ function API.createPosse(charid, name)
     local User = API.getUserFromCharId(charid)
     local members = {[charid] = 1}
     local rows = API_Database.query('FCRP/CreatePosse', {charid = charid, name = name, members = json.encode(members)})
-    if #rows > 0 then
-        local id = rows[1].insertId
+    if rows then
+        local id = rows.insertId
         User:setPosse(id)
         local Posse = API.Posse(id, charid, name, nil)
         posses[id] = Posse

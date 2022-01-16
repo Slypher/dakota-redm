@@ -295,8 +295,8 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
 
     self.createHorse = function(this, model, name)
         local rows = API_Database.query("FCRP/CreateHorse", {charid = self:getId(), model = model, name = name})
-        if #rows > 0 then
-            local id = rows[1].insertId
+        if rows then
+            local id = rows.insertId
             self.Horse = API.Horse(id, model, name, API.Inventory("horse:" .. id, nil, nil))
             local Inventory = self.Horse:getInventory()
 
@@ -388,12 +388,12 @@ function API.Character(id, charName, level, xp, role, charAge, inventory)
 
     self.getLastPosition = function(this)
         local lastPositionFromDb = self:getData(self.id, "metaData", "position")
-        return lastPositionFromDb ~= nil and json.decode(lastPositionFromDb) or {-329.9, 775.11, 121.74}
+        return lastPositionFromDb ~= nil and lastPositionFromDb or {-329.9, 775.11, 121.74}
     end
 
     self.getCachedStats = function()
         local c = self:getData(self.id, "metaData", "stats")
-        return c ~= nil and json.decode(c) or {}
+        return c ~= nil and c or {}
     end
 
     self.cacheStats = function(this, position, health, stamina, healthCore, staminaCore)

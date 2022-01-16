@@ -1,6 +1,5 @@
 local gPedModel
 local gCharAppearence
-local gLastPosition
 local gStats
 
 function cAPI.setDataAppearence(pedModel, charAppearence)
@@ -18,11 +17,11 @@ function cAPI.Initialize(pedModel, charAppearence, lastPosition, stats)
 
     gPedModel = pedModel
     gCharAppearence = charAppearence
-    gLastPosition = lastPosition
+    lastPosition = json.decode(lastPosition)
     gStats = stats   
 
     if lastPosition == nil then
-        lastPosition = "{-1099.470,-1839.129,60.327}"
+        lastPosition = {-1099.470,-1839.129,60.327}
     end
 
     local decodedLastPosition = json.decode(lastPosition)

@@ -9,7 +9,7 @@ function API.varyHunger(variation)
         return
     end
 
-    local hunger = json.decode(Character:getData(Character:getId(), 'metaData', 'hunger'))
+    local hunger = Character:getData(Character:getId(), 'metaData', 'hunger')
     hunger = tonumber(hunger)
 
     if hunger then
@@ -47,7 +47,7 @@ function API.varyHunger2(source, variation)
         return
     end
 
-    local hunger = json.decode(Character:getData(Character:getId(), 'metaData', 'hunger'))
+    local hunger = Character:getData(Character:getId(), 'metaData', 'hunger')
     hunger = tonumber(hunger)
 
     if hunger then
@@ -89,7 +89,7 @@ function API.varyThirst(variation)
         return
     end
 
-    local thirst = json.decode(Character:getData(Character:getId(), 'metaData', 'thirst'))
+    local thirst = Character:getData(Character:getId(), 'metaData', 'thirst')
     thirst = tonumber(thirst)
 
     if thirst then
@@ -131,7 +131,7 @@ function API.varyThirst2(source, variation)
         return
     end
 
-    local thirst = json.decode(Character:getData(Character:getId(), 'metaData', 'thirst'))
+    local thirst = Character:getData(Character:getId(), 'metaData', 'thirst')
     thirst = tonumber(thirst)
 
     if thirst then
