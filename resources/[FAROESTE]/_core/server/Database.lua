@@ -146,7 +146,7 @@ CreateThread(function()
 end)
 
 ----------	USER QUERIES -------------
-API_Database.prepare("FCRP/CreateUser", "INSERT INTO users(identifier, name, createdAt, banned) VALUES(@identifier, @name, @createdAt, 0); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/CreateUser", "INSERT INTO users(identifier, name, createdAt, banned) VALUES(@identifier, @name, @createdAt, 0);")
 API_Database.prepare("FCRP/SelectUser", "SELECT * from users WHERE identifier = @identifier")
 API_Database.prepare("FCRP/BannedUser", "SELECT banned from users WHERE user_id = @user_id")
 API_Database.prepare("FCRP/SetBanned", "UPDATE users SET banned = 1, reason = @reason WHERE user_id = @user_id")
@@ -156,7 +156,7 @@ API_Database.prepare("AddIdentifierWhitelist", "UPDATE users SET whitelist = 1 w
 API_Database.prepare("RemoveIdentifierWhitelist", "UPDATE users SET whitelist = 0 where user_id = @user_id")
 
 -------- CHARACTER QUERIES -----------
-API_Database.prepare("FCRP/CreateCharacter", "INSERT INTO characters(user_id, characterName, groups, age) VALUES (@user_id, @charName, 0,@charAge); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/CreateCharacter", "INSERT INTO characters(user_id, characterName, groups, age) VALUES (@user_id, @charName, 0,@charAge);")
 API_Database.prepare("FCRP/CharacterAppearence", "INSERT INTO characters_appearence (charid, isMale, model, enabledComponents, faceFeatures, overlays, clothes, pedHeight) VALUES (@charId, @isMale, @model, '{}', '{}', '{}', '{}', 1.0)")
 API_Database.prepare("FCRP/GetCharacters", "SELECT * from characters WHERE user_id = @user_id")
 API_Database.prepare("FCRP/GetCharacter", "SELECT * from characters WHERE charid = @charid")
@@ -192,19 +192,19 @@ API_Database.prepare("FCRP/SetCFort", "UPDATE fort SET bando = @bando WHERE id =
 API_Database.prepare("FCRP/GetCFort", "SELECT bando from fort WHERE id = @id")
 
 -------- JAIL DATATABLE QUERIES --------
-API_Database.prepare("FCRP/SetCJail", "INSERT INTO jail(charid, jail_time) VALUES (@charid, @jail_time); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/SetCJail", "INSERT INTO jail(charid, jail_time) VALUES (@charid, @jail_time);")
 API_Database.prepare("FCRP/UpdCJail", "UPDATE jail SET jail_time = @jail_time WHERE charid = @charid")
 API_Database.prepare("FCRP/GetCJail", "SELECT * from jail WHERE charid = @charid")
 API_Database.prepare("FCRP/RemCJail", "DELETE FROM jail WHERE charid = @charid")
 
 -------- QUEST DATATABLE QUERIES --------
-API_Database.prepare("FCRP/SetQuest", "INSERT INTO quest(questId, charid, questSteps) VALUES (@questId, @charid, @questSteps); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/SetQuest", "INSERT INTO quest(questId, charid, questSteps) VALUES (@questId, @charid, @questSteps);")
 API_Database.prepare("FCRP/UpdQuest", "UPDATE quest SET questSteps = @questSteps WHERE questId = @questId")
 API_Database.prepare("FCRP/GetQuest", "SELECT * from quest WHERE charid = @charid")
 API_Database.prepare("FCRP/RemQuest", "DELETE FROM quest WHERE questId = @questId")
 
 -------- TENTS DATATABLE QUERIES --------
-API_Database.prepare("FCRP/AddTents", "INSERT INTO tents(charid, model, position) VALUES (@charid, @model, @position); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/AddTents", "INSERT INTO tents(charid, model, position) VALUES (@charid, @model, @position);")
 API_Database.prepare("FCRP/GetTents", "SELECT * from tents WHERE charid = @charid")
 API_Database.prepare("FCRP/GetAllTents", "SELECT * from tents")
 API_Database.prepare("FCRP/RemoveTents", "DELETE FROM tents WHERE id = @id")
@@ -226,7 +226,7 @@ API_Database.prepare("SELECT:inv_select_slots_and_capacity", "SELECT inv_slots, 
 API_Database.prepare("UPDATE:inv_clear", "UPDATE `inventories` SET `inv_slots` = '{}' WHERE id = @id")
 
 ---------- HORSE QUERIES -------------
-API_Database.prepare("FCRP/CreateHorse", "INSERT INTO horses(charid, model, name) VALUES (@charid, @model, @name); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/CreateHorse", "INSERT INTO horses(charid, model, name) VALUES (@charid, @model, @name);")
 API_Database.prepare("FCRP/GetHorses", "SELECT * from horses WHERE charid = @charid")
 API_Database.prepare("FCRP/GetHorse", "SELECT * from horses WHERE id = @id")
 API_Database.prepare("FCRP/DeleteHorse", "DELETE FROM horses WHERE id = @id")
@@ -238,13 +238,13 @@ API_Database.prepare("UpdateHorseMetaData", "UPDATE horses SET metaData = @metad
 API_Database.prepare("SelectHorseMetaData", "SELECT metaData FROM horses WHERE id = @id")
 
 ---------- POSSE QUERIES -------------
-API_Database.prepare("FCRP/CreatePosse", "INSERT INTO posses(charid, members, name) VALUES (@charid, @members, @name); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/CreatePosse", "INSERT INTO posses(charid, members, name) VALUES (@charid, @members, @name);")
 API_Database.prepare("FCRP/GetPosseById", "SELECT * from posses WHERE id = @id")
 
 ---------- CHEST QUERIES -------------
 API_Database.prepare("FCRP/GetChests", "SELECT * from chests")
-API_Database.prepare("FCRP/CreateChest", "INSERT INTO chests(charid, position, type, capacity) VALUES (@charid, @position, @type, @capacity); SELECT LAST_INSERT_ID() AS id")
-API_Database.prepare("FCRP/CreateStaticChest", "INSERT INTO chests(position, type, capacity) VALUES (@position, @type, @capacity); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("FCRP/CreateChest", "INSERT INTO chests(charid, position, type, capacity) VALUES (@charid, @position, @type, @capacity);")
+API_Database.prepare("FCRP/CreateStaticChest", "INSERT INTO chests(position, type, capacity) VALUES (@position, @type, @capacity);")
 
 ------------ CROP QUERIES --------------------
 API_Database.prepare("UPDATE:crop_update_slot", "UPDATE farms SET crop_percent_grown = @crop_percent_grown, crop_min_time_water = @crop_min_time_water WHERE crop_id = @crop_id AND slot_id = @slot_id")
@@ -266,7 +266,7 @@ API_Database.prepare("queue:get", "SELECT priority, start, end from queue_priori
 API_Database.prepare("queue:remove", "DELETE FROM queue_priority WHERE id = @user_id")
 
 ------------ ORGANIZATIONS --------------------
-API_Database.prepare("orgs:insert", "INSERT INTO organizations(name, type) VALUES (@name, @type); SELECT LAST_INSERT_ID() AS id")
+API_Database.prepare("orgs:insert", "INSERT INTO organizations(name, type) VALUES (@name, @type);")
 API_Database.prepare("orgs:delete", "DELETE FROM organizations WHERE id = @org_id")
 API_Database.prepare("orgs:getMemberOrgs", "SELECT o.id, o.name, o.type, m.rank FROM organizations o, org_members m  WHERE o.id = m.org_id AND m.member_id = @member_id")
 API_Database.prepare("orgs:getMemberOrgByType", "SELECT o.id, o.name, o.type, m.rank FROM organizations o, org_members m  WHERE o.id = m.org_id AND m.member_id = @member_id AND o.type = @org_type")
@@ -290,7 +290,7 @@ do
 
 	local queries = {
 		user = {
-			["FCRP/CreateUser"] = "INSERT INTO users(identifier, name, banned) VALUES(@identifier, @name, 0); SELECT LAST_INSERT_ID() AS id",
+			["FCRP/CreateUser"] = "INSERT INTO users(identifier, name, banned) VALUES(@identifier, @name, 0);",
 			["FCRP/SelectUser"] = "SELECT * from users WHERE identifier = @identifier",
 			["FCRP/BannedUser"] = "SELECT banned from users WHERE user_id = @user_id",
 			["FCRP/SetBanned"] = "UPDATE users SET banned = 1, reason = @reason WHERE user_id = @user_id",
@@ -300,7 +300,7 @@ do
 			["RemoveIdentifierWhitelist"] = "DELETE FROM whitelist WHERE identifier = @identifier"
 		},
 		character = {
-			["FCRP/CreateCharacter"] = "INSERT INTO characters(user_id, characterName, groups, age) VALUES (@user_id, @charName, 0,@charAge); SELECT LAST_INSERT_ID() AS id",
+			["FCRP/CreateCharacter"] = "INSERT INTO characters(user_id, characterName, groups, age) VALUES (@user_id, @charName, 0,@charAge);",
 			["FCRP/CharacterAppearence"] = "INSERT INTO characters_appearence (charid, isMale, model, enabledComponents, faceFeatures, overlays, clothes, pedHeight) VALUES (@charId, @isMale, 'mp_male', '{}', '{}', '{}', '{}', 1.0)",
 			["FCRP/GetCharacters"] = "SELECT * from characters WHERE user_id = @user_id",
 			["FCRP/GetCharacter"] = "SELECT * from characters WHERE charid = @charid",
@@ -320,7 +320,7 @@ do
 			["FCRP/GetPlayerDeath"] = "SELECT is_dead from characters WHERE charid = @charid",
 			["UPDATE:character_remove_role"] = "UPDATE characters SET groups = groups & ~@role",
 			jail = {
-				["FCRP/SetCJail"] = "INSERT INTO jail(charid, jail_time) VALUES (@charid, @jail_time); SELECT LAST_INSERT_ID() AS id",
+				["FCRP/SetCJail"] = "INSERT INTO jail(charid, jail_time) VALUES (@charid, @jail_time);",
 				["FCRP/UpdCJail"] = "UPDATE jail SET jail_time = @jail_time WHERE charid = @charid",
 				["FCRP/GetCJail"] = "SELECT * from jail WHERE charid = @charid",
 				["FCRP/RemCJail"] = "DELETE FROM jail WHERE charid = @charid"
@@ -336,7 +336,7 @@ do
 			["FCRP/GetCFort"] = "SELECT bando from fort WHERE id = @id"
 		},
 		tents = {
-			["FCRP/AddTents"] = "INSERT INTO tents(charid, model, position) VALUES (@charid, @model, @position); SELECT LAST_INSERT_ID() AS id",
+			["FCRP/AddTents"] = "INSERT INTO tents(charid, model, position) VALUES (@charid, @model, @position);",
 			["FCRP/GetTents"] = "SELECT * from tents WHERE charid = @charid",
 			["FCRP/GetAllTents"] = "SELECT * from tents",
 			["FCRP/RemoveTents"] = "DELETE FROM tents WHERE id = @id"
@@ -349,7 +349,7 @@ do
 			["UPDATE:inv_clear"] = "UPDATE inventories SET inv_slot = `{}` WHERE inv_id = @inv_id"
 		},
 		horse = {
-			["FCRP/CreateHorse"] = "INSERT INTO horses(charid, model, name) VALUES (@charid, @model, @name); SELECT LAST_INSERT_ID() AS id",
+			["FCRP/CreateHorse"] = "INSERT INTO horses(charid, model, name) VALUES (@charid, @model, @name);",
 			["FCRP/GetHorses"] = "SELECT * from horses WHERE charid = @charid",
 			["FCRP/GetHorse"] = "SELECT * from horses WHERE id = @id",
 			["FCRP/DeleteHorse"] = "DELETE FROM horses WHERE id = @id",
@@ -360,13 +360,13 @@ do
 
 		},
 		posse = {
-			["FCRP/CreatePosse"] = "INSERT INTO posses(charid, members, name) VALUES (@charid, @members, @name); SELECT LAST_INSERT_ID() AS id",
+			["FCRP/CreatePosse"] = "INSERT INTO posses(charid, members, name) VALUES (@charid, @members, @name);",
 			["FCRP/GetPosseById"] = "SELECT * from posses WHERE id = @id"
 		},
 		chest = {
 			["FCRP/GetChests"] = "SELECT * from chests",
-			["FCRP/CreateChest"] = "INSERT INTO chests(charid, position, type, capacity) VALUES (@charid, @position, @type, @capacity); SELECT LAST_INSERT_ID() AS id",
-			["FCRP/CreateStaticChest"] = "INSERT INTO chests(position, type, capacity) VALUES (@position, @type, @capacity); SELECT LAST_INSERT_ID() AS id"
+			["FCRP/CreateChest"] = "INSERT INTO chests(charid, position, type, capacity) VALUES (@charid, @position, @type, @capacity);",
+			["FCRP/CreateStaticChest"] = "INSERT INTO chests(position, type, capacity) VALUES (@position, @type, @capacity);"
 		},
 		farming = {
 			["UPDATE:crop_update_slot"] = "UPDATE farms SET crop_percent_grown = @crop_percent_grn, crop_min_time_water = @crop_min_time_water WHERE crop_id = @crop_id AND slot_id = @slot_id",

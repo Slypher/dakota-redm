@@ -25,7 +25,7 @@ function API.getUserIdByIdentifiers(ids, name)
 
     local rows = API_Database.query("FCRP/CreateUser", {identifier = ids[1], name = name, createdAt = added})
     if #rows > 0 then
-        return rows[1].id
+        return rows[1].insertId
     end
 end
 

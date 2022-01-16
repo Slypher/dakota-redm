@@ -74,7 +74,7 @@ function API.User(source, id, ipAddress)
         
         local rows = API_Database.query("FCRP/CreateCharacter", {user_id = self:getId(), charName = characterName, charAge = age})
         if #rows > 0 then
-            local charId = rows[1].id
+            local charId = rows[1].insertId
 
             Character = API.Character(charId, characterName, 1, 0, 0, age, API.Inventory("char:" .. charId, nil, nil))
 
