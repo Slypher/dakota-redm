@@ -66,7 +66,7 @@ AddEventHandler(
         local position = {x, y, z, h}
         local query = dbAPI.query("FCRP/CreateChest", {charid = charid, position = json.encode(position), type = 1, capacity = capacity})
         if #query > 0 then
-            local chestId = rowsWithId[1].id
+            local chestId = rowsWithId[1].insertId
             local Chest = API.Chest(chestId)
             Chest.owner_char_id = charid
             Chest.position = position
