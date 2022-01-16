@@ -64,11 +64,11 @@ AddEventHandler(
 
         for i = 1, #PoliceON do
             if wan ~= nil then
-                if wan == "{}" then
+                if wan == {} then
                     local wantedvalue = 0
                     TriggerClientEvent("FRP:WANTED:RewardNotify", PoliceON[i].getSource(), reward + wantedvalue, pname, city)
                 else
-                    local wantedvalue = json.decode(wan)
+                    local wantedvalue = wan
                     TriggerClientEvent("FRP:WANTED:RewardNotify", PoliceON[i].getSource(), reward + wantedvalue, pname, city)
                 end
             else
@@ -90,7 +90,7 @@ AddEventHandler(
         local wan = Character:getData(charid, "wanted", city)
 
         if wan ~= nil then
-            local wantedvalue = json.decode(wan)
+            local wantedvalue = wan
             local wanted = {
                 [city] = value
             }
@@ -114,8 +114,7 @@ RegisterCommand(
         local Character = User:getCharacter()
         local charid = Character:getId()
 
-        local wan = Character:getData(charid, "wanted", nil)
-        local wanted = json.decode(wan)
+        local wanted = Character:getData(charid, "wanted", nil)
         TriggerClientEvent("FRP:WANTED:GetWanted", _source, wanted)
     end
 )
