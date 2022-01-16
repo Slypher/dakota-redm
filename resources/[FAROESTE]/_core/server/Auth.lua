@@ -80,7 +80,7 @@ Queue.OnReady(
                 end
 
                 if not API.isWhitelisted(steamId) then
-                    allow("ERROR: Você não tem permissão. \n Passe seu ID a adminstração: " .. user_id .. " \n discord.gg/dakotarp")
+                    allow("ERROR: Você não tem permissão. \n Passe seu ID a adminstração: " .. user_id .. " \n discord.gg/dakotaroleplay")
                     return
                 end
 
