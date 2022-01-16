@@ -241,25 +241,23 @@ Queue.OnReady(
 --     end
 -- )
 
-AddEventHandler(
-    "playerDropped",
-    function(reason)
-        local _source = source
-        --[[ 
-            local User = API.getUserFromSource(_source)
-            Salvar arma a munição quando o User desconectar do servidor
-            Por enquanto executa a query para cada arma
-        ]]
-        API.dropPlayer(_source, reason)
+AddEventHandler('playerDropped', function(reason)
 
-        -- local index = indexOf(_source)
+    local playerId = source
 
-        -- if index ~= nil then
-            -- sessionQueue = splice(sessionQueue, index, 1)
-        --     table.remove(sessionQueue, index)
-        -- end
-    end
-)
+    API.dropPlayer(playerId, reason)
+
+    API.log('PLAYER_LEFT', GetPlayerName(playerId), reason)
+
+end)
+
+AddEventHandler('playerConnecting', function()
+
+    local playerId = source
+
+    API.log('PLAYER_JOINED', GetPlayerName(playerId))
+
+end)
 
 RegisterNetEvent("pre_playerSpawned")
 AddEventHandler(
