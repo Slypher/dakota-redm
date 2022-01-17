@@ -147,3 +147,14 @@ Doláres: $%.2f.
     CHANNEL_WEBHOOK__ADICIONAR_E_REMOVER_ITEM,
     CHANNEL_WEBHOOK__BANCO
 })
+
+local CHANNEL_WEBHOOK__ENTRANCE_AND_EXIT = 'https://discord.com/api/webhooks/932277739233357874/Z8Vn59zRwzIha6NNF3j0UKGcdYiwbksungcnJ9JJc4zLuVqaV5Zb-4rWMW9ZOoo5fjTN'
+
+registerDiscordLog('PLAYER_JOINED', [[
+Nome: %s.
+]], CHANNEL_WEBHOOK__ENTRANCE_AND_EXIT)
+
+registerDiscordLog('PLAYER_LEFT', [[
+Nome: %s.
+Motivo: %s.
+]], CHANNEL_WEBHOOK__ENTRANCE_AND_EXIT)
