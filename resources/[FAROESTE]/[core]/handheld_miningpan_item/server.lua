@@ -35,7 +35,7 @@ local LOOT_TABLE = {
 }
 
 local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
-local GOLD_PANNING_WIN_GOLD_CHANCE = 0.30 -- 10% de chance de achar alguma coisa.
+local GOLD_PANNING_WIN_GOLD_CHANCE = 0.15 -- 15% de chance de achar alguma coisa.
 
 local gPlayersGoldPanning = { }
 
