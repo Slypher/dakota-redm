@@ -1,6 +1,6 @@
 Config = {}
 
-Config.copsRequired = 0
+Config.copsRequired = 2
 Config.policeColor = {0,200,255}
 
 Config.robberyInterval = 3600 -- time in seconds

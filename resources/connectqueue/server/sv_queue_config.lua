@@ -12,8 +12,27 @@ Config = {}
 -- Management 60
 
 Config.Priority = {
-    ["steam:110000116fd4d07"] =  10000, -- examples
-    ["steam:110000109aae847"] =  10000, -- examples
+    -- ADM
+    ["steam:110000116fd4d07"] =  10000, -- Patifico
+    ["steam:110000109aae847"] =  10000, -- Iris
+    ["steam:11000011686db8b"] =  10000, -- Lari
+    
+    -- MOD
+    ["steam:11000010ab5147a"] =  5000, -- KIFOO
+    ["steam:110000106feb025"] =  5000, -- CHAPÉU
+    
+    -- SUP
+    ["steam:110000108b0cd99"] =  2500, -- Morato
+    ["steam:1100001050c1eae"] =  2500, -- Tatu
+
+    -- DEV
+    ["steam:110000133a534b9"] =  10000, -- Slypher
+
+    -- STREAMERS
+    ["steam:110000106d9e1b8"] =  500, -- Kalera
+
+    -- COLABORADORES
+
 }
 
 -- require people to run steam
@@ -35,10 +54,10 @@ Config.ConnectTimeOut = 240
 Config.QueueTimeOut = 90
 
 -- will give players temporary priority when they disconnect and when they start loading in
-Config.EnableGrace = false
+Config.EnableGrace = true
 
 -- how much priority power grace time will give
-Config.GracePower = 10
+Config.GracePower = 100
 
 -- how long grace time lasts in seconds
 Config.GraceTime = 90
