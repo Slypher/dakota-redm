@@ -3117,6 +3117,14 @@ ItemList = {
         description = '',
         stackSize = 1,
         worldModel = 'a_c_fishsmallmouthbass_01_ms'
+    },
+
+    ['fishingrod'] = {
+        type = 'weapon',
+        name = 'Vara de Pescar',
+        weight = 1.5,
+        description = 'Um pequeno cabo engatado por um grosso cipó e um gancho pequeno em sua ponta. Útil para pescas.',
+        stackSize = 1
     }
 
 }
