@@ -662,6 +662,43 @@ end
         return false
     end
 
+    local baits = {
+        'p_baitbread01x',
+        'p_baitcorn01x',
+        'p_baitcheese01x',
+        'p_baitworm01x',
+        'p_baitcricket01x',
+        'p_crawdad01x',
+        'p_finishedragonfly01x_hf',
+        'p_finisdfishlure01x',
+        'p_finishdcrawd01x',
+        'p_finishedragonflylegendary01x',
+        'p_finisdfishlurelegendary01x',
+        'p_finishdcrawdlegendary01x',
+        'p_lgoc_spinner_v4'
+    }
+
+    for i = 1, #baits do
+
+        local bait = baits[i]
+
+        if itemId == bait then
+
+            local user = API.getUserFromSource(source)
+
+            local character = user:getCharacter()
+
+            local inventory = character:getInventory()
+
+            if inventory:removeItem(-1, bait, 1) then
+                TriggerClientEvent('net.useBait', source, bait)
+            end
+
+            return false
+        end
+
+    end
+
     return false
 end
 
