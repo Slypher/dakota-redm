@@ -677,6 +677,84 @@ Config = {
             },
         }
     },
+
+      ---------------------------------------------------------------------------------------------------
+    ---------------------------------------- FERREIRO | FUNDIÇÃO --------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    
+
+    {    
+        group = "ferreiro",
+        position = vec3(-869.613,-1394.739,43.524),  -- No position, its global
+        --Ferreiro = true,
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                                -- CARVÃO
+                descriptionTextOverride = 'Materiais: Madeira de boa ou má qualidade.',
+                time = 10,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}},
+                },
+                output = {
+                    {item = "carvao", amount = 1, name = "Carvão"},
+                }
+            },
+            {
+                                -- BARRA DE FERRO
+                descriptionTextOverride = 'Materiais: Minério de ferro, carvão e ferramentas.',
+                time = 30,
+                input = {
+                    {item = "minerioferro", amount = 3},
+                    {item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barraferro", amount = 1, name = "Barra de Ferro"},
+                }
+            },
+            {
+                                -- BARRA DE COBRE
+                descriptionTextOverride = 'Materiais: Minério de cobre, carvão e ferramentas.',
+                time = 30,
+                input = {
+                    {item = "mineriocobre", amount = 3},
+                    {item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barracobre", amount = 1, name = "Barra de Cobre"},
+                }
+            },
+            {
+                                -- PEPITA DE OURO
+                descriptionTextOverride = 'Materiais: Minério de ouro, carvão e ferramentas.',
+                time = 40,
+                input = {
+                    {item = "minerioouro", amount = 1},
+                    {item = "carvao", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pepitadeouro", amount = 4, name = "Pepita de ouro"}
+                }
+            },
+            {
+                                -- BARRA DE OURO
+                descriptionTextOverride = 'Materiais: Pepita de ouro, carvão e ferramentas.',
+                time = 40,
+                input = {
+                    {item = "pepitadeouro", amount = 25},
+                    {item = "carvao", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barraouro", amount = 1, name = "Barra de Ouro"}
+                }
+            },
+        }
+    },
     ---------------------------------------------------------------------------------------------------
     ---------------------------------------- FERREIRO | BIGORNA ---------------------------------------
     ---------------------------------------------------------------------------------------------------
@@ -880,6 +958,114 @@ Config = {
         group = "ferreiro",
         --position = vec3(-277.220,779.328,119.504),  -- No position, its global
         Ferreiro3 = true,
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                                -- PICARETA
+                descriptionTextOverride = 'Materiais: Uma cabeça de picareta, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecapicareta", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 4},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "picareta", amount = 1, name = "Picareta"},
+                }
+            },
+            {
+                                -- MACHADO
+                descriptionTextOverride = 'Materiais: Uma cabeça de machado, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecamachado", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_hatchet", amount = 1, name = "Machado"},
+                }
+            },
+            {
+                                -- PÁ
+                descriptionTextOverride = 'Materiais: Uma cabeça de pá, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecapa", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pa", amount = 1, name = "Pá"}
+                }
+            },
+            --[[{
+                                -- ENXADA
+                time = 20,
+                input = {
+                    {item = "cabecaenxada", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "enxada", amount = 1, name = "Enxada"}
+                }
+            },]]
+            {
+                                -- FACÃO
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_machete", amount = 1, name = "Facão"},
+                }
+            },
+            {
+                                -- FACA
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',                                
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_knife", amount = 1, name = "Faca de Caça"},
+                }
+            },
+            {
+                                -- GAZUA
+                descriptionTextOverride = 'Materiais: Parafusos, ferramentas e uma barra de cobre.',
+                time = 20,
+                input = {
+                    {item = "parafuso", amount = 10},
+                    {item = "barracobre", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "lockpick", amount = 5, name = "Gazua"},
+                }
+            },
+        }
+    },
+
+
+
+{    
+        group = "ferreiro",
+        position = vec3(-870.386,-1386.965,43.546),  -- No position, its global
+       --Ferreiro3 = true,
         useTextDescriptionAll = true,
         craftings = 
         {

@@ -58,6 +58,13 @@ local doorStates = {
     -----------------------------------
     -- SHERIFF
     [349074475] = {isOpen = false},
+    [2735269038] = {isOpen = false}, -- Tumbleweed
+    [2444845424] = {isOpen = false}, -- Tumbleweed
+
+    -- PADARIA
+    -- [2422396838] = {isOpen = false}, -- PORTA PRO ALÉM
+    -- [4091334792] = {isOpen = false},
+    -- [3852416013] = {isOpen = false},
 
 
     -- VALENTINE ARMAZÉM
@@ -235,6 +242,15 @@ Citizen.CreateThread(
                 }
             )
 
+
+            setControllableDoorsForGroup(
+                "padeiro",
+                {
+                    4091334792,
+                    3852416013,
+                }
+            )
+
             -- setControllableDoorsForGroup(
             --     "house:4",
             --     {
@@ -287,7 +303,9 @@ Citizen.CreateThread(
                     603068205,
                     1020479727,
                     349074475,
-                    1751238140
+                    1751238140,
+                    2735269038,
+                    2444845424
                 }
             )
 

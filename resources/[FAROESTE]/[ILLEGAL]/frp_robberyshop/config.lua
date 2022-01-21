@@ -31,27 +31,33 @@ Config.ATMS = {
 	{ id = 8,		x =		-825.547,		y = 	-1323.500,		z = 47.900,		h = 45.36,		seconds = 300,	wasRobbed = 60 }, -- QUARTO SALOON
 														-- STRAWBERRY
 	{ id = 9,		x =		-1789.326,      y =     -387.355,       z = 160.229,	h = 60.66,		seconds = 300,	wasRobbed = 60 }, -- ARMAZEM
+
+	
+														-- RHODES
+	{ id = 10,		x =		1329.961,		y = -1293.671,			z = 77.086,		h = 64.36,		seconds = 300,	wasRobbed = 60 }, -- ARMAZEM
+	{ id = 11,		x =		1323.386,		y = -1323.361,			z = 77.955,		h = -15.17,		seconds = 300,	wasRobbed = 60 }, -- LOJA DE ARMAS
+	{ id = 12,		x =		1338.726,		y = -1375.299,			z = 80.546,		h = 176.69,  	seconds = 300,	wasRobbed = 60 }, -- SALOON
 	
 
 														-- VALENTINE BANK
-	{ id = 10,		x =		-308.590,		y = 	765.279,		z = 118.725,	h = 13.65,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE DIREITA
-	{ id = 11,		x =		-308.976,		y = 	763.757,		z = 118.725,	h = 98.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE CENTRO
-	{ id = 12,		x =		-307.958,		y = 	762.751,		z =	118.725,	h = 189.94,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE ESQUERDA
+	{ id = 13,		x =		-308.590,		y = 	765.279,		z = 118.725,	h = 13.65,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE DIREITA
+	{ id = 14,		x =		-308.976,		y = 	763.757,		z = 118.725,	h = 98.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE CENTRO
+	{ id = 15,		x =		-307.958,		y = 	762.751,		z =	118.725,	h = 189.94,		seconds = 300,	wasRobbed = 60 }, -- BANCO VALENTINE ESQUERDA
 
 														-- RHODES BANK
-	{ id = 13,		x = 	1288.079,		y = 	-1313.533,		z = 77.035,		h = -41.40,		seconds = 300,	wasRobbed = 60 }, -- BANCO  ESQUERDA
-	{ id = 14,		x =		1287.689, 		y = 	-1314.854, 		z = 77.036,		h = -131.43,	seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO
-	{ id = 15,		x =		1286.461,		y = 	-1315.387,		z = 77.036,		h = 139.84,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA
+	{ id = 16,		x = 	1288.079,		y = 	-1313.533,		z = 77.035,		h = -41.40,		seconds = 300,	wasRobbed = 60 }, -- BANCO  ESQUERDA
+	{ id = 17,		x =		1287.689, 		y = 	-1314.854, 		z = 77.036,		h = -131.43,	seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO
+	{ id = 18,		x =		1286.461,		y = 	-1315.387,		z = 77.036,		h = 139.84,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA
 
 														-- BW BANK 
-	{ id = 16,		x =		-818.634,		y = 	-1273.491,		z = 43.675,		h = -1.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA 1
-	{ id = 17,		x =		-820.103,		y = 	-1273.491,		z = 43.675,		h = -1.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA 2
+	{ id = 19,		x =		-818.634,		y = 	-1273.491,		z = 43.675,		h = -1.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA 1
+	{ id = 20,		x =		-820.103,		y = 	-1273.491,		z = 43.675,		h = -1.0,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA 2
 														
 														-- SD BANK
-	{ id = 18,		x =		2644.986,		y = 	-1306.238,		z = 52.242,		h = 179.18,		seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO 1
-	{ id = 19,		x =		2643.74,		y = 	-1306.793,		z = 52.242,		h = -119.08,	seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO 2
-	{ id = 20,		x =		2641.55,		y = 	-1303.285,		z =	52.242,		h = 104.98,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA
-	{ id = 21,		x =		2644.47,		y = 	-1303.477,		z =	52.242,		h = -65.82,		seconds = 300,	wasRobbed = 60 }, -- BANCO  ESQUERDA
+	{ id = 21,		x =		2644.986,		y = 	-1306.238,		z = 52.242,		h = 179.18,		seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO 1
+	{ id = 22,		x =		2643.74,		y = 	-1306.793,		z = 52.242,		h = -119.08,	seconds = 300,	wasRobbed = 60 }, -- BANCO  CENTRO 2
+	{ id = 23,		x =		2641.55,		y = 	-1303.285,		z =	52.242,		h = 104.98,		seconds = 300,	wasRobbed = 60 }, -- BANCO  DIREITA
+	{ id = 24,		x =		2644.47,		y = 	-1303.477,		z =	52.242,		h = -65.82,		seconds = 300,	wasRobbed = 60 }, -- BANCO  ESQUERDA
 	
 
 }

@@ -17,7 +17,13 @@ config_file_GROUPS = {
     ["governador"] = 1 << 14,
     ["secretario"] = 1 << 15,
     ["jornalista"] = 1 << 16,
-    ['allowlister'] = 1 << 17
+    ['allowlister'] = 1 << 17,
+    ['fsheriff'] = 1 << 18,
+    ['ftrooper'] = 1 << 19,
+    ['fmedic'] = 1 << 20,
+    ['fmarshall'] = 1 << 21,
+    ['fdelegado'] = 1 << 22,
+    ['frecruta'] = 1 << 23
 }
 
 config_file_INHERITANCE = {
