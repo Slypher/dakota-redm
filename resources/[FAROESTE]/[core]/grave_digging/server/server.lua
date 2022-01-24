@@ -19,7 +19,7 @@ local SITE_KEEP_ACTIVE_TIMEOUT = 5000
 
 local BE_REWARD_LOOT_CHANCE = 80
 
-local NOTIFY_LAW_ENFORCEMENT_CHANCE = 5
+local NOTIFY_LAW_ENFORCEMENT_CHANCE = 30
 local MIN_NUM_LAW_ENFORCEMENT_ONLINE = 0
 
 --[[
@@ -128,7 +128,7 @@ RegisterNetEvent('net.requestInitDigging', function(cluster, site)
 
     local user = API.getUserFromSource(playerId)
 
-    local usersAsOfficers = API.getUsersByGroup('recruta', false)
+    local usersAsOfficers = API.getUsersByGroup('trooper', false)
 
     if #usersAsOfficers < MIN_NUM_LAW_ENFORCEMENT_ONLINE then
         user:notify('error', 'Não há policiais suficientes!')
@@ -207,7 +207,7 @@ RegisterNetEvent('net.requestStateUpdate', function(newState)
         if math.random() <= (NOTIFY_LAW_ENFORCEMENT_CHANCE / 100) then
             local clusterDisplayName = DIGGING_CLUSTERS[currCluster].displayName
 
-            API.NotifyUsersWithGroup('recruta', ('Moradores avistaram pessoas roubando covas em %s'):format(clusterDisplayName), true)
+            API.NotifyUsersWithGroup('trooper', ('Moradores avistaram pessoas roubando covas em %s'):format(clusterDisplayName), true)
         end
 
         if not gSitesShouldGiveLoot[currCluster]?[activeSite] then

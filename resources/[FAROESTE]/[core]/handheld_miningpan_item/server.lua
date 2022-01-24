@@ -6,7 +6,7 @@ local LootTableGen = Proxy.getInterface('LootTableGen')
 local LOOT_TABLE = {
     {
         lootItemId = 'cristal',
-        lootWeight = 70,
+        lootWeight = 50,
     },
     {
         lootItemId = 'pepitadeouro',
@@ -34,7 +34,7 @@ local LOOT_TABLE = {
     ]]
 }
 
-local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
+local GOLD_PANNING_REWARD_DICE_INTERVAL = 35
 local GOLD_PANNING_WIN_GOLD_CHANCE = 0.15 -- 15% de chance de achar alguma coisa.
 
 local gPlayersGoldPanning = { }

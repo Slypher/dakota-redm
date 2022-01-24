@@ -58,16 +58,26 @@ local doorStates = {
     -----------------------------------
     -- SHERIFF
     [349074475] = {isOpen = false},
+    [2735269038] = {isOpen = false}, -- Tumbleweed
+    [2444845424] = {isOpen = false}, -- Tumbleweed
+
+    -- PADARIA
+    -- [2422396838] = {isOpen = false}, -- PORTA PRO ALÉM
+    -- [4091334792] = {isOpen = false},
+    -- [3852416013] = {isOpen = false},
 
 
     -- VALENTINE ARMAZÉM
     [3554893730] = {isOpen = true}, -- Vestiario
+    -- STRAWBERRY ARMAZÉM
+    [94437577] = {isOpen = true}, -- Vestiario
 
     -- RHODES ARMAZÉM
     [2432590327] = {isOpen = true}, -- Vestiario
 
     -- TUMBLEWEED ARMAZÉM
     [3208189941] = {isOpen = true}, -- Vestiario
+
 
 
     -- BANKS DOORS
@@ -80,6 +90,7 @@ local doorStates = {
     [3886827663] = {isOpen = true, pair = 2642457609}, -- Banco de Valentine porta de entrada esquerda.
     [2642457609] = {isOpen = true, pair = 3886827663}, -- Banco de Valentine porta de entrada direita.
     [531022111] = {isOpen = true},
+    [3101287960] = {isOpen = true},
     [1634115439] = {isOpen = true, pair = 3445627749},
     [3445627749] = {isOpen = true, pair = 1634115439},
     -- DP SAINT DENIS
@@ -235,6 +246,15 @@ Citizen.CreateThread(
                 }
             )
 
+
+            setControllableDoorsForGroup(
+                "padeiro",
+                {
+                    4091334792,
+                    3852416013,
+                }
+            )
+
             -- setControllableDoorsForGroup(
             --     "house:4",
             --     {
@@ -287,7 +307,9 @@ Citizen.CreateThread(
                     603068205,
                     1020479727,
                     349074475,
-                    1751238140
+                    1751238140,
+                    2735269038,
+                    2444845424
                 }
             )
 

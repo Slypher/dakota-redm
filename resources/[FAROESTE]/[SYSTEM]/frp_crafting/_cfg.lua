@@ -246,18 +246,19 @@ Config = {
                     {item = "sopadecarne", amount = 2, name = "Ensopado de Carne"}
                 }
             },
-            --[[{
+            {
+                descriptionTextOverride = 'Materiais: Água. oregano, cantarelo e cenoura selvagem.',
                 time = 40,
                 input = {
                     {item = "agua", amount = 2},
                     {item = "oregano", amount = 3},
                     {item = "cantarelo", amount = 3},
-                    {item = "cenouraselvagem", amount = 6},
+                    {item = "cenouraselvagem", amount = 3},
                 },
                 output = {
                     {item = "sopaselvagem", amount = 1, name = "Ensopado Selvagem"}
                 }
-            },]]
+            },
             -------------------------------------- COMIDAS 
             {
                 descriptionTextOverride = 'Materiais: Umas 5 batatas deve encher uma tigela',
@@ -287,7 +288,7 @@ Config = {
             
             -------------------------------------------- ERVAS MEDICINAL ------------------------------------------
             {
-                descriptionTextOverride = 'Flores vermelhas, Ginseng do Alaska, Tabaco indigena e algo para picar tudo.',
+                descriptionTextOverride = 'Flores vermelhas, Ginseng do Alaska, Tabaco indiano, água e algo para picar tudo.',
                 time = 15,
                 input = {
                     {item = "agua", amount = 1}, 
@@ -329,7 +330,8 @@ Config = {
                 }
             },
             -------------------------------------------- ERVAS DE VENENO ------------------------------------------
-            --[[{
+            {
+                descriptionTextOverride = 'Beija-flor, Asclépia, Oleandro e algo para picar tudo.',
                 time = 15,
                 input = {
                     {item = "asclepia", amount = 5}, 
@@ -338,9 +340,9 @@ Config = {
                     {item = "melee_knife_jawbone", amount = 1, remove = false}
                 },
                 output = {
-                    {item = "ervadeveneno", amount = 1, name = "Erva de Veneno"},
+                    {item = "ervadeveneno", amount = 1, name = "Erva Nativa"},
                 }
-            },]]
+            },
             -------------------------------------------- ERVAS OLHOS DE ÁGUIA ------------------------------------------
             --[[{
                 time = 20,
@@ -355,7 +357,7 @@ Config = {
                 }
             },]]
             -------------------------------------------- ERVAS RAÍZES DA TERRA ------------------------------------------
-            --[[
+            {
                 time = 15,
                 input = {
                     {item = "cantarelo", amount = 5}, 
@@ -366,7 +368,7 @@ Config = {
                 output = {
                     {item = "raizesdaterra", amount = 1, name = "Raízes da Terra"},
                 }
-            },]]
+            },
         }
     },
 
@@ -423,8 +425,8 @@ Config = {
                     {item = "melee_knife_jawbone", amount = 2}, 
                 },
                 output = {
-                    --{item = "thrown_tomahawk", amount = 1, name = "Machadinha"},
-                    {item = "melee_hatchet", amount = 1, name = "Machadinha"},
+                    {item = "thrown_tomahawk", amount = 1, name = "Machadinha"},
+                    --{item = "melee_hatchet", amount = 1, name = "Machadinha"},
                 }
             },
             -------------------------------------------- ARCO SIMPLES ------------------------------------------
@@ -607,7 +609,85 @@ Config = {
 
     {    
         group = "ferreiro",
-        position = vec3(-369.409,796.127,116.192),  -- No position, its global
+        position = vec3(-369.509,796.268,116.204),  -- No position, its global
+        --Ferreiro = true,
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                                -- CARVÃO
+                descriptionTextOverride = 'Materiais: Madeira de boa ou má qualidade.',
+                time = 10,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}},
+                },
+                output = {
+                    {item = "carvao", amount = 1, name = "Carvão"},
+                }
+            },
+            {
+                                -- BARRA DE FERRO
+                descriptionTextOverride = 'Materiais: Minério de ferro, carvão e ferramentas.',
+                time = 30,
+                input = {
+                    {item = "minerioferro", amount = 3},
+                    {item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barraferro", amount = 1, name = "Barra de Ferro"},
+                }
+            },
+            {
+                                -- BARRA DE COBRE
+                descriptionTextOverride = 'Materiais: Minério de cobre, carvão e ferramentas.',
+                time = 30,
+                input = {
+                    {item = "mineriocobre", amount = 3},
+                    {item = "carvao", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barracobre", amount = 1, name = "Barra de Cobre"},
+                }
+            },
+            {
+                                -- PEPITA DE OURO
+                descriptionTextOverride = 'Materiais: Minério de ouro, carvão e ferramentas.',
+                time = 40,
+                input = {
+                    {item = "minerioouro", amount = 1},
+                    {item = "carvao", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pepitadeouro", amount = 4, name = "Pepita de ouro"}
+                }
+            },
+            {
+                                -- BARRA DE OURO
+                descriptionTextOverride = 'Materiais: Pepita de ouro, carvão e ferramentas.',
+                time = 40,
+                input = {
+                    {item = "pepitadeouro", amount = 25},
+                    {item = "carvao", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "barraouro", amount = 1, name = "Barra de Ouro"}
+                }
+            },
+        }
+    },
+
+      ---------------------------------------------------------------------------------------------------
+    ---------------------------------------- FERREIRO | FUNDIÇÃO --------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    
+
+    {    
+        group = "ferreiro",
+        position = vec3(-866.364,-1398.286,43.630),  -- No position, its global
         --Ferreiro = true,
         useTextDescriptionAll = true,
         craftings = 
@@ -697,21 +777,7 @@ Config = {
                     {item = "ferramentas", amount = 1, remove = false}
                 },
                 output = {
-                    {item = "ferramentas", amount = 1, name = "Caixa de Ferramentas"},
-                }
-            },
-            {
-                                -- LAMPIÃO
-                descriptionTextOverride = 'Materiais: Barra de cobre, gordura, tecido e ferramentas.',
-                time = 20,
-                input = {
-                    {item = "barracobre", amount = 1},
-                    {item = "gordura", amount = 1},
-                    {item = "tecidobranco", amount = 1},
-                    {item = "ferramentas", amount = 1, remove = false}
-                },
-                output = {
-                    {item = "melee_davy_lantern", amount = 1, name = "Lampião"},
+                    {item = "ferramentas", amount = 1, name = "Ferramentas"},
                 }
             },
             {
@@ -786,17 +852,6 @@ Config = {
                     {item = "cabecapa", amount = 1, name = "Cabeça de Pá"}
                 }
             },
-            --[[{
-                                -- CABEÇA DE ENXADA
-                time = 25,
-                input = {
-                    {item = "barraferro", amount = 1},
-                    {item = "ferramentas", amount = 1, remove = false}
-                },
-                output = {
-                    {item = "cabecaenxada", amount = 1, name = "Cabeça de Enxada"}
-                }
-            },]]
             {
                                 -- LÂMINA
                 descriptionTextOverride = 'Materiais: Barra de ferro e ferramentas.',
@@ -878,10 +933,118 @@ Config = {
 
     {    
         group = "ferreiro",
-        --position = vec3(-277.220,779.328,119.504),  -- No position, its global
-        Ferreiro3 = true,
+        position = vec3(-363.688,791.329,116.253),  -- No position, its global
+        --Ferreiro3 = true,
         useTextDescriptionAll = true,
         craftings = 
+        {
+            {
+                {
+                                -- LAMPIÃO
+                descriptionTextOverride = 'Materiais: Barra de cobre, gordura, tecido e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "barracobre", amount = 1},
+                    {item = "gordura", amount = 1},
+                    {item = "tecidobranco", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_davy_lantern", amount = 1, name = "Lampião"},
+                }
+            },
+                                -- PICARETA
+                descriptionTextOverride = 'Materiais: Uma cabeça de picareta, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecapicareta", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 4},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "picareta", amount = 1, name = "Picareta"},
+                }
+            },
+            {
+                                -- MACHADO
+                descriptionTextOverride = 'Materiais: Uma cabeça de machado, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecamachado", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_hatchet", amount = 1, name = "Machado"},
+                }
+            },
+            {
+                                -- PÁ
+                descriptionTextOverride = 'Materiais: Uma cabeça de pá, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "cabecapa", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 2},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pa", amount = 1, name = "Pá"}
+                }
+            },
+            {
+                                -- FACÃO
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_machete", amount = 1, name = "Facão"},
+                }
+            },
+            {
+                                -- FACA
+                descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',                                
+                time = 20,
+                input = {
+                    {item = "lamina", amount = 1},
+                    {item = "madeirarefinada", amount = 1},
+                    {item = "prego", amount = 3},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "melee_knife", amount = 1, name = "Faca de Caça"},
+                }
+            },
+            {
+                                -- GAZUA
+                descriptionTextOverride = 'Materiais: Parafusos, ferramentas e uma barra de cobre.',
+                time = 20,
+                input = {
+                    {item = "parafuso", amount = 10},
+                    {item = "barracobre", amount = 1},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "lockpick", amount = 5, name = "Gazua (ilegal)"},
+                }
+            },
+        }
+    },
+
+
+{    
+    group = "ferreiro",
+    position = vec3(-870.386,-1386.965,43.546),  -- No position, its global
+    --Ferreiro3 = true,
+    useTextDescriptionAll = true,
+    craftings = 
         {
             {
                                 -- PICARETA
@@ -925,19 +1088,6 @@ Config = {
                     {item = "pa", amount = 1, name = "Pá"}
                 }
             },
-            --[[{
-                                -- ENXADA
-                time = 20,
-                input = {
-                    {item = "cabecaenxada", amount = 1},
-                    {item = "madeirarefinada", amount = 1},
-                    {item = "prego", amount = 2},
-                    {item = "ferramentas", amount = 1, remove = false}
-                },
-                output = {
-                    {item = "enxada", amount = 1, name = "Enxada"}
-                }
-            },]]
             {
                                 -- FACÃO
                 descriptionTextOverride = 'Materiais: Uma lâmina, madeira refinada, pregos e ferramentas.',
@@ -976,7 +1126,7 @@ Config = {
                     {item = "ferramentas", amount = 1, remove = false}
                 },
                 output = {
-                    {item = "lockpick", amount = 5, name = "Gazua"},
+                    {item = "lockpick", amount = 5, name = "Gazua (ilegal)"},
                 }
             },
         }
@@ -1281,22 +1431,791 @@ Config = {
                     {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
                 }
             },
-            --{
+            --[[{
                                 -- ESCOPETA DE ELEFANTE
-            --    descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Elefante',
-            --    time = 60,
-            --    input = {
-            --        {item = "canodearma", amount = 2},
-            --        {item = "caodearma", amount = 2},
-            --        {item = "gatilhodearma", amount = 2},
-            --        {item = "corpodeescopeta", amount = 2},
-            --        {item = "parafuso", amount = 8},
-            --        {item = "ferramentas", amount = 1, remove = false}
-            --    },
-            --    output = {
-            --        {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
-            --    }
-            --},
+               descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Elefante',
+               time = 60,
+               input = {
+                   {item = "canodearma", amount = 2},
+                   {item = "caodearma", amount = 2},
+                   {item = "gatilhodearma", amount = 2},
+                   {item = "corpodeescopeta", amount = 2},
+                   {item = "parafuso", amount = 8},
+                   {item = "ferramentas", amount = 1, remove = false}
+               },
+               output = {
+                   {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
+               }
+            },]]
+            {
+                                -- MUNIÇÕES REVOLVER
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_revolver", amount = 10, name = "Munição de Revolver"},
+                }
+            },
+            {
+                                -- MUNIÇÕES PISTOLA
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_pistol", amount = 10, name = "Munição de Pistola"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ANTI-PRAGAS
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_22", amount = 10, name = "Munição Anti-Pragas"},
+                }
+            },
+            {
+                                -- MUNIÇÕES CARABINA
+                descriptionTextOverride = 'Materiais: Dois saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 2},
+                },
+                output = {
+                    {item = "ammo_repeater", amount = 10, name = "Munição de Carabina"},
+                }
+            },
+            {
+                                -- MUNIÇÕES RIFLE
+                descriptionTextOverride = 'Materiais: Três saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 3},
+                },
+                output = {
+                    {item = "ammo_rifle", amount = 10, name = "Munição de Rifle"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ESCOPETA
+                descriptionTextOverride = 'Materiais: Quatro saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 4},
+                },
+                output = {
+                    {item = "ammo_shotgun", amount = 10, name = "Munição de Escopeta"},
+                }
+            },
+        }
+    },
+    {
+        group = "armeiro",
+        position = vec3(-5505.856,-2966.030,-0.631),  -- No position, its global
+        --Armeiro = true,
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                                -- REVOLVER DE AÇÃO-DUPLA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Ação-Dupla',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeacaodupla", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_doubleaction", amount = 1, name = "Revólver de Ação-Dupla"},
+                }
+            },
+            {
+                                -- REVOLVER DE VAQUEIRO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Vaqueiro',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevaqueiro", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_cattleman", amount = 1, name = "Revólver de Vaqueiro"},
+                }
+            },
+            {
+                                -- REVOLVER SCHOTFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Schotfield',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeschotfield", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_schofield", amount = 1, name = "Revólver Schotfield"},
+                }
+            },
+            {
+                                -- REVOLVER LEMAT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Lemat',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelemat", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_lemat", amount = 1, name = "Revólver Lemat"},
+                }
+            },
+            {
+                                -- REVOLVER DA MARINHA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver da Marinha',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodenavy", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_navy", amount = 1, name = "Revólver da Marinha"},
+                }
+            },
+            {
+                                -- PISTOLA VOLCANIC
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Volcanic',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevolcanic", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_volcanic", amount = 1, name = "Pistola Volcanic"},
+                }
+            },
+            {
+                                -- PISTOLA MAUSER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Mauser',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodemauser", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_mauser", amount = 1, name = "Pistola Mauser"},
+                }
+            },
+            {
+                                -- PISTOLA SEMI-AUTO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Semi-Automatica',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodesemiauto", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_semiauto", amount = 1, name = "Pistola Semi-Auto"},
+                }
+            },
+            {
+                                -- CARABINA DE REPETIÇÃO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Carabina de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodecarabina", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_carbine", amount = 1, name = "Carabina de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA LANCASTER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Lancaster de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelancaster", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_winchester", amount = 1, name = "Lancaster de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA HENRY
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Henry de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodehenry", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_henry", amount = 1, name = "Henry de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA VARMINT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Anti-Pragas',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodepragas", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_varmint", amount = 1, name = "Rifle Anti-Pragas"}
+                }
+            },
+            {
+                                -- CARABINA EVANS
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Evans de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeevans", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_evans", amount = 1, name = "Evans de Repetição"}
+                }
+            },
+            {
+                                -- RIFLE SPRINGFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Springfield',
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodespringfield", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_springfield", amount = 1, name = "Rifle Springfield"}
+                }
+            },
+            {
+                                -- RIFLE DE FERROLHO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle de Ferrolho',
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "corpodeferrolho", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_boltaction", amount = 1, name = "Rifle de Ferrolho"}
+                }
+            },
+            {
+                                -- RIFLE ROLLING BLOCK
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Rolling Block',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpoderolling", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "sniperrifle_rollingblock", amount = 1, name = "Rifle Rolling Block"}
+                }
+            },
+            {
+                                -- ESCOPETA SERRADA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Serrado',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeserrada", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_sawedoff", amount = 1, name = "Escopeta de Cano-Serrado"},
+                }
+            },
+            {
+                                -- ESCOPETA CANO-DUPLO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Duplo',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeescopeta", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
+                }
+            },
+           --[[ {
+                                -- ESCOPETA DE ELEFANTE
+               descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Elefante',
+               time = 60,
+               input = {
+                   {item = "canodearma", amount = 2},
+                   {item = "caodearma", amount = 2},
+                   {item = "gatilhodearma", amount = 2},
+                   {item = "corpodeescopeta", amount = 2},
+                   {item = "parafuso", amount = 8},
+                   {item = "ferramentas", amount = 1, remove = false}
+               },
+               output = {
+                   {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
+               }
+            },]]
+            {
+                                -- MUNIÇÕES REVOLVER
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_revolver", amount = 10, name = "Munição de Revolver"},
+                }
+            },
+            {
+                                -- MUNIÇÕES PISTOLA
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_pistol", amount = 10, name = "Munição de Pistola"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ANTI-PRAGAS
+                descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 1},
+                },
+                output = {
+                    {item = "ammo_22", amount = 10, name = "Munição Anti-Pragas"},
+                }
+            },
+            {
+                                -- MUNIÇÕES CARABINA
+                descriptionTextOverride = 'Materiais: Dois saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 2},
+                },
+                output = {
+                    {item = "ammo_repeater", amount = 10, name = "Munição de Carabina"},
+                }
+            },
+            {
+                                -- MUNIÇÕES RIFLE
+                descriptionTextOverride = 'Materiais: Três saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 3},
+                },
+                output = {
+                    {item = "ammo_rifle", amount = 10, name = "Munição de Rifle"},
+                }
+            },
+            {
+                                -- MUNIÇÕES ESCOPETA
+                descriptionTextOverride = 'Materiais: Quatro saquinhos de pólvora e uma caixa de cartuchos',
+                time = 5,
+                input = {
+                    {item = "caixacartuchos", amount = 1},
+                    {item = "sacopolvora", amount = 4},
+                },
+                output = {
+                    {item = "ammo_shotgun", amount = 10, name = "Munição de Escopeta"},
+                }
+            },
+        }
+    },
+
+    {
+        group = "armeiro",
+        position = vec3(1327.053,-1322.055,77.898),  -- No position, its global
+        --Armeiro = true,
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                                -- REVOLVER DE AÇÃO-DUPLA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Ação-Dupla',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeacaodupla", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_doubleaction", amount = 1, name = "Revólver de Ação-Dupla"},
+                }
+            },
+            {
+                                -- REVOLVER DE VAQUEIRO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver de Vaqueiro',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevaqueiro", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_cattleman", amount = 1, name = "Revólver de Vaqueiro"},
+                }
+            },
+            {
+                                -- REVOLVER SCHOTFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Schotfield',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeschotfield", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_schofield", amount = 1, name = "Revólver Schotfield"},
+                }
+            },
+            {
+                                -- REVOLVER LEMAT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver Lemat',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelemat", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_lemat", amount = 1, name = "Revólver Lemat"},
+                }
+            },
+            {
+                                -- REVOLVER DA MARINHA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Revólver da Marinha',
+                time = 25,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodenavy", amount = 1},
+                    {item = "parafuso", amount = 5},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "revolver_navy", amount = 1, name = "Revólver da Marinha"},
+                }
+            },
+            {
+                                -- PISTOLA VOLCANIC
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Volcanic',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodevolcanic", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_volcanic", amount = 1, name = "Pistola Volcanic"},
+                }
+            },
+            {
+                                -- PISTOLA MAUSER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Mauser',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodemauser", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_mauser", amount = 1, name = "Pistola Mauser"},
+                }
+            },
+            {
+                                -- PISTOLA SEMI-AUTO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Pistola Semi-Automatica',
+                time = 30,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodesemiauto", amount = 1},
+                    {item = "parafuso", amount = 6},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "pistol_semiauto", amount = 1, name = "Pistola Semi-Auto"},
+                }
+            },
+            {
+                                -- CARABINA DE REPETIÇÃO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Carabina de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodecarabina", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_carbine", amount = 1, name = "Carabina de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA LANCASTER
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Lancaster de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodelancaster", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_winchester", amount = 1, name = "Lancaster de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA HENRY
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Henry de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodehenry", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_henry", amount = 1, name = "Henry de Repetição"}
+                }
+            },
+            {
+                                -- CARABINA VARMINT
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Anti-Pragas',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodepragas", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_varmint", amount = 1, name = "Rifle Anti-Pragas"}
+                }
+            },
+            {
+                                -- CARABINA EVANS
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Evans de Repetição',
+                time = 40,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodeevans", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "repeater_evans", amount = 1, name = "Evans de Repetição"}
+                }
+            },
+            {
+                                -- RIFLE SPRINGFIELD
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Springfield',
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpodespringfield", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_springfield", amount = 1, name = "Rifle Springfield"}
+                }
+            },
+            {
+                                -- RIFLE DE FERROLHO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle de Ferrolho',
+                time = 50,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "corpodeferrolho", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "rifle_boltaction", amount = 1, name = "Rifle de Ferrolho"}
+                }
+            },
+            {
+                                -- RIFLE ROLLING BLOCK
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de um Rifle Rolling Block',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 1},
+                    {item = "caodearma", amount = 1},
+                    {item = "gatilhodearma", amount = 1},
+                    {item = "corpoderolling", amount = 1},
+                    {item = "parafuso", amount = 10},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "sniperrifle_rollingblock", amount = 1, name = "Rifle Rolling Block"}
+                }
+            },
+            {
+                                -- ESCOPETA SERRADA
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Serrado',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeserrada", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_sawedoff", amount = 1, name = "Escopeta de Cano-Serrado"},
+                }
+            },
+            {
+                                -- ESCOPETA CANO-DUPLO
+                descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Cano-Duplo',
+                time = 60,
+                input = {
+                    {item = "canodearma", amount = 2},
+                    {item = "caodearma", amount = 2},
+                    {item = "gatilhodearma", amount = 2},
+                    {item = "corpodeescopeta", amount = 1},
+                    {item = "parafuso", amount = 8},
+                    {item = "ferramentas", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "shotgun_doublebarrel", amount = 1, name = "Escopeta de Cano-Duplo"},
+                }
+            },
+           --[[ {
+                                -- ESCOPETA DE ELEFANTE
+               descriptionTextOverride = 'Materiais: Peças de Armas, ferramentas, parafusos e o corpo de uma Escopeta de Elefante',
+               time = 60,
+               input = {
+                   {item = "canodearma", amount = 2},
+                   {item = "caodearma", amount = 2},
+                   {item = "gatilhodearma", amount = 2},
+                   {item = "corpodeescopeta", amount = 2},
+                   {item = "parafuso", amount = 8},
+                   {item = "ferramentas", amount = 1, remove = false}
+               },
+               output = {
+                   {item = "barradeferro", amount = 1, name = "Escopeta de Elefante"},
+               }
+            },]]
             {
                                 -- MUNIÇÕES REVOLVER
                 descriptionTextOverride = 'Materiais: Um saquinho de pólvora e uma caixa de cartuchos',
@@ -1416,9 +2335,9 @@ Config = {
     ----------------------------------------------------------------------------------------------------------------------------------------------------
 
     {
-        -- position = vec3(0, 0, 0) -- No position, its global
+        position = vec3(-1866.364,-1726.550,86.066), -- No position, its global
         group = "padeiro",
-        Padaria = true,
+        --Padaria = true,
 
         useTextDescriptionAll = true,
 
@@ -1468,9 +2387,9 @@ Config = {
 
 
     {
-        -- position = vec3(0, 0, 0) -- No position, its global
+        position = vec3(-1870.125,-1727.667,86.066), -- No position, its global
         group = "padeiro",
-        Padaria2 = true,
+        --Padaria2 = true,
 
         useTextDescriptionAll = true,
 
@@ -1489,9 +2408,9 @@ Config = {
             },
             {
                 descriptionTextOverride = 'Agora é só acender o fogo e assar a massa das bolachas.',
-                time = 30,
+                time = 15,
                 input = {
-                    --{item = "carvao", amount = 1},
+                    {item = "carvao", amount = 1, alias =  {"madeiraruim", "madeiraboa"}},
                     {item = "massadebolacha", amount = 1},
                 },
                 output = {
@@ -1500,9 +2419,9 @@ Config = {
             },
             {
                 descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos biscoitos.',
-                time = 30,
+                time = 15,
                 input = {
-                    --{item = "carvao", amount = 1},
+                    {item = "carvao", amount = 1, alias =  {"madeiraruim", "madeiraboa"}},
                     {item = "massadebiscoito", amount = 1},
                 },
                 output = {
@@ -1511,9 +2430,120 @@ Config = {
             },
             {
                 descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos pães.',
-                time = 30,
+                time = 15,
                 input = {
-                    --{item = "carvao", amount = 1},
+                    {item = "carvao", amount = 1, alias = {"madeiraruim", "madeiraboa"}},
+                    {item = "massadepao", amount = 1},
+                },
+                output = {
+                    {item = "pao", amount = 10, name = "Pão"}
+                }
+            },
+        }
+    },
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------- PADARIA | MESA -------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    {
+        position = vec3(-1091.422,713.615,81.045), -- No position, its global
+        group = "padeiro",
+        --Padaria = true,
+
+        useTextDescriptionAll = true,
+
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar e um pouco de gordura.',
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1},
+                    {item = "gordura", amount = 1}
+                },
+                output = {
+                    {item = "massadepao", amount = 1, name = "Massa de Pão"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar.',
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1}
+                },
+                output = {
+                    {item = "massadebiscoito", amount = 1, name = "Massa de Biscoito"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Receita de Pão: 500g de Farinha, 500g de Açúcar.',
+                time = 20,
+                input = {
+                    {item = "farinha", amount = 1},
+                    {item = "acucar", amount = 1}
+                },
+                output = {
+                    {item = "massadebolacha", amount = 1, name = "Massa de Bolacha"}
+                }
+            },
+        }
+    },
+
+
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------PADARIA | FORNO----------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    {
+        position = vec3(-1095.323,714.969,81.045), -- No position, its global
+        group = "padeiro",
+        --Padaria2 = true,
+
+        useTextDescriptionAll = true,
+
+        craftings = 
+        {
+            {
+                                -- CARVÃO
+                descriptionTextOverride = 'Materiais: Madeira de boa ou má qualidade.',
+                time = 10,
+                input = {
+                    {item = "madeiraboa", amount = 1, alias = {"madeiraruim"}},
+                },
+                output = {
+                    {item = "carvao", amount = 1, name = "Carvão"},
+                }
+            },
+            {
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa das bolachas.',
+                time = 15,
+                input = {
+                    {item = "carvao", amount = 1, alias =  {"madeiraruim", "madeiraboa"}},
+                    {item = "massadebolacha", amount = 1},
+                },
+                output = {
+                    {item = "bolacha", amount = 10, name = "Bolacha"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos biscoitos.',
+                time = 15,
+                input = {
+                    {item = "carvao", amount = 1, alias =  {"madeiraruim", "madeiraboa"}},
+                    {item = "massadebiscoito", amount = 1},
+                },
+                output = {
+                    {item = "biscoito", amount = 10, name = "Biscoito"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Agora é só acender o fogo e assar a massa dos pães.',
+                time = 15,
+                input = {
+                    {item = "carvao", amount = 1, alias = {"madeiraruim", "madeiraboa"}},
                     {item = "massadepao", amount = 1},
                 },
                 output = {
@@ -1523,13 +2553,13 @@ Config = {
         }
     },
 
-
+   
     ---------------------------------------------------------------------------------------------------
     --------------------------------------- FAZENDEIRO | LATA -----------------------------------------
     ---------------------------------------------------------------------------------------------------
 
     {
-        position = vec3(1357.599,-1248.308,79.951), -- No position, its global
+        position = vec3(1420.577,379.568,90.329), -- No position, its global
         useTextDescriptionAll = true,
         craftings = 
         {
@@ -1605,7 +2635,51 @@ Config = {
 -- useTextDescriptionAll = true,
     -- descriptionTextOverride = 'Tradição de corno',
     {
-        position = vec3(1053.885,-1123.756,67.891), -- No position, its global
+        position = vec3(1056.941,-1127.715,66.898), -- No position, its global
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Pague 1c e entregue 4 maços de Trigo para receber um saco de farinha.',
+                time = 15,
+                input = {
+                    {item = "money", amount = 1},
+                    {item = "trigo", amount = 4},
+                    --{item = "melee_knife", amount = 1, remove = false}
+                },
+                output = {
+                    {item = "farinha", amount = 1, name = "Pacote de Farinha"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Pague 1c e entregue 4 canas-de-açúcar para receber um saco de Açúcar.',
+                time = 15,
+                input = {
+                    {item = "money", amount = 1},
+                    {item = "canaacucar", amount = 4},
+                },
+                output = {
+                    {item = "acucar", amount = 1, name = "Açúcar"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Pague 10c e entregue 4 canas-de-açúcar para receber um pouco de álcool.',
+                time = 15,
+                input = {
+                    {item = "money", amount = 10},
+                    {item = "canaacucar", amount = 4},
+                },
+                output = {
+                    {item = "alcool", amount = 1, name = "Álcool"}
+                }
+            },
+        }
+    },
+-------------------------------------------------MOINHO--------------------------------------------
+-- useTextDescriptionAll = true,
+    -- descriptionTextOverride = 'Tradição de corno',
+    {
+        position = vec3(-947.695,-1336.027,50.693), -- No position, its global
         useTextDescriptionAll = true,
         craftings = 
         {
@@ -1647,35 +2721,35 @@ Config = {
     },
 
 -------------------------------------------------LENHADOR--------------------------------------------
+{
+    position = vec3(-1821.705,-423.195,160.052), -- No position, its global
+    useTextDescriptionAll = true,
+    craftings = 
     {
-        position = vec3(-1821.705,-423.195,160.052), -- No position, its global
-        useTextDescriptionAll = true,
-        craftings = 
         {
-            {
-                descriptionTextOverride = 'Madeira boa, um bom machado ou um facão bem afiado.',
-                time = 15,
-                input = {
-                    {item = "madeiraboa", amount = 1},
-                    {item = "melee_hatchet", amount = 1, alias = {"melee_machete"}, remove = false},
-                },
-                output = {
-                    {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
-                }
+            descriptionTextOverride = 'Madeira boa, um bom machado ou um facão bem afiado.',
+            time = 15,
+            input = {
+                {item = "madeiraboa", amount = 1},
+                {item = "melee_hatchet", amount = 1, alias = {"melee_machete"}, remove = false},
             },
-            {
-                descriptionTextOverride = 'Madeira Refinada e todas as ferramentas necessárias.',
-                time = 15,
-                input = {
-                    {item = "madeirarefinada", amount = 2},
-                    {item = "ferramentas", amount = 1, remove = false},
-                },
-                output = {
-                    {item = "tabua", amount = 1, name = "Tábua"}
-                }
+            output = {
+                {item = "madeirarefinada", amount = 1, name = "Madeira Refinada"}
+            }
+        },
+        {
+            descriptionTextOverride = 'Madeira Refinada e todas as ferramentas necessárias.',
+            time = 15,
+            input = {
+                {item = "madeirarefinada", amount = 2},
+                {item = "ferramentas", amount = 1, remove = false},
             },
-        }
-    },
+            output = {
+                {item = "tabua", amount = 1, name = "Tábua"}
+            }
+        },
+    }
+},
 
 --------------------------------------ALFAIATE-------------------------------
     {
@@ -1825,6 +2899,66 @@ Config = {
             },
         }
     },
+
+
+
+    -- CASA BW
+    {
+        position = vec3(1631.830,827.692,121.753), -- No position, its global
+
+        useTextDescriptionAll = true,
+
+        craftings =
+        {
+            {
+                descriptionTextOverride = 'Comum entre fazendeiros e enlatadores, fácil de fazer, mas demorado devido a fermentação.',
+                
+                time = 60,
+
+                input = {
+                    {item = "milholata", amount = 3},
+                    {item = "alcool", amount = 1},
+                    {item = "mostofraco", amount = 1},
+                },
+
+                output = {
+                    {item = "moonshinetradicional", amount = 1, name = "Tradição ilegal"}
+                },
+            },
+            {
+                descriptionTextOverride = 'Refrescante, cheiro de álcool e um mosto razoável.',
+
+                time = 40,
+
+                input = {
+                    {item = "cassisdourado", amount = 6},
+                    {item = "mentasilvestre", amount = 6},
+                    {item = "alcool", amount = 3},
+                    {item = "mostomedio", amount = 1},
+                },
+
+                output = {
+                    {item = "moonshinedourado", amount = 1, name = "Refresco Dourado"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Cor de violetas, e cheiro de inverno, muito álcool, e um mosto muito forte.',
+
+                time = 50,
+
+                input = {
+                    {item = "gualteria", amount = 8},
+                    {item = "violeta", amount = 8},
+                    {item = "alcool", amount = 3},
+                    {item = "mostoforte", amount = 1},
+                },
+
+                output = {
+                    {item = "moonshineinverno", amount = 1, name = "Lágrimas de inverno"}
+                }
+            },
+        }
+    },
     
 
     ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1832,7 +2966,95 @@ Config = {
     ----------------------------------------------------------------------------------------------------------------------------------------------------
 
     {
-        position = vec3(-828.745,-1319.372,43.587), -- No position, its global
+        position = vec3(-819.813,-1318.204,43.688), -- No position, its global
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Lúpulos, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "lupulo", amount = 4},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 2},
+                },
+                output = {
+                    {item = "cerveja", amount = 1, name = "Cerveja"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Grãos de milho, trigo, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "milho", amount = 6},
+                    {item = "trigo", amount = 6},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 1},
+                },
+                output = {
+                    {item = "whisky", amount = 1, name = "Whisky"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Agaves, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "agave", amount = 10},
+                    {item = "alcool", amount = 3},
+                    {item = "agua", amount = 2},
+                },
+                output = {
+                    {item = "tequila", amount = 1, name = "Tequila"}
+                }
+            },
+        }
+    },
+    {
+        position = vec3(-313.990,807.618,118.990), -- No position, its global
+        useTextDescriptionAll = true,
+        craftings = 
+        {
+            {
+                descriptionTextOverride = 'Lúpulos, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "lupulo", amount = 4},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 2},
+                },
+                output = {
+                    {item = "cerveja", amount = 1, name = "Cerveja"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Grãos de milho, trigo, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "milho", amount = 6},
+                    {item = "trigo", amount = 6},
+                    {item = "alcool", amount = 1},
+                    {item = "agua", amount = 1},
+                },
+                output = {
+                    {item = "whisky", amount = 1, name = "Whisky"}
+                }
+            },
+            {
+                descriptionTextOverride = 'Agaves, álcool e água.',
+                time = 22,
+                input = {
+                    {item = "agave", amount = 10},
+                    {item = "alcool", amount = 3},
+                    {item = "agua", amount = 2},
+                },
+                output = {
+                    {item = "tequila", amount = 1, name = "Tequila"}
+                }
+            },
+        }
+    },
+    {
+        position = vec3(1338.656,-1373.574,80.489), -- No position, its global
         useTextDescriptionAll = true,
         craftings = 
         {

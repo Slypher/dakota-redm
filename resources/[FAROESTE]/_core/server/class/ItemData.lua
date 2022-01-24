@@ -504,8 +504,8 @@ function triggerUse(User, itemData, Slot)
     end
     if itemId == "sopa" then
         cAPI.TaskScriptedAnim(source, "eat")
-        API.varyHunger2(source, -80)
-        API.varyThirst2(source, -20) 
+        API.varyHunger2(source, -70)
+        API.varyThirst2(source, -40) 
         User:closeInventory()
         return true
     end
@@ -513,6 +513,13 @@ function triggerUse(User, itemData, Slot)
         cAPI.TaskScriptedAnim(source, "eat")
         API.varyHunger2(source, -100) 
         API.varyThirst2(source, -20)
+        User:closeInventory()
+        return true
+    end
+    if itemId == "sopaselvagem" then
+        cAPI.TaskScriptedAnim(source, "eat")
+        API.varyHunger2(source, -40) 
+        API.varyThirst2(source, -40)
         User:closeInventory()
         return true
     end
@@ -583,30 +590,40 @@ function triggerUse(User, itemData, Slot)
 ---------------------------- INDIO ---------------------------------
 
 if itemId == "raizesdaterra" then --COLOCAR EFEITO DE BEBADO/ANIMAÇÃO
-    cAPI.TaskInteraction(source, "drink_tonic")
-    API.varyThirst2(source, -20)
+    TriggerClientEvent("DKT:ANIMATION:soparaizdaterra", source)
+    API.varyThirst2(source, -80)
+    API.varyHunger2(source, -80)
     return true
 end
-if itemId == "olhosdeaguia" then -- ATIVAR OS OLHOS DE AGUIA POR UM PERIODO DE TEMPO
-    cAPI.TaskInteraction(source, "drink_tonic")
-    API.varyThirst2(source, -20)
-    return true
+-- if itemId == "olhosdeaguia" then -- ATIVAR OS OLHOS DE AGUIA POR UM PERIODO DE TEMPO
+--     cAPI.TaskInteraction(source, "drink_tonic")
+--     TriggerClientEvent("FRP:WANTED:UsedEagleEye", source)
+--     return true
+-- end
+
+if itemId == "ervamedicinal" then -- REVIVE E CURA
+    TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
+    TriggerClientEvent('FRP:RESPAWN:Treatment', User)-------------------------------------------- TESTE PATIFICO
+    return false
 end
 
-    -- if itemId == "ervamedicinal" then -- REVIVE E CURA
-    --     TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
-    --     return false
-    -- end
-
-    if itemId == "ervamedicinal" then -- REVIVE E CURA
-        TriggerEvent('itemWithRessurectingPropertiesWasUsed', User, Slot, true, false)
-        TriggerClientEvent('FRP:RESPAWN:Treatment', User)-------------------------------------------- TESTE PATIFICO
-        return false
-    end
-
-if itemId == "ervaveneno" then -- COMEÇA A CAUSAR DANO DEPOIS DE ALGUM TEMPO
-    cAPI.TaskInteraction(source, "drink_tonic")
-    API.varyThirst2(source, -20)
+if itemId == "ervadeveneno" then -- COMEÇA A CAUSAR DANO DEPOIS DE ALGUM TEMPO
+    TriggerClientEvent("DKT:ANIMATION:soparaizdaterra", source)
+    Wait(10000)
+    API.varyThirst2(source, 20)
+    API.varyHunger2(source, 20)
+    Wait(20000)
+    API.varyThirst2(source, 40)
+    API.varyHunger2(source, 40)
+    Wait(30000)
+    API.varyThirst2(source, 60)
+    API.varyHunger2(source, 60)
+    Wait(40000)
+    API.varyThirst2(source, 80)
+    API.varyHunger2(source, 80)
+    Wait(50000)
+    API.varyThirst2(source, 100)
+    API.varyHunger2(source, 100)
     return true
 end
 
@@ -624,12 +641,12 @@ end
         return true
     end
 
-    if itemId == "eagleeye" then
-        cAPI.TaskInteraction(source, "drink_tonic")
-        TriggerClientEvent("FRP:WANTED:UsedEagleEye", source)
+    -- if itemId == "eagleeye" then
+    --     cAPI.TaskInteraction(source, "drink_tonic")
+    --     TriggerClientEvent("FRP:WANTED:UsedEagleEye", source)
 
-        return true
-    end
+    --     return true
+    -- end
 
     if itemId == "lockpick" then
         User:closeInventory()

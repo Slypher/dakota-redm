@@ -209,6 +209,7 @@ Citizen.CreateThread(
                             PlaySoundFrontend("REWARD_NEW_GUN", "HUD_REWARD_SOUNDSET", true, 0)
 
                             ClearPosCrafting()
+                            
 
                             TriggerEvent("FRP:CRAFTING:client_TryToOpenCrafting")
                         elseif PromptHasHoldModeCompleted(prompt_cancel) then
@@ -244,8 +245,8 @@ Citizen.CreateThread(
                         PromptSetVisible(prompt_cancel, true)
 
                         craftingEndGameTimer = GetGameTimer() + (selected_time * 1000)
-
                         TriggerEvent("FRP:CRAFT:ShouldClose", false)
+
 
                         -- print('crafting :: prompt_craft hold mode was completed')
 
@@ -707,13 +708,13 @@ AddEventHandler(
 
         ClearPedTasks(playerPed)
 
-        if not nearestCraftingConfig.position then
-            -- CreateScenarioPointHash
-            local scenario = Citizen.InvokeNative(0x94B745CE41DB58A1, `WORLD_PLAYER_CAMP_FIRE_KNEEL3`, playerPosition, desiredHeading, 0, 0, 0)
-            TaskUseScenarioPoint(playerPed, scenario, "", -1.0, true, false, 0, false, -1.0, true)
-        else
-            TaskAchieveHeading(playerPed, desiredHeading, -1)
-        end
+        -- if not nearestCraftingConfig.position then
+        --     -- CreateScenarioPointHash
+        --     local scenario = Citizen.InvokeNative(0x94B745CE41DB58A1, `WORLD_PLAYER_CAMP_FIRE_KNEEL3`, playerPosition, desiredHeading, 0, 0, 0)
+        --     TaskUseScenarioPoint(playerPed, scenario, "", -1.0, true, false, 0, false, -1.0, true)
+        -- else
+        --     TaskAchieveHeading(playerPed, desiredHeading, -1)
+        -- end
     end
 )
 

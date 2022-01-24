@@ -82,7 +82,7 @@ Citizen.CreateThread(
         while true do
             Citizen.Wait(100)
             if not IsPedOnMount(PlayerPedId()) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
-                SetMinimapType(0)
+                SetMinimapType(1)
 
                 SendNUIMessage(
                     {
@@ -90,7 +90,7 @@ Citizen.CreateThread(
                     }
                 )
             else
-                SetMinimapType(0)
+                SetMinimapType(1)
 
                 SendNUIMessage(
                     {

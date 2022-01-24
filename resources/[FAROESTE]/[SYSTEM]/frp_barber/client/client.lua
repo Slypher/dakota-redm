@@ -115,6 +115,24 @@ CreateThread(function()
             position = vec3(-307.851, 813.354, 118.012),
             heading = -101.76
         },
+        -- Rhodes
+        {
+            position = vec3(1297.945,-1131.486,81.010),
+            heading = -123.86
+        },
+        -- Saint Denis
+        {
+            position = vec3(2657.809,-1181.212,52.344),
+            heading = -177.77
+        },
+        {
+            position = vec3(2656.119,-1181.059,52.344),
+            heading = -177.77
+        },
+        {
+            position = vec3(2654.523,-1180.837,52.344),
+            heading = -177.77
+        },
         -- Blackwater
         {
             position = vec3(-816.572, -1368.756, 42.773),

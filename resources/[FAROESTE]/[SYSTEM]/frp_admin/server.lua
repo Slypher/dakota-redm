@@ -514,6 +514,75 @@ RegisterCommand(
 )
 
 RegisterCommand(
+    "ponto",
+    function(source, rawCommand)
+        local User = API.getUserFromSource(source)
+        local Character = User:getCharacter()
+
+        if Character:hasGroupOrInheritance("sheriff") then
+                User:getCharacter():removeGroup("sheriff")
+                User:getCharacter():addGroup("fsheriff")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("fsheriff") then
+                User:getCharacter():removeGroup("fsheriff")
+                User:getCharacter():addGroup("sheriff")
+                User:notify("error", "Você entrou em serviço!")
+
+            elseif Character:hasGroupOrInheritance("trooper") then
+                User:getCharacter():removeGroup("trooper")
+                User:getCharacter():addGroup("ftrooper")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("ftrooper") then
+                User:getCharacter():removeGroup("ftrooper")
+                User:getCharacter():addGroup("trooper")
+                User:notify("error", "Você entrou em serviço!")
+
+            elseif Character:hasGroupOrInheritance("marshall") then
+                User:getCharacter():removeGroup("marshall")
+                User:getCharacter():addGroup("fmarshall")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("fmarshall") then
+                User:getCharacter():removeGroup("fmarshall")
+                User:getCharacter():addGroup("marshall")
+                User:notify("error", "Você entrou em serviço!")
+
+            elseif Character:hasGroupOrInheritance("delegado") then
+                User:getCharacter():removeGroup("delegado")
+                User:getCharacter():addGroup("fdelegado")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("fdelegado") then
+                User:getCharacter():removeGroup("fdelegado")
+                User:getCharacter():addGroup("delegado")
+                User:notify("error", "Você entrou em serviço!")
+
+            elseif Character:hasGroupOrInheritance("recruta") then
+                User:getCharacter():removeGroup("recruta")
+                User:getCharacter():addGroup("frecruta")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("frecruta") then
+                User:getCharacter():removeGroup("frecruta")
+                User:getCharacter():addGroup("recruta")
+                User:notify("error", "Você entrou em serviço!")
+
+            elseif Character:hasGroupOrInheritance("medic") then
+                User:getCharacter():removeGroup("medic")
+                User:getCharacter():addGroup("fmedic")
+                User:notify("error", "Você saiu em serviço!")
+
+            elseif Character:hasGroupOrInheritance("fmedic") then
+                User:getCharacter():removeGroup("fmedic")
+                User:getCharacter():addGroup("medic")
+                User:notify("error", "Você entrou em serviço!")
+            end
+        end
+)
+
+RegisterCommand(
     "policia",
     function(source, args, rawCommand)
         local User = API.getUserFromSource(source)

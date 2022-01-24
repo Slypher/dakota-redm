@@ -662,7 +662,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'shotgun_doublebarrel',
             
                 transactionPriceBuyDollar = 31500,
-                transactionPriceBuyGold = 150,
+                transactionPriceBuyGold = 200,
             
                 transactionPriceSellDollar = 1000,
             },
@@ -678,7 +678,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'sniperrifle_rollingblock',
             
                 transactionPriceBuyDollar = 31500,
-                transactionPriceBuyGold = 150,
+                transactionPriceBuyGold = 200,
             
                 transactionPriceSellDollar = 1000,
             },
@@ -687,16 +687,17 @@ SHOPINFO_DATABASE = {
         positions = {
             vec3(1323.041,-1321.520,77.885), -- RHODES
             vec3(2716.015,-1285.621,49.626), -- SAINT DENIS
+            vec3(-5508.253,-2964.267,-0.564), -- TUMBLEWEED
         },
 
-        audios = {
-            'ArmeiroValentine_01',
-            'ArmeiroValentine_02',
-            'ArmeiroValentine_03',
-            'ArmeiroValentine_04',
-            'ArmeiroValentine_05',
-            'ArmeiroValentine_06',
-        }
+        -- audios = {
+        --     'ArmeiroValentine_01',
+        --     'ArmeiroValentine_02',
+        --     'ArmeiroValentine_03',
+        --     'ArmeiroValentine_04',
+        --     'ArmeiroValentine_05',
+        --     'ArmeiroValentine_06',
+        -- }
     },
 
     --########################  ARMEIRO ########################--
@@ -861,7 +862,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'shotgun_doublebarrel',
             
                 transactionPriceBuyDollar = 55125,
-                transactionPriceBuyGold = 150,
+                transactionPriceBuyGold = 200,
             
                 transactionPriceSellDollar = 1000,
             },
@@ -877,7 +878,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'sniperrifle_rollingblock',
             
                 transactionPriceBuyDollar = 55123,
-                transactionPriceBuyGold = 150,
+                transactionPriceBuyGold = 200,
             
                 transactionPriceSellDollar = 1000,
             },
@@ -949,6 +950,7 @@ SHOPINFO_DATABASE = {
             vec3(-279.883,782.827,119.500), -- VALENTINE
             vec3(1325.508, -1321.458, 76.890), -- RHODES
             vec3(2720.806,-1286.316,49.626), -- SAINT DENIS
+            vec3(-5507.745,-2968.871,-0.567), -- TUMBLEWEED
         },
 
         audios = {
@@ -1054,7 +1056,6 @@ SHOPINFO_DATABASE = {
             
                 transactionPriceBuyDollar = 6,
                 transactionPriceBuyGold = 1,
-            
                 transactionPriceSellDollar = 3,
             },
             {
@@ -1073,52 +1074,12 @@ SHOPINFO_DATABASE = {
         },
     },
     
-    --########################  LOJA CLANDESTINA ########################--
+    --########################  LOJA JOIAS ########################--
 
     {
-        name = 'Clive',
+        name = 'Algernon Wasp',
         
         items = {
-            {
-                itemId = 'papolaseed',
-            
-                transactionPriceBuyDollar = 15,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 8,
-            },
-            {
-                itemId = 'bananadinamite',
-            
-                transactionPriceBuyDollar = 500,
-                transactionPriceBuyGold = 1,
-            
-                transactionPriceSellDollar = 100,
-            },
-            {
-                itemId = 'mostofraco',
-
-                transactionPriceBuyDollar = 100,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 30,
-            },
-            {
-                itemId = 'mostomedio',
-
-                transactionPriceBuyDollar = 125,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 30,
-            },
-            {
-                itemId = 'mostoforte',
-
-                transactionPriceBuyDollar = 150,
-                transactionPriceBuyGold = 1,
-
-                transactionPriceSellDollar = 30,
-            },
             {
                 itemId = 'brincos',
 
@@ -1159,10 +1120,124 @@ SHOPINFO_DATABASE = {
 
                 transactionPriceSellDollar = 250,
             },
+            {
+                itemId = 'violeta',
+
+                transactionPriceSellDollar = 20,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviadeserto',
+
+                transactionPriceSellDollar = 20,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviavermelha',
+
+                transactionPriceSellDollar = 20,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'penarapina',
+    
+                transactionPriceSellDollar = 120,
+            },
+            {
+                itemId = 'penaarara',
+                    
+                transactionPriceSellDollar = 500,
+            },
+            {
+                itemId = 'penacondor',
+    
+                transactionPriceSellDollar = 700,
+            },
+            {
+                itemId = 'penapicapau',
+    
+                transactionPriceSellDollar = 400,
+            },
+            {
+                itemId = 'asamorcego',
+    
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'dente',
+    
+                transactionPriceSellDollar = 100,
+            },
+            {
+                itemId = 'galhada',
+    
+                transactionPriceSellDollar = 120,
+            },
+            {
+                itemId = 'galhadagrande',
+    
+                transactionPriceSellDollar = 200,
+            },
+            {
+                itemId = 'chifrebisao',
+    
+                transactionPriceSellDollar = 100,
+            },
+            {
+                itemId = 'patadefelino',
+    
+                transactionPriceSellDollar = 500,
+            },
+            {
+                itemId = 'garrarapina',
+    
+                transactionPriceSellDollar = 75,
+            },
+            {
+                itemId = 'peledecobra',
+    
+                transactionPriceSellDollar = 50,
+            },
+            {
+                itemId = 'couroreptil',
+    
+                transactionPriceSellDollar = 50,
+            },
+            {
+                itemId = 'patacoelho',
+    
+                transactionPriceSellDollar = 100,
+            },
+            {
+                itemId = 'caudaesquilo',
+    
+                transactionPriceSellDollar = 100,
+            },
+            {
+                itemId = 'escamalendaria',
+    
+                transactionPriceSellDollar = 5000,
+            },
+            {
+                itemId = 'dentejavalilendario',
+    
+                transactionPriceSellDollar = 3500,
+            },
+            {
+                itemId = 'chifrebisaolendario',
+    
+                transactionPriceSellDollar = 3000,
+            },
+            {
+                itemId = 'dentelendario',
+    
+                transactionPriceSellDollar = 4000,
+            },
+            
         },
 
         positions = {
-            vec3(-333.095,186.375,63.590), --
+            vec3(2588.002,-1011.159,44.249), --
         }
     },
     
@@ -1216,7 +1291,7 @@ SHOPINFO_DATABASE = {
     --########################  ARMAZÉNS GERAIS ########################--
 
     {
-        name = 'Meredith',
+        name = 'Meredith Merch',
 
         items = {
             {
@@ -1379,7 +1454,7 @@ SHOPINFO_DATABASE = {
         }
     },
     {
-        name = 'Terry',
+        name = 'Terry Vell',
 
         items = {
             {
@@ -1538,7 +1613,7 @@ SHOPINFO_DATABASE = {
     },
     ------------------------------------------------------------------
     {
-        name = 'Thomas',
+        name = 'Thomas Ynnech',
 
         items = {
             {
@@ -1677,13 +1752,493 @@ SHOPINFO_DATABASE = {
     },
     ------------------------------------------------------------------
     {
-        name = 'Joshua',
+        name = 'Molly',
+
+        items = {
+            {
+                itemId = 'pao',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'pocafe',
+            
+                transactionPriceBuyDollar = 15,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 5,
+            },
+            {
+                itemId = 'bolacha',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'biscoito',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'molhotomate',
+            
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'milholata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'feijaolata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'milho',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'cenoura',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'trigo',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'batata',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'repolho',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'tomate',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'feijao',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'alface',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'canaacucar',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },            
+        },
+
+        positions = {
+            vec3(1328.232,-1293.467,77.086), -- Armazém de Rhodes
+        }
+    },
+
+    {
+        name = 'Dr Malcolm MacIntosh',
+
+        items = {
+            {
+                itemId = 'pao',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'milholata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'feijaolata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'cassis',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'cassisdourado',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'tabacoindiano',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'oregano',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'tomilhorastejante',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'ginsengamericano',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'amora',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviadeserto',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviavermelha',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'bardana',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'mentasilvestre',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'parasol',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'cantarelo',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'boletobaio',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'milfolhas',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'violeta',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'beijaflor',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'gualteria',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'asclepia',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'maitake',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'quinina',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'papola',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'cenouraselvagem',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'ginsengalaska',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'oleandro',
+
+                transactionPriceSellDollar = 10,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'frasco',
+
+                transactionPriceBuyDollar = 10,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 8,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'quimicos',
+
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },            
+        },
+
+        positions = {
+            vec3(-3685.501,-2623.289,-13.422), -- Armazém de Armadillo
+        }
+    },
+    ------------------------------------------------------------------
+    {
+        name = 'Martha Rock',
+
+        items = {
+            {
+                itemId = 'pao',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'pocafe',
+            
+                transactionPriceBuyDollar = 15,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 5,
+            },
+            {
+                itemId = 'bolacha',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'biscoito',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 15,
+            },
+            {
+                itemId = 'molhotomate',
+            
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'milholata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'feijaolata',
+
+                transactionPriceBuyDollar = 300,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 40,
+            },
+            {
+                itemId = 'milho',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'cenoura',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'trigo',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'batata',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'repolho',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'tomate',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'feijao',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'alface',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },
+            {
+                itemId = 'canaacucar',
+
+                transactionPriceBuyDollar = 200,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 4,
+            },            
+        },
+
+        positions = {
+            vec3(-5487.209,-2938.998,-0.322), -- Armazém de tumbleweed
+        }
+    },
+    ------------------------------------------------------------------
+    {
+        name = 'Joshua Josh',
 
         items = {
             {
                 itemId = 'cerveja',
             
-                transactionPriceBuyDollar = 332.5,
+                transactionPriceBuyDollar = 150,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 95,
@@ -1691,7 +2246,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'whisky',
             
-                transactionPriceBuyDollar = 700,
+                transactionPriceBuyDollar = 350,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 200,
@@ -1699,7 +2254,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'tequila',
             
-                transactionPriceBuyDollar = 875,
+                transactionPriceBuyDollar = 450,
                 transactionPriceBuyGold = 2,
             
                 transactionPriceSellDollar = 250,
@@ -1707,7 +2262,7 @@ SHOPINFO_DATABASE = {
             {
                 itemId = 'agua',
             
-                transactionPriceBuyDollar = 52.5,
+                transactionPriceBuyDollar = 30,
                 transactionPriceBuyGold = 1,
             
                 transactionPriceSellDollar = 5,
@@ -1722,8 +2277,181 @@ SHOPINFO_DATABASE = {
         --     'Charles',
         -- }
     },
+    ------------------------------------------------------------------
     {
-        name = 'Charles',
+        name = 'Bratt Carl',
+
+        items = {
+            {
+                itemId = 'cerveja',
+            
+                transactionPriceBuyDollar = 150,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 95,
+            },
+            {
+                itemId = 'whisky',
+            
+                transactionPriceBuyDollar = 350,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 200,
+            },
+            {
+                itemId = 'tequila',
+            
+                transactionPriceBuyDollar = 450,
+                transactionPriceBuyGold = 2,
+            
+                transactionPriceSellDollar = 250,
+            },
+            {
+                itemId = 'agua',
+            
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 5,
+            },
+            {
+                itemId = 'opio',
+
+                transactionPriceBuyDollar = 1108,
+                transactionPriceBuyGold = 15,
+
+                transactionPriceSellDollar = 800,
+            },
+        },
+
+        positions = {
+            vec3(-5517.394,-2907.785,-1.686), -- Saloon de Tumble
+        },
+
+        -- audios = {
+        --     'Charles',
+        -- }
+    },
+    ------------------------------------------------------------------
+    {
+        name = 'Javiero Tequila',
+
+        items = {
+            {
+                itemId = 'cerveja',
+            
+                transactionPriceBuyDollar = 150,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 95,
+            },
+            {
+                itemId = 'whisky',
+            
+                transactionPriceBuyDollar = 350,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 200,
+            },
+            {
+                itemId = 'tequila',
+            
+                transactionPriceBuyDollar = 450,
+                transactionPriceBuyGold = 2,
+            
+                transactionPriceSellDollar = 250,
+            },
+            {
+                itemId = 'agua',
+            
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 5,
+            },
+            {
+                itemId = 'mostofraco',
+
+                transactionPriceBuyDollar = 100,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 30,
+            },
+            {
+                itemId = 'mostomedio',
+
+                transactionPriceBuyDollar = 125,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 30,
+            },
+            {
+                itemId = 'mostoforte',
+
+                transactionPriceBuyDollar = 150,
+                transactionPriceBuyGold = 1,
+
+                transactionPriceSellDollar = 30,
+            },
+        },
+
+        positions = {
+            vec3(-3701.398,-2596.167,-13.255), -- Saloon de Armadillo
+        },
+
+        -- audios = {
+        --     'Charles',
+        -- }
+    },
+    ------------------------------------------------------------------
+    {
+        name = 'Baruqui Mukay',
+
+        items = {
+            {
+                itemId = 'cerveja',
+            
+                transactionPriceBuyDollar = 150,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 95,
+            },
+            {
+                itemId = 'whisky',
+            
+                transactionPriceBuyDollar = 350,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 200,
+            },
+            {
+                itemId = 'tequila',
+            
+                transactionPriceBuyDollar = 450,
+                transactionPriceBuyGold = 2,
+            
+                transactionPriceSellDollar = 250,
+            },
+            {
+                itemId = 'agua',
+            
+                transactionPriceBuyDollar = 30,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 5,
+            },
+        },
+
+        positions = {
+            vec3(1341.876,-1375.080,80.546), -- Saloon de Rhodes
+        },
+
+        -- audios = {
+        --     'Charles',
+        -- }
+    },
+    {
+        name = 'Charles Scot',
 
         items = {
             {
@@ -1770,7 +2498,7 @@ SHOPINFO_DATABASE = {
     },
     ------------------------------------------------------------------
     {
-        name = 'Castor',
+        name = 'Castor Wood',
 
         items = {
             {
@@ -1813,7 +2541,7 @@ SHOPINFO_DATABASE = {
     },
     ------------------------------------------------------------------
     {
-        name = 'Francis',
+        name = 'Francis Arnold',
         items = {
             {
                 itemId = 'lata',
@@ -1919,6 +2647,14 @@ SHOPINFO_DATABASE = {
 
                 transactionPriceSellDollar = 3,
             },
+            {
+                itemId = 'bananadinamite',
+            
+                transactionPriceBuyDollar = 500,
+                transactionPriceBuyGold = 1,
+            
+                transactionPriceSellDollar = 100,
+            },
         },
 
         positions = {
@@ -1927,7 +2663,7 @@ SHOPINFO_DATABASE = {
 
     },
     {
-        name = 'Carl',
+        name = 'Carl "The bad" Carson',
         items = {
             {
                 itemId = 'lata',
@@ -2166,18 +2902,7 @@ SHOPINFO_DATABASE = {
                 transactionPriceSellDollar = 5,
                 --bundleSellQuantity = 2,
             },
-            {
-                itemId = 'salviadeserto',
-
-                transactionPriceSellDollar = 5,
-                --bundleSellQuantity = 2,
-            },
-            {
-                itemId = 'salviavermelha',
-
-                transactionPriceSellDollar = 5,
-                --bundleSellQuantity = 2,
-            },
+            
             {
                 itemId = 'bardana',
 
@@ -2216,6 +2941,18 @@ SHOPINFO_DATABASE = {
             },
             {
                 itemId = 'violeta',
+
+                transactionPriceSellDollar = 5,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviadeserto',
+
+                transactionPriceSellDollar = 5,
+                --bundleSellQuantity = 2,
+            },
+            {
+                itemId = 'salviavermelha',
 
                 transactionPriceSellDollar = 5,
                 --bundleSellQuantity = 2,
@@ -2370,29 +3107,9 @@ SHOPINFO_DATABASE = {
             transactionPriceSellDollar = 6,
         },
         {
-            itemId = 'dentejavalilendario',
-
-            transactionPriceSellDollar = 1000,
-        },
-        {
-            itemId = 'chifrebisaolendario',
-
-            transactionPriceSellDollar = 1000,
-        },
-        {
-            itemId = 'dentelendario',
-
-            transactionPriceSellDollar = 1000,
-        },
-        {
             itemId = 'asamorcego',
 
             transactionPriceSellDollar = 6,
-        },
-        {
-            itemId = 'escamalendaria',
-
-            transactionPriceSellDollar = 1000,
         },
         {
             itemId = 'garrarapina',
@@ -2479,6 +3196,22 @@ SHOPINFO_DATABASE = {
             transactionPriceSellDollar = 50,
         },
         {
+            itemId = 'papolaseed',
+        
+            transactionPriceBuyDollar = 15,
+            transactionPriceBuyGold = 1,
+        
+            transactionPriceSellDollar = 8,
+        },
+        {
+            itemId = 'lupuloseed',
+        
+            transactionPriceBuyDollar = 6,
+            transactionPriceBuyGold = 1,
+        
+            transactionPriceSellDollar = 3,
+        },
+        {
             itemId = 'milho',
 
             transactionPriceBuyDollar = 200,
@@ -2506,7 +3239,7 @@ SHOPINFO_DATABASE = {
     },
 
     positions = {
-        vec3(1363.859,-1288.305,76.123),
+        vec3(1436.681,332.009,88.750),
     },
 },
 
@@ -2521,7 +3254,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'moonshinetradicional',
 
                 transactionPriceBuyDollar = 924,
-                transactionPriceBuyGold = 3,
+                transactionPriceBuyGold = 10,
 
                 transactionPriceSellDollar = 500,
             },
@@ -2529,7 +3262,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'moonshinedourado',
 
                 transactionPriceBuyDollar = 1100,
-                transactionPriceBuyGold = 6,
+                transactionPriceBuyGold = 15,
 
                 transactionPriceSellDollar = 650,
             },
@@ -2537,14 +3270,14 @@ SHOPINFO_DATABASE = {
                 itemId = 'moonshineinverno',
 
                 transactionPriceBuyDollar = 1574,
-                transactionPriceBuyGold = 9,
+                transactionPriceBuyGold = 20,
 
                 transactionPriceSellDollar = 900,
             },
         },
 
         positions = {
-            vec3(-1884.865,1335.750,200.918),
+            vec3(-1358.562,2427.654,307.930),
         },
     },
 
@@ -2557,14 +3290,14 @@ SHOPINFO_DATABASE = {
                 itemId = 'opio',
 
                 transactionPriceBuyDollar = 1108,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyGold = 15,
 
                 transactionPriceSellDollar = 554,
             },
         },
 
         positions = {
-            vec3(399.243,-1269.337,41.715),
+            vec3(-1356.928,-2290.907,45.199),
         },
     },
 
@@ -2579,7 +3312,7 @@ SHOPINFO_DATABASE = {
                 itemId = 'cristal',
     
                 transactionPriceBuyDollar = 500,
-                transactionPriceBuyGold = 1,
+                transactionPriceBuyGold = 2,
     
                 transactionPriceSellDollar = 20,
             },
@@ -2587,15 +3320,15 @@ SHOPINFO_DATABASE = {
                 itemId = 'pepitadeouro',
     
                 transactionPriceBuyDollar = 1000,
-                transactionPriceBuyGold = 50,
+                transactionPriceBuyGold = 100,
     
-                transactionPriceSellDollar = 100,
+                transactionPriceSellDollar = 500,
             },
             {
                 itemId = 'barraouro',
     
                 transactionPriceBuyDollar = 10000,
-                transactionPriceBuyGold = 100,
+                transactionPriceBuyGold = 300,
     
                 transactionPriceSellDollar = 5000,
             },
@@ -2603,33 +3336,33 @@ SHOPINFO_DATABASE = {
                 itemId = 'minerioouro',
     
                 transactionPriceBuyDollar = 5000,
-                transactionPriceBuyGold = 50,
+                transactionPriceBuyGold = 200,
     
-                transactionPriceSellDollar = 1500,
+                transactionPriceSellDollar = 1000,
             },
             {
                 itemId = 'esmeralda',
                 
                 transactionPriceBuyDollar = 1500,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyGold = 200,
                 
-                transactionPriceSellDollar = 325,
+                transactionPriceSellDollar = 600,
             },
             {
                 itemId = 'rubi',
                 
                 transactionPriceBuyDollar = 2000,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyGold = 200,
                 
-                transactionPriceSellDollar = 650,
+                transactionPriceSellDollar = 900,
             },
             {
                 itemId = 'diamante',
     
-                transactionPriceBuyDollar = 2500,
-                transactionPriceBuyGold = 2,
+                transactionPriceBuyDollar = 5000,
+                transactionPriceBuyGold = 200,
     
-                transactionPriceSellDollar = 1300,
+                transactionPriceSellDollar = 2500,
             },
         },
         

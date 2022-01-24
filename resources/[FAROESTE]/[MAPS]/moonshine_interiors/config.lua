@@ -9,20 +9,20 @@ Config.Blips = false
 Config.Shacks = {
 
     ['lemoyne'] = {
-        ['outside'] = vector3(2416.261,-1078.848,47.425), -- GOVERNADOR
+        ['outside'] = vector3(1048.384,-1829.544,48.862), -- GOVERNADOR
         ['inside'] = vector3(1785.01,-821.53,191.01),
         ['interior'] = 77313,
         ['interior_sets'] = {
             "mp006_mshine_band1",
             --"mp006_mshine_bar_benchAndFrame",
             "mp006_mshine_dressing_2",
-            "mp006_mshine_hidden_door",
+            "mp006_mshine_hidden_door_open",
             "mp006_mshine_location3",
             --"mp006_mshine_pic_04",
             "mp006_mshine_shelfwall1",
             "mp006_mshine_shelfwall2",
-            --"mp006_mshine_Still_01",
-            --"mp006_mshine_still_hatch",
+            "mp006_mshine_Still_01",
+            "mp006_mshine_still_hatch",
             "mp006_mshine_theme_refined",
         },
     },
@@ -35,7 +35,7 @@ Config.Shacks = {
             "mp006_mshine_band1",
             --"mp006_mshine_bar_benchAndFrame",
             "mp006_mshine_dressing_3",
-            "mp006_mshine_hidden_door",
+            "mp006_mshine_hidden_door_open",
             "mp006_mshine_location3",
             "mp006_mshine_pic_02",
             "mp006_mshine_shelfwall1",
@@ -66,8 +66,8 @@ Config.Shacks = {
     },
 
     ['hanover'] = {
-        ['outside'] = vector3(1443.573,360.003,87.636), -- EMERALD
-        ['inside'] = vector3(1627.64, 822.9, 123.94),
+        ['outside'] = vector3(-762.818,-1454.833,55.565), -- EMERALD
+        ['inside'] = vector3(1626.033,829.608,125.004),
         ['interior'] = 78593,
         ['interior_sets'] = {
             "mp006_mshine_band1",
@@ -80,7 +80,7 @@ Config.Shacks = {
             "mp006_mshine_shelfwall2",
             --"mp006_mshine_Still_01",
             --"mp006_mshine_still_hatch",,
-            "mp006_mshine_theme_goth",
+            --"mp006_mshine_theme_goth",
         },
     },
 
@@ -92,7 +92,7 @@ Config.Shacks = {
             "mp006_mshine_band1",
             --"mp006_mshine_bar_benchAndFrame",
             "mp006_mshine_dressing_3",
-            "mp006_mshine_hidden_door",
+            "mp006_mshine_hidden_door_open",
             "mp006_mshine_location3",
             --"mp006_mshine_pic_04",
             "mp006_mshine_shelfwall1",

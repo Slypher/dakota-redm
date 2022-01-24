@@ -672,6 +672,13 @@ ItemList = {
         description = "Perfeita para uma tarde ensolarada.",
         stackSize = 3
     },
+    ["sopaselvagem"] = {
+        type = "edible",
+        name = "Ensopado Selvagem",
+        weight = 0.95,
+        description = "Feita com alguns cogumelos.",
+        stackSize = 3
+    },
     ["molhotomate"] = {
         type = "generic",
         name = "Molho de Tomate",
@@ -2190,9 +2197,9 @@ ItemList = {
     },
     ["ervadeveneno"] = { -- COMEÇA A CAUSAR DANO DEPOIS DE ALGUM TEMPO
         type = "edible",
-        name = "Erva de Veneno",
+        name = "Erva Nativa",
         weight = 0.3,
-        description = "Uma erva letal, segundo a lenda, ela pode matar uma pessoa algum tempo depois de consumi-da.",
+        description = "Um ensopado de ervas nativas.",
         stackSize = 3
     },
     ["ervamedicinal"] = { -- REVIVE E CURA

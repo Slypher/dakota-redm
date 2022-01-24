@@ -21,7 +21,7 @@ Config.Stables = {
 			Heading = 190.00
         }
     },
-	--[[Saint_Denis = {
+	Saint_Denis = {
 		Pos = {x=2503.153, y=-1442.725, z=46.312},
 		Name = 'Estábulo',
         Heading = 169.45,
@@ -30,7 +30,7 @@ Config.Stables = {
 			CamPos = {x=-3, y=3, z=0},
 			Heading = 93.13
         }
-    },]]
+    },
 }
 
 

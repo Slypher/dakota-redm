@@ -1,4 +1,4 @@
-local QueueExports = exports.connectqueue.GetQueueExports()
+local QueueExports = exports.connectqueue:GetQueueExports()
 
 ServerAPI.RegisterUserConnectingHook(function(userId, playerId)
     local userPrivileges = fetchUserPrivileges(userId)
@@ -23,3 +23,5 @@ ServerAPI.RegisterUserConnectingHook(function(userId, playerId)
 
     -- return 'No'
 end)
+
+

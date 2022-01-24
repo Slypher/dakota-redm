@@ -26,7 +26,7 @@ AddEventHandler(
     Citizen.Wait(10000)
     ClearPedTasksImmediately(PlayerPedId())
     local x,y,z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 2.0, -1.55))
-    local prop = CreateObject(GetHashKey("p_campfire03x"), x, y, z, true, false, true)
+    local prop = CreateObject(GetHashKey("p_campfire05x"), x, y, z, true, false, true)
     SetEntityHeading(prop, GetEntityHeading(PlayerPedId()))
     PlaceObjectOnGroundProperly(prop)
     campfire = prop

@@ -1588,12 +1588,12 @@ Citizen.CreateThread(
 
             -- Valentine
             {
-                position = vec3(-329.393, 774.892, 120.834),
+                position = vec3(-329.470,775.446,120.643),
                 heading = 286.07,
             },
             {
-                position = vec3(-325.872,759.647,120.655),
-                heading = -45.34,
+                position = vec3(-327.754,807.717,116.903),
+                heading = -76.90,
             },
 
             -- BlackWater.
@@ -1601,17 +1601,22 @@ Citizen.CreateThread(
                 position = vec3(-767.693, -1294.545, 43.041),
                 heading = 286.07,
             },
+            -- Rhodes.
+            {
+                position = vec3(1324.131,-1288.404,77.085),
+                heading = 150.13,
+            },
 
             -- Saint Denis
             {
                 position = vec3(2556.891, -1160.544, 52.723),
-                heading = 89.69,
+                heading = 169.71,
             },
 
             -- Strawberry
             {
-                position = vec3(-1820.330,-367.655,166.506),
-                heading = -119.0,
+                position = vec3(-1794.350,-395.032,160.346),
+                heading = -44.28,
             },
 
             -- Indios Wallace.
