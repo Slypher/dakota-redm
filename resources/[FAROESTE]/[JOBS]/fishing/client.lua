@@ -296,10 +296,7 @@ Citizen.CreateThread(function()
                             fishing = false
                             local entity = FISHING_GET_FISH_HANDLE()
                             local fishModel = GetEntityModel(entity)
-                            TriggerServerEvent("vorp_fishing:FishToInventory", fishModel)
-							if Config.DiscordIntegration == true then
-								TriggerServerEvent("vorp_fishing:discord_keep", fishModel, fishing_data.fish.weight)
-							end
+                            TriggerServerEvent('net.giveFish', fishModel)
                             SetEntityAsMissionEntity(entity, true, true)
                             Citizen.Wait(3000)
                             DeleteEntity(entity)
