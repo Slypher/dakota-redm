@@ -80,7 +80,7 @@ Config.Shacks = {
             "mp006_mshine_shelfwall2",
             --"mp006_mshine_Still_01",
             --"mp006_mshine_still_hatch",,
-            "mp006_mshine_theme_goth",
+            --"mp006_mshine_theme_goth",
         },
     },
 

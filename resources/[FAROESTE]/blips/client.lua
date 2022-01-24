@@ -47,7 +47,7 @@ local blips = {
 	--{name = "Sheriff", sprite = 1047294027, x = 2908.20,    y = 1311.53,    z = 44.94},     -- ANNESBURGS
 
 	-- {name = "Departamento de Polícia", sprite = 778811758, x = 2512.04,  y = -1308.5,  z = 48.95},--SAINT DENIS
-	-- {name = "Penitenciária Federal", sprite = 778811758,   x = 3363.802, y = -681.128, z = 55.972},--SAINT DENIS
+	{name = "Penitenciária Federal", sprite = 778811758,   x = 3363.802, y = -681.128, z = 55.972},--SAINT DENIS
 
     -- PADARIA
 	{name = "Padaria", sprite = 935247438, x = -339.566, y = 796.852, z = 117.116},-- color = BLIP_COLORS.BLUE2}, VALENTINE
@@ -96,7 +96,7 @@ local blips = {
 	-- {name = "Porto", sprite = 2005921736, x = -1182.360,    y = -1955.231,  z = 44.274},   -- PORTO LADRÃO 2
 	-- {name = "Porto", sprite = 2005921736, x = 337.289,      y = -685.081,   z = 42.969},   -- PEIXES LENDARIOS
 	-- {name = "Porto", sprite = 2005921736, x = -2017.416,    y = -3048.529,  z = -10.594},  -- FRONTEIRA
-	-- {name = "Porto", sprite = 2005921736, x = 3266.964,     y = -716.300,   z = 42.032},   -- PENITENCIARIA
+	{name = "Porto", sprite = 2005921736, x = 3266.964,     y = -716.300,   z = 42.032},   -- PENITENCIARIA
 
     -- -- FORTES DO EXÉRCITO
 	--{name = "Forte do Exército", sprite = 2113496404, x = 347.158,     y = 1491.489,   z = 184.445},  -- WALLACE
@@ -107,9 +107,9 @@ local blips = {
 	-- {name = "Mina de Carvão", sprite = 1220803671, x = 2785.193,  y = 1338.916,  z = 71.306},   -- ANNESBURG 1
 	-- {name = "Mina de Ferro", sprite = 1220803671, x = -5963.993, y = -3201.232, z = -21.413},  -- TUMBLEWEED
 	-- {name = "Mina de Cobre e Ouro", sprite = 1220803671, x = -1405.648, y = 1158.018,  z = 226.342},  -- MONTE HAGEN
-	--{name = "Cavernas", sprite = 1220803671, x = 2296.597,  y = 1068.627,  z = 90.117},   -- CACHOEIRA
-	--{name = "Cavernas", sprite = 1220803671, x = -2111.463, y = 78.291,    z = 254.191},  -- MONTE SHANN
-	--{name = "Cavernas", sprite = 1220803671, x = -2323.350, y = 95.539,    z = 221.435},  -- MONTE SHANN2
+	-- {name = "Cavernas", sprite = 1220803671, x = 2296.597,  y = 1068.627,  z = 90.117},   -- CACHOEIRA
+	-- {name = "Cavernas", sprite = 1220803671, x = -2111.463, y = 78.291,    z = 254.191},  -- MONTE SHANN
+	-- {name = "Cavernas", sprite = 1220803671, x = -2323.350, y = 95.539,    z = 221.435},  -- MONTE SHANN2
 
     -- CARPINTEIRO
 	--{name = "Big Mill Construtora", sprite = 1586273744, x = -859.276,   y = -1277.169,  z = 43.089},   -- BW
@@ -133,6 +133,7 @@ local blips = {
 	--{name = "Estábulo", sprite = 564457427, x = -5520.338,  y = -3043.717,  z = 0.182}, -- TW
 	{name = "Estábulo", sprite = 564457427, x = -372.338,   y = 789.243,    z = 116.778}, -- VA 
 	{name = "Estábulo", sprite = 564457427, x = -865.010,   y = -1366.296,  z = 44.390}, -- BW
+	{name = "Estábulo", sprite = 564457427, x = 2503.401, 	y = -1443.471, 	z = 46.320}, -- BW
 	--{name = "Estábulo", sprite = 564457427, x = 2960.333,   y = 799.365,    z = 51.411}, -- VAN HORN
 	
     -- ESTABULOS DE CARROÇAS
@@ -175,7 +176,7 @@ local blips = {
 	-- {name = "Estação de Trem", sprite = 1258184551, x = -2495.297,  y = -2426.242,  z = 60.600},     -- RANCHO MAC FARLANES
     
     -- GOVERNADOR
-	{name = "MANSÃO DO GOVERNADOR", sprite = 60954128, x = 2401.406,y = -1098.307,z = 47.421},     -- SD
+	{name = "MANSÃO DA GOVERNADORA", sprite = 60954128, x = 2342.936, y = -1216.454, z = 44.994},     -- SD
 
     -- GOVERNADOR
 	--{name = "CASSINO", sprite = 1243830185, x = 3288.311, y = -1315.983, z = 42.771},     -- SD
@@ -218,13 +219,25 @@ local blips = {
     -- CEMITÉRIOS
 	-- {name = "Cemitério", sprite = 350569997, x = 2725.077,  y = -1067.862,   z = 47.405},     -- SD
 	{name = "Cemitério", sprite = 350569997, x = 1455.265,  y = 418.937,     z = 93.596},     -- EMERALD
+	{name = "Cemitério", sprite = 350569997, x = -1000.160, y = -1193.123,   z = 60.338},     -- BLACKWATER
 	{name = "Cemitério", sprite = 350569997, x = 1271.605,  y = -1232.354,   z = 79.684},     -- RHODES
 	{name = "Cemitério", sprite = 350569997, x = -232.233,  y = 822.051,     z = 125.667},     -- VALENTINE
-	{name = "Cemitério", sprite = 350569997, x = -1000.160, y = -1193.123,   z = 60.338},     -- BLACKWATER
 	{name = "Cemitério", sprite = 350569997, x = -3313.530, y = -2866.073,   z = -4.997},     -- ARMADILLO
 	{name = "Cemitério", sprite = 350569997, x = -4446.702, y = -2694.213,   z = -11.544},     -- ARMADILLO/TUMBLEWEED
 	{name = "Cemitério", sprite = 350569997, x = -5450.294, y = -2909.952,   z = 0.405},     -- TUMBLEWEED
 	
+	-- MOINHOS
+	{name = "Moinho da Eva", sprite = 669307703, x = 1056.941,  y = -1127.715,   z = 66.898},     -- RHODES
+	{name = "Moinho do Kab", sprite = 669307703, x = -947.695,  y = -1336.027,   z = 50.693},     -- BLACKWATER
+		
+		-- TIA MAGGIE
+	{name = "Tia Maggie", sprite = -1733535731, x = -1676.415, y = -341.063, z = 169.785},     -- STRAWBERRY
+		-- Big Billy
+	{name = "Big Billy", sprite = 669307703, x = 1436.732, y = 332.411, z = 88.752},     -- Emerald
+		-- Colecionador
+	{name = "Algernon Wasp", sprite = -1944395098, x = 2588.002, y = -1011.159, z = 44.249},     -- Emerald
+
+
     -- CAMPO DE PETRÓLEO
 	--{name = "Campo de Petróleo", sprite = 1391579593, x = 525.305,y = 632.304,z = 130.672},     ------------------- MUDAR COORDENADA
 

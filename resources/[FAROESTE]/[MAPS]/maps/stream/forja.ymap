@@ -2,15 +2,15 @@
 <CMapData>
   <flags value="2"/>
   <contentFlags value="65"/>
-  <streamingExtentsMin x="-866.439" y="-1399.093" z="42.699"/>
-  <streamingExtentsMax x="-866.439" y="-1399.093" z="42.699"/>
-  <entitiesExtentsMin x="-866.439" y="-1399.093" z="42.699"/>
-  <entitiesExtentsMax x="-866.439" y="-1399.093" z="42.699"/>         
+  <streamingExtentsMin x="-866.439" y="-1399.093" z="41.699"/>
+  <streamingExtentsMax x="-866.439" y="-1399.093" z="41.699"/>
+  <entitiesExtentsMin x="-866.439" y="-1399.093" z="41.699"/>
+  <entitiesExtentsMax x="-866.439" y="-1399.093" z="41.699"/>         
   <entities>
     <Item type="CEntityDef">
       <archetypeName>p_forge01x</archetypeName>
       <flags value="1572865"/>
-      <position x="-866.439" y="-1399.093" z="42.699"/>
+      <position x="-866.439" y="-1399.093" z="41.699"/>
       <rotation w="1.0" x="0" y="0" z="0.0"/>
       <scaleXY value="1"/>
       <scaleZ value="1"/>

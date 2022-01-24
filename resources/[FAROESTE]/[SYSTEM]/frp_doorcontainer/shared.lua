@@ -69,12 +69,15 @@ local doorStates = {
 
     -- VALENTINE ARMAZÉM
     [3554893730] = {isOpen = true}, -- Vestiario
+    -- STRAWBERRY ARMAZÉM
+    [94437577] = {isOpen = true}, -- Vestiario
 
     -- RHODES ARMAZÉM
     [2432590327] = {isOpen = true}, -- Vestiario
 
     -- TUMBLEWEED ARMAZÉM
     [3208189941] = {isOpen = true}, -- Vestiario
+
 
 
     -- BANKS DOORS
@@ -87,6 +90,7 @@ local doorStates = {
     [3886827663] = {isOpen = true, pair = 2642457609}, -- Banco de Valentine porta de entrada esquerda.
     [2642457609] = {isOpen = true, pair = 3886827663}, -- Banco de Valentine porta de entrada direita.
     [531022111] = {isOpen = true},
+    [3101287960] = {isOpen = true},
     [1634115439] = {isOpen = true, pair = 3445627749},
     [3445627749] = {isOpen = true, pair = 1634115439},
     -- DP SAINT DENIS

@@ -78,6 +78,6 @@ Config.Language = {
     pos = "\xF0\x9F\x90\x8CVocê esta em %d/%d na fila \xF0\x9F\x95\x9C%s",
     connectingerr = "\xE2\x9D\x97[Fila] Erro: Erro ao adicionar você na lista.",
     timedout = "\xE2\x9D\x97[Fila] Erro: Tempo limite excedido.",
-    wlonly = "\xE2\x9D\x97[Fila] Você precisa estar aprovado na Whitelist | discord.gg/dakotarp",
+    wlonly = "\xE2\x9D\x97[Fila] Você precisa estar aprovado na Whitelist | discord.gg/dakotaroleplay",
     steam = "\xE2\x9D\x97 [Fila] Erro: A Steam precisa estar aberta."
 }
