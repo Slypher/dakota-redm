@@ -2474,7 +2474,7 @@ SHOPINFO_DATABASE = {
             transactionPriceSellDollar = 300,
         },
         {
-            itemId = 'podeosso',
+            itemId = 'osso',
                        
             transactionPriceSellDollar = 50,
         },

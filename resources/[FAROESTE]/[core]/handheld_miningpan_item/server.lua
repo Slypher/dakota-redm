@@ -10,19 +10,19 @@ local LOOT_TABLE = {
     },
     {
         lootItemId = 'pepitadeouro',
-        lootWeight = 30,
+        lootWeight = 20,
     },
     {
         lootItemId = 'esmeralda',
-        lootWeight = 12,
+        lootWeight = 9,
     },
     {
         lootItemId = 'rubi',
-        lootWeight = 10,
+        lootWeight = 6,
     },
     {
         lootItemId = 'diamante',
-        lootWeight = 5,
+        lootWeight = 3,
     },
 
     --[[
@@ -35,7 +35,7 @@ local LOOT_TABLE = {
 }
 
 local GOLD_PANNING_REWARD_DICE_INTERVAL = 30
-local GOLD_PANNING_WIN_GOLD_CHANCE = 0.20 -- 10% de chance de achar alguma coisa.
+local GOLD_PANNING_WIN_GOLD_CHANCE = 0.15 -- 15% de chance de achar alguma coisa.
 
 local gPlayersGoldPanning = { }
 
