@@ -2312,7 +2312,7 @@ SHOPINFO_DATABASE = {
         {
             itemId = 'penaarara',
                 
-            transactionPriceSellDollar = 10,
+            transactionPriceSellDollar = 500,
         },
         {
             itemId = 'penacondor',
